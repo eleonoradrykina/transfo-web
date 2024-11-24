@@ -1,9 +1,81 @@
 @font-face {
-  font-family: "Inter";
-  font-style: normal;
+  font-family: "Whyte";
+  src:
+    url("/BAP-blog/fonts/ABCWhyte-Regular-Trial.woff") format("woff"),
+    url("/BAP-blog/fonts/ABCWhyte-Regular-Trial.woff2") format("woff2");
   font-weight: 400;
+  font-style: normal;
   font-display: swap;
-  src: url("/fonts/Inter-Regular.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Whyte";
+  src:
+    url("/BAP-blog/fonts/ABCWhyte-Bold-Trial.woff") format("woff"),
+    url("/BAP-blog/fonts/ABCWhyte-Bold-Trial.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Whyte";
+  src:
+    url("/BAP-blog/fonts/ABCWhyte-RegularItalic-Trial.woff") format("woff"),
+    url("/BAP-blog/fonts/ABCWhyte-RegularItalic-Trial.woff2") format("woff2");
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Whyte";
+  src:
+    url("/BAP-blog/fonts/ABCWhyte-BoldItalic-Trial.woff") format("woff"),
+    url("/BAP-blog/fonts/ABCWhyte-BoldItalic-Trial.woff2") format("woff2");
+  font-weight: 700;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Camera";
+  src:
+    url("/BAP-blog/fonts/ABCCamera-BoldItalic-Trial.woff") format("woff"),
+    url("/BAP-blog/fonts/ABCCamera-BoldItalic-Trial.woff2") format("woff2");
+  font-weight: 700;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Camera";
+  src:
+    url("/BAP-blog/fonts/ABCCamera-Bold-Trial.woff") format("woff"),
+    url("/BAP-blog/fonts/ABCCamera-Bold-Trial.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Camera";
+  src:
+    url("/BAP-blog/fonts/ABCCamera-Regular-Trial.woff") format("woff"),
+    url("/BAP-blog/fonts/ABCCamera-Regular-Trial.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Camera";
+  src:
+    url("/BAP-blog/fonts/ABCCamera-RegularItalic-Trial.woff") format("woff"),
+    url("/BAP-blog/fonts/ABCCamera-RegularItalic-Trial.woff2") format("woff2");
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
 }
 
 body {
