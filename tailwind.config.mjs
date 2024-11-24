@@ -27,6 +27,10 @@ export default {
           dark: "#C8C8C8",
         },
       },
+      fontFamily: {
+        whyte: ["Whyte", "sans-serif"],
+        camera: ["Camera", "sans-serif"],
+      },
     },
   },
   plugins: [],

@@ -1,12 +1,14 @@
 ---
 import Main from "../layouts/Main.astro";
 import languages from "../services/languages.json";
+import "../styles/hero.css";
 
 const copy = languages.nl;
 ---
 
 <Main title={copy.title} description={copy.description}>
-  <h1>
-    {copy.title}
-  </h1>
+  <div class="hero">
+    <div class="hero__top"><h1 class="hero__title">{copy.title}</h1></div>
+    <div class="hero__bottom"></div>
+  </div>
 </Main>

@@ -87,5 +87,5 @@ body {
     rgba(10, 11, 44, 1) 100%
   );
 
-  @apply text-white;
+  @apply text-white font-whyte;
 }
