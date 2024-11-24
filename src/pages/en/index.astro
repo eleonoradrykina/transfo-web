@@ -1,0 +1,8 @@
+---
+import Main from "../../layouts/Main.astro";
+import languages from "../../services/languages.json";
+
+const copy = languages.en;
+---
+
+<Main title={copy.title} description={copy.description} />

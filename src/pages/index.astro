@@ -1,5 +1,8 @@
 ---
 import Main from "../layouts/Main.astro";
+import languages from "../services/languages.json";
+
+const copy = languages.nl;
 ---
 
-<Main title="Transfo Intiem" description="test description" />
+<Main title={copy.title} description={copy.description} />
