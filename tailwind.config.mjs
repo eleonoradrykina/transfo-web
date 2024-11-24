@@ -44,6 +44,7 @@ export default {
       },
       padding: SIZES,
       margin: SIZES,
+      gap: SIZES,
     },
   },
   plugins: [],
