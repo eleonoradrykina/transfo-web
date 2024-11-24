@@ -1,8 +1,8 @@
 @font-face {
   font-family: "Whyte";
   src:
-    url("/BAP-blog/fonts/ABCWhyte-Regular-Trial.woff") format("woff"),
-    url("/BAP-blog/fonts/ABCWhyte-Regular-Trial.woff2") format("woff2");
+    url("fonts/ABCWhyte-Book-Trial.woff") format("woff"),
+    url("fonts/ABCWhyte-Book-Trial.woff2") format("woff2");
   font-weight: 400;
   font-style: normal;
   font-display: swap;
@@ -11,18 +11,8 @@
 @font-face {
   font-family: "Whyte";
   src:
-    url("/BAP-blog/fonts/ABCWhyte-Bold-Trial.woff") format("woff"),
-    url("/BAP-blog/fonts/ABCWhyte-Bold-Trial.woff2") format("woff2");
-  font-weight: 700;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Whyte";
-  src:
-    url("/BAP-blog/fonts/ABCWhyte-RegularItalic-Trial.woff") format("woff"),
-    url("/BAP-blog/fonts/ABCWhyte-RegularItalic-Trial.woff2") format("woff2");
+    url("fonts/ABCWhyte-BookItalic-Trial.woff") format("woff"),
+    url("fonts/ABCWhyte-BookItalic-Trial.woff2") format("woff2");
   font-weight: 400;
   font-style: italic;
   font-display: swap;
@@ -31,8 +21,38 @@
 @font-face {
   font-family: "Whyte";
   src:
-    url("/BAP-blog/fonts/ABCWhyte-BoldItalic-Trial.woff") format("woff"),
-    url("/BAP-blog/fonts/ABCWhyte-BoldItalic-Trial.woff2") format("woff2");
+    url("fonts/ABCWhyte-Regular-Trial.woff") format("woff"),
+    url("fonts/ABCWhyte-Regular-Trial.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Whyte";
+  src:
+    url("fonts/ABCWhyte-Bold-Trial.woff") format("woff"),
+    url("fonts/ABCWhyte-Bold-Trial.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Whyte";
+  src:
+    url("fonts/ABCWhyte-RegularItalic-Trial.woff") format("woff"),
+    url("fonts/ABCWhyte-RegularItalic-Trial.woff2") format("woff2");
+  font-weight: 500;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Whyte";
+  src:
+    url("fonts/ABCWhyte-BoldItalic-Trial.woff") format("woff"),
+    url("fonts/ABCWhyte-BoldItalic-Trial.woff2") format("woff2");
   font-weight: 700;
   font-style: italic;
   font-display: swap;
@@ -41,8 +61,8 @@
 @font-face {
   font-family: "Camera";
   src:
-    url("/BAP-blog/fonts/ABCCamera-BoldItalic-Trial.woff") format("woff"),
-    url("/BAP-blog/fonts/ABCCamera-BoldItalic-Trial.woff2") format("woff2");
+    url("fonts/ABCCamera-BoldItalic-Trial.woff") format("woff"),
+    url("fonts/ABCCamera-BoldItalic-Trial.woff2") format("woff2");
   font-weight: 700;
   font-style: italic;
   font-display: swap;
@@ -51,8 +71,8 @@
 @font-face {
   font-family: "Camera";
   src:
-    url("/BAP-blog/fonts/ABCCamera-Bold-Trial.woff") format("woff"),
-    url("/BAP-blog/fonts/ABCCamera-Bold-Trial.woff2") format("woff2");
+    url("fonts/ABCCamera-Bold-Trial.woff") format("woff"),
+    url("fonts/ABCCamera-Bold-Trial.woff2") format("woff2");
   font-weight: 700;
   font-style: normal;
   font-display: swap;
@@ -61,8 +81,8 @@
 @font-face {
   font-family: "Camera";
   src:
-    url("/BAP-blog/fonts/ABCCamera-Regular-Trial.woff") format("woff"),
-    url("/BAP-blog/fonts/ABCCamera-Regular-Trial.woff2") format("woff2");
+    url("fonts/ABCCamera-Regular-Trial.woff") format("woff"),
+    url("fonts/ABCCamera-Regular-Trial.woff2") format("woff2");
   font-weight: 400;
   font-style: normal;
   font-display: swap;
@@ -71,15 +91,15 @@
 @font-face {
   font-family: "Camera";
   src:
-    url("/BAP-blog/fonts/ABCCamera-RegularItalic-Trial.woff") format("woff"),
-    url("/BAP-blog/fonts/ABCCamera-RegularItalic-Trial.woff2") format("woff2");
+    url("fonts/ABCCamera-RegularItalic-Trial.woff") format("woff"),
+    url("fonts/ABCCamera-RegularItalic-Trial.woff2") format("woff2");
   font-weight: 400;
   font-style: italic;
   font-display: swap;
 }
 
 body {
-  @apply w-screen h-screen;
+  @apply w-full h-full;
   background: rgb(21, 22, 68);
   background: radial-gradient(
     circle,
@@ -88,4 +108,10 @@ body {
   );
 
   @apply text-white font-whyte;
+}
+
+.margins {
+  @apply w-full;
+  @apply mx-15;
+  max-width: calc(100vw - 30px);
 }

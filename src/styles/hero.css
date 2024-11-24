@@ -1,5 +1,18 @@
 .hero {
+  @apply h-screen w-screen;
+
+  &__top {
+    @apply flex flex-col items-center;
+    @apply mt-[20vh];
+  }
+
+  &__date {
+    @apply uppercase;
+    @apply text-center font-normal text-xl;
+  }
+
   &__title {
-    @apply font-camera text-4xl;
+    @apply font-camera font-bold text-[23vw] text-center;
+    @apply leading-none;
   }
 }

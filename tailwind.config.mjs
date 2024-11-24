@@ -1,8 +1,19 @@
 /** @type {import('tailwindcss').Config} */
+
+const SIZES = {
+  15: "15px",
+  30: "30px",
+};
+
 export default {
   content: ["./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}"],
   theme: {
     extend: {
+      screen: {
+        mobile: "450px",
+        tablet: "768px",
+        laptop: "1024px",
+      },
       colors: {
         pink: {
           DEFAULT: "#DEC1FB",
@@ -31,6 +42,8 @@ export default {
         whyte: ["Whyte", "sans-serif"],
         camera: ["Camera", "sans-serif"],
       },
+      padding: SIZES,
+      margin: SIZES,
     },
   },
   plugins: [],
