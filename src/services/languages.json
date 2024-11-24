@@ -1,7 +1,11 @@
 {
     "nl": {
         "title": "Transfo Intiem",
-        "description": "Wandel langs sfeervolle routes en ontdek intieme optredens, kunstinstallaties, muziek en meer. Laat je raken door het thema ‘eenzaamheid’ en geniet van een avond vol warmte en creativiteit."
+        "description": "Wandel langs sfeervolle routes en ontdek intieme optredens, kunstinstallaties, muziek en meer. Laat je raken door het thema ‘eenzaamheid’ en geniet van een avond vol warmte en creativiteit.",
+        "date": "14 December 2024",
+        "faq": {
+            "title": "Veelgestelde vragen"
+        }
     },
     "en": {
         "title": "Transfo Intiem",

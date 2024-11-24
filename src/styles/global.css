@@ -1,0 +1,19 @@
+@font-face {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/fonts/Inter-Regular.woff2") format("woff2");
+}
+
+body {
+  @apply w-screen h-screen;
+  background: rgb(21, 22, 68);
+  background: radial-gradient(
+    circle,
+    rgba(21, 22, 68, 1) 0%,
+    rgba(10, 11, 44, 1) 100%
+  );
+
+  @apply text-white;
+}
