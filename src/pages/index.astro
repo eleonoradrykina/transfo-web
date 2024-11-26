@@ -4,6 +4,7 @@ import Main from "../layouts/Main.astro";
 import languages from "../services/languages.json";
 import "../styles/hero.css";
 import { Language } from "../services/types";
+import Map from "../components/Map";
 
 const copy = languages.nl;
 ---
@@ -14,6 +15,7 @@ const copy = languages.nl;
       <span class="hero__date">{copy.date.festival}</span>
       <h1 class="hero__title">{copy.title}</h1>
     </div>
+    <Map client:only="react" />
     <div class="hero__bottom">
       <Countdown client:only="react" language={Language.NL} />
     </div>
