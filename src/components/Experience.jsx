@@ -21,24 +21,23 @@ import {
 import { ToneMappingMode } from "postprocessing";
 
 import gsap from "gsap";
-import type { Vector3 } from "three";
 
 export default function Experience() {
-  let selectedMeshes: any[] = [];
+  let selectedMeshes = [];
   const OrbitControlsRef = useRef();
 
-  const clearSelection = (meshes: any[]) => {
+  const clearSelection = (meshes) => {
     console.log("clearSelection");
     //turn off the light:
     if (meshes) {
       console.log("meshes", meshes);
-      meshes.forEach((mesh: any) => {
+      meshes.forEach((mesh) => {
         mesh.material.emissiveIntensity = 0;
       });
     }
   };
 
-  const handleBuildingClick = (e: any, label: string) => {
+  const handleBuildingClick = (e, label) => {
     console.log(typeof e);
     e.stopPropagation();
     clearSelection(selectedMeshes);
@@ -49,9 +48,9 @@ export default function Experience() {
     //set orbit controls:
     console.log(OrbitControlsRef.current);
 
-    const newMeshes = e.eventObject.children[0].children as any[];
+    const newMeshes = e.eventObject.children[0].children;
     //light up the building:
-    newMeshes.forEach((mesh: any) => {
+    newMeshes.forEach((mesh) => {
       mesh.material.emissiveIntensity = 3.0;
     });
 
@@ -60,7 +59,7 @@ export default function Experience() {
     selectedMeshes = newMeshes;
   };
 
-  const setOrbitControls = (position: Vector3, label: string) => {
+  const setOrbitControls = (position, label) => {
     const tl = gsap.timeline();
 
     if (OrbitControlsRef.current) {
@@ -189,35 +188,35 @@ export default function Experience() {
       <ambientLight intensity={1.0} />
       <MapModel onClick={clearSelection} />
       <Hoofdzaal
-        onClick={(e: any) => handleBuildingClick(e, "Hoofdzaal")}
+        onClick={(e) => handleBuildingClick(e, "Hoofdzaal")}
         label="Hoofdzaal"
       />
       <Mechaniekers
-        onClick={(e: any) => handleBuildingClick(e, "Mechaniekers")}
+        onClick={(e) => handleBuildingClick(e, "Mechaniekers")}
         label="Mechaniekers"
       />
       <Ketelhuis
-        onClick={(e: any) => handleBuildingClick(e, "Ketelhuis")}
+        onClick={(e) => handleBuildingClick(e, "Ketelhuis")}
         label="Ketelhuis"
       />
       <Transformatoren
-        onClick={(e: any) => handleBuildingClick(e, "Transformatoren")}
+        onClick={(e) => handleBuildingClick(e, "Transformatoren")}
         label="Transformatoren"
       />
       <Octagon
-        onClick={(e: any) => handleBuildingClick(e, "Octagon")}
+        onClick={(e) => handleBuildingClick(e, "Octagon")}
         label="Octagon"
       />
       <Kunstacademie
-        onClick={(e: any) => handleBuildingClick(e, "Kunstacademie")}
+        onClick={(e) => handleBuildingClick(e, "Kunstacademie")}
         label="Kunstacademie"
       />
       <Duiktank
-        onClick={(e: any) => handleBuildingClick(e, "Duiktank")}
+        onClick={(e) => handleBuildingClick(e, "Duiktank")}
         label="Duiktank"
       />
       <Watertoren
-        onClick={(e: any) => handleBuildingClick(e, "Watertoren")}
+        onClick={(e) => handleBuildingClick(e, "Watertoren")}
         label="Watertoren"
       />
     </>
