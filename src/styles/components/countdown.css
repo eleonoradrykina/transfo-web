@@ -1,0 +1,15 @@
+.countdown {
+  @apply flex flex-row gap-15 justify-center justify-items-center;
+
+  &__time {
+    @apply flex flex-col items-center;
+  }
+
+  &__number {
+    @apply font-bold text-4xl;
+  }
+
+  &__text {
+    @apply font-normal;
+  }
+}
