@@ -98,6 +98,15 @@
   font-display: swap;
 }
 
+html {
+  background: rgb(21, 22, 68);
+  background: radial-gradient(
+    circle,
+    rgba(21, 22, 68, 1) 0%,
+    rgba(10, 11, 44, 1) 100%
+  );
+}
+
 body {
   @apply w-full h-full;
   background: rgb(21, 22, 68);
@@ -108,6 +117,11 @@ body {
   );
 
   @apply text-white font-whyte;
+}
+
+.main {
+  @apply max-w-screen-2xl mx-auto;
+  @apply w-full h-screen;
 }
 
 .margins {

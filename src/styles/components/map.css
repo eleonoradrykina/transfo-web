@@ -1,0 +1,42 @@
+.map {
+  @apply fixed top-0 bottom-0 right-0 left-0;
+  @apply z-10;
+}
+
+.mapPin > div {
+  @apply font-whyte;
+  @apply absolute;
+  @apply w-max px-[0.25rem] py-[0.5rem];
+  background: rgba(239, 222, 222, 0.5);
+  border-radius: 1rem;
+  user-select: none;
+}
+
+.building-label {
+  @apply font-whyte italic lowercase text-white text-base text-center;
+}
+
+.building-label::after {
+  content: "";
+  display: block;
+  height: 0.5rem;
+  width: 0.5rem;
+  border-radius: 50%;
+  background: #fff;
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.building-label::before {
+  content: "";
+  display: block;
+  height: 1rem;
+  width: 2px;
+  background: #fff;
+  position: absolute;
+  top: 110%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
