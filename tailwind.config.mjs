@@ -3,6 +3,10 @@
 const SIZES = {
   15: "15px",
   30: "30px",
+  60: "60px",
+  120: "120px",
+  180: "180px",
+  360: "360px",
 };
 
 export default {
@@ -45,6 +49,14 @@ export default {
       padding: SIZES,
       margin: SIZES,
       gap: SIZES,
+      inset: SIZES,
+      height: SIZES,
+      width: SIZES,
+      maxWidth: {
+        ...SIZES,
+        smallParagraph: "520px",
+        paragraph: "640px",
+      },
     },
   },
   plugins: [],

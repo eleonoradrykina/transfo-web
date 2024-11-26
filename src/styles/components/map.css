@@ -1,20 +1,19 @@
+.map {
+  @apply fixed top-0 bottom-0 right-0 left-0;
+  @apply z-10;
+}
+
 .mapPin > div {
-  font-family: "Helvetica Neue", sans-serif;
-  position: absolute;
-  width: max-content;
-  padding: 0.25rem 0.5rem;
+  @apply font-whyte;
+  @apply absolute;
+  @apply w-max px-[0.25rem] py-[0.5rem];
   background: rgba(239, 222, 222, 0.5);
   border-radius: 1rem;
   user-select: none;
 }
 
 .building-label {
-  font-family: "Helvetica Neue", sans-serif;
-  font-size: 0.875rem;
-  font-style: italic;
-  text-transform: lowercase;
-  color: #fff;
-  text-align: center;
+  @apply font-whyte italic lowercase text-white text-base text-center;
 }
 
 .building-label::after {

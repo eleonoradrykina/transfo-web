@@ -4,7 +4,7 @@ import Main from "../layouts/Main.astro";
 import languages from "../services/languages.json";
 import "../styles/hero.css";
 import { Language } from "../services/types";
-import Map from "../components/Map";
+import Map from "../components/Map.tsx";
 
 const copy = languages.nl;
 ---
@@ -14,10 +14,42 @@ const copy = languages.nl;
     <div class="hero__top margins">
       <span class="hero__date">{copy.date.festival}</span>
       <h1 class="hero__title">{copy.title}</h1>
+      <div class="hidden md:block relative z-30">
+        <Countdown client:only="react" language={Language.NL} />
+      </div>
     </div>
     <Map client:only="react" />
-    <div class="hero__bottom">
-      <Countdown client:only="react" language={Language.NL} />
+    <div class="hero__bottom margins">
+      <div class="block md:hidden">
+        <Countdown client:only="react" language={Language.NL} />
+      </div>
+
+      <p class="hero__intro">
+        Wandel langs sfeervolle routes en ontdek <span class="bold"
+          >intieme optredens</span
+        >, kunstinstallaties, muziek en meer. Laat je raken door het thema
+        ‘eenzaamheid’ en geniet van een avond vol <span class="bold"
+          >warmte en creativiteit</span
+        >.
+      </p>
+      <svg
+        class="hero__arrow"
+        width="16"
+        height="31"
+        viewBox="0 0 16 31"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          fill-rule="evenodd"
+          clip-rule="evenodd"
+          d="M9 0V30C9 30.5523 8.55228 31 8 31C7.44772 31 7 30.5523 7 30V0H9Z"
+        ></path>
+        <path
+          fill-rule="evenodd"
+          clip-rule="evenodd"
+          d="M0.292893 22.2929C0.683417 21.9024 1.31658 21.9024 1.70711 22.2929L8 28.5858L14.2929 22.2929C14.6834 21.9024 15.3166 21.9024 15.7071 22.2929C16.0976 22.6834 16.0976 23.3166 15.7071 23.7071L8.70711 30.7071C8.31658 31.0976 7.68342 31.0976 7.29289 30.7071L0.292893 23.7071C-0.0976311 23.3166 -0.0976311 22.6834 0.292893 22.2929Z"
+        ></path>
+      </svg>
     </div>
   </div>
 </Main>
