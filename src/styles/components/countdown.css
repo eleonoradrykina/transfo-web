@@ -1,0 +1,21 @@
+.countdown {
+  @apply flex flex-row gap-15 justify-center justify-items-center;
+  @apply w-full;
+
+  &__time {
+    @apply flex flex-col items-center;
+    @apply p-15 bg-white/20 rounded-lg;
+    backdrop-filter: blur(10px);
+
+    width: calc(25% - (45px / 4));
+    @apply max-w-[100px];
+  }
+
+  &__number {
+    @apply font-bold text-4xl;
+  }
+
+  &__text {
+    @apply font-normal text-xs;
+  }
+}

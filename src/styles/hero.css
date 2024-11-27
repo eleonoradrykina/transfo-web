@@ -1,0 +1,39 @@
+.hero {
+  @apply h-screen w-full fixed;
+  @apply flex flex-col justify-between;
+  @apply pt-30 pb-60 md:pt-60 lg:pt-120;
+
+  &__top {
+    @apply flex flex-col items-center;
+  }
+
+  &__bottom {
+    @apply flex flex-col items-center gap-30;
+    @apply relative z-20;
+  }
+
+  &__date {
+    @apply uppercase;
+    @apply text-center font-normal text-xl;
+  }
+
+  &__title {
+    @apply font-camera font-bold text-[23vw] md:text-[10vw] lg:text-[200px] text-center;
+    font-size: clamp(100px, 12vw, 200px);
+    @apply leading-none;
+  }
+
+  &__arrow {
+    @apply fill-white;
+    @apply h-15;
+  }
+
+  &__intro {
+    @apply text-center font-normal text-base md:text-lg;
+    @apply max-w-smallParagraph;
+
+    & .bold {
+      @apply font-bold;
+    }
+  }
+}
