@@ -6,10 +6,14 @@ import React from 'react'
 import { useGLTF, Html } from '@react-three/drei'
 import { useLoader } from '@react-three/fiber'
 import { TextureLoader } from 'three/src/loaders/TextureLoader'
+import { SRGBColorSpace } from 'three'
+
 
 export default function Duiktank(props) {
-  const { nodes, materials } = useGLTF('./models/duiktank.glb')
-  const colorMap = useLoader(TextureLoader, './models/textures/duiktank-baked.jpg')
+  const { nodes, materials } = useGLTF('models/duiktank.glb')
+  const colorMap = useLoader(TextureLoader, 'models/textures/duiktank-baked.jpg')
+  //make sure the texture is srgb
+  colorMap.colorSpace = SRGBColorSpace
   colorMap.flipY = false
 
   return (
@@ -40,4 +44,4 @@ export default function Duiktank(props) {
   )
 }
 
-useGLTF.preload('./models/duiktank.glb')
+useGLTF.preload('models/duiktank.glb')

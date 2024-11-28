@@ -5,13 +5,13 @@ import React, { useRef } from 'react'
 import { useGLTF, Html } from '@react-three/drei'
 import { useLoader } from '@react-three/fiber'
 import { TextureLoader } from 'three/src/loaders/TextureLoader'
+import { SRGBColorSpace } from 'three'
 
 export default function Watertoren(props) {
-  const { nodes, materials } = useGLTF('./models/watertoren.glb')
-  const colorMap = useLoader(TextureLoader, './models/textures/watertoren-baked.jpg')
+  const { nodes, materials } = useGLTF('models/watertoren.glb')
+  const colorMap = useLoader(TextureLoader, 'models/textures/watertoren-baked.jpg')
   colorMap.flipY = false
-
-  const text = props.label
+  colorMap.colorSpace = SRGBColorSpace
 
   return (
     <group {...props} dispose={null}>
@@ -42,7 +42,7 @@ export default function Watertoren(props) {
          position={ [0.1,0.75,0.25]}
          distanceFactor={6}
          occlude>
-            <p className='building-label'>{text}</p>
+            <p className='building-label'>{props.label}</p>
         </Html>
         <meshStandardMaterial 
           map={colorMap}
@@ -54,4 +54,4 @@ export default function Watertoren(props) {
   )
 }
 
-useGLTF.preload('./models/watertoren.glb')
+useGLTF.preload('models/watertoren.glb')

@@ -2,16 +2,17 @@ import { Canvas } from "@react-three/fiber";
 import { Leva } from "leva";
 import { Bvh } from "@react-three/drei";
 import "../styles/components/map.css";
-
 import Experience from "./Experience";
 
 export default function Map() {
+  console.log("Map");
+
   return (
     <div className="map">
       <Leva collapsed />
       <Canvas
-        //  flat
-        shadows
+        // onCreated={({ gl }) => { gl.toneMapping = THREE.NoToneMapping }}
+        flat
         gl={{
           // antialias: true,
           toneMappingExposure: 0.5,

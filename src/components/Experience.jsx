@@ -1,7 +1,14 @@
-import { OrbitControls } from "@react-three/drei";
+import { OrbitControls, Html } from "@react-three/drei";
 import { Perf } from "r3f-perf";
 
-import MapModel from "./MapModel";
+/* Non interactive map:*/
+import MapModel from "./nonInteractiveMap/MapModel";
+import Ground from "./nonInteractiveMap/Ground";
+import OfficeBuilding from "./nonInteractiveMap/OfficeBuilding";
+import Path from "./nonInteractiveMap/Path";
+import Trees from "./nonInteractiveMap/Trees";
+
+/* Interactive buldings:*/
 import Hoofdzaal from "./interactiveBuildings/Hoofdzaal";
 import Mechaniekers from "./interactiveBuildings/Mechaniekers";
 import Ketelhuis from "./interactiveBuildings/Ketelhuis";
@@ -10,15 +17,18 @@ import Octagon from "./interactiveBuildings/Octagon";
 import Kunstacademie from "./interactiveBuildings/Kunstacademie";
 import Duiktank from "./interactiveBuildings/Duiktank";
 import Watertoren from "./interactiveBuildings/Watertoren";
+import Plong from "./interactiveBuildings/Plong";
 
-import { useRef } from "react";
+import { useRef, useState, useEffect } from "react";
 import { useControls } from "leva";
+import { useThree } from "@react-three/fiber";
 import {
   ToneMapping,
   EffectComposer,
   Bloom,
+  DepthOfField,
 } from "@react-three/postprocessing";
-import { ToneMappingMode } from "postprocessing";
+import { ToneMappingMode, BlendFunction } from "postprocessing";
 
 import gsap from "gsap";
 
@@ -30,7 +40,6 @@ export default function Experience() {
     console.log("clearSelection");
     //turn off the light:
     if (meshes) {
-      console.log("meshes", meshes);
       meshes.forEach((mesh) => {
         mesh.material.emissiveIntensity = 0;
       });
@@ -38,7 +47,7 @@ export default function Experience() {
   };
 
   const handleBuildingClick = (e, label) => {
-    console.log(typeof e);
+    console.log(e);
     e.stopPropagation();
     clearSelection(selectedMeshes);
     console.log("building label", label);
@@ -54,9 +63,8 @@ export default function Experience() {
       mesh.material.emissiveIntensity = 3.0;
     });
 
-    console.log("newMeshes", newMeshes);
-
     selectedMeshes = newMeshes;
+    console.log("selectedMeshes", selectedMeshes);
   };
 
   const setOrbitControls = (position, label) => {
@@ -89,10 +97,11 @@ export default function Experience() {
           duration: 0.75,
           ease: "power2.in",
           onComplete: () => {
-            // Reset the distance constraints after animation
-
-            OrbitControlsRef.current.minDistance = cameraControls.minDistance;
-            OrbitControlsRef.current.maxDistance = cameraControls.maxDistance;
+            if (OrbitControlsRef.current) {
+              // Reset the distance constraints after animation
+              OrbitControlsRef.current.minDistance = cameraControls.minDistance;
+              OrbitControlsRef.current.maxDistance = cameraControls.maxDistance;
+            }
           },
         });
     }
@@ -163,12 +172,8 @@ export default function Experience() {
   return (
     <>
       <EffectComposer>
-        <ToneMapping mode={ToneMappingMode.OPTIMIZED_CINEON} />
-        <Bloom luminanceThreshold={0.4} mipmapBlur intensity={1.5} />
-        {/* <DepthOfField 
-                    focusDistance={0.06}
-                    focalLength={0.02}
-                    bokehScale={8} /> */}
+        <Bloom luminanceThreshold={0.4} mipmapBlur intensity={1.6} />
+        {/* <ToneMapping mode= {ToneMappingMode.OPTIMIZED_CINEON} /> */}
       </EffectComposer>
       <Perf position="top-left" />
       <OrbitControls
@@ -186,7 +191,10 @@ export default function Experience() {
         ref={OrbitControlsRef}
       />
       <ambientLight intensity={1.0} />
-      <MapModel onClick={clearSelection} />
+      <Ground />
+      <Trees />
+      <MapModel />
+      <Path intensity={0.5} />
       <Hoofdzaal
         onClick={(e) => handleBuildingClick(e, "Hoofdzaal")}
         label="Hoofdzaal"
@@ -219,6 +227,11 @@ export default function Experience() {
         onClick={(e) => handleBuildingClick(e, "Watertoren")}
         label="Watertoren"
       />
+      <Plong
+        onClick={(e) => handleBuildingClick(e, "Plong")}
+        label="Plong"
+      />
+      <OfficeBuilding />
     </>
   );
 }

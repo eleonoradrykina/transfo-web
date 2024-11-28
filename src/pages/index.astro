@@ -14,15 +14,10 @@ const copy = languages.nl;
     <div class="hero__top margins">
       <span class="hero__date">{copy.date.festival}</span>
       <h1 class="hero__title">{copy.title}</h1>
-      <div class="hidden md:block relative z-30">
-        <Countdown client:only="react" language={Language.NL} />
-      </div>
     </div>
     <Map client:only="react" />
     <div class="hero__bottom margins">
-      <div class="block md:hidden">
-        <Countdown client:only="react" language={Language.NL} />
-      </div>
+      <Countdown client:only="react" language={Language.NL} />
 
       <p class="hero__intro">
         Wandel langs sfeervolle routes en ontdek <span class="bold"
