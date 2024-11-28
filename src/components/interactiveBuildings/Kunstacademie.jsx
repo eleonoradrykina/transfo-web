@@ -6,12 +6,13 @@ import React from 'react'
 import { useGLTF, Html } from '@react-three/drei'
 import { useLoader } from '@react-three/fiber'
 import { TextureLoader } from 'three/src/loaders/TextureLoader'
+import { SRGBColorSpace } from 'three'
 
 export default function Kunstacademie(props) {
-  const { nodes } = useGLTF('./models/kunstacademie-no-materials.glb')
-  const colorMap = useLoader(TextureLoader, './models/textures/kunstacademie-baked.jpg')
+  const { nodes } = useGLTF('models/kunstacademie-no-materials.glb')
+  const colorMap = useLoader(TextureLoader, 'models/textures/kunstacademie-baked.jpg')
   colorMap.flipY = false
-
+  colorMap.colorSpace = SRGBColorSpace
   return (
     <group {...props} dispose={null}>
       <group>
@@ -65,4 +66,4 @@ export default function Kunstacademie(props) {
   )
 }
 
-useGLTF.preload('./models/kunstacademie-no-materials.glb')
+useGLTF.preload('models/kunstacademie-no-materials.glb')

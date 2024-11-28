@@ -6,12 +6,13 @@ import React from 'react'
 import { useGLTF, Html } from '@react-three/drei'
 import { useLoader } from '@react-three/fiber'
 import { TextureLoader } from 'three/src/loaders/TextureLoader'
+import { SRGBColorSpace } from 'three'
 
 export default function Octagon(props) {
-  const { nodes, materials } = useGLTF('./models/octagon.glb')
-  const colorMap = useLoader(TextureLoader, './models/textures/octagon-baked.jpg')
+  const { nodes, materials } = useGLTF('models/octagon.glb')
+  const colorMap = useLoader(TextureLoader, 'models/textures/octagon-baked.jpg')
   colorMap.flipY = false
-
+  colorMap.colorSpace = SRGBColorSpace
   return (
     <group {...props} dispose={null}>
         <group position={[1.89, -0.102, -1.122]} rotation={[0, -0.375, 0]}>
@@ -19,8 +20,8 @@ export default function Octagon(props) {
         castShadow
         receiveShadow
         geometry={nodes.Cube018.geometry}
-        position={[0, -0.066, 0.297]}
-        rotation={[0, -0.366, -Math.PI]}
+        position={[0.1, 0.14, 0.26]}
+        rotation={[0, 0.4, -Math.PI]}
         scale={[-0.109, -0.151, -0.075]}
       >
         <meshStandardMaterial 
@@ -77,4 +78,4 @@ export default function Octagon(props) {
   )
 }
 
-useGLTF.preload('./models/octagon.glb')
+useGLTF.preload('models/octagon.glb')

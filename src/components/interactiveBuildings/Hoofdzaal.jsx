@@ -6,11 +6,12 @@ import React from 'react'
 import { useGLTF, Html } from '@react-three/drei'
 import { useLoader } from '@react-three/fiber'
 import { TextureLoader } from 'three/src/loaders/TextureLoader'
-
+import { SRGBColorSpace } from 'three'
 
 export default function Hoofdzaal(props) {
-  const { nodes } = useGLTF('./models/hoofdzaal.glb')
-  const colorMap = useLoader(TextureLoader, './models/textures/hoofdzaal-baked.jpg')
+  const { nodes } = useGLTF('models/hoofdzaal.glb')
+  const colorMap = useLoader(TextureLoader, 'models/textures/hoofdzaal-baked.jpg')
+  colorMap.colorSpace = SRGBColorSpace;
   colorMap.flipY = false
 
   return (
@@ -87,4 +88,4 @@ export default function Hoofdzaal(props) {
   )
 }
 
-useGLTF.preload('/hoofdzaal.glb')
+useGLTF.preload('models/hoofdzaal.glb')
