@@ -2,7 +2,7 @@ import { Canvas } from "@react-three/fiber";
 import { Leva } from "leva";
 import { Bvh } from "@react-three/drei";
 import "../styles/components/map.css";
-import Experience from "./Experience.tsx";
+import Experience from "./Experience";
 
 export default function Map() {
   console.log("Map");
