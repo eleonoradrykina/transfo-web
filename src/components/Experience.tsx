@@ -1,0 +1,238 @@
+import { OrbitControls, Html } from "@react-three/drei";
+import { Perf } from "r3f-perf";
+
+/* Non interactive map:*/
+import MapModel from "./nonInteractiveMap/MapModel";
+import Ground from "./nonInteractiveMap/Ground";
+import OfficeBuilding from "./nonInteractiveMap/OfficeBuilding";
+import Path from "./nonInteractiveMap/Path";
+import Trees from "./nonInteractiveMap/Trees";
+
+/* Interactive buldings:*/
+import Hoofdzaal from "./interactiveBuildings/Hoofdzaal";
+import Mechaniekers from "./interactiveBuildings/Mechaniekers";
+import Ketelhuis from "./interactiveBuildings/Ketelhuis";
+import Transformatoren from "./interactiveBuildings/Transformatoren";
+import Octagon from "./interactiveBuildings/Octagon";
+import Kunstacademie from "./interactiveBuildings/Kunstacademie";
+import Duiktank from "./interactiveBuildings/Duiktank";
+import Watertoren from "./interactiveBuildings/Watertoren";
+import Plong from "./interactiveBuildings/Plong";
+
+import { useRef, useState, useEffect } from "react";
+import { useControls } from "leva";
+import { useThree, type Events } from "@react-three/fiber";
+import {
+  ToneMapping,
+  EffectComposer,
+  Bloom,
+  DepthOfField,
+} from "@react-three/postprocessing";
+import { ToneMappingMode, BlendFunction } from "postprocessing";
+
+import gsap from "gsap";
+import type { Mesh, Vector3 } from "three";
+
+export default function Experience() {
+  let selectedMeshes: Mesh[] = [];
+  const OrbitControlsRef = useRef<any>();
+
+  const clearSelection = (meshes: Mesh[]) => {
+    console.log("clearSelection");
+    //turn off the light:
+    if (meshes) {
+      meshes.forEach((mesh) => {
+        mesh.material.emissiveIntensity = 0;
+      });
+    }
+  };
+
+  const handleBuildingClick = (e, label: string) => {
+    console.log(e);
+    e.stopPropagation();
+    clearSelection(selectedMeshes);
+    console.log("building label", label);
+    console.log(e.eventObject.children[0].children[0].position);
+    setOrbitControls(e.eventObject.children[0].children[0].position, label);
+
+    //set orbit controls:
+    console.log(OrbitControlsRef.current);
+
+    const newMeshes = e.eventObject.children[0].children;
+    //light up the building:
+    newMeshes.forEach((mesh: Mesh) => {
+      mesh.material.emissiveIntensity = 3.0;
+    });
+
+    selectedMeshes = newMeshes;
+    console.log("selectedMeshes", selectedMeshes);
+  };
+
+  const setOrbitControls = (position: Vector3, label: string) => {
+    const tl = gsap.timeline();
+
+    if (OrbitControlsRef.current) {
+      // First zoom out to distance 15
+      tl.to(OrbitControlsRef.current, {
+        minDistance: 15.0,
+        maxDistance: 15.0,
+        duration: 0.75,
+        ease: "power2.out",
+      })
+        //then change target
+        .to(
+          OrbitControlsRef.current.target,
+          {
+            x: position.x,
+            y: position.y,
+            z: position.z,
+            duration: 0.75, // Adjust duration as needed
+            ease: "power2.inOut",
+          },
+          "<"
+        )
+        // Then zoom in
+        .to(OrbitControlsRef.current, {
+          minDistance: 8.0,
+          maxDistance: 8.0,
+          duration: 0.75,
+          ease: "power2.in",
+          onComplete: () => {
+            if (OrbitControlsRef.current) {
+              // Reset the distance constraints after animation
+              OrbitControlsRef.current.minDistance = cameraControls.minDistance;
+              OrbitControlsRef.current.maxDistance = cameraControls.maxDistance;
+            }
+          },
+        });
+    }
+  };
+
+  const cameraControls = useControls("Camera", {
+    minDistance: {
+      value: 5.1,
+      min: 0,
+      max: 10,
+      step: 0.1,
+    },
+    maxDistance: {
+      value: 16.3,
+      min: 5,
+      max: 100,
+      step: 0.1,
+    },
+    minAzimuthAngle: {
+      value: -0.4,
+      min: -Math.PI,
+      max: Math.PI,
+      step: 0.01,
+    },
+    maxAzimuthAngle: {
+      value: 0.81,
+      min: -Math.PI,
+      max: Math.PI,
+      step: 0.01,
+    },
+    maxPolarAngle: {
+      value: 1.26,
+      min: 0,
+      max: Math.PI,
+      step: 0.01,
+    },
+    minPolarAngle: {
+      value: 0.86,
+      min: 0,
+      max: Math.PI,
+      step: 0.01,
+    },
+    smoothTime: {
+      value: 0.25,
+      min: 0,
+      max: 1,
+      step: 0.01,
+    },
+    draggingSmoothTime: {
+      value: 0.125,
+      min: 0,
+      max: 1,
+      step: 0.01,
+    },
+    maxSpeed: {
+      value: 1.5,
+      min: 0,
+      max: 10,
+      step: 0.01,
+    },
+    azimuthRotateSpeed: {
+      value: 1.0,
+      min: 0,
+      max: 10,
+      step: 0.01,
+    },
+  });
+  return (
+    <>
+      <EffectComposer>
+        <Bloom luminanceThreshold={0.4} mipmapBlur intensity={1.6} />
+        {/* <ToneMapping mode= {ToneMappingMode.OPTIMIZED_CINEON} /> */}
+      </EffectComposer>
+      <Perf position="top-left" />
+      <OrbitControls
+        minDistance={cameraControls.minDistance}
+        maxDistance={cameraControls.maxDistance}
+        minAzimuthAngle={cameraControls.minAzimuthAngle}
+        maxAzimuthAngle={cameraControls.maxAzimuthAngle}
+        maxPolarAngle={cameraControls.maxPolarAngle}
+        minPolarAngle={cameraControls.minPolarAngle}
+        smoothTime={cameraControls.smoothTime}
+        draggingSmoothTime={cameraControls.draggingSmoothTime}
+        maxSpeed={cameraControls.maxSpeed}
+        azimuthRotateSpeed={cameraControls.azimuthRotateSpeed}
+        dampingFactor={0.1}
+        ref={OrbitControlsRef}
+      />
+      <ambientLight intensity={1.0} />
+      <Ground />
+      <Trees />
+      <MapModel />
+      <Path intensity={0.5} />
+      <Hoofdzaal
+        onClick={(e: Events) => handleBuildingClick(e, "Hoofdzaal")}
+        label="Hoofdzaal"
+      />
+      <Mechaniekers
+        onClick={(e: Events) => handleBuildingClick(e, "Mechaniekers")}
+        label="Mechaniekers"
+      />
+      <Ketelhuis
+        onClick={(e: Events) => handleBuildingClick(e, "Ketelhuis")}
+        label="Ketelhuis"
+      />
+      <Transformatoren
+        onClick={(e: Events) => handleBuildingClick(e, "Transformatoren")}
+        label="Transformatoren"
+      />
+      <Octagon
+        onClick={(e: Events) => handleBuildingClick(e, "Octagon")}
+        label="Octagon"
+      />
+      <Kunstacademie
+        onClick={(e: Events) => handleBuildingClick(e, "Kunstacademie")}
+        label="Kunstacademie"
+      />
+      <Duiktank
+        onClick={(e: Events) => handleBuildingClick(e, "Duiktank")}
+        label="Duiktank"
+      />
+      <Watertoren
+        onClick={(e: Events) => handleBuildingClick(e, "Watertoren")}
+        label="Watertoren"
+      />
+      <Plong
+        onClick={(e: Events) => handleBuildingClick(e, "Plong")}
+        label="Plong"
+      />
+      <OfficeBuilding />
+    </>
+  );
+}
