@@ -107,6 +107,49 @@ export default function Experience() {
     }
   };
 
+  const setLabelsOpacity = () => {
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: "#body",
+        start: "top top",
+        end: "bottom bottom",
+        onEnterBack: () => {
+          tl.reverse();
+        },
+      },
+    });
+    tl.to(
+      ".building-label",
+      {
+        opacity: 1,
+        duration: 0.75,
+        ease: "power2.out",
+      },
+      "<"
+    );
+    tl.to(
+      OrbitControlsRef.current,
+      {
+        minDistance: 12.0,
+        maxDistance: 12.0,
+        duration: 1.25,
+        ease: "power2.out",
+        onComplete: () => {
+            if (OrbitControlsRef.current) {
+              // Reset the distance constraints after animation
+              OrbitControlsRef.current.minDistance = cameraControls.minDistance;
+              OrbitControlsRef.current.maxDistance = cameraControls.maxDistance;
+            }
+        }
+        },
+      "<"
+    );
+  };
+
+  useEffect(() => {
+    setLabelsOpacity();
+  }, []);
+
   const cameraControls = useControls("Camera", {
     minDistance: {
       value: 5.1,
@@ -192,7 +235,7 @@ export default function Experience() {
         enableZoom={false}
         ref={OrbitControlsRef}
       />
-      <ambientLight intensity={3.0} />
+      <ambientLight intensity={1.5} />
       <Ground />
       <Trees />
       <MapModel />

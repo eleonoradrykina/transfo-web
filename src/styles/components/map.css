@@ -3,7 +3,7 @@
   @apply z-10;
 }
 
-.mapPin > div {
+.mapPin>div {
   @apply font-whyte;
   @apply absolute;
   @apply w-max px-[0.25rem] py-[0.5rem];
@@ -14,6 +14,7 @@
 
 .building-label {
   @apply font-whyte italic lowercase text-white text-base text-center;
+  @apply opacity-0;
 }
 
 .building-label::after {
