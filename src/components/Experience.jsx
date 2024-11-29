@@ -175,7 +175,7 @@ export default function Experience() {
         <Bloom luminanceThreshold={0.4} mipmapBlur intensity={1.6} />
         <ToneMapping />
       </EffectComposer>
-      <Perf position="top-left" />
+      {/* <Perf position="top-left" /> */}
       <OrbitControls
         minDistance={cameraControls.minDistance}
         maxDistance={cameraControls.maxDistance}

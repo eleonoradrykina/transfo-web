@@ -4,7 +4,7 @@
   @apply pt-30 pb-60 md:pt-60 lg:pt-120;
 
   &__top {
-    @apply flex flex-col items-center;
+    @apply flex flex-col items-start;
   }
 
   &__bottom {
@@ -15,9 +15,11 @@
   &__date {
     @apply uppercase;
     @apply text-center font-normal text-xl;
+    @apply mx-auto;
   }
 
   &__title {
+    @apply mx-auto;
     @apply font-camera font-bold text-[23vw] md:text-[10vw] lg:text-[200px] text-center;
     font-size: clamp(100px, 12vw, 200px);
     @apply leading-none;

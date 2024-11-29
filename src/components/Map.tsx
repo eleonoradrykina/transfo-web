@@ -9,7 +9,7 @@ export default function Map() {
 
   return (
     <div className="map">
-      <Leva collapsed />
+      <Leva hidden />
       <Canvas
         // onCreated={({ gl }) => { gl.toneMapping = THREE.NoToneMapping }}
         flat

@@ -6,9 +6,9 @@ gsap.registerPlugin(ScrollTrigger);
 
 const mainTL = gsap.timeline({
   scrollTrigger: {
-    trigger: ".main",
+    trigger: "#body",
     start: "top top",
-    end: "+=500",
+    end: "bottom bottom",
     scrub: 1,
     markers: {
       startColor: "white",
@@ -20,4 +20,24 @@ const mainTL = gsap.timeline({
   },
 });
 
-mainTL.play();
+mainTL.to(".hero__title", {
+  //scale: 0.7,
+  fontSize: "7vw",
+  marginLeft: "0px",
+});
+mainTL.to(
+  ".hero__date",
+  {
+    marginLeft: "0px",
+  },
+  "<"
+);
+mainTL.to(
+  ".hero",
+  {
+    paddingTop: "15px",
+  },
+  "<"
+);
+
+mainTL.to(".hero__top", {}, "<");
