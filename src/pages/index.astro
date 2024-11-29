@@ -4,7 +4,7 @@ import Main from "../layouts/Main.astro";
 import languages from "../services/languages.json";
 import "../styles/hero.css";
 import { Language } from "../services/types";
-import Map from "../components/Map.tsx";
+import Interactivity from "../components/Interactivity";
 
 const copy = languages.nl;
 ---
@@ -15,7 +15,7 @@ const copy = languages.nl;
       <span class="hero__date">{copy.date.festival}</span>
       <h1 class="hero__title">{copy.title}</h1>
     </div>
-    <Map client:only="react" />
+    <Interactivity client:only="react" />
     <div class="hero__bottom margins">
       <Countdown client:only="react" language={Language.NL} />
 
@@ -47,5 +47,4 @@ const copy = languages.nl;
       </svg>
     </div>
   </div>
-  <div class="schedule"></div>
 </Main>
