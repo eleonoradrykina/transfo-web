@@ -21,7 +21,7 @@ export default function Map() {
           fov: 45,
           near: 0.1,
           far: 100,
-          position: [2, 5, 10],
+          position: [13, 5, 13],
         }}
         onPointerMissed={() => console.log("pointer missed")}
       >

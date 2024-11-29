@@ -73,9 +73,9 @@ export default function Experience() {
     if (OrbitControlsRef.current) {
       // First zoom out to distance 15
       tl.to(OrbitControlsRef.current, {
-        minDistance: 15.0,
-        maxDistance: 15.0,
-        duration: 0.75,
+        minDistance: 14.0,
+        maxDistance: 14.0,
+        duration: 1.25,
         ease: "power2.out",
       })
         //then change target
@@ -85,17 +85,17 @@ export default function Experience() {
             x: position.x,
             y: position.y,
             z: position.z,
-            duration: 0.75, // Adjust duration as needed
+            duration: 1.25, // Adjust duration as needed
             ease: "power2.inOut",
           },
           "<"
         )
         // Then zoom in
         .to(OrbitControlsRef.current, {
-          minDistance: 8.0,
-          maxDistance: 8.0,
-          duration: 0.75,
-          ease: "power2.in",
+          minDistance: 9.0,
+          maxDistance: 9.0,
+          duration: 1.25,
+          ease: "power2.out",
           onComplete: () => {
             if (OrbitControlsRef.current) {
               // Reset the distance constraints after animation
@@ -173,7 +173,7 @@ export default function Experience() {
     <>
       <EffectComposer>
         <Bloom luminanceThreshold={0.4} mipmapBlur intensity={1.6} />
-        {/* <ToneMapping mode= {ToneMappingMode.OPTIMIZED_CINEON} /> */}
+        <ToneMapping />
       </EffectComposer>
       <Perf position="top-left" />
       <OrbitControls
@@ -187,10 +187,12 @@ export default function Experience() {
         draggingSmoothTime={cameraControls.draggingSmoothTime}
         maxSpeed={cameraControls.maxSpeed}
         azimuthRotateSpeed={cameraControls.azimuthRotateSpeed}
-        dampingFactor={0.1}
+        dampingFactor={0.05}
+        enableDamping={true}
+        enableZoom={false}
         ref={OrbitControlsRef}
       />
-      <ambientLight intensity={1.0} />
+      <ambientLight intensity={3.0} />
       <Ground />
       <Trees />
       <MapModel />
