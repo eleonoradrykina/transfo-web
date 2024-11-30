@@ -30,7 +30,7 @@ export default function Octagon(props) {
           <meshStandardMaterial
             map={colorMap}
             emissive="#BC78FF"
-            emissiveIntensity={0}
+            emissiveIntensity={props.emissiveIntensity}
           />
         </mesh>
 
@@ -43,7 +43,7 @@ export default function Octagon(props) {
           <meshStandardMaterial
             map={colorMap}
             emissive="#BC78FF"
-            emissiveIntensity={0}
+            emissiveIntensity={props.emissiveIntensity}
           />
         </mesh>
         <mesh
@@ -53,12 +53,12 @@ export default function Octagon(props) {
           material={materials.roof}
         >
           <Html position={[-0.15, 1.15, 0.15]} distanceFactor={6} occlude>
-            <p className="building-label">{props.label}</p>
+            <p className="building-label">Octagon</p>
           </Html>
           <meshStandardMaterial
             map={colorMap}
             emissive="#BC78FF"
-            emissiveIntensity={0}
+            emissiveIntensity={props.emissiveIntensity}
           />
         </mesh>
         <mesh
@@ -70,7 +70,7 @@ export default function Octagon(props) {
           <meshStandardMaterial
             map={colorMap}
             emissive="#BC78FF"
-            emissiveIntensity={0}
+            emissiveIntensity={props.emissiveIntensity}
           />
         </mesh>
       </group>

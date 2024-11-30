@@ -1,9 +1,12 @@
 .schedule {
-  @apply fixed z-30 right-0 bottom-0 top-[20%] md:top-0;
+  @apply fixed z-30 right-0 left-0 bottom-0 top-[20%] md:top-0;
+  @media (min-width: 768px) {
+    left: unset;
+  }
   @apply md:max-w-[750px] md:w-[45%] md:min-w-[600px];
 
   .schedule__content {
-    @apply bg-black/30;
+    @apply bg-purple/30;
     backdrop-filter: blur(10px);
     @apply md:m-30 px-5 pt-15 md:px-15 md:py-30 rounded-t-lg md:rounded-b-lg;
     @apply flex flex-col items-center text-center gap-5;

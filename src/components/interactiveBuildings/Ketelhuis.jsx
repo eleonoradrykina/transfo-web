@@ -25,12 +25,12 @@ export default function Ketelhuis(props) {
         <meshStandardMaterial 
           map={colorMap}
           emissive="#BC78FF" 
-          emissiveIntensity={ 0 } />
+          emissiveIntensity={props.emissiveIntensity} />
          <Html
           position={ [0,2.125,0]}
           distanceFactor={6}
           occlude>
-            <p className='building-label'>{props.label}</p>
+            <p className='building-label'>Ketelhuis</p>
           </Html>
         </mesh>
         <mesh
@@ -42,7 +42,7 @@ export default function Ketelhuis(props) {
         <meshStandardMaterial 
           map={colorMap}
           emissive="#BC78FF" 
-          emissiveIntensity={ 0 } />
+          emissiveIntensity={props.emissiveIntensity} />
         </mesh>
         <mesh
           geometry={nodes.Cube002.geometry}
@@ -53,7 +53,7 @@ export default function Ketelhuis(props) {
         <meshStandardMaterial 
           map={colorMap}
           emissive="#BC78FF" 
-          emissiveIntensity={ 0 } />
+          emissiveIntensity={props.emissiveIntensity} />
         </mesh>
         <mesh
           castShadow
@@ -66,7 +66,7 @@ export default function Ketelhuis(props) {
         <meshStandardMaterial 
           map={colorMap}
           emissive="#BC78FF" 
-          emissiveIntensity={ 0 } />
+          emissiveIntensity={props.emissiveIntensity} />
         </mesh>
       </group>
     </group>

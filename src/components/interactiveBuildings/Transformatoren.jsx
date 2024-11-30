@@ -26,12 +26,12 @@ export default function Transformatoren(props) {
                       position={ [0.1,0.75,0.25]}
                       distanceFactor={6}
                       occlude>
-                       <p className='building-label'>{props.label}</p>
+                       <p className='building-label'>Transformatoren</p>
                      </Html>
                      <meshStandardMaterial 
                      map={colorMap} 
                      emissive="#BC78FF" 
-                     emissiveIntensity={ 0 } 
+                     emissiveIntensity={props.emissiveIntensity} 
                     />
             </mesh>
         </group>

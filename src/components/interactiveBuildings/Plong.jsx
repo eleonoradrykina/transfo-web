@@ -26,7 +26,7 @@ export default function Plong(props) {
         <meshStandardMaterial 
         map={colorMap}
         emissive="#BC78FF" 
-        emissiveIntensity={0}
+        emissiveIntensity={props.emissiveIntensity}
         />
       </mesh>
       </group>

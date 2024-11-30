@@ -27,12 +27,12 @@ export default function Hoofdzaal(props) {
         <meshStandardMaterial 
           map={colorMap}
           emissive="#BC78FF" 
-          emissiveIntensity={ 0 } />
+          emissiveIntensity={props.emissiveIntensity} />
         <Html
           position={ [0.1,1.5,0.25]}
           distanceFactor={6}
           occlude>
-           <p className='building-label'>{props.label}</p>
+           <p className='building-label'>Hoofdzaal</p>
          </Html>
       </mesh>
         <mesh
@@ -45,7 +45,7 @@ export default function Hoofdzaal(props) {
         <meshStandardMaterial 
           map={colorMap}
           emissive="#BC78FF" 
-          emissiveIntensity={ 0 } />
+          emissiveIntensity={props.emissiveIntensity} />
         </mesh>
         <mesh
           castShadow
@@ -57,7 +57,7 @@ export default function Hoofdzaal(props) {
         <meshStandardMaterial 
           map={colorMap}
           emissive="#BC78FF" 
-          emissiveIntensity={ 0 } />
+          emissiveIntensity={props.emissiveIntensity} />
         </mesh>
         <mesh
           castShadow
@@ -69,7 +69,7 @@ export default function Hoofdzaal(props) {
         <meshStandardMaterial 
           map={colorMap}
           emissive="#BC78FF" 
-          emissiveIntensity={ 0 } />
+          emissiveIntensity={props.emissiveIntensity} />
         </mesh>
         <mesh
           castShadow
@@ -81,7 +81,7 @@ export default function Hoofdzaal(props) {
         <meshStandardMaterial 
           map={colorMap}
           emissive="#BC78FF" 
-          emissiveIntensity={ 0 } />
+          emissiveIntensity={props.emissiveIntensity} />
         </mesh>
       </group>
     </group>

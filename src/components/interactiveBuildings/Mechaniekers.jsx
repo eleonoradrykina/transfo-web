@@ -30,14 +30,14 @@ colorMap.colorSpace = SRGBColorSpace
             position={ [-0.85,3.0,0.2]}
             distanceFactor={6}
             occlude>
-              <p className='building-label'>{props.label}</p>
+              <p className='building-label'>Mechaniekers</p>
             </Html>
           <meshStandardMaterial 
           roughness={1}
           metalness={0}
           map={colorMap}
           emissive="#BC78FF" 
-          emissiveIntensity={ 0 } />
+          emissiveIntensity={props.emissiveIntensity} />
         </mesh>
         <mesh
           castShadow
@@ -48,7 +48,7 @@ colorMap.colorSpace = SRGBColorSpace
           <meshStandardMaterial 
           map={colorMap}
           emissive="#BC78FF" 
-          emissiveIntensity={ 0 } />
+          emissiveIntensity={props.emissiveIntensity} />
         </mesh>
       </group>
     </group>

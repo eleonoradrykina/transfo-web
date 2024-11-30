@@ -31,41 +31,55 @@ import {
 import { ToneMappingMode, BlendFunction } from "postprocessing";
 
 import gsap from "gsap";
+import { update } from "three/examples/jsm/libs/tween.module.js";
 
 
-export default function Experience() {
-  let selectedMeshes = [];
+
+export default function Experience({ onClickBuilding, clearSelection, updateClearSelection }) {
+  const [selectedBuilding, setSelectedBuilding] = useState(null);
+  const [hoofdzaalEmissiveIntensity, setHoofdzaalEmissiveIntensity] = useState(0);
+  const [mechaniekersEmissiveIntensity, setMechaniekersEmissiveIntensity] = useState(0);
+  const [ketelhuisEmissiveIntensity, setKetelhuisEmissiveIntensity] = useState(0);
+  const [transformatorenEmissiveIntensity, setTransformatorenEmissiveIntensity] = useState(0);
+  const [octagonEmissiveIntensity, setOctagonEmissiveIntensity] = useState(0);
+  const [kunstacademieEmissiveIntensity, setKunstacademieEmissiveIntensity] = useState(0);
+  const [duiktankEmissiveIntensity, setDuiktankEmissiveIntensity] = useState(0);
+  const [watertorenEmissiveIntensity, setWatertorenEmissiveIntensity] = useState(0);
+  const [plongEmissiveIntensity, setPlongEmissiveIntensity] = useState(0);
   const OrbitControlsRef = useRef();
 
-  const clearSelection = (meshes) => {
-    console.log("clearSelection");
-    //turn off the light:
-    if (meshes) {
-      meshes.forEach((mesh) => {
-        mesh.material.emissiveIntensity = 0;
-      });
-    }
+  const handleClear = () => {
+    setHoofdzaalEmissiveIntensity(0);
+    setMechaniekersEmissiveIntensity(0);
+    setKetelhuisEmissiveIntensity(0);
+    setTransformatorenEmissiveIntensity(0);
+    setOctagonEmissiveIntensity(0);
+    setKunstacademieEmissiveIntensity(0);
+    setDuiktankEmissiveIntensity(0);
+    setWatertorenEmissiveIntensity(0);
+    setPlongEmissiveIntensity(0);
   };
 
-  const handleBuildingClick = (e, label) => {
-    console.log(e);
-    e.stopPropagation();
-    clearSelection(selectedMeshes);
-    console.log("building label", label);
-    console.log(e.eventObject.children[0].children[0].position);
-    setOrbitControls(e.eventObject.children[0].children[0].position, label);
-
-    //set orbit controls:
-    console.log(OrbitControlsRef.current);
-
-    const newMeshes = e.eventObject.children[0].children;
-    //light up the building:
-    newMeshes.forEach((mesh) => {
-      mesh.material.emissiveIntensity = 3.0;
-    });
-
-    selectedMeshes = newMeshes;
-    console.log("selectedMeshes", selectedMeshes);
+  const handleSelect = (key) => {
+    handleClear();
+    updateClearSelection(false);    
+    onClickBuilding(key);
+    switch (key) {
+      case "hoofdzaal": setHoofdzaalEmissiveIntensity(3.0); break;
+      case "mechaniekers": setMechaniekersEmissiveIntensity(3.0); break;
+      case "ketelhuis": setKetelhuisEmissiveIntensity(3.0); break;
+      case "transformatoren": setTransformatorenEmissiveIntensity(3.0); break;
+      case "octagon": setOctagonEmissiveIntensity(3.0); break;
+      case "kunstacademie": setKunstacademieEmissiveIntensity(3.0); break;
+      case "duiktank": setDuiktankEmissiveIntensity(3.0); break;
+      case "watertoren": setWatertorenEmissiveIntensity(3.0); break;
+      case "plong": setPlongEmissiveIntensity(3.0); break;
+    }
+      window.history.pushState(
+        {},
+        "",
+        `${window.location.origin}/?building=${key.toLowerCase()}`
+      );
   };
 
   const setOrbitControls = (position, label) => {
@@ -147,7 +161,17 @@ export default function Experience() {
 
   useEffect(() => {
     setLabelsOpacity();
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.has("building")) {
+      handleSelect(urlParams.get("building"));
+    }
   }, []);
+
+  useEffect(() => {
+    handleClear();
+  }, [clearSelection]);
+
+
 
   const cameraControls = useControls("Camera", {
     minDistance: {
@@ -240,40 +264,68 @@ export default function Experience() {
       <MapModel />
       <Path intensity={0.5} />
       <Hoofdzaal
-        onClick={(e) => handleBuildingClick(e, "Hoofdzaal")}
-        label="Hoofdzaal"
-      />
+      onClick={(e) => 
+        {
+          e.stopPropagation();
+          handleSelect("hoofdzaal")
+        }}
+      emissiveIntensity={hoofdzaalEmissiveIntensity}
+    />
       <Mechaniekers
-        onClick={(e) => handleBuildingClick(e, "Mechaniekers")}
-        label="Mechaniekers"
+        onClick={(e) => {
+          e.stopPropagation();
+          handleSelect("mechaniekers");
+        }}
+        emissiveIntensity={mechaniekersEmissiveIntensity}
       />
       <Ketelhuis
-        onClick={(e) => handleBuildingClick(e, "Ketelhuis")}
-        label="Ketelhuis"
+        onClick={(e) => {
+          e.stopPropagation();
+          handleSelect("ketelhuis");
+        }}
+        emissiveIntensity={ketelhuisEmissiveIntensity}
       />
       <Transformatoren
-        onClick={(e) => handleBuildingClick(e, "Transformatoren")}
-        label="Transformatoren"
+        onClick={(e) => {
+          e.stopPropagation();
+          handleSelect("transformatoren");
+        }}
+        emissiveIntensity={transformatorenEmissiveIntensity}
       />
       <Octagon
-        onClick={(e) => handleBuildingClick(e, "Octagon")}
-        label="Octagon"
+        onClick={(e) => {
+          e.stopPropagation();
+          handleSelect("octagon");
+        }}
+        emissiveIntensity={octagonEmissiveIntensity}
       />
       <Kunstacademie
-        onClick={(e) => handleBuildingClick(e, "Kunstacademie")}
-        label="Kunstacademie"
+        onClick={(e) => {
+          e.stopPropagation();
+          handleSelect("kunstacademie");
+        }}
+        emissiveIntensity={kunstacademieEmissiveIntensity}
       />
       <Duiktank
-        onClick={(e) => handleBuildingClick(e, "Duiktank")}
-        label="Duiktank"
+        onClick={(e) => {
+          e.stopPropagation();
+          handleSelect("duiktank");
+        }}
+        emissiveIntensity={duiktankEmissiveIntensity}
       />
       <Watertoren
-        onClick={(e) => handleBuildingClick(e, "Watertoren")}
-        label="Watertoren"
+        onClick={(e) => {
+          e.stopPropagation();
+          handleSelect("watertoren");
+        }}
+        emissiveIntensity={watertorenEmissiveIntensity}
       />
       <Plong
-        onClick={(e) => handleBuildingClick(e, "Plong")}
-        label="Plong"
+        onClick={(e) => {
+          e.stopPropagation();
+          handleSelect("plong");
+        }}
+        emissiveIntensity={plongEmissiveIntensity}
       />
       <OfficeBuilding />
     </>
