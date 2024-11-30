@@ -11,17 +11,11 @@ export default function Map() {
     <div className="map">
       <Leva hidden />
       <Canvas
-        // onCreated={({ gl }) => { gl.toneMapping = THREE.NoToneMapping }}
-        flat
-        gl={{
-          // antialias: true,
-          toneMappingExposure: 0.5,
-        }}
         camera={{
           fov: 45,
           near: 0.1,
           far: 100,
-          position: [2, 5, 10],
+          position: [13, 7, 13],
         }}
         onPointerMissed={() => console.log("pointer missed")}
       >
