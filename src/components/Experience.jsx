@@ -32,6 +32,7 @@ import { ToneMappingMode, BlendFunction } from "postprocessing";
 
 import gsap from "gsap";
 
+
 export default function Experience() {
   let selectedMeshes = [];
   const OrbitControlsRef = useRef();
@@ -113,9 +114,7 @@ export default function Experience() {
         trigger: "#body",
         start: "top top",
         end: "bottom bottom",
-        onEnterBack: () => {
-          tl.reverse();
-        },
+        scrub: 1,
       },
     });
     tl.to(

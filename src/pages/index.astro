@@ -10,13 +10,13 @@ const copy = languages.nl;
 ---
 
 <Main title={copy.title} description={copy.description}>
-  <div class="hero">
+  <div id="hero" class="hero">
     <div class="hero__top margins">
-      <span class="hero__date">{copy.date.festival}</span>
-      <h1 class="hero__title">{copy.title}</h1>
+      <span id="hero__date" class="hero__date">{copy.date.festival}</span>
+      <h1 id="hero__title" class="hero__title">{copy.title}</h1>
     </div>
     <Interactivity client:only="react" />
-    <div class="hero__bottom margins">
+    <div id="hero__bottom" class="hero__bottom margins">
       <Countdown client:only="react" language={Language.NL} />
 
       <p class="hero__intro">
