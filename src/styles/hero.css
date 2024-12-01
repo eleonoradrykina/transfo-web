@@ -1,5 +1,5 @@
 .hero {
-  @apply h-screen w-full fixed max-w-screen-2xl z-20;
+  @apply h-screen w-full fixed max-w-screen-2xl z-10;
   @apply flex flex-col justify-between;
   @apply pt-30 pb-30 md:pt-60 lg:pt-120;
 

@@ -7,7 +7,7 @@ const Interactivity = () => {
 
   return (
     <div className="interactivity">
-      <Map onChangeBuilding={setSelectedBuilding} />
+      {/* <Map onChangeBuilding={setSelectedBuilding} /> */}
       <Schedule selectedBuilding={selectedBuilding} />
     </div>
   );

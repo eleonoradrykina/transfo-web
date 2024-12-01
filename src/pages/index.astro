@@ -68,11 +68,39 @@ const copy = languages.nl;
     if (faqButton) {
       faqButton.addEventListener("click", () => {
         console.log("clicked");
-        faqTL.to("#schedule", {
-          x: "100%",
-          duration: 1,
-          ease: "power2.out",
-        });
+        faqTL
+          .to("#schedule", {
+            x: "100vw",
+            duration: 1,
+            ease: "power2.out",
+          })
+          .to(
+            "#hero__title",
+            {
+              x: "100vw",
+              duration: 1,
+              ease: "power2.out",
+            },
+            "<"
+          )
+          .to(
+            "#hero__date",
+            {
+              x: "100vw",
+              duration: 1,
+              ease: "power2.out",
+            },
+            "<"
+          )
+          .to(
+            "#faq__button",
+            {
+              x: "100vw",
+              duration: 1,
+              ease: "power2.out",
+            },
+            "<"
+          );
         faqTL.play();
       });
     }
