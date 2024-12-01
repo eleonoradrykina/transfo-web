@@ -4,25 +4,20 @@ import Main from "../layouts/Main.astro";
 import languages from "../services/languages.json";
 import "../styles/hero.css";
 import { Language } from "../services/types";
-import Map from "../components/Map.tsx";
+import Interactivity from "../components/Interactivity";
 
 const copy = languages.nl;
 ---
 
 <Main title={copy.title} description={copy.description}>
-  <div class="hero">
+  <div id="hero" class="hero">
     <div class="hero__top margins">
-      <span class="hero__date">{copy.date.festival}</span>
-      <h1 class="hero__title">{copy.title}</h1>
-      <div class="hidden md:block relative z-30">
-        <Countdown client:only="react" language={Language.NL} />
-      </div>
+      <span id="hero__date" class="hero__date">{copy.date.festival}</span>
+      <h1 id="hero__title" class="hero__title">{copy.title}</h1>
     </div>
-    <Map client:only="react" />
-    <div class="hero__bottom margins">
-      <div class="block md:hidden">
-        <Countdown client:only="react" language={Language.NL} />
-      </div>
+    <Interactivity client:only="react" />
+    <div id="hero__bottom" class="hero__bottom margins">
+      <Countdown client:only="react" language={Language.NL} />
 
       <p class="hero__intro">
         Wandel langs sfeervolle routes en ontdek <span class="bold"
@@ -52,5 +47,4 @@ const copy = languages.nl;
       </svg>
     </div>
   </div>
-  <div class="schedule"></div>
 </Main>

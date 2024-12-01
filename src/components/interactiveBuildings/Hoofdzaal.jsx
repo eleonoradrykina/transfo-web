@@ -6,15 +6,19 @@ import React from 'react'
 import { useGLTF, Html } from '@react-three/drei'
 import { useLoader } from '@react-three/fiber'
 import { TextureLoader } from 'three/src/loaders/TextureLoader'
-
+import { SRGBColorSpace } from 'three'
 
 export default function Hoofdzaal(props) {
-  const { nodes } = useGLTF('./models/hoofdzaal.glb')
-  const colorMap = useLoader(TextureLoader, './models/textures/hoofdzaal-baked.jpg')
+  const { nodes } = useGLTF('models/hoofdzaal.glb')
+  const colorMap = useLoader(TextureLoader, 'models/textures/hoofdzaal-baked.jpg')
+  colorMap.colorSpace = SRGBColorSpace;
   colorMap.flipY = false
 
   return (
-    <group {...props} dispose={null}>
+    <group onClick={(e) => {
+      e.stopPropagation()
+      props.handleClick()
+    }} dispose={null}>
       <group>
       <mesh
         castShadow
@@ -26,12 +30,12 @@ export default function Hoofdzaal(props) {
         <meshStandardMaterial 
           map={colorMap}
           emissive="#BC78FF" 
-          emissiveIntensity={ 0 } />
+          emissiveIntensity={props.emissiveIntensity} />
         <Html
           position={ [0.1,1.5,0.25]}
           distanceFactor={6}
           occlude>
-           <p className='building-label'>{props.label}</p>
+           <p className='building-label'>Hoofdzaal</p>
          </Html>
       </mesh>
         <mesh
@@ -44,7 +48,7 @@ export default function Hoofdzaal(props) {
         <meshStandardMaterial 
           map={colorMap}
           emissive="#BC78FF" 
-          emissiveIntensity={ 0 } />
+          emissiveIntensity={props.emissiveIntensity} />
         </mesh>
         <mesh
           castShadow
@@ -56,7 +60,7 @@ export default function Hoofdzaal(props) {
         <meshStandardMaterial 
           map={colorMap}
           emissive="#BC78FF" 
-          emissiveIntensity={ 0 } />
+          emissiveIntensity={props.emissiveIntensity} />
         </mesh>
         <mesh
           castShadow
@@ -68,7 +72,7 @@ export default function Hoofdzaal(props) {
         <meshStandardMaterial 
           map={colorMap}
           emissive="#BC78FF" 
-          emissiveIntensity={ 0 } />
+          emissiveIntensity={props.emissiveIntensity} />
         </mesh>
         <mesh
           castShadow
@@ -80,11 +84,11 @@ export default function Hoofdzaal(props) {
         <meshStandardMaterial 
           map={colorMap}
           emissive="#BC78FF" 
-          emissiveIntensity={ 0 } />
+          emissiveIntensity={props.emissiveIntensity} />
         </mesh>
       </group>
     </group>
   )
 }
 
-useGLTF.preload('/hoofdzaal.glb')
+useGLTF.preload('models/hoofdzaal.glb')

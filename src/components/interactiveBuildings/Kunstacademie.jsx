@@ -6,14 +6,18 @@ import React from 'react'
 import { useGLTF, Html } from '@react-three/drei'
 import { useLoader } from '@react-three/fiber'
 import { TextureLoader } from 'three/src/loaders/TextureLoader'
+import { SRGBColorSpace } from 'three'
 
 export default function Kunstacademie(props) {
-  const { nodes } = useGLTF('./models/kunstacademie-no-materials.glb')
-  const colorMap = useLoader(TextureLoader, './models/textures/kunstacademie-baked.jpg')
+  const { nodes } = useGLTF('models/kunstacademie-no-materials.glb')
+  const colorMap = useLoader(TextureLoader, 'models/textures/kunstacademie-baked.jpg')
   colorMap.flipY = false
-
+  colorMap.colorSpace = SRGBColorSpace
   return (
-    <group {...props} dispose={null}>
+    <group onClick={(e) => {
+      e.stopPropagation()
+      props.handleClick()
+    }} dispose={null}>
       <group>
       <mesh
         castShadow
@@ -27,12 +31,12 @@ export default function Kunstacademie(props) {
           position={ [ -3, 5.5, 0 ]}
           distanceFactor={6}
           occlude>
-            <p className='building-label'>{props.label}</p>
+            <p className='building-label'>kunstacademie</p>
           </Html>
         <meshStandardMaterial 
           map={colorMap}
           emissive="#BC78FF" 
-          emissiveIntensity={ 0 } />
+          emissiveIntensity={props.emissiveIntensity} />
       </mesh>
       <mesh
         castShadow
@@ -45,7 +49,7 @@ export default function Kunstacademie(props) {
         <meshStandardMaterial 
           map={colorMap}
           emissive="#BC78FF" 
-          emissiveIntensity={ 0 } />
+          emissiveIntensity={props.emissiveIntensity} />
       </mesh>
       <mesh
         castShadow
@@ -58,11 +62,11 @@ export default function Kunstacademie(props) {
         <meshStandardMaterial 
           map={colorMap}
           emissive="#BC78FF" 
-          emissiveIntensity={ 0 } />
+          emissiveIntensity={props.emissiveIntensity} />
       </mesh>
       </group>
     </group>
   )
 }
 
-useGLTF.preload('./models/kunstacademie-no-materials.glb')
+useGLTF.preload('models/kunstacademie-no-materials.glb')

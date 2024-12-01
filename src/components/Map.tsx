@@ -2,30 +2,38 @@ import { Canvas } from "@react-three/fiber";
 import { Leva } from "leva";
 import { Bvh } from "@react-three/drei";
 import "../styles/components/map.css";
-
 import Experience from "./Experience";
+import { useState } from "react";
 
-export default function Map() {
+interface Props {
+  onChangeBuilding: (building: string | null) => void;
+}
+
+export default function Map({ onChangeBuilding }: Props) {
+  const [clearSelection, setClearSelection] = useState(0);
+
   return (
     <div className="map">
-      <Leva collapsed />
+      <Leva hidden />
       <Canvas
-        //  flat
-        shadows
-        gl={{
-          // antialias: true,
-          toneMappingExposure: 0.5,
-        }}
         camera={{
           fov: 45,
           near: 0.1,
           far: 100,
-          position: [2, 5, 10],
+          position: [13, 7, 13],
         }}
-        onPointerMissed={() => console.log("pointer missed")}
+        onPointerMissed={() => {
+          console.log("missed");
+
+          window.history.pushState({}, "", window.location.origin);
+          setClearSelection(clearSelection + 1);
+        }}
       >
         <Bvh>
-          <Experience />
+          <Experience
+            clearSelection={clearSelection}
+            onClickBuilding={onChangeBuilding}
+          />
         </Bvh>
       </Canvas>
     </div>

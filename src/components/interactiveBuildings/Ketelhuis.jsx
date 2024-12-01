@@ -6,14 +6,18 @@ import React from 'react'
 import { useGLTF, Html } from '@react-three/drei'
 import { useLoader } from '@react-three/fiber'
 import { TextureLoader } from 'three/src/loaders/TextureLoader'
+import { SRGBColorSpace } from 'three'
 
 export default function Ketelhuis(props) {
-  const { nodes, materials } = useGLTF('./models/ketelhuis2.glb')
-  const colorMap = useLoader(TextureLoader, './models/textures/ketelhuis-baked2.jpg')
+  const { nodes, materials } = useGLTF('models/ketelhuis2.glb')
+  const colorMap = useLoader(TextureLoader, 'models/textures/ketelhuis-baked2.jpg')
   colorMap.flipY = false
-
+  colorMap.colorSpace = SRGBColorSpace
   return (
-    <group {...props} dispose={null}>
+    <group onClick={(e) => {
+      e.stopPropagation()
+      props.handleClick()
+    }} dispose={null}>
       <group position={[-0.793, 0.87, -0.556]} rotation={[0, 0.009, 0]}>
         <mesh
           castShadow
@@ -24,12 +28,12 @@ export default function Ketelhuis(props) {
         <meshStandardMaterial 
           map={colorMap}
           emissive="#BC78FF" 
-          emissiveIntensity={ 0 } />
+          emissiveIntensity={props.emissiveIntensity} />
          <Html
           position={ [0,2.125,0]}
           distanceFactor={6}
           occlude>
-            <p className='building-label'>{props.label}</p>
+            <p className='building-label'>Ketelhuis</p>
           </Html>
         </mesh>
         <mesh
@@ -41,7 +45,7 @@ export default function Ketelhuis(props) {
         <meshStandardMaterial 
           map={colorMap}
           emissive="#BC78FF" 
-          emissiveIntensity={ 0 } />
+          emissiveIntensity={props.emissiveIntensity} />
         </mesh>
         <mesh
           geometry={nodes.Cube002.geometry}
@@ -52,7 +56,7 @@ export default function Ketelhuis(props) {
         <meshStandardMaterial 
           map={colorMap}
           emissive="#BC78FF" 
-          emissiveIntensity={ 0 } />
+          emissiveIntensity={props.emissiveIntensity} />
         </mesh>
         <mesh
           castShadow
@@ -65,11 +69,11 @@ export default function Ketelhuis(props) {
         <meshStandardMaterial 
           map={colorMap}
           emissive="#BC78FF" 
-          emissiveIntensity={ 0 } />
+          emissiveIntensity={props.emissiveIntensity} />
         </mesh>
       </group>
     </group>
   )
 }
 
-useGLTF.preload('./models/ketelhuis2.glb')
+useGLTF.preload('models/ketelhuis2.glb')

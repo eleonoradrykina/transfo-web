@@ -1,23 +1,31 @@
 .hero {
-  @apply h-screen w-full fixed;
+  @apply h-screen w-full fixed max-w-screen-2xl;
   @apply flex flex-col justify-between;
-  @apply pt-30 pb-60 md:pt-60 lg:pt-120;
+  @apply pt-30 pb-30 md:pt-60 lg:pt-120;
+  background: rgb(21, 22, 68);
+  background: radial-gradient(
+    circle,
+    rgba(21, 22, 68, 1) 0%,
+    rgba(10, 11, 44, 1) 100%
+  );
 
   &__top {
-    @apply flex flex-col items-center;
+    @apply flex flex-col items-start;
   }
 
   &__bottom {
-    @apply flex flex-col items-center gap-30;
+    @apply flex flex-col items-center gap-15 md:gap-30;
     @apply relative z-20;
   }
 
   &__date {
     @apply uppercase;
     @apply text-center font-normal text-xl;
+    @apply mx-auto;
   }
 
   &__title {
+    @apply mx-auto;
     @apply font-camera font-bold text-[23vw] md:text-[10vw] lg:text-[200px] text-center;
     font-size: clamp(100px, 12vw, 200px);
     @apply leading-none;

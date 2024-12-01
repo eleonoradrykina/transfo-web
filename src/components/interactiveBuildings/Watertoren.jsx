@@ -5,16 +5,19 @@ import React, { useRef } from 'react'
 import { useGLTF, Html } from '@react-three/drei'
 import { useLoader } from '@react-three/fiber'
 import { TextureLoader } from 'three/src/loaders/TextureLoader'
+import { SRGBColorSpace } from 'three'
 
 export default function Watertoren(props) {
-  const { nodes, materials } = useGLTF('./models/watertoren.glb')
-  const colorMap = useLoader(TextureLoader, './models/textures/watertoren-baked.jpg')
+  const { nodes, materials } = useGLTF('models/watertoren.glb')
+  const colorMap = useLoader(TextureLoader, 'models/textures/watertoren-baked.jpg')
   colorMap.flipY = false
-
-  const text = props.label
+  colorMap.colorSpace = SRGBColorSpace
 
   return (
-    <group {...props} dispose={null}>
+    <group onClick={(e) => {
+      e.stopPropagation()
+      props.handleClick()
+    }} dispose={null}>
       <group>
       <mesh
         castShadow
@@ -28,7 +31,7 @@ export default function Watertoren(props) {
         <meshStandardMaterial 
           map={colorMap}
           emissive="#BC78FF" 
-          emissiveIntensity={ 0 } />
+          emissiveIntensity={props.emissiveIntensity} />
       </mesh>
       <mesh
         castShadow
@@ -42,16 +45,16 @@ export default function Watertoren(props) {
          position={ [0.1,0.75,0.25]}
          distanceFactor={6}
          occlude>
-            <p className='building-label'>{text}</p>
+            <p className='building-label'>Watertoren</p>
         </Html>
         <meshStandardMaterial 
           map={colorMap}
           emissive="#BC78FF" 
-          emissiveIntensity={ 0 } />
+          emissiveIntensity={props.emissiveIntensity} />
       </mesh>
       </group>
     </group>
   )
 }
 
-useGLTF.preload('./models/watertoren.glb')
+useGLTF.preload('models/watertoren.glb')

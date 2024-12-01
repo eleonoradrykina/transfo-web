@@ -1,6 +1,8 @@
 /** @type {import('tailwindcss').Config} */
 
 const SIZES = {
+  5: "5px",
+  10: "10px",
   15: "15px",
   30: "30px",
   60: "60px",

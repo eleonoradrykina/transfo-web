@@ -6,14 +6,21 @@ import React from 'react'
 import { useGLTF, Html } from '@react-three/drei'
 import { useLoader } from '@react-three/fiber'
 import { TextureLoader } from 'three/src/loaders/TextureLoader'
+import { SRGBColorSpace } from 'three'
+
 
 export default function Duiktank(props) {
-  const { nodes, materials } = useGLTF('./models/duiktank.glb')
-  const colorMap = useLoader(TextureLoader, './models/textures/duiktank-baked.jpg')
+  const { nodes, materials } = useGLTF('models/duiktank.glb')
+  const colorMap = useLoader(TextureLoader, 'models/textures/duiktank-baked.jpg')
+  //make sure the texture is srgb
+  colorMap.colorSpace = SRGBColorSpace
   colorMap.flipY = false
 
   return (
-    <group {...props} dispose={null}>
+    <group onClick={(e) => {
+      e.stopPropagation()
+      props.handleClick()
+    }} dispose={null}>
       <group>
       <mesh
         castShadow
@@ -28,16 +35,16 @@ export default function Duiktank(props) {
           position={ [0.2,2.75,0.25]}
           distanceFactor={6}
           occlude>
-            <p className='building-label'>{props.label}</p>
+            <p className='building-label'>Duiktank</p>
           </Html>
         <meshStandardMaterial 
           map={colorMap}
           emissive="#BC78FF" 
-          emissiveIntensity={ 0 } />
+          emissiveIntensity={props.emissiveIntensity} />
       </mesh>
       </group>
     </group>
   )
 }
 
-useGLTF.preload('./models/duiktank.glb')
+useGLTF.preload('models/duiktank.glb')
