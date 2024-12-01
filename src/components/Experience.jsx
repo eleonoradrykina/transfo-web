@@ -31,12 +31,13 @@ import {
 import { ToneMappingMode, BlendFunction } from "postprocessing";
 
 import gsap from "gsap";
+import { update } from "three/examples/jsm/libs/tween.module.js";
 
 const positions = new Map([["hoofdzaal", [-0.005, 0.584, -1.317]], ["mechaniekers", [0.573, 0.306, 0.635]], ["ketelhuis", [-0.793, 0.87, -0.556]], ["transformatoren", [1.014, 1.132, -4.375]], ["octagon", [1.89, -0.102, -1.122]], ["kunstacademie", [3.105, 0.186, -0.804]], ["duiktank", [1.496, 0.366, 4.596]], ["watertoren", [-0.665, 0.045, 2.214]], ["plong", [1.504, 0.12, -0.343]]]);
 
 
 
-export default function Experience({ onClickBuilding, clearSelection, updateClearSelection }) {
+export default function Experience({ onClickBuilding, clearSelection }) {
   const [selectedBuilding, setSelectedBuilding] = useState(null);
   const [hoofdzaalEmissiveIntensity, setHoofdzaalEmissiveIntensity] = useState(0);
   const [mechaniekersEmissiveIntensity, setMechaniekersEmissiveIntensity] = useState(0);
@@ -47,9 +48,14 @@ export default function Experience({ onClickBuilding, clearSelection, updateClea
   const [duiktankEmissiveIntensity, setDuiktankEmissiveIntensity] = useState(0);
   const [watertorenEmissiveIntensity, setWatertorenEmissiveIntensity] = useState(0);
   const [plongEmissiveIntensity, setPlongEmissiveIntensity] = useState(0);
+
+  useEffect(() => {
+    handleClear("useEffect");
+  }, [clearSelection]);
   const OrbitControlsRef = useRef();
 
-  const handleClear = () => {
+  const handleClear = (location) => {
+    console.log("clearing", location);
     setHoofdzaalEmissiveIntensity(0);
     setMechaniekersEmissiveIntensity(0);
     setKetelhuisEmissiveIntensity(0);
@@ -62,16 +68,14 @@ export default function Experience({ onClickBuilding, clearSelection, updateClea
   };
 
   const handleSelect = (key) => {
-    handleClear();
-    updateClearSelection(false);    
+    handleClear("handleSelect");  
     onClickBuilding(key);
-
     setOrbitControls(key);
 
     switch (key) {
       case "hoofdzaal": setHoofdzaalEmissiveIntensity(3.0); break;
       case "mechaniekers": setMechaniekersEmissiveIntensity(3.0); break;
-      case "ketelhuis": setKetelhuisEmissiveIntensity(3.0); break;
+      case "ketelhuis": setKetelhuisEmissiveIntensity(3); break;
       case "transformatoren": setTransformatorenEmissiveIntensity(3.0); break;
       case "octagon": setOctagonEmissiveIntensity(3.0); break;
       case "kunstacademie": setKunstacademieEmissiveIntensity(3.0); break;
@@ -79,6 +83,13 @@ export default function Experience({ onClickBuilding, clearSelection, updateClea
       case "watertoren": setWatertorenEmissiveIntensity(3.0); break;
       case "plong": setPlongEmissiveIntensity(3.0); break;
     }
+    
+    window.scrollTo({
+      top: document.body.scrollHeight,
+      left: 0,
+      behavior: "smooth",
+    });
+
       window.history.pushState(
         {},
         "",
@@ -170,18 +181,11 @@ export default function Experience({ onClickBuilding, clearSelection, updateClea
     setLabelsOpacity();
     const urlParams = new URLSearchParams(window.location.search);
     if (urlParams.has("building")) {
-      window.scrollTo({
-        top: document.body.scrollHeight,
-        left: 0,
-        behavior: "smooth",
-      });
       handleSelect(urlParams.get("building"));
     }
   }, []);
 
-  useEffect(() => {
-    handleClear();
-  }, [clearSelection]);
+
 
 
 

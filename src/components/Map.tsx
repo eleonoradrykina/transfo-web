@@ -10,7 +10,7 @@ interface Props {
 }
 
 export default function Map({ onChangeBuilding }: Props) {
-  const [clearSelection, setClearSelection] = useState(false);
+  const [clearSelection, setClearSelection] = useState(0);
 
   return (
     <div className="map">
@@ -26,12 +26,11 @@ export default function Map({ onChangeBuilding }: Props) {
           console.log("missed");
 
           window.history.pushState({}, "", window.location.origin);
-          setClearSelection(true);
+          setClearSelection(clearSelection + 1);
         }}
       >
         <Bvh>
           <Experience
-            updateClearSelection={setClearSelection}
             clearSelection={clearSelection}
             onClickBuilding={onChangeBuilding}
           />
