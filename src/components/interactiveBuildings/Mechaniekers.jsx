@@ -15,7 +15,10 @@ colorMap.flipY = false
 colorMap.colorSpace = SRGBColorSpace
 
   return (
-    <group {...props} dispose={null}>
+    <group onClick={(e) => {
+      e.stopPropagation()
+      props.handleClick()
+    }} dispose={null}>
       <group
         position={[0.573, 0.306, 0.635]}
         rotation={[0, 0.009, 0]}

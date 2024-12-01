@@ -17,7 +17,10 @@ export default function Duiktank(props) {
   colorMap.flipY = false
 
   return (
-    <group {...props} dispose={null}>
+    <group onClick={(e) => {
+      e.stopPropagation()
+      props.handleClick()
+    }} dispose={null}>
       <group>
       <mesh
         castShadow

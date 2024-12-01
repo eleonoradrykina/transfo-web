@@ -14,7 +14,10 @@ export default function Ketelhuis(props) {
   colorMap.flipY = false
   colorMap.colorSpace = SRGBColorSpace
   return (
-    <group {...props} dispose={null}>
+    <group onClick={(e) => {
+      e.stopPropagation()
+      props.handleClick()
+    }} dispose={null}>
       <group position={[-0.793, 0.87, -0.556]} rotation={[0, 0.009, 0]}>
         <mesh
           castShadow

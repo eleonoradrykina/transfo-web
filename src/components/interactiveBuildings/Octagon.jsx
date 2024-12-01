@@ -17,7 +17,10 @@ export default function Octagon(props) {
   colorMap.flipY = false;
   colorMap.colorSpace = SRGBColorSpace;
   return (
-    <group {...props} dispose={null}>
+    <group onClick={(e) => {
+      e.stopPropagation()
+      props.handleClick()
+    }} dispose={null}>
       <group position={[1.89, -0.102, -1.122]} rotation={[0, -0.375, 0]}>
         <mesh
           castShadow

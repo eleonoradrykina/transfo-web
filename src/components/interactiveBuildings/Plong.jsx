@@ -14,7 +14,10 @@ export default function Plong(props) {
   colorMap.flipY = false
   colorMap.colorSpace = SRGBColorSpace
   return (
-    <group {...props} dispose={null}>
+    <group onClick={(e) => {
+      e.stopPropagation()
+      props.handleClick()
+    }} dispose={null}>
      <group>
         <mesh
         castShadow
