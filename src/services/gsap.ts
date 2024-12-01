@@ -29,6 +29,14 @@ mainTL.to(
   "<"
 );
 
+mainTL.from(
+  "#faq__button",
+  {
+    opacity: 0,
+  },
+  "<"
+);
+
 mm.add("(max-width: 767px)", () => {
   mainTL.to(
     "#hero",

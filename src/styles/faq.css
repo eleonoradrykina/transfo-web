@@ -1,0 +1,15 @@
+.faq {
+  @apply h-screen w-full fixed max-w-screen-2xl z-20;
+  @apply flex flex-col justify-between;
+  @apply bg-green-50;
+  @apply -translate-x-full;
+}
+
+.faq__button {
+  @apply mt-5 relative z-30;
+  @apply md:absolute md:bottom-60 md:left-60;
+  @apply px-15 py-5 bg-purple/30;
+  @apply border-[2.5px] border-pink rounded-full;
+  backdrop-filter: blur(10px);
+  @apply text-white font-bold text-sm;
+}

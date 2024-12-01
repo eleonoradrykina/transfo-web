@@ -23,6 +23,13 @@ const Schedule = ({ selectedBuilding }: Props) => {
         start: "top top",
         end: "bottom bottom",
         scrub: 1,
+        onUpdate() {
+          gsap.to("#schedule", {
+            duration: 0.5,
+            ease: "power1.out",
+            x: "0%",
+          });
+        },
       },
     });
 
