@@ -170,6 +170,11 @@ export default function Experience({ onClickBuilding, clearSelection, updateClea
     setLabelsOpacity();
     const urlParams = new URLSearchParams(window.location.search);
     if (urlParams.has("building")) {
+      window.scrollTo({
+        top: document.body.scrollHeight,
+        left: 0,
+        behavior: "smooth",
+      });
       handleSelect(urlParams.get("building"));
     }
   }, []);
