@@ -17,7 +17,10 @@ export default function Duiktank(props) {
   colorMap.flipY = false
 
   return (
-    <group {...props} dispose={null}>
+    <group onClick={(e) => {
+      e.stopPropagation()
+      props.handleClick()
+    }} dispose={null}>
       <group>
       <mesh
         castShadow
@@ -32,12 +35,12 @@ export default function Duiktank(props) {
           position={ [0.2,2.75,0.25]}
           distanceFactor={6}
           occlude>
-            <p className='building-label'>{props.label}</p>
+            <p className='building-label'>Duiktank</p>
           </Html>
         <meshStandardMaterial 
           map={colorMap}
           emissive="#BC78FF" 
-          emissiveIntensity={ 0 } />
+          emissiveIntensity={props.emissiveIntensity} />
       </mesh>
       </group>
     </group>

@@ -3,7 +3,7 @@
   @apply z-10;
 }
 
-.mapPin>div {
+.mapPin > div {
   @apply font-whyte;
   @apply absolute;
   @apply w-max px-[0.25rem] py-[0.5rem];

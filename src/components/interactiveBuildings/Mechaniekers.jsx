@@ -15,7 +15,10 @@ colorMap.flipY = false
 colorMap.colorSpace = SRGBColorSpace
 
   return (
-    <group {...props} dispose={null}>
+    <group onClick={(e) => {
+      e.stopPropagation()
+      props.handleClick()
+    }} dispose={null}>
       <group
         position={[0.573, 0.306, 0.635]}
         rotation={[0, 0.009, 0]}
@@ -30,14 +33,14 @@ colorMap.colorSpace = SRGBColorSpace
             position={ [-0.85,3.0,0.2]}
             distanceFactor={6}
             occlude>
-              <p className='building-label'>{props.label}</p>
+              <p className='building-label'>Mechaniekers</p>
             </Html>
           <meshStandardMaterial 
           roughness={1}
           metalness={0}
           map={colorMap}
           emissive="#BC78FF" 
-          emissiveIntensity={ 0 } />
+          emissiveIntensity={props.emissiveIntensity} />
         </mesh>
         <mesh
           castShadow
@@ -48,7 +51,7 @@ colorMap.colorSpace = SRGBColorSpace
           <meshStandardMaterial 
           map={colorMap}
           emissive="#BC78FF" 
-          emissiveIntensity={ 0 } />
+          emissiveIntensity={props.emissiveIntensity} />
         </mesh>
       </group>
     </group>

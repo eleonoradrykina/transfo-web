@@ -17,7 +17,10 @@ export default function Octagon(props) {
   colorMap.flipY = false;
   colorMap.colorSpace = SRGBColorSpace;
   return (
-    <group {...props} dispose={null}>
+    <group onClick={(e) => {
+      e.stopPropagation()
+      props.handleClick()
+    }} dispose={null}>
       <group position={[1.89, -0.102, -1.122]} rotation={[0, -0.375, 0]}>
         <mesh
           castShadow
@@ -30,7 +33,7 @@ export default function Octagon(props) {
           <meshStandardMaterial
             map={colorMap}
             emissive="#BC78FF"
-            emissiveIntensity={0}
+            emissiveIntensity={props.emissiveIntensity}
           />
         </mesh>
 
@@ -43,7 +46,7 @@ export default function Octagon(props) {
           <meshStandardMaterial
             map={colorMap}
             emissive="#BC78FF"
-            emissiveIntensity={0}
+            emissiveIntensity={props.emissiveIntensity}
           />
         </mesh>
         <mesh
@@ -53,12 +56,12 @@ export default function Octagon(props) {
           material={materials.roof}
         >
           <Html position={[-0.15, 1.15, 0.15]} distanceFactor={6} occlude>
-            <p className="building-label">{props.label}</p>
+            <p className="building-label">Octagon</p>
           </Html>
           <meshStandardMaterial
             map={colorMap}
             emissive="#BC78FF"
-            emissiveIntensity={0}
+            emissiveIntensity={props.emissiveIntensity}
           />
         </mesh>
         <mesh
@@ -70,7 +73,7 @@ export default function Octagon(props) {
           <meshStandardMaterial
             map={colorMap}
             emissive="#BC78FF"
-            emissiveIntensity={0}
+            emissiveIntensity={props.emissiveIntensity}
           />
         </mesh>
       </group>

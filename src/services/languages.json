@@ -15,6 +15,9 @@
         },
         "faq": {
             "title": "Veelgestelde vragen"
+        },
+        "schedule": {
+            "title": "Programma"
         }
     }
 }

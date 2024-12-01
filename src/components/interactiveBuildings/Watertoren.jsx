@@ -14,7 +14,10 @@ export default function Watertoren(props) {
   colorMap.colorSpace = SRGBColorSpace
 
   return (
-    <group {...props} dispose={null}>
+    <group onClick={(e) => {
+      e.stopPropagation()
+      props.handleClick()
+    }} dispose={null}>
       <group>
       <mesh
         castShadow
@@ -28,7 +31,7 @@ export default function Watertoren(props) {
         <meshStandardMaterial 
           map={colorMap}
           emissive="#BC78FF" 
-          emissiveIntensity={ 0 } />
+          emissiveIntensity={props.emissiveIntensity} />
       </mesh>
       <mesh
         castShadow
@@ -42,12 +45,12 @@ export default function Watertoren(props) {
          position={ [0.1,0.75,0.25]}
          distanceFactor={6}
          occlude>
-            <p className='building-label'>{props.label}</p>
+            <p className='building-label'>Watertoren</p>
         </Html>
         <meshStandardMaterial 
           map={colorMap}
           emissive="#BC78FF" 
-          emissiveIntensity={ 0 } />
+          emissiveIntensity={props.emissiveIntensity} />
       </mesh>
       </group>
     </group>

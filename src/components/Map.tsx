@@ -3,9 +3,14 @@ import { Leva } from "leva";
 import { Bvh } from "@react-three/drei";
 import "../styles/components/map.css";
 import Experience from "./Experience";
+import { useState } from "react";
 
-export default function Map() {
-  console.log("Map");
+interface Props {
+  onChangeBuilding: (building: string | null) => void;
+}
+
+export default function Map({ onChangeBuilding }: Props) {
+  const [clearSelection, setClearSelection] = useState(0);
 
   return (
     <div className="map">
@@ -17,10 +22,18 @@ export default function Map() {
           far: 100,
           position: [13, 7, 13],
         }}
-        onPointerMissed={() => console.log("pointer missed")}
+        onPointerMissed={() => {
+          console.log("missed");
+
+          window.history.pushState({}, "", window.location.origin);
+          setClearSelection(clearSelection + 1);
+        }}
       >
         <Bvh>
-          <Experience />
+          <Experience
+            clearSelection={clearSelection}
+            onClickBuilding={onChangeBuilding}
+          />
         </Bvh>
       </Canvas>
     </div>
