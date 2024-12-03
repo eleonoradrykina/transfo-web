@@ -5,6 +5,7 @@ import "../styles/components/map.css";
 import Experience from "./Experience";
 import { useState } from "react";
 
+
 interface Props {
   onChangeBuilding: (building: string | null) => void;
 }
@@ -24,7 +25,6 @@ export default function Map({ onChangeBuilding }: Props) {
         }}
         onPointerMissed={() => {
           console.log("missed");
-
           window.history.pushState({}, "", window.location.origin);
           setClearSelection(clearSelection + 1);
         }}

@@ -35,7 +35,7 @@ export default function Duiktank(props) {
           position={ [0.2,2.75,0.25]}
           distanceFactor={6}
           occlude>
-            <p className='building-label'>Duiktank</p>
+            <p className='building-label'>Duiktank - Zomerbar</p>
           </Html>
         <meshStandardMaterial 
           map={colorMap}

@@ -72,6 +72,7 @@ export default function Trees(props) {
         castShadow
         receiveShadow
         geometry={nodes.Sphere020.geometry}
+        position={[1.105, 0.226, 0.18]}
         material={materials['grass.001']}
       />
       <mesh
