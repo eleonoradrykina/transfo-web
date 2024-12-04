@@ -6,6 +6,7 @@ import "../styles/hero.css";
 import "../styles/faq.css";
 import { Language } from "../services/types";
 import Interactivity from "../components/Interactivity";
+import FAQ from "../components/FAQ";
 
 const copy = languages.nl;
 ---
@@ -49,22 +50,16 @@ const copy = languages.nl;
       </svg>
     </div>
   </div>
-  <div id="faq" class="faq"></div>
+  <FAQ client:load />
+  <button id="faq__back__button" class="faq__button back">
+    Terug naar overzicht
+  </button>
   <script>
     import { gsap } from "gsap";
 
     const faqTL = gsap.timeline({ paused: true });
-
-    // .to(
-    //   "#faq",
-    //   {
-    //     x: "0",
-    //     duration: 1,
-    //   },
-    //   "<"
-    // );
-
     const faqButton = document.getElementById("faq__button");
+    const faqBackButton = document.getElementById("faq__back__button");
     if (faqButton) {
       faqButton.addEventListener("click", () => {
         console.log("clicked");
@@ -100,8 +95,32 @@ const copy = languages.nl;
               ease: "power2.out",
             },
             "<"
+          )
+          .to(
+            "#faq",
+            {
+              x: "0",
+              duration: 1,
+              ease: "power2.out",
+            },
+            "<"
+          )
+          .to(
+            "#faq__back__button",
+            {
+              x: "0",
+              duration: 1,
+              ease: "power2.out",
+            },
+            "<+=0.5"
           );
         faqTL.play();
+      });
+    }
+
+    if (faqBackButton) {
+      faqBackButton.addEventListener("click", () => {
+        faqTL.reverse();
       });
     }
   </script>
