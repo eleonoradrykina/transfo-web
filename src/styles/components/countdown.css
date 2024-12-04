@@ -8,7 +8,7 @@
     backdrop-filter: blur(10px);
 
     width: calc(25% - (45px / 4));
-    @apply max-w-[100px];
+    @apply max-w-[90px];
   }
 
   &__number {
@@ -16,6 +16,6 @@
   }
 
   &__text {
-    @apply font-normal text-xs;
+    @apply font-normal text-sm md:text-base;
   }
 }
