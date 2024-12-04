@@ -21,7 +21,7 @@ const Schedule = ({ selectedBuilding }: Props) => {
       scrollTrigger: {
         trigger: "#body",
         start: "top top",
-        end: "bottom bottom",
+        end: "20",
         scrub: 1,
         onUpdate() {
           gsap.to("#schedule", {

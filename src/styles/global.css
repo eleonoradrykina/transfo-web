@@ -108,7 +108,8 @@ html {
 }
 
 body {
-  @apply w-full h-[200vh];
+  @apply w-full;
+  height: calc(100vh + 20px);
   background: rgb(21, 22, 68);
   background: radial-gradient(
     circle,

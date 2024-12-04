@@ -9,17 +9,9 @@ const mainTL = gsap.timeline({
   scrollTrigger: {
     trigger: "#body",
     start: "top top",
-    end: "bottom bottom",
-    // scrub: 1,
+    end: "20",
     onEnterBack: () => {
       mainTL.reverse();
-    },
-    markers: {
-      startColor: "white",
-      endColor: "white",
-      fontSize: "18px",
-      fontWeight: "bold",
-      indent: 20,
     },
   },
 });

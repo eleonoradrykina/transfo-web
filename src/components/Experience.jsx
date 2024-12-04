@@ -109,7 +109,7 @@ export default function Experience({ onClickBuilding, clearSelection }) {
       scrollTrigger: {
         trigger: "#body",
         start: "top top",
-        end: "bottom bottom",
+        end: "20",
         onEnter: () => {
           setIsClickable(true);
           console.log("isClickable", isClickable);
@@ -200,7 +200,7 @@ export default function Experience({ onClickBuilding, clearSelection }) {
       scrollTrigger: {
         trigger: "#body",
         start: "top top",
-        end: "bottom bottom",
+        end: "20",
         onEnterBack: () => {
           tlZoom.reverse();
           zoomOut();
