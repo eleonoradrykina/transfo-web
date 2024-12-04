@@ -10,6 +10,7 @@
   &__bottom {
     @apply flex flex-col items-center gap-15 md:gap-30;
     @apply relative z-20;
+    @apply pointer-events-none;
   }
 
   &__date {

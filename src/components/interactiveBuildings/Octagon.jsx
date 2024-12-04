@@ -55,7 +55,7 @@ export default function Octagon(props) {
           geometry={nodes.Circle005_1.geometry}
           material={materials.roof}
         >
-          <Html position={[-0.15, 1.15, 0.15]} distanceFactor={6} occlude>
+          <Html position={[-0.15, 1.0, 0.15]} distanceFactor={6} occlude>
             <p className="building-label">Octagon</p>
           </Html>
           <meshStandardMaterial

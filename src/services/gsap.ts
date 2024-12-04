@@ -10,7 +10,10 @@ const mainTL = gsap.timeline({
     trigger: "#body",
     start: "top top",
     end: "bottom bottom",
-    scrub: 1,
+    // scrub: 1,
+    onEnterBack: () => {
+      mainTL.reverse();
+    },
     markers: {
       startColor: "white",
       endColor: "white",
