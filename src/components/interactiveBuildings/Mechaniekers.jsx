@@ -33,7 +33,7 @@ colorMap.colorSpace = SRGBColorSpace
             position={ [-0.85,3.0,0.2]}
             distanceFactor={6}
             occlude>
-              <p className='building-label'>Mechaniekers</p>
+              <p className='building-label'>Mechaniekersgebouw</p>
             </Html>
           <meshStandardMaterial 
           roughness={1}

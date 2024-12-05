@@ -31,11 +31,7 @@ import {
 import { ToneMappingMode, BlendFunction } from "postprocessing";
 
 import gsap from "gsap";
-import { update } from "three/examples/jsm/libs/tween.module.js";
-
 const positions = new Map([["hoofdzaal", [-0.005, 0.584, -1.317]], ["mechaniekers", [0.573, 0.306, 0.635]], ["ketelhuis", [-0.793, 0.87, -0.556]], ["transformatoren", [1.014, 1.132, -4.375]], ["octagon", [1.89, -0.102, -1.122]], ["kunstacademie", [3.105, 0.186, -0.804]], ["duiktank", [1.496, 0.366, 4.596]], ["watertoren", [-0.665, 0.045, 2.214]], ["plong", [1.504, 0.12, -0.343]]]);
-
-
 
 export default function Experience({ onClickBuilding, clearSelection }) {
   const [selectedBuilding, setSelectedBuilding] = useState(null);
@@ -48,6 +44,11 @@ export default function Experience({ onClickBuilding, clearSelection }) {
   const [duiktankEmissiveIntensity, setDuiktankEmissiveIntensity] = useState(0);
   const [watertorenEmissiveIntensity, setWatertorenEmissiveIntensity] = useState(0);
   const [plongEmissiveIntensity, setPlongEmissiveIntensity] = useState(0);
+
+  const [isClickable, setIsClickable] = useState(false);
+
+	const scene = useRef();
+
 
   useEffect(() => {
     handleClear("useEffect");
@@ -68,6 +69,10 @@ export default function Experience({ onClickBuilding, clearSelection }) {
   };
 
   const handleSelect = (key) => {
+    if (!isClickable) {
+      console.log("not clickable");
+      return;
+    }
     handleClear("handleSelect");  
     onClickBuilding(key);
     setOrbitControls(key);
@@ -95,6 +100,34 @@ export default function Experience({ onClickBuilding, clearSelection }) {
         "",
         `${window.location.origin}/?building=${key.toLowerCase()}`
       );
+  };
+
+  const setLabelsOpacity = () => {
+    const tlLabels = gsap.timeline({
+      scrollTrigger: {
+        trigger: "#body",
+        start: "top top",
+        end: "20",
+        onEnter: () => {
+          setIsClickable(true);
+          console.log("isClickable", isClickable);
+        },
+        onEnterBack: () => {
+          setIsClickable(false);
+          console.log("isClickable", isClickable);
+          tlLabels.reverse();
+        }
+      },
+    });
+    tlLabels.to(
+      ".building-label",
+      {
+        opacity: 1,
+        duration: 0.75,
+        ease: "power2.out",
+      },
+      "<"
+    );
   };
 
   const setOrbitControls = (key) => {
@@ -129,65 +162,76 @@ export default function Experience({ onClickBuilding, clearSelection }) {
           duration: 1.25,
           ease: "power2.out",
           
-          onComplete: () => {
-            if (OrbitControlsRef.current) {
-              // Reset the distance constraints after animation
-              OrbitControlsRef.current.minDistance = cameraControls.minDistance;
-              OrbitControlsRef.current.maxDistance = cameraControls.maxDistance;
-            }
-          },
+          onComplete: () => resetOrbitControls(),
         }, "<");
     }
   };
 
-  const setLabelsOpacity = () => {
-    const tl = gsap.timeline({
+  const resetOrbitControls = () => {
+    if (OrbitControlsRef.current) {
+      OrbitControlsRef.current.minDistance = cameraControls.minDistance;
+      OrbitControlsRef.current.maxDistance = cameraControls.maxDistance;
+    }
+  }
+
+  const zoomOut = () => {
+    const tlZoomOut = gsap.timeline();
+    tlZoomOut.to(OrbitControlsRef.current.target, {
+      x: 0,
+      y: 0,
+      z: 0,
+      duration: 1.25,
+      ease: "power2.out",
+    })
+    .to(OrbitControlsRef.current, {
+      minDistance: 14.0,
+      maxDistance: 14.0,
+      duration: 1.25,
+      ease: "power2.out",
+      onComplete: () => resetOrbitControls()
+    }, "<");
+  }
+
+  const setZoom = () => {
+		console.log(OrbitControlsRef.current)
+    const tlZoom = gsap.timeline({
       scrollTrigger: {
         trigger: "#body",
         start: "top top",
-        end: "bottom bottom",
-        scrub: 1,
-      },
-    });
-    tl.to(
-      ".building-label",
-      {
-        opacity: 1,
-        duration: 0.75,
-        ease: "power2.out",
-      },
-      "<"
-    );
-    tl.to(
-      OrbitControlsRef.current,
-      {
-        minDistance: 12.0,
-        maxDistance: 12.0,
-        duration: 1.25,
-        ease: "power2.out",
-        onComplete: () => {
-            if (OrbitControlsRef.current) {
-              // Reset the distance constraints after animation
-              OrbitControlsRef.current.minDistance = cameraControls.minDistance;
-              OrbitControlsRef.current.maxDistance = cameraControls.maxDistance;
-            }
+        end: "20",
+        onEnterBack: () => {
+          tlZoom.reverse();
+          zoomOut();
+          //also clear building selection
+          handleClear("setZoom");
+          //also clear url params
+          window.history.pushState({}, "", window.location.pathname);
         }
-        },
-      "<"
-    );
-  };
+      },
+    })
+    tlZoom.to(OrbitControlsRef.current, {
+      minDistance: 12.0,
+      maxDistance: 12.0,
+      duration: 1.25,
+      ease: "power2.out",
+      onComplete: () => resetOrbitControls()
+    })
+		//this does not work
+		.to(OrbitControlsRef.current.object.position, {
+			x: 20,
+			y: 0,
+			z: 13,
+		}, "<");
+  }
 
   useEffect(() => {
     setLabelsOpacity();
+    setZoom();
     const urlParams = new URLSearchParams(window.location.search);
     if (urlParams.has("building")) {
       handleSelect(urlParams.get("building"));
     }
   }, []);
-
-
-
-
 
   const cameraControls = useControls("Camera", {
     minDistance: {
@@ -271,20 +315,22 @@ export default function Experience({ onClickBuilding, clearSelection }) {
         azimuthRotateSpeed={cameraControls.azimuthRotateSpeed}
         dampingFactor={0.05}
         enableDamping={true}
+        enablePan={false}
         enableZoom={false}
         ref={OrbitControlsRef}
       />
       <ambientLight intensity={1.5} />
-      <Ground />
-      <Trees />
-      <MapModel />
+      <group ref={scene}>
+       <Ground />
+       <Trees />
+       <MapModel />
       <Path intensity={0.5} />
       <Hoofdzaal
       handleClick={() => handleSelect("hoofdzaal")}
       emissiveIntensity={hoofdzaalEmissiveIntensity}
     />
       <Mechaniekers
-       handleClick={() => handleSelect("mechaniekers")}
+        handleClick={() => handleSelect("mechaniekers")}
         emissiveIntensity={mechaniekersEmissiveIntensity}
       />
       <Ketelhuis
@@ -296,7 +342,7 @@ export default function Experience({ onClickBuilding, clearSelection }) {
         emissiveIntensity={transformatorenEmissiveIntensity}
       />
       <Octagon
-       handleClick={() => handleSelect("octagon")}
+        handleClick={() => handleSelect("octagon")}
         emissiveIntensity={octagonEmissiveIntensity}
       />
       <Kunstacademie
@@ -315,7 +361,8 @@ export default function Experience({ onClickBuilding, clearSelection }) {
         handleClick={() => handleSelect("plong")}
         emissiveIntensity={plongEmissiveIntensity}
       />
-      <OfficeBuilding />
+       <OfficeBuilding />
+      </group>
     </>
   );
 }

@@ -17,7 +17,7 @@ export default function Path(props) {
     scrollTrigger: {
       trigger: "#body",
       start: "top top",
-      end: "bottom bottom",
+      end: "20",
       onEnterBack: () => {
         tl.reverse();
       },

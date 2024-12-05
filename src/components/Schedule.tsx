@@ -21,8 +21,33 @@ const Schedule = ({ selectedBuilding }: Props) => {
       scrollTrigger: {
         trigger: "#body",
         start: "top top",
-        end: "bottom bottom",
+        end: "20",
         scrub: 1,
+        onUpdate() {
+          gsap.to("#schedule", {
+            duration: 0.5,
+            ease: "power1.out",
+            x: "0vw",
+          });
+
+          gsap.to("#faq__button", {
+            duration: 0.5,
+            ease: "power1.out",
+            x: "0vw",
+          });
+
+          gsap.to("#hero__title", {
+            duration: 0.5,
+            ease: "power1.out",
+            x: "0vw",
+          });
+
+          gsap.to("#hero__date", {
+            duration: 0.5,
+            ease: "power1.out",
+            x: "0vw",
+          });
+        },
       },
     });
 

@@ -16,7 +16,6 @@ const Countdown = ({ language }: CountdownProps) => {
   const [days, setDays] = useState(Math.floor(timeLeft / (60 * 60 * 24)));
   const [hours, setHours] = useState(Math.floor((timeLeft / (60 * 60)) % 24));
   const [minutes, setMinutes] = useState(Math.floor((timeLeft / 60) % 60));
-  const [seconds, setSeconds] = useState(Math.floor(timeLeft % 60));
 
   useEffect(() => {
     const timerInterval = setInterval(() => {
@@ -28,7 +27,6 @@ const Countdown = ({ language }: CountdownProps) => {
         setDays(Math.floor(newTime / (60 * 60 * 24)));
         setHours(Math.floor((newTime / (60 * 60)) % 24));
         setMinutes(Math.floor((newTime / 60) % 60));
-        setSeconds(Math.floor(newTime % 60));
       }
     }, 1000);
 
@@ -54,12 +52,6 @@ const Countdown = ({ language }: CountdownProps) => {
         <span className="countdown__number">{minutes}</span>
         <span className="countdown__text">
           {minutes === 1 ? copy.date.minute : copy.date.minutes}
-        </span>
-      </div>
-      <div className="countdown__time seconds">
-        <span className="countdown__number">{seconds}</span>
-        <span className="countdown__text">
-          {seconds === 1 ? copy.date.second : copy.date.seconds}
         </span>
       </div>
     </div>
