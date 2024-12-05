@@ -2,19 +2,16 @@ export enum Language {
   NL = "nl",
 }
 
-export interface Event {
+export interface IEvent {
   title: string;
   name: string;
-  paragraph1: string;
-  paragraph2?: string;
-  paragraph3?: string;
-  links?: { text: string; url: string }[];
-  startTime?: Date;
-  endTime?: Date;
-  startTime2?: Date;
-  endTime2?: Date;
+  startTime: Date | null;
+  endTime: Date | null;
+  startTime2: Date | null;
+  endTime2: Date | null;
   tags: string[];
   location: string;
   subLocation?: string;
-  image: string;
+  heroImage: string;
+  content: any;
 }

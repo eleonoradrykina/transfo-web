@@ -1,14 +1,19 @@
 import { useState } from "react";
 import Map from "./Map";
 import Schedule from "./Schedule";
+import { type IEvent } from "../services/types";
 
-const Interactivity = () => {
+interface Props {
+  events: IEvent[];
+}
+
+const Interactivity = ({ events }: Props) => {
   const [selectedBuilding, setSelectedBuilding] = useState<string | null>(null);
 
   return (
     <div className="interactivity">
       <Map onChangeBuilding={setSelectedBuilding} />
-      <Schedule selectedBuilding={selectedBuilding} />
+      <Schedule events={events} selectedBuilding={selectedBuilding} />
     </div>
   );
 };
