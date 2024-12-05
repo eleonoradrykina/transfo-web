@@ -31,8 +31,6 @@ import {
 import { ToneMappingMode, BlendFunction } from "postprocessing";
 
 import gsap from "gsap";
-import { update } from "three/examples/jsm/libs/tween.module.js";
-
 const positions = new Map([["hoofdzaal", [-0.005, 0.584, -1.317]], ["mechaniekers", [0.573, 0.306, 0.635]], ["ketelhuis", [-0.793, 0.87, -0.556]], ["transformatoren", [1.014, 1.132, -4.375]], ["octagon", [1.89, -0.102, -1.122]], ["kunstacademie", [3.105, 0.186, -0.804]], ["duiktank", [1.496, 0.366, 4.596]], ["watertoren", [-0.665, 0.045, 2.214]], ["plong", [1.504, 0.12, -0.343]]]);
 
 export default function Experience({ onClickBuilding, clearSelection }) {
@@ -49,7 +47,7 @@ export default function Experience({ onClickBuilding, clearSelection }) {
 
   const [isClickable, setIsClickable] = useState(false);
 
-	const scene = useRef([0, 0, 0]);
+	const scene = useRef();
 
 
   useEffect(() => {
@@ -109,7 +107,7 @@ export default function Experience({ onClickBuilding, clearSelection }) {
       scrollTrigger: {
         trigger: "#body",
         start: "top top",
-        end: "bottom bottom",
+        end: "20",
         onEnter: () => {
           setIsClickable(true);
           console.log("isClickable", isClickable);
@@ -200,7 +198,7 @@ export default function Experience({ onClickBuilding, clearSelection }) {
       scrollTrigger: {
         trigger: "#body",
         start: "top top",
-        end: "bottom bottom",
+        end: "20",
         onEnterBack: () => {
           tlZoom.reverse();
           zoomOut();
