@@ -105,11 +105,21 @@ export const SCHEDULE: Event[] = [
     title: "De warmste week markt",
     name: "De Warmste Week",
     paragraph1:
-      "consectetur veniam fugiat nostrud ut ex et veniam excepteur aute nisi incididunt minim anim quis deserunt magna ea enim irure veniam incididunt nostrud consectetur ex ullamco",
-    paragraph2:
-      "consequat laborum proident ipsum sit nostrud Lorem aliqua cillum mollit mollit cupidatat enim ullamco ullamco aute esse magna eu do magna pariatur adipisicing ea ullamco duis deserunt amet esse aliquip",
+      "Tijdens Transfo Intiem organiseren we een sfeervol marktje op het middenplein van de site. Hier kunnen bewoners en verenigingen hun acties voor De Warmste Week presenteren. Er zijn 15 kraampjes beschikbaar waar jij initiatieven ten voordele van het goede doel kunt voorstellen aan het publiek.",
     tags: ["Markt"],
     location: "Middenplein",
     image: "warmste-week.png",
+  },
+  {
+    title: "Miokapi",
+    name: "Miokapi",
+    paragraph1:
+      "Miokapi is het solo project van Freek Quartier waarin hij met behulp van een keyboard en loopstation laidback instrumentale improvisaties creëert. Het is de perfecte soundtrack voor een relaxte avond, waarbij de muziek je meeneemt op een dromerige trip.",
+    tags: ["Muziek"],
+    location: "Hoofdgebouw",
+    subLocation: "Pompenzaal",
+    image: "miokapi.png",
+    startTime: new Date("2024-12-14T22:00:00"),
+    endTime: new Date("2024-12-14T23:00:00"),
   },
 ];
