@@ -1,7 +1,7 @@
 .faq {
   @apply max-h-screen h-fit w-fit fixed z-20;
   @apply flex flex-col justify-between;
-  @apply -translate-x-[140%];
+  @apply -translate-x-[150%];
   @apply py-30 md:pt-120 md:pb-60 md:ml-60;
 
   &__questions {
