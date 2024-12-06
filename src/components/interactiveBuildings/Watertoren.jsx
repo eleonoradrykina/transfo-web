@@ -9,7 +9,7 @@ import { SRGBColorSpace } from 'three'
 
 export default function Watertoren(props) {
   const { nodes, materials } = useGLTF('models/watertoren.glb')
-  const colorMap = useLoader(TextureLoader, 'models/textures/watertoren-baked.jpg')
+  const colorMap = useLoader(TextureLoader, 'models/textures/watertoren-baked.webp')
   colorMap.flipY = false
   colorMap.colorSpace = SRGBColorSpace
 

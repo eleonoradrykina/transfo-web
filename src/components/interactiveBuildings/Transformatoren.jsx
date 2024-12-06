@@ -9,7 +9,7 @@ import { SRGBColorSpace } from 'three'
 
 export default function Transformatoren(props) {
   const { nodes } = useGLTF('models/transformatoren.glb')
-  const colorMap = useLoader(TextureLoader, 'models/textures/transformatoren-baked.jpg')
+  const colorMap = useLoader(TextureLoader, 'models/textures/transformatoren-baked.webp')
   colorMap.flipY = false
   colorMap.colorSpace = SRGBColorSpace
 

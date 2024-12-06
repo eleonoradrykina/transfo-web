@@ -10,7 +10,7 @@ import { SRGBColorSpace } from 'three'
 
 export default function Ketelhuis(props) {
   const { nodes, materials } = useGLTF('models/ketelhuis.glb')
-  const colorMap = useLoader(TextureLoader, 'models/textures/ketelhuis-baked2.jpg')
+  const colorMap = useLoader(TextureLoader, 'models/textures/ketelhuis-baked.webp')
   colorMap.flipY = false
   colorMap.colorSpace = SRGBColorSpace
   return (
@@ -76,4 +76,4 @@ export default function Ketelhuis(props) {
   )
 }
 
-useGLTF.preload('models/ketelhuis2.glb')
+useGLTF.preload('models/ketelhuis.glb')

@@ -12,7 +12,7 @@ export default function Octagon(props) {
   const { nodes, materials } = useGLTF("models/octagon.glb");
   const colorMap = useLoader(
     TextureLoader,
-    "models/textures/octagon-baked.jpg"
+    "models/textures/octagon-baked.webp"
   );
   colorMap.flipY = false;
   colorMap.colorSpace = SRGBColorSpace;
@@ -41,7 +41,6 @@ export default function Octagon(props) {
           castShadow
           receiveShadow
           geometry={nodes.Circle005.geometry}
-          //   material={materials['Material.001']}
         >
           <meshStandardMaterial
             map={colorMap}

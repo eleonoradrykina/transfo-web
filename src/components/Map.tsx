@@ -1,5 +1,4 @@
 import { Canvas } from "@react-three/fiber";
-import { Leva } from "leva";
 import { Bvh } from "@react-three/drei";
 import "../styles/components/map.css";
 import Experience from "./Experience";
@@ -15,7 +14,6 @@ export default function Map({ onChangeBuilding }: Props) {
 
   return (
     <div className="map">
-      <Leva hidden />
       <Canvas
         camera={{
           fov: 45,
