@@ -99,12 +99,7 @@
 }
 
 html {
-  background: rgb(21, 22, 68);
-  background: radial-gradient(
-    circle,
-    rgba(21, 22, 68, 1) 0%,
-    rgba(10, 11, 44, 1) 100%
-  );
+  @apply bg-purple;
 }
 
 body {

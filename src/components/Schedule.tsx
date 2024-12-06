@@ -1,17 +1,18 @@
 import { useEffect, useState } from "react";
-import { SCHEDULE } from "../services/schedule";
 import "../styles/components/schedule.css";
 import EventPreview from "./EventPreview";
 import { gsap } from "gsap";
 
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { type IEvent } from "../services/types";
 
 interface Props {
   selectedBuilding: string | null;
+  events: IEvent[];
 }
 
-const Schedule = ({ selectedBuilding }: Props) => {
-  const [filteredSchedule, setFilteredSchedule] = useState(SCHEDULE);
+const Schedule = ({ selectedBuilding, events }: Props) => {
+  const [filteredSchedule, setFilteredSchedule] = useState(events);
 
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
@@ -66,7 +67,7 @@ const Schedule = ({ selectedBuilding }: Props) => {
 
   useEffect(() => {
     setFilteredSchedule(
-      SCHEDULE.filter((event) => {
+      events.filter((event) => {
         if (selectedBuilding) {
           return (
             event.location.toLowerCase() === selectedBuilding.toLowerCase()
