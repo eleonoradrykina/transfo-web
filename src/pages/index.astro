@@ -7,8 +7,35 @@ import "../styles/faq.css";
 import { Language } from "../services/types";
 import Interactivity from "../components/Interactivity";
 import FAQ from "../components/FAQ";
+import type { IEvent } from "../services/types";
 
 const copy = languages.nl;
+const temp = await Astro.glob("../content/schedule/*.md");
+
+const events = await Promise.all(
+  temp.map(async (event: any): Promise<IEvent> => {
+    return {
+      title: event.frontmatter.title,
+      name: event.frontmatter.name,
+      startTime: event.frontmatter.startTime
+        ? new Date(event.frontmatter.startTime)
+        : null,
+      endTime: event.frontmatter.endTime
+        ? new Date(event.frontmatter.endTime)
+        : null,
+      startTime2: event.frontmatter.startTime2
+        ? new Date(event.frontmatter.startTime2)
+        : null,
+      endTime2: event.frontmatter.endTime2
+        ? new Date(event.frontmatter.endTime2)
+        : null,
+      location: event.frontmatter.location,
+      heroImage: event.frontmatter.heroImage,
+      tags: event.frontmatter.tags,
+      content: event.compiledContent(),
+    };
+  })
+);
 ---
 
 <Main title={copy.title} description={copy.description}>
@@ -18,7 +45,7 @@ const copy = languages.nl;
       <h1 id="hero__title" class="hero__title">{copy.title}</h1>
       <button id="faq__button" class="faq__button">Veelgestelde vragen</button>
     </div>
-    <Interactivity client:only="react" />
+    <Interactivity events={events} client:only="react" />
     <div id="hero__bottom" class="hero__bottom margins">
       <Countdown client:only="react" language={Language.NL} />
 
