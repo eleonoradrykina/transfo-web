@@ -30,10 +30,15 @@ colorMap.colorSpace = SRGBColorSpace
           material={materials.building}
         >
           <Html
+            
             position={ [-0.85,3.0,0.2]}
             distanceFactor={6}
             occlude>
-              <p className='building-label'>Mechaniekersgebouw</p>
+              <p onClick={(e) => {
+              console.log('clicked')
+              e.stopPropagation()
+              props.handleClick()
+            }} className='building-label'>Mechaniekersgebouw</p>
             </Html>
           <meshStandardMaterial 
           roughness={1}
