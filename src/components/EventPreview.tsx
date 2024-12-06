@@ -1,15 +1,18 @@
-import type { Event } from "../services/types";
+import type { IEvent } from "../services/types";
 import "../styles/components/schedule.css";
 
 interface Props {
-  event: Event;
+  event: IEvent;
 }
 
 const EventPreview = ({ event }: Props) => {
   return (
     <li className="event-preview">
       <div className="event-preview__main">
-        <img className="event-preview__image" src={`/events/${event.image}`} />
+        <img
+          className="event-preview__image"
+          src={`/events/${event.heroImage}`}
+        />
         <h4 className="event-preview__title">{event.title}</h4>
       </div>
       <div className="event-preview__tags">

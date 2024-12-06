@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import "../styles/components/schedule.css";
 import EventPreview from "./EventPreview";
-import Event from "./Event";
 import { gsap } from "gsap";
 
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -14,8 +13,6 @@ interface Props {
 
 const Schedule = ({ selectedBuilding, events }: Props) => {
   const [filteredSchedule, setFilteredSchedule] = useState(events);
-
-  console.log(events);
 
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
@@ -97,8 +94,7 @@ const Schedule = ({ selectedBuilding, events }: Props) => {
 
         <ul className="schedule__list">
           {filteredSchedule.map((event) => (
-            <Event key={event.title} event={event} />
-            // <EventPreview key={event.title} event={event} />
+            <EventPreview key={event.title} event={event} />
           ))}
         </ul>
       </div>
