@@ -2,7 +2,10 @@ import Question from "./Question";
 
 const FAQ = () => {
   return (
-    <div id="faq" className="faq margins">
+    <div id="faq" className="faq">
+      <button id="faq__back__button" className="faq__button back">
+        Terug naar overzicht
+      </button>
       <h2 className="faq__title">Veelgestelde vragen</h2>
       <div className="faq__questions">
         <Question question="Hoe geraak ik op het evenement?">
