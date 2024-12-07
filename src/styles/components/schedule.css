@@ -51,7 +51,7 @@
 
   .event-preview__tag {
     @apply block px-15;
-    @apply bg-blue-dark rounded-full;
+    @apply bg-orange rounded-full;
 
     &.time {
       @apply bg-purple;
@@ -64,6 +64,7 @@
     &.no-bg {
       @apply bg-transparent;
       @apply italic;
+      @apply px-5;
     }
   }
 }

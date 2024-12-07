@@ -93,9 +93,25 @@ const Schedule = ({ selectedBuilding, events }: Props) => {
         )}
 
         <ul className="schedule__list">
-          {filteredSchedule.map((event) => (
-            <EventPreview key={event.title} event={event} />
-          ))}
+          {filteredSchedule
+            .sort((a: IEvent, b: IEvent) => {
+              if (a.startTime && b.startTime) {
+                return a.startTime.getTime() - b.startTime.getTime();
+              } else if (a.startTime && !b.startTime) {
+                return -1;
+              } else if (!a.startTime && b.startTime) {
+                return 1;
+              } else {
+                return 0;
+              }
+            })
+            .map((event) => (
+              <EventPreview
+                withLocation={!selectedBuilding}
+                key={event.title}
+                event={event}
+              />
+            ))}
         </ul>
       </div>
     </div>

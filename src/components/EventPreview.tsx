@@ -3,9 +3,10 @@ import "../styles/components/schedule.css";
 
 interface Props {
   event: IEvent;
+  withLocation?: boolean;
 }
 
-const EventPreview = ({ event }: Props) => {
+const EventPreview = ({ event, withLocation }: Props) => {
   return (
     <li className="event-preview">
       <div className="event-preview__main">
@@ -21,7 +22,10 @@ const EventPreview = ({ event }: Props) => {
             {tag}
           </span>
         ))}
-        <span className="event-preview__tag location">{event.location}</span>
+        {withLocation && (
+          <span className="event-preview__tag location">{event.location}</span>
+        )}
+
         {event.startTime && event.endTime ? (
           <>
             <span className="event-preview__tag time">
@@ -46,7 +50,7 @@ const EventPreview = ({ event }: Props) => {
             )}{" "}
           </>
         ) : (
-          <span className="event-preview__tag no-bg">Heel de tijd</span>
+          <span className="event-preview__tag no-bg">Heel de avond</span>
         )}
       </div>
     </li>
