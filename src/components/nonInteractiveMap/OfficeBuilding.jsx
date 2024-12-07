@@ -8,8 +8,8 @@ import { useLoader } from '@react-three/fiber'
 import { TextureLoader } from 'three/src/loaders/TextureLoader'
 import { SRGBColorSpace } from 'three'
 export default function OfficeBuilding(props) {
-  const { nodes } = useGLTF('/models/office-building.glb')
-  const colorMap = useLoader(TextureLoader, '/models/textures/office-building-baked.jpg')
+  const { nodes } = useGLTF('models/office-building.glb')
+  const colorMap = useLoader(TextureLoader, 'models/textures/office-building-baked.webp')
   colorMap.flipY = false
   colorMap.colorSpace = SRGBColorSpace
   

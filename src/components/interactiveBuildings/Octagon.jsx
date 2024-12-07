@@ -9,10 +9,10 @@ import { TextureLoader } from "three/src/loaders/TextureLoader";
 import { SRGBColorSpace } from "three";
 
 export default function Octagon(props) {
-  const { nodes, materials } = useGLTF("/models/octagon.glb");
+  const { nodes } = useGLTF("models/octagon-no-materials.glb");
   const colorMap = useLoader(
     TextureLoader,
-    "/models/textures/octagon-baked.jpg"
+    "models/textures/octagon-baked.webp"
   );
   colorMap.flipY = false;
   colorMap.colorSpace = SRGBColorSpace;
@@ -21,13 +21,13 @@ export default function Octagon(props) {
       e.stopPropagation()
       props.handleClick()
     }} dispose={null}>
-      <group position={[1.89, -0.102, -1.122]} rotation={[0, -0.375, 0]}>
+      <group>
         <mesh
           castShadow
           receiveShadow
           geometry={nodes.Cube018.geometry}
-          position={[0.1, 0.14, 0.26]}
-          rotation={[0, 0.4, -Math.PI]}
+          position={[1.892, 0.036, -0.849]}
+          rotation={[0, 0.009, -Math.PI]}
           scale={[-0.109, -0.151, -0.075]}
         >
           <meshStandardMaterial
@@ -36,40 +36,14 @@ export default function Octagon(props) {
             emissiveIntensity={props.emissiveIntensity}
           />
         </mesh>
-
         <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.Circle005.geometry}
-          //   material={materials['Material.001']}
-        >
-          <meshStandardMaterial
-            map={colorMap}
-            emissive="#BC78FF"
-            emissiveIntensity={props.emissiveIntensity}
-          />
-        </mesh>
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.Circle005_1.geometry}
-          material={materials.roof}
+          geometry={nodes.Circle.geometry}
+          position={[1.89, -0.102, -1.122]}
+          rotation={[0, -0.375, 0]}
         >
           <Html position={[-0.15, 1.0, 0.15]} distanceFactor={6} occlude>
             <p className="building-label">Octagon</p>
           </Html>
-          <meshStandardMaterial
-            map={colorMap}
-            emissive="#BC78FF"
-            emissiveIntensity={props.emissiveIntensity}
-          />
-        </mesh>
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.Circle005_2.geometry}
-          material={materials.building}
-        >
           <meshStandardMaterial
             map={colorMap}
             emissive="#BC78FF"
@@ -81,4 +55,4 @@ export default function Octagon(props) {
   );
 }
 
-useGLTF.preload("/models/octagon.glb");
+useGLTF.preload("models/octagon-no-materials.glb");

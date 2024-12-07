@@ -9,8 +9,8 @@ import { SRGBColorSpace } from 'three'
 import { navigate } from 'astro/virtual-modules/transitions-router.js'
 
 export default function Transformatoren(props) {
-  const { nodes } = useGLTF('/models/transformatoren.glb')
-  const colorMap = useLoader(TextureLoader, '/models/textures/transformatoren-baked.jpg')
+  const { nodes } = useGLTF('models/transformatoren-no-materials.glb')
+  const colorMap = useLoader(TextureLoader, 'models/textures/transformatoren-baked.webp')
   colorMap.flipY = false
   colorMap.colorSpace = SRGBColorSpace
 
@@ -43,4 +43,4 @@ export default function Transformatoren(props) {
   )
 }
 
-useGLTF.preload('/models/transformatoren.glb')
+useGLTF.preload('models/transformatoren-no-materials.glb')
