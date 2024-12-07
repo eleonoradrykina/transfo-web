@@ -2,7 +2,7 @@
 title: "Bergen"
 name: "Bergen"
 tags: ["Muziek"]
-location: "Mechaniekers"
+location: "mechaniekers"
 heroImage: "bergen.png"
 startTime: "2024-12-14T19:00:00"
 endTime: "2024-12-14T20:00:00"
