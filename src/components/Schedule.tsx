@@ -14,79 +14,21 @@ interface Props {
 }
 
 const Schedule = ({ initialBuilding, events, initialEvent }: Props) => {
-  const [filteredSchedule, setFilteredSchedule] = useState(events);
-  const [selectedEvent, setSelectedEvent] = useState<IEvent>();
-  const [selectedBuilding, setSelectedBuilding] = useState<string | null>(
-    initialBuilding
+  const [selectedEvent] = useState<IEvent | null>(
+    events.find((event) => event.slug === initialEvent) ?? null
+  );
+  const [selectedBuilding] = useState<string | null>(initialBuilding);
+  const [filteredSchedule, setFilteredSchedule] = useState(
+    events.filter((event) => {
+      if (selectedBuilding) {
+        return event.location.toLowerCase() === selectedBuilding.toLowerCase();
+      } else {
+        return true;
+      }
+    })
   );
 
   useEffect(() => {
-    document.addEventListener("astro:after-swap", () => {
-      console.log("astro:after-swap");
-      if (initialBuilding && !initialEvent) {
-        const defaultToBuilding = gsap.timeline({
-          onComplete: () => {
-            console.log("defaultToBuilding");
-          },
-        });
-        defaultToBuilding
-          .from(".schedule__default", {
-            x: "0",
-          })
-          .from(
-            ".schedule__building",
-            {
-              x: "100%",
-            },
-            "<"
-          )
-          .from(".schedule__event", { x: "200%" }, "<");
-      }
-      if (initialBuilding && initialEvent) {
-        const buildingToEvent = gsap.timeline({
-          paused: true,
-          onComplete: () => {
-            console.log("buildingToEvent");
-          },
-        });
-
-        buildingToEvent
-          .from(".schedule__default", {
-            x: "-100%",
-          })
-          .from(
-            ".schedule__building",
-            {
-              x: "0",
-            },
-            "<"
-          )
-          .from(".schedule__event", { x: "100%" }, "<");
-      }
-    });
-    document.addEventListener("load", () => {
-      console.log("load");
-    });
-  }, []);
-
-  useEffect(() => {
-    const event = events.find((event) => event.slug === initialEvent);
-
-    if (event) {
-      setSelectedEvent(event);
-      // console.log(selectedEvent);
-      // gsap.to(".schedule__default", {
-      //   x: "-200%",
-      //   duration: 0.1,
-      //   ease: "power1.out",
-      // });
-      // gsap.to(".schedule__event", {
-      //   x: "0%",
-      //   duration: 0.1,
-      //   ease: "power1.out",
-      // });
-    }
-
     gsap.registerPlugin(ScrollTrigger);
     let mm = gsap.matchMedia();
 
@@ -132,20 +74,6 @@ const Schedule = ({ initialBuilding, events, initialEvent }: Props) => {
     //   "<"
     // );
   }, []);
-
-  useEffect(() => {
-    setFilteredSchedule(
-      events.filter((event) => {
-        if (selectedBuilding) {
-          return (
-            event.location.toLowerCase() === selectedBuilding.toLowerCase()
-          );
-        } else {
-          return true;
-        }
-      })
-    );
-  }, [selectedBuilding]);
 
   return (
     <div
