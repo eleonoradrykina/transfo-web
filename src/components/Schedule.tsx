@@ -6,7 +6,6 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { type IEvent } from "../services/types";
 import Event from "./Event";
-import { init } from "astro/virtual-modules/prefetch.js";
 
 interface Props {
   initialBuilding: string | null;
