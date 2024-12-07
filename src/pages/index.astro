@@ -67,7 +67,7 @@ const events = await Promise.all(
           <span id="hero__date" class="hero__date">{copy.date.festival}</span>
           <h1 id="hero__title" class="hero__title">{copy.title}</h1>
           <button id="faq__button" class="faq__button"
-            >Veelgestelde vragen</button
+            >{copy.faq.title.toUpperCase()}</button
           >
         </div>
         <Interactivity transition:persist events={events} client:only="react" />
@@ -102,7 +102,7 @@ const events = await Promise.all(
           </svg>
         </div>
       </div>
-      <FAQ client:load />
+      <FAQ copy={copy} client:load />
 
       <script>
         import { gsap } from "gsap";
@@ -129,6 +129,11 @@ const events = await Promise.all(
         const reversedFaqTL = gsap.timeline({
           paused: true,
           autoRemoveChildren: true,
+          scrollTrigger: {
+            trigger: "#body",
+            start: "bottom bottom",
+            end: "20",
+          },
         });
         const faqButton = document.getElementById("faq__button");
         const faqBackButton = document.getElementById("faq__back__button");

@@ -44,10 +44,10 @@
 .faq__button {
   @apply mt-5 relative z-30;
   @apply md:fixed md:bottom-60 md:left-60;
-  @apply px-15 py-5 bg-purple/30;
+  @apply px-15 md:px-[20px] py-5 md:py-[7px] bg-purple/30;
   @apply border-[2.5px] border-pink rounded-full;
   backdrop-filter: blur(10px);
-  @apply text-white font-bold text-sm;
+  @apply text-white font-bold text-sm md:text-base;
 
   &.back {
     @apply w-fit;
