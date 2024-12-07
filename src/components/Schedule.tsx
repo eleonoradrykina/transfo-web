@@ -13,6 +13,7 @@ interface Props {
 
 const Schedule = ({ selectedBuilding, events }: Props) => {
   const [filteredSchedule, setFilteredSchedule] = useState(events);
+  const [selectedEvent, setSelectedEvent] = useState<IEvent>();
 
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
@@ -82,8 +83,16 @@ const Schedule = ({ selectedBuilding, events }: Props) => {
   return (
     <div id="schedule" className="schedule">
       <div className="schedule__content">
-        <h3 className="schedule__title">{selectedBuilding ?? "Programma"}</h3>
-        {selectedBuilding ? (
+        <h3 className="schedule__title">
+          {selectedEvent
+            ? selectedEvent.title
+            : selectedBuilding
+              ? selectedBuilding
+              : "Programma"}
+        </h3>
+        {selectedEvent ? (
+          selectedEvent.name
+        ) : selectedBuilding ? (
           <div></div>
         ) : (
           <p>
@@ -93,9 +102,27 @@ const Schedule = ({ selectedBuilding, events }: Props) => {
         )}
 
         <ul className="schedule__list">
-          {filteredSchedule.map((event) => (
-            <EventPreview key={event.title} event={event} />
-          ))}
+          {filteredSchedule
+            .sort((a: IEvent, b: IEvent) => {
+              if (a.startTime && b.startTime) {
+                return a.startTime.getTime() - b.startTime.getTime();
+              } else if (a.startTime && !b.startTime) {
+                return -1;
+              } else if (!a.startTime && b.startTime) {
+                return 1;
+              } else {
+                return 0;
+              }
+            })
+            .map((event) => (
+              <li key={event.title}>
+                <EventPreview
+                  selectEvent={setSelectedEvent}
+                  withLocation={!selectedBuilding}
+                  event={event}
+                />
+              </li>
+            ))}
         </ul>
       </div>
     </div>

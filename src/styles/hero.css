@@ -21,8 +21,17 @@
 
   &__title {
     @apply mx-auto;
-    @apply font-camera font-bold text-[23vw] md:text-[10vw] lg:text-[200px] text-center;
-    font-size: clamp(100px, 12vw, 200px);
+    @apply font-camera font-bold text-center;
+    font-size: clamp(100px, 12vw, 160px);
+
+    @media (min-width: 768px) {
+      font-size: clamp(80px, 11vw, 110px);
+    }
+
+    @media (min-width: 1024px) {
+      font-size: clamp(110px, 9vw, 170px);
+    }
+
     @apply leading-none;
   }
 

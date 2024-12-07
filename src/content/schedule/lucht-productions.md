@@ -2,7 +2,7 @@
 title: "Lucht Productions"
 name: "Lucht Productions"
 tags: ["lichtinstallatie"]
-location: "Transformatoren"
+location: "transformatoren"
 heroImage: "lucht-productions.png"
 ---
 
