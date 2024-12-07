@@ -38,6 +38,9 @@
     backdrop-filter: blur(10px);
     @apply md:m-30 rounded-t-lg md:rounded-b-lg;
     @apply h-full;
+    @media (min-width: 768px) {
+      height: calc(100% - 90px);
+    }
     @apply overflow-x-hidden;
   }
 
@@ -118,7 +121,7 @@
   @apply flex flex-col gap-15;
   @apply p-15 md:p-30 rounded-lg;
   @apply bg-black;
-  @apply max-h-full overflow-y-hidden;
+  @apply max-h-full h-full overflow-y-hidden;
 
   &__back {
     @apply bg-white/20;

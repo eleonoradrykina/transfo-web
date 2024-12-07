@@ -9,11 +9,12 @@ interface Props {
 
 const Event = ({ event, handleBack }: Props) => {
   useEffect(() => {
+    console.log("renew");
     const test = document.getElementById(`content__${event.name}`);
     if (test) {
       test.innerHTML = event.content;
     }
-  }, []);
+  }, [event]);
 
   return (
     <div className="event">
