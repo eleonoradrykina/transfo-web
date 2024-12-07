@@ -35,7 +35,6 @@ const Schedule = ({ initialBuilding, events, initialEvent }: Props) => {
   );
 
   useEffect(() => {
-    console.log("getting here");
     setState(initialBuilding ? "onBuilding" : "onDefault");
     setSelectedEvent(null);
     setFilteredSchedule(events);
@@ -74,49 +73,48 @@ const Schedule = ({ initialBuilding, events, initialEvent }: Props) => {
 
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
-    let mm = gsap.matchMedia();
 
-    // const scheduleTL = gsap.timeline({
-    //   scrollTrigger: {
-    //     trigger: "#body",
-    //     start: "top top",
-    //     end: "20",
-    //     scrub: 1,
-    //     onUpdate() {
-    //       gsap.to("#schedule", {
-    //         duration: 0.5,
-    //         ease: "power1.out",
-    //         x: "0vw",
-    //       });
+    const scheduleTL = gsap.timeline({
+      scrollTrigger: {
+        trigger: "#body",
+        start: "top top",
+        end: "20",
+        scrub: 1,
+        onUpdate() {
+          gsap.to("#schedule", {
+            duration: 0.5,
+            ease: "power1.out",
+            x: "0vw",
+          });
 
-    //       gsap.to("#faq__button", {
-    //         duration: 0.5,
-    //         ease: "power1.out",
-    //         x: "0vw",
-    //       });
+          gsap.to("#faq__button", {
+            duration: 0.5,
+            ease: "power1.out",
+            x: "0vw",
+          });
 
-    //       gsap.to("#hero__title", {
-    //         duration: 0.5,
-    //         ease: "power1.out",
-    //         x: "0vw",
-    //       });
+          gsap.to("#hero__title", {
+            duration: 0.5,
+            ease: "power1.out",
+            x: "0vw",
+          });
 
-    //       gsap.to("#hero__date", {
-    //         duration: 0.5,
-    //         ease: "power1.out",
-    //         x: "0vw",
-    //       });
-    //     },
-    //   },
-    // });
+          gsap.to("#hero__date", {
+            duration: 0.5,
+            ease: "power1.out",
+            x: "0vw",
+          });
+        },
+      },
+    });
 
-    // scheduleTL.from(
-    //   "#schedule",
-    //   {
-    //     y: "100%",
-    //   },
-    //   "<"
-    // );
+    scheduleTL.from(
+      "#schedule",
+      {
+        y: "100%",
+      },
+      "<"
+    );
   }, []);
 
   return (
