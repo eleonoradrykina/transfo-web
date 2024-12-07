@@ -23,13 +23,35 @@ export default function Ground(props) {
           position={ [3.75,0.25,2.5]}
           distanceFactor={6}
           occlude>
-            <p className='building-label'>hoogteparcours</p>
+            <p 
+            onClick={(e) => {
+              e.stopPropagation()
+              props.handleClickParcours()
+            }}
+            className='building-label'>hoogteparcours</p>
         </Html>
         <Html
           position={ [2.5,0.25,3.0]}
           distanceFactor={6}
           occlude>
-            <p className='building-label'>waterbassin</p>
+            <p 
+            onClick={(e) => {
+              e.stopPropagation()
+              props.handleClickBassin()
+            }}
+            className='building-label'>waterbassin</p>
+        </Html>
+          <Html
+          position={ [0.6,0.25,-2.4]}
+          distanceFactor={6}
+          occlude>
+          <p className='map-label'>markt</p>
+        </Html>
+        <Html
+          position={ [2.0,0.25,-3.0]}
+          distanceFactor={6}
+          occlude>
+            <p className='map-label'>ingang</p>
         </Html>
         <meshStandardMaterial 
           map={groundColorMap} />

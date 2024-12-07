@@ -41,8 +41,13 @@ export default function Octagon(props) {
           position={[1.89, -0.102, -1.122]}
           rotation={[0, -0.375, 0]}
         >
-          <Html position={[-0.15, 1.0, 0.15]} distanceFactor={6} occlude>
-            <p className="building-label">Octagon</p>
+          <Html position={[-0.15, 1.0, 0.15]} distanceFactor={7} occlude>
+            <p 
+            onClick={(e) => {
+              e.stopPropagation()
+              props.handleClick()
+            }}
+            className="building-label">Octagon</p>
           </Html>
           <meshStandardMaterial
             map={colorMap}

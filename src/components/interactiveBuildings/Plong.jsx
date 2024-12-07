@@ -28,9 +28,14 @@ export default function Plong(props) {
       >
           <Html
             position={ [-0.2,0.6,0.7]}
-            distanceFactor={6}
+            distanceFactor={7}
             occlude>
-              <p className='building-label'>plonggebouw</p>
+              <p 
+              onClick={(e) => {
+                e.stopPropagation()
+                props.handleClick()
+              }}
+              className='building-label'>plonggebouw</p>
             </Html>
         <meshStandardMaterial 
         map={colorMap}

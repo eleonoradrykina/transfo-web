@@ -18,7 +18,8 @@ export default function Hoofdzaal(props) {
     <group onClick={(e) => {
       e.stopPropagation()
       props.handleClick()
-    }} dispose={null}>
+    }}
+    dispose={null}>
       <group>
       <mesh
         castShadow
@@ -31,11 +32,16 @@ export default function Hoofdzaal(props) {
           map={colorMap}
           emissive="#BC78FF" 
           emissiveIntensity={props.emissiveIntensity} />
-        <Html
-          position={ [0.1,1.5,0.25]}
-          distanceFactor={6}
+          <Html
+          position={ [0.5,1.75,0.75]}
+          distanceFactor={7}
           occlude>
-           <p className='building-label'>Hoofdzaal</p>
+           <p 
+           onClick={(e) => {
+            e.stopPropagation()
+            props.handleClick()
+          }}
+            className='building-label'>machinezaal & pompenzaal</p>
          </Html>
       </mesh>
         <mesh
