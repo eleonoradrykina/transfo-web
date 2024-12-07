@@ -106,11 +106,13 @@ const Schedule = ({ selectedBuilding, events }: Props) => {
               }
             })
             .map((event) => (
-              <EventPreview
-                withLocation={!selectedBuilding}
-                key={event.title}
-                event={event}
-              />
+              <li>
+                <EventPreview
+                  withLocation={!selectedBuilding}
+                  key={event.title}
+                  event={event}
+                />
+              </li>
             ))}
         </ul>
       </div>

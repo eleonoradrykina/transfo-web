@@ -8,7 +8,7 @@ interface Props {
 
 const EventPreview = ({ event, withLocation }: Props) => {
   return (
-    <li className="event-preview">
+    <a className="event-preview">
       <div className="event-preview__main">
         <img
           className="event-preview__image"
@@ -53,7 +53,7 @@ const EventPreview = ({ event, withLocation }: Props) => {
           <span className="event-preview__tag no-bg">Heel de avond</span>
         )}
       </div>
-    </li>
+    </a>
   );
 };
 
