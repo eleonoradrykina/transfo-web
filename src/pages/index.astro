@@ -61,25 +61,6 @@ const events = await Promise.all(
     <ClientRouter />
   </head>
   <body id="body">
-    <footer id="footer" class="footer">
-      <div class="footer__side gap-60">
-        <a target="_blank" href="https://www.transfozwevegem.be/">
-          <img src="/footer/transfo-logo-2.png" />
-        </a>
-
-        <a target="_blank" href="https://maps.app.goo.gl/t7pKtMWzNho41mCL6"
-          >Blokellestraat 113b, Zwevegem</a
-        >
-      </div>
-      <div class="footer__side gap-[20px]">
-        <a target="_blank" href="https://www.west-vlaanderen.be/"
-          ><img src="/footer/west-vlaanderen-logo.png" /></a
-        >
-        <a target="_blank" href="https://www.zwevegem.be/">
-          <img src="/footer/zwevegem-logo.png" /></a
-        >
-      </div>
-    </footer>
     <main class="main">
       <div id="hero" class="hero">
         <div class="hero__top margins">
@@ -123,7 +104,36 @@ const events = await Promise.all(
       </div>
       <FAQ copy={copy} client:load />
     </main>
+    <footer id="footer" class="footer">
+      <div class="footer__side left">
+        <div class="flex flex-row gap-15 items-center">
+          <a target="_blank" href="https://www.transfozwevegem.be/">
+            <img src="/footer/transfo-logo-2.png" />
+          </a>
+          <a
+            class="md:hidden"
+            target="_blank"
+            href="https://www.west-vlaanderen.be/"
+            ><img src="/footer/west-vlaanderen-logo.png" /></a
+          >
+          <a class="md:hidden" target="_blank" href="https://www.zwevegem.be/">
+            <img src="/footer/zwevegem-logo.png" /></a
+          >
+        </div>
 
+        <a target="_blank" href="https://maps.app.goo.gl/t7pKtMWzNho41mCL6"
+          >Blokellestraat 113b, Zwevegem</a
+        >
+      </div>
+      <div class="footer__side right">
+        <a target="_blank" href="https://www.west-vlaanderen.be/"
+          ><img src="/footer/west-vlaanderen-logo.png" /></a
+        >
+        <a target="_blank" href="https://www.zwevegem.be/">
+          <img src="/footer/zwevegem-logo.png" /></a
+        >
+      </div>
+    </footer>
     <script src="../services/gsapFAQ.ts"></script>
     <script src="../services/gsap.ts"></script>
   </body>

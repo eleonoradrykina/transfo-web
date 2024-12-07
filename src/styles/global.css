@@ -127,16 +127,26 @@ body {
 }
 
 .footer {
-  @apply md:h-60;
+  @apply h-60;
   @apply fixed z-20 bottom-0 left-30 right-30;
-  @apply flex flex-row justify-between items-center;
+  @apply flex flex-row justify-center md:justify-between items-center;
   @apply translate-y-full;
+  @apply text-sm;
 
   &__side {
-    @apply flex flex-row items-center;
+    @apply flex flex-col md:flex-row items-center;
+
+    &.left {
+      @apply md:gap-60;
+    }
+
+    &.right {
+      @apply hidden md:flex;
+      @apply gap-30;
+    }
 
     img {
-      @apply h-[45px];
+      @apply h-30 md:h-[45px];
     }
   }
 }

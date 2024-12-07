@@ -1,9 +1,9 @@
 .faq {
-  @apply max-h-screen h-screen w-screen fixed z-20;
+  @apply max-h-screen fixed z-20;
   @apply inset-0;
   @apply flex flex-col justify-between gap-30;
   @apply -translate-x-[100%];
-  @apply py-30 pt-15 px-15 md:pt-120 md:px-60;
+  @apply py-30 pt-15 px-15 pb-[60px] md:pt-120 md:px-60;
 
   &__questions {
     @apply max-w-[550px];

@@ -72,6 +72,17 @@ if (faqButton) {
         "<"
       );
 
+    mm.add("(max-width: 767px)", () => {
+      faqTL.to(
+        "#footer",
+        {
+          y: 0,
+          duration: 0.2,
+        },
+        "<+0.2"
+      );
+    });
+
     mm.add("(min-width: 768px)", () => {
       faqTL.to(
         "#faq__back__button",
@@ -92,6 +103,16 @@ if (faqButton) {
 if (faqBackButton) {
   faqBackButton.addEventListener("click", () => {
     faqTL.clear();
+    mm.add("(max-width: 767px)", () => {
+      reversedFaqTL.to(
+        "#footer",
+        {
+          y: "100%",
+          duration: 0.2,
+        },
+        "<"
+      );
+    });
     mm.add("(min-width: 768px)", () => {
       reversedFaqTL.to("#faq__back__button", {
         y: 10,
@@ -146,6 +167,7 @@ if (faqBackButton) {
         },
         "<0.2"
       );
+
     reversedFaqTL.play();
   });
 }
