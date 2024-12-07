@@ -9,7 +9,7 @@ interface Props {
 
 const EventPreview = ({ event, withLocation, selectEvent }: Props) => {
   return (
-    <button onClick={() => selectEvent(event)} className="event-preview">
+    <a href={`/${event.location}/${event.slug}`} className="event-preview">
       <div className="event-preview__main">
         <img
           className="event-preview__image"
@@ -54,7 +54,7 @@ const EventPreview = ({ event, withLocation, selectEvent }: Props) => {
           <span className="event-preview__tag no-bg">Heel de avond</span>
         )}
       </div>
-    </button>
+    </a>
   );
 };
 
