@@ -1,5 +1,16 @@
-import { OrbitControls } from "@react-three/drei";
+import { useRef, useState, useEffect } from "react";
+import { OrbitControls, CameraControls } from "@react-three/drei";
 // import { Perf } from "r3f-perf";
+
+// import { useControls } from "leva";
+import { useThree } from "@react-three/fiber";
+import {
+  ToneMapping,
+  EffectComposer,
+  Bloom,
+  DepthOfField,
+} from "@react-three/postprocessing";
+import { ToneMappingMode, BlendFunction } from "postprocessing";
 
 /* Non interactive map:*/
 import MapModel from "./nonInteractiveMap/MapModel";
@@ -19,19 +30,9 @@ import Duiktank from "./interactiveBuildings/Duiktank";
 import Watertoren from "./interactiveBuildings/Watertoren";
 import Plong from "./interactiveBuildings/Plong";
 
-import { useRef, useState, useEffect } from "react";
-// import { useControls } from "leva";
-import { useThree } from "@react-three/fiber";
-import {
-  ToneMapping,
-  EffectComposer,
-  Bloom,
-  DepthOfField,
-} from "@react-three/postprocessing";
-import { ToneMappingMode, BlendFunction } from "postprocessing";
-
 import gsap from "gsap";
-const positions = new Map([["hoofdzaal", [-0.005, 0.584, -1.317]], ["mechaniekers", [0.573, 0.306, 0.635]], ["ketelhuis", [-0.793, 0.87, -0.556]], ["transformatoren", [1.014, 1.132, -4.375]], ["octagon", [1.89, -0.102, -1.122]], ["kunstacademie", [3.105, 0.186, -0.804]], ["duiktank", [1.496, 0.366, 4.596]], ["watertoren", [-0.665, 0.045, 2.214]], ["plong", [1.504, 0.12, -0.343]]]);
+
+const positions = new Map([["hoofdzaal", [-0.005, 0.584, -1.317]], ["mechaniekers", [0.573, 0.306, 0.635]], ["ketelhuis", [-0.793, 0.87, -0.556]], ["transformatoren", [1.014, 1.132, -4.375]], ["octagon", [1.89, -0.102, -1.122]], ["kunstacademie", [3.105, 0.186, -0.804]], ["duiktank", [1.0, 0.366, 4.596]], ["watertoren", [-0.665, 0.045, 2.214]], ["plong", [1.504, 0.12, -0.343]], ["hoogteparcours", [3.75,0,2.5]], ["waterbassin", [2.5,0,3.0]]]);
 
 export default function Experience({ onClickBuilding, clearSelection }) {
   const [selectedBuilding, setSelectedBuilding] = useState(null);
@@ -47,13 +48,18 @@ export default function Experience({ onClickBuilding, clearSelection }) {
 
   const [isClickable, setIsClickable] = useState(false);
 
-	const scene = useRef();
+  const [usersGestures, setUsersGestures] = useState({
+    left: 0,
+    one: 0,
+  });
+
+  const cameraControlsRef = useRef();
 
 
   useEffect(() => {
     handleClear("useEffect");
   }, [clearSelection]);
-  const OrbitControlsRef = useRef();
+
 
   const handleClear = (location) => {
     console.log("clearing", location);
@@ -75,7 +81,7 @@ export default function Experience({ onClickBuilding, clearSelection }) {
     }
     handleClear("handleSelect");  
     onClickBuilding(key);
-    setOrbitControls(key);
+    setCameraControls(key);
 
     switch (key) {
       case "hoofdzaal": setHoofdzaalEmissiveIntensity(3.0); break;
@@ -93,14 +99,14 @@ export default function Experience({ onClickBuilding, clearSelection }) {
       top: document.body.scrollHeight,
       left: 0,
       behavior: "smooth",
-    });
+    })
 
-      window.history.pushState(
-        {},
-        "",
-        `${window.location.origin}/?building=${key.toLowerCase()}`
-      );
-  };
+    window.history.pushState(
+      {},
+      "",
+      `${window.location.origin}/?building=${key.toLowerCase()}`
+    )
+  }
 
   const setLabelsOpacity = () => {
     const tlLabels = gsap.timeline({
@@ -108,13 +114,7 @@ export default function Experience({ onClickBuilding, clearSelection }) {
         trigger: "#body",
         start: "top top",
         end: "20",
-        onEnter: () => {
-          setIsClickable(true);
-          console.log("isClickable", isClickable);
-        },
         onEnterBack: () => {
-          setIsClickable(false);
-          console.log("isClickable", isClickable);
           tlLabels.reverse();
         }
       },
@@ -123,171 +123,182 @@ export default function Experience({ onClickBuilding, clearSelection }) {
       ".building-label",
       {
         opacity: 1,
+        cursor: "pointer",
+        duration: 0.75,
+        ease: "power2.out",
+      },
+      "<"
+    )
+    .to(
+      ".map-label",
+      {
+        opacity: 1,
         duration: 0.75,
         ease: "power2.out",
       },
       "<"
     );
-  };
+  }
 
-  const setOrbitControls = (key) => {
+  const setCameraControls = (key) => {
     const tl = gsap.timeline();
 
     const position = positions.get(key);
+    const camera = [10, 5, 10]
+    const offsetCenter = [5, 0, 0]; 
 
-    if (OrbitControlsRef.current) {
-      // First zoom out to distance 15
-      // tl.to(OrbitControlsRef.current, {
-      //   minDistance: 14.0,
-      //   maxDistance: 14.0,
-      //   duration: 1.25,
-      //   ease: "power2.out",
-      // })
-        //then change target
-        tl.to(
-          OrbitControlsRef.current.target,
-          {
-            x: position[0],
-            y: position[1],
-            z: position[2],
-            duration: 1.25, // Adjust duration as needed
-            ease: "power2.inOut",
-          },
-          "<"
-        )
-        // Then zoom in
-        .to(OrbitControlsRef.current, {
-          minDistance: 9.0,
-          maxDistance: 9.0,
-          duration: 1.25,
-          ease: "power2.out",
-          
-          onComplete: () => resetOrbitControls(),
-        }, "<");
+     if (cameraControlsRef.current) {
+      // Lerp from current position to new position
+      cameraControlsRef.current.lerpLookAt(
+        ...camera,           // camera position
+        ...offsetCenter,     // current target (scene center)
+        ...camera,           // same camera position
+        ...position,         // new target (building position)
+        0.17,                // animation duration/strength (0-1)
+        true                // enable transition
+      );
     }
-  };
-
-  const resetOrbitControls = () => {
-    if (OrbitControlsRef.current) {
-      OrbitControlsRef.current.minDistance = cameraControls.minDistance;
-      OrbitControlsRef.current.maxDistance = cameraControls.maxDistance;
-    }
-  }
-
-  const zoomOut = () => {
-    const tlZoomOut = gsap.timeline();
-    tlZoomOut.to(OrbitControlsRef.current.target, {
-      x: 0,
-      y: 0,
-      z: 0,
-      duration: 1.25,
-      ease: "power2.out",
-    })
-    .to(OrbitControlsRef.current, {
-      minDistance: 14.0,
-      maxDistance: 14.0,
-      duration: 1.25,
-      ease: "power2.out",
-      onComplete: () => resetOrbitControls()
-    }, "<");
   }
 
   const setZoom = () => {
-		console.log(OrbitControlsRef.current)
-    const tlZoom = gsap.timeline({
-      scrollTrigger: {
-        trigger: "#body",
-        start: "top top",
-        end: "20",
+    const mm = gsap.matchMedia();
+
+    mm.add("(min-width: 767px)", () => {
+      const tlZoomDesktop = gsap.timeline({
+        scrollTrigger: {
+          trigger: "#body",
+          start: "top top",
+          end: "20",
+          onEnter: () => {
+          cameraControlsRef.current.enabled = true;
+
+          //enable clickable buildings
+          setIsClickable(true);
+
+          //move to the left and zoom in
+          cameraControlsRef.current?.truck(3.5, 0, true)
+          cameraControlsRef.current?.dolly(2, true)
+
+          //enable user gestures
+          setUsersGestures({
+            left: 1,
+            one: 1,
+          })
+        },
         onEnterBack: () => {
-          tlZoom.reverse();
-          zoomOut();
-          //also clear building selection
-          handleClear("setZoom");
+          //disable clickable buildings
+          setIsClickable(false);
+
+          //move to the right and zoom out
+          cameraControlsRef.current?.truck(-3.5, 0, true)
+          cameraControlsRef.current?.dolly(-2, true)
+
+          //set camera to default position
+          cameraControlsRef.current.setLookAt(10, 5, 10, 0, 0, 0, true)
+
+          //disable user gestures
+          setUsersGestures({
+            left: 0,
+            one: 0,
+          })
+   
+          handleClear("setZoom")
           //also clear url params
-          window.history.pushState({}, "", window.location.pathname);
+          window.history.pushState({}, "", window.location.pathname)
         }
-      },
+       },
+      })
     })
-    tlZoom.to(OrbitControlsRef.current, {
-      minDistance: 12.0,
-      maxDistance: 12.0,
-      duration: 1.25,
-      ease: "power2.out",
-      onComplete: () => resetOrbitControls()
+
+    mm.add("(max-width: 767px)", () => {
+      const tlZoomMobile = gsap.timeline({
+        scrollTrigger: {
+          trigger: "#body",
+          start: "top top",
+          end: "20",
+          onEnter: () => {
+          cameraControlsRef.current.enabled = true;
+
+          //and zoom in
+          cameraControlsRef.current?.dolly(2, true)
+
+          //no user gestures
+        },
+        onEnterBack: () => {
+          //zoom out
+          cameraControlsRef.current?.dolly(-2, true)
+
+          //set camera to default position
+          cameraControlsRef.current.setLookAt(10, 5, 10, 0, 0, 0, true)
+   
+          handleClear("setZoom")
+          //also clear url params
+          window.history.pushState({}, "", window.location.pathname)
+        }
+       },
+      })
     })
-		//this does not work
-		.to(OrbitControlsRef.current.object.position, {
-			x: 20,
-			y: 0,
-			z: 13,
-		}, "<");
   }
 
   useEffect(() => {
     setLabelsOpacity();
     setZoom();
-    const urlParams = new URLSearchParams(window.location.search);
+    const urlParams = new URLSearchParams(window.location.search)
     if (urlParams.has("building")) {
-      handleSelect(urlParams.get("building"));
+      handleSelect(urlParams.get("building"))
     }
   }, []);
 
   const cameraControls = {
-    minDistance: 5.1,
+    minDistance: 10.0,
     maxDistance: 16.3,
-    minAzimuthAngle: 0.1,
-    maxAzimuthAngle: 1.4,
     maxPolarAngle: 1.3,
-    minPolarAngle: 0.5,
-    smoothTime: 0.1,
-    draggingSmoothTime: 0.1,
+    minPolarAngle: 0.8,
+    maxAzimuthAngle: 1.1,
+    minAzimuthAngle: -0.3,
   }
 
-  // const cameraControls = useControls("Camera", {
-  //   minDistance: {
-  //     value: 5.1,
-  //     min: 0,
-  //     max: 10,
-  //     step: 0.1,
-  //    },
-  //   maxDistance: {
-  //     value: 16.3,
-  //   },
-  // });
   return (
     <>
       <EffectComposer>
         <Bloom luminanceThreshold={0.4} mipmapBlur intensity={1.6} />
         <ToneMapping />
       </EffectComposer>
-      {/* <Perf position="top-left" /> */}
-      <OrbitControls
+      <CameraControls 
+        ref={cameraControlsRef}
         minDistance={cameraControls.minDistance}
         maxDistance={cameraControls.maxDistance}
-        minAzimuthAngle={cameraControls.minAzimuthAngle}
-        maxAzimuthAngle={cameraControls.maxAzimuthAngle}
         maxPolarAngle={cameraControls.maxPolarAngle}
         minPolarAngle={cameraControls.minPolarAngle}
-        smoothTime={cameraControls.smoothTime}
-        draggingSmoothTime={cameraControls.draggingSmoothTime}
-        maxSpeed={cameraControls.maxSpeed}
-        azimuthRotateSpeed={cameraControls.azimuthRotateSpeed}
-        dampingFactor={0.05}
-        enableDamping={true}
-        enablePan={false}
-        enableZoom={false}
-        ref={OrbitControlsRef}
+        maxAzimuthAngle={cameraControls.maxAzimuthAngle}
+        minAzimuthAngle={cameraControls.minAzimuthAngle}
+
+        mouseButtons={{
+          left: usersGestures.left,
+          middle: 0,
+          right: 0,
+          wheel: 0,
+        }}
+        touches={{
+          one: usersGestures.one,
+          two: 0,
+          three: 0
+        }}
       />
       <ambientLight intensity={1.5} />
-      <group ref={scene}>
-       <Ground />
+       {/* <axesHelper
+        args={[10]} 
+        /> */}
+       <Ground 
+        handleClickParcours={() => handleSelect("hoogteparcours")}
+        handleClickBassin={() => handleSelect("waterbassin")}
+       />
        <Trees />
        <MapModel />
       <Path intensity={0.5} />
       <Hoofdzaal
-      handleClick={() => handleSelect("hoofdzaal")}
-      emissiveIntensity={hoofdzaalEmissiveIntensity}
+        handleClick={() => handleSelect("hoofdzaal")}
+        emissiveIntensity={hoofdzaalEmissiveIntensity}
     />
       <Mechaniekers
         handleClick={() => handleSelect("mechaniekers")}
@@ -322,7 +333,6 @@ export default function Experience({ onClickBuilding, clearSelection }) {
         emissiveIntensity={plongEmissiveIntensity}
       />
        <OfficeBuilding />
-      </group>
     </>
   );
 }

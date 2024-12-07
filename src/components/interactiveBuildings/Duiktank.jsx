@@ -31,10 +31,15 @@ export default function Duiktank(props) {
         scale={[0.534, 0.35, 0.534]}
       >
         <Html
-          position={ [0.2,2.75,0.25]}
-          distanceFactor={6}
+          position={ [0.4,2.1,1.0]}
+          distanceFactor={7}
           occlude>
-            <p className='building-label'>Duiktank - Zomerbar</p>
+            <p 
+            onClick={(e) => {
+              e.stopPropagation()
+              props.handleClick()
+            }}
+              className='building-label'>Duiktank - Zomerbar</p>
           </Html>
         <meshStandardMaterial 
           map={colorMap}
