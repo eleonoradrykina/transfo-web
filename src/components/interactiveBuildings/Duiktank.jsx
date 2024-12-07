@@ -10,8 +10,8 @@ import { SRGBColorSpace } from 'three'
 
 
 export default function Duiktank(props) {
-  const { nodes, materials } = useGLTF('models/duiktank.glb')
-  const colorMap = useLoader(TextureLoader, 'models/textures/duiktank-baked.jpg')
+  const { nodes } = useGLTF('models/duiktank-no-materials.glb')
+  const colorMap = useLoader(TextureLoader, 'models/textures/duiktank-baked.webp')
   //make sure the texture is srgb
   colorMap.colorSpace = SRGBColorSpace
   colorMap.flipY = false
@@ -23,10 +23,9 @@ export default function Duiktank(props) {
     }} dispose={null}>
       <group>
       <mesh
-        castShadow
-        receiveShadow
+        // castShadow
+        // receiveShadow
         geometry={nodes.duiktank.geometry}
-        material={materials['rustiq-brown']}
         position={[1.496, 0.366, 4.596]}
         rotation={[0, -1.568, 0]}
         scale={[0.534, 0.35, 0.534]}
@@ -47,4 +46,4 @@ export default function Duiktank(props) {
   )
 }
 
-useGLTF.preload('models/duiktank.glb')
+useGLTF.preload('models/duiktank-no-materials.glb')

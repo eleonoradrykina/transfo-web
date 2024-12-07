@@ -5,8 +5,8 @@ import { TextureLoader } from 'three/src/loaders/TextureLoader'
 import { SRGBColorSpace } from 'three'
 
 export default function Ground(props) {
-  const { nodes} = useGLTF('models/ground.glb')
-  const groundColorMap = useLoader(TextureLoader, 'models/textures/ground.jpg')
+  const { nodes} = useGLTF('models/ground-no-materials.glb')
+  const groundColorMap = useLoader(TextureLoader, 'models/textures/ground-baked.jpg')
   groundColorMap.flipY = false
   groundColorMap.colorSpace = SRGBColorSpace
 
@@ -38,4 +38,4 @@ export default function Ground(props) {
   )
 }
 
-useGLTF.preload('models/ground.glb')
+useGLTF.preload('models/ground-no-materials.glb')

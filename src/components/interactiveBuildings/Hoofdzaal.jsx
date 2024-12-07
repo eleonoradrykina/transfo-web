@@ -10,7 +10,7 @@ import { SRGBColorSpace } from 'three'
 
 export default function Hoofdzaal(props) {
   const { nodes } = useGLTF('models/hoofdzaal.glb')
-  const colorMap = useLoader(TextureLoader, 'models/textures/hoofdzaal-baked.jpg')
+  const colorMap = useLoader(TextureLoader, 'models/textures/hoofdzaal-baked.webp')
   colorMap.colorSpace = SRGBColorSpace;
   colorMap.flipY = false
 

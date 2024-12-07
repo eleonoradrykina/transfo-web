@@ -10,7 +10,7 @@ import { SRGBColorSpace } from 'three'
 
 export default function Kunstacademie(props) {
   const { nodes } = useGLTF('models/kunstacademie-no-materials.glb')
-  const colorMap = useLoader(TextureLoader, 'models/textures/kunstacademie-baked.jpg')
+  const colorMap = useLoader(TextureLoader, 'models/textures/kunstacademie-baked.webp')
   colorMap.flipY = false
   colorMap.colorSpace = SRGBColorSpace
   return (

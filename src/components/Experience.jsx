@@ -1,5 +1,5 @@
-import { OrbitControls, Html } from "@react-three/drei";
-import { Perf } from "r3f-perf";
+import { OrbitControls } from "@react-three/drei";
+// import { Perf } from "r3f-perf";
 
 /* Non interactive map:*/
 import MapModel from "./nonInteractiveMap/MapModel";
@@ -20,7 +20,7 @@ import Watertoren from "./interactiveBuildings/Watertoren";
 import Plong from "./interactiveBuildings/Plong";
 
 import { useRef, useState, useEffect } from "react";
-import { useControls } from "leva";
+// import { useControls } from "leva";
 import { useThree } from "@react-three/fiber";
 import {
   ToneMapping,
@@ -233,68 +233,28 @@ export default function Experience({ onClickBuilding, clearSelection }) {
     }
   }, []);
 
-  const cameraControls = useControls("Camera", {
-    minDistance: {
-      value: 5.1,
-      min: 0,
-      max: 10,
-      step: 0.1,
-    },
-    maxDistance: {
-      value: 16.3,
-      min: 5,
-      max: 100,
-      step: 0.1,
-    },
-    minAzimuthAngle: {
-      value: -0.4,
-      min: -Math.PI,
-      max: Math.PI,
-      step: 0.01,
-    },
-    maxAzimuthAngle: {
-      value: 0.81,
-      min: -Math.PI,
-      max: Math.PI,
-      step: 0.01,
-    },
-    maxPolarAngle: {
-      value: 1.26,
-      min: 0,
-      max: Math.PI,
-      step: 0.01,
-    },
-    minPolarAngle: {
-      value: 0.86,
-      min: 0,
-      max: Math.PI,
-      step: 0.01,
-    },
-    smoothTime: {
-      value: 0.25,
-      min: 0,
-      max: 1,
-      step: 0.01,
-    },
-    draggingSmoothTime: {
-      value: 0.125,
-      min: 0,
-      max: 1,
-      step: 0.01,
-    },
-    maxSpeed: {
-      value: 1.5,
-      min: 0,
-      max: 10,
-      step: 0.01,
-    },
-    azimuthRotateSpeed: {
-      value: 1.0,
-      min: 0,
-      max: 10,
-      step: 0.01,
-    },
-  });
+  const cameraControls = {
+    minDistance: 5.1,
+    maxDistance: 16.3,
+    minAzimuthAngle: 0.1,
+    maxAzimuthAngle: 1.4,
+    maxPolarAngle: 1.3,
+    minPolarAngle: 0.5,
+    smoothTime: 0.1,
+    draggingSmoothTime: 0.1,
+  }
+
+  // const cameraControls = useControls("Camera", {
+  //   minDistance: {
+  //     value: 5.1,
+  //     min: 0,
+  //     max: 10,
+  //     step: 0.1,
+  //    },
+  //   maxDistance: {
+  //     value: 16.3,
+  //   },
+  // });
   return (
     <>
       <EffectComposer>
