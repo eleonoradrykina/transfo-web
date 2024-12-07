@@ -17,7 +17,7 @@ export default function Transformatoren(props) {
   return (
     <group onClick={(e) => {
       e.stopPropagation()
-      navigate('/transformatoren')
+      props.handleClick()
     }} dispose={null}>
         <group>
              <mesh

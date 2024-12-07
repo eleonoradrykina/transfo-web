@@ -99,7 +99,7 @@
 }
 
 html {
-  @apply bg-purple;
+  @apply bg-black;
 }
 
 body {
@@ -124,4 +124,19 @@ body {
   @apply w-full;
   @apply mx-15;
   max-width: calc(100vw - 30px);
+}
+
+.footer {
+  @apply md:h-60;
+  @apply fixed z-20 bottom-0 left-30 right-30;
+  @apply flex flex-row justify-between items-center;
+  @apply translate-y-full;
+
+  &__side {
+    @apply flex flex-row items-center;
+
+    img {
+      @apply h-[45px];
+    }
+  }
 }
