@@ -48,9 +48,12 @@ export default function Experience({ onClickBuilding, clearSelection }) {
 
   const [isClickable, setIsClickable] = useState(false);
 
-  const cameraControlsRef = useRef();
-  const OrbitControlsRef = useRef();
+  const [usersGestures, setUsersGestures] = useState({
+    left: 0,
+    one: 0,
+  });
 
+  const cameraControlsRef = useRef();
 
 
   useEffect(() => {
@@ -78,7 +81,7 @@ export default function Experience({ onClickBuilding, clearSelection }) {
     }
     handleClear("handleSelect");  
     onClickBuilding(key);
-    setOrbitControls(key);
+    setCameraControls(key);
 
     switch (key) {
       case "hoofdzaal": setHoofdzaalEmissiveIntensity(3.0); break;
@@ -133,16 +136,12 @@ export default function Experience({ onClickBuilding, clearSelection }) {
     );
   }
 
-  const setOrbitControls = (key) => {
+  const setCameraControls = (key) => {
     const tl = gsap.timeline();
 
     const position = positions.get(key);
     const camera = [10, 5, 10]
     const offsetCenter = [5, 0, 0]; 
-
-    // if (cameraControlsRef.current) {
-    //   cameraControlsRef.current.setLookAt(...camera, ...position, true)
-    // }
 
      if (cameraControlsRef.current) {
       // Lerp from current position to new position
@@ -169,6 +168,10 @@ export default function Experience({ onClickBuilding, clearSelection }) {
           //move to the left and zoom in
           cameraControlsRef.current?.truck(3.5, 0, true)
           cameraControlsRef.current?.dolly(2, true)
+          setUsersGestures({
+            left: 1,
+            one: 1,
+          })
         },
         onEnterBack: () => {
           //move to the right and zoom out
@@ -177,6 +180,11 @@ export default function Experience({ onClickBuilding, clearSelection }) {
 
           //set camera to default position
           cameraControlsRef.current.setLookAt(10, 5, 10, 0, 0, 0, true)
+
+          setUsersGestures({
+            left: 0,
+            one: 0,
+          })
    
           handleClear("setZoom")
           //also clear url params
@@ -198,6 +206,10 @@ export default function Experience({ onClickBuilding, clearSelection }) {
   const cameraControls = {
     minDistance: 10.0,
     maxDistance: 16.3,
+    maxPolarAngle: 1.3,
+    minPolarAngle: 0.8,
+    maxAzimuthAngle: 1.1,
+    minAzimuthAngle: -0.3,
   }
 
   return (
@@ -210,14 +222,19 @@ export default function Experience({ onClickBuilding, clearSelection }) {
         ref={cameraControlsRef}
         minDistance={cameraControls.minDistance}
         maxDistance={cameraControls.maxDistance}
+        maxPolarAngle={cameraControls.maxPolarAngle}
+        minPolarAngle={cameraControls.minPolarAngle}
+        maxAzimuthAngle={cameraControls.maxAzimuthAngle}
+        minAzimuthAngle={cameraControls.minAzimuthAngle}
+
         mouseButtons={{
-          left: 0,
+          left: usersGestures.left,
           middle: 0,
           right: 0,
           wheel: 0,
         }}
         touches={{
-          one: 0,
+          one: usersGestures.one,
           two: 0,
           three: 0
         }}
