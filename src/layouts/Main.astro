@@ -10,7 +10,7 @@ import "../styles/faq.css";
 import { getCollection } from "astro:content";
 
 interface Props {
-  title: string;
+  title?: string;
   description: string;
   selectedBuilding?: string;
   selectedEvent?: string;
@@ -20,7 +20,7 @@ const { title, description, selectedBuilding, selectedEvent } = Astro.props;
 
 const copy = languages.nl;
 const temp = await getCollection("schedule");
-let tempRAW: string[] = [];
+let tempRAW: { content: string; title: string }[] = [];
 
 const eventsRaw = await import.meta.glob("../content/schedule/*.md", {
   eager: true,
@@ -28,14 +28,15 @@ const eventsRaw = await import.meta.glob("../content/schedule/*.md", {
 if (eventsRaw) {
   tempRAW = await Promise.all(
     Object.values(eventsRaw).map(async (event: any) => {
+      console.log(await event.frontmatter);
       const content = await event.compiledContent();
-      return content;
+      return { content: content, title: event.frontmatter.title };
     })
   );
 }
 
 const events = await Promise.all(
-  temp.map(async (event: any, index): Promise<IEvent> => {
+  temp.map(async (event: any): Promise<IEvent> => {
     return {
       slug: event.slug,
       title: event.data.title,
@@ -49,7 +50,9 @@ const events = await Promise.all(
       location: event.data.location,
       heroImage: event.data.heroImage,
       tags: event.data.tags,
-      content: tempRAW[index] ?? "",
+      content:
+        tempRAW.find((eventRAW) => eventRAW.title === event.data.title)
+          ?.content ?? "",
     };
   })
 );
@@ -62,7 +65,7 @@ const events = await Promise.all(
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
     <meta name="description" content={description} />
-    <title>{title}</title>
+    <title>Transfo Intiem {title ? "| " + title : ""}</title>
     <ClientRouter />
   </head>
   <body id="body">

@@ -4,10 +4,9 @@ import "../styles/components/schedule.css";
 interface Props {
   event: IEvent;
   withLocation?: boolean;
-  selectEvent: (event: IEvent) => void;
 }
 
-const EventPreview = ({ event, withLocation, selectEvent }: Props) => {
+const EventPreview = ({ event, withLocation }: Props) => {
   return (
     <a href={`/${event.location}/${event.slug}`} className="event-preview">
       <div className="event-preview__main">

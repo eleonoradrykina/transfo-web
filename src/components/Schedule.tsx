@@ -89,7 +89,10 @@ const Schedule = ({ selectedBuilding, events, initialEvent }: Props) => {
   }, [selectedBuilding]);
 
   return (
-    <div id="schedule" className={`schedule ${selectedEvent ? "event" : ""}`}>
+    <div
+      id="schedule"
+      className={`schedule ${selectedEvent ? "has-event" : ""}`}
+    >
       <div className="schedule__content">
         <div className="schedule__default">
           <h3 className="schedule__title">
@@ -120,7 +123,6 @@ const Schedule = ({ selectedBuilding, events, initialEvent }: Props) => {
               .map((event) => (
                 <li key={event.title}>
                   <EventPreview
-                    selectEvent={setSelectedEvent}
                     withLocation={!selectedBuilding}
                     event={event}
                   />

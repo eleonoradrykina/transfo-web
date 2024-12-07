@@ -1,11 +1,11 @@
 .schedule {
-  @apply fixed z-30 right-0 left-0 bottom-0 top-[20%] md:top-0;
+  @apply fixed z-30 right-0 left-0 bottom-0 top-[45%] md:top-0;
   @media (min-width: 768px) {
     left: unset;
   }
   @apply md:max-w-[750px] md:w-[45%] md:min-w-[600px];
 
-  &.event {
+  &.has-event {
     .schedule__default {
       @apply -translate-x-full;
     }
@@ -24,13 +24,15 @@
   }
 
   &__default {
-    @apply w-full px-5 pt-15 md:px-15 md:py-30;
+    @apply absolute top-0 left-0;
+    @apply w-full px-5 pt-30 md:px-15 md:py-30;
     @apply flex flex-col items-center text-center gap-5;
     @apply transition-all duration-300 ease-in-out;
   }
 
   &__event {
-    @apply w-full px-5 pt-15 md:px-15 md:py-30;
+    @apply absolute inset-0;
+    @apply w-full px-5 pt-30 md:px-15 md:py-30;
     @apply flex flex-col items-center text-center gap-5;
     @apply transition-all duration-300 ease-in-out;
     @apply translate-x-full;
@@ -51,28 +53,28 @@
 .event-preview {
   @apply flex flex-col gap-10;
   @apply w-full;
-  @apply bg-black/70 p-15 rounded-lg;
+  @apply bg-black p-15 rounded-lg;
 
-  .event-preview__main {
+  &__main {
     @apply flex flex-row items-center gap-15;
   }
 
-  .event-preview__title {
+  &__title {
     @apply font-bold text-2xl;
     @apply line-clamp-2 text-start;
     @apply max-h-[64px];
   }
 
-  .event-preview__image {
+  &__image {
     @apply w-120 min-w-[120px] h-[80px] object-cover object-center rounded-md;
   }
 
-  .event-preview__tags {
+  &__tags {
     @apply w-full;
     @apply flex flex-row flex-wrap gap-5;
   }
 
-  .event-preview__tag {
+  &__tag {
     @apply block px-15;
     @apply bg-orange rounded-full;
 
@@ -82,6 +84,57 @@
 
     &.location {
       @apply bg-blue;
+    }
+
+    &.no-bg {
+      @apply bg-transparent;
+      @apply italic;
+      @apply px-5;
+    }
+  }
+}
+
+.event {
+  @apply flex flex-col gap-15;
+  @apply p-15 rounded-lg;
+  @apply bg-black;
+  @apply max-h-full overflow-y-hidden;
+
+  &__back {
+    @apply bg-white/20;
+    @apply min-w-[38px] min-h-[38px];
+    @apply flex items-center justify-center;
+    @apply border-2 border-pink rounded-full;
+  }
+
+  &__title {
+    @apply font-bold text-3xl md:text-5xl;
+  }
+
+  &__content {
+    @apply text-start;
+    p {
+      @apply mb-15;
+    }
+  }
+
+  &__image {
+    @apply aspect-square object-cover;
+    @apply w-120;
+    @apply rounded-md;
+  }
+
+  &__tags {
+    @apply w-full;
+    @apply flex flex-col md:flex-row flex-wrap gap-10 md:justify-center items-start;
+  }
+
+  &__tag {
+    @apply block px-15;
+    @apply bg-orange rounded-full;
+
+    &.time {
+      @apply bg-purple;
     }
 
     &.no-bg {
