@@ -41,7 +41,7 @@ export default function Watertoren(props) {
       >
            <Html
          position={ [0.1,0.75,0.25]}
-         distanceFactor={6}
+         distanceFactor={7}
          occlude>
             <p className='building-label'>Watertoren</p>
         </Html>

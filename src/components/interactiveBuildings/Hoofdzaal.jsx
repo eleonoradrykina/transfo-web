@@ -33,7 +33,7 @@ export default function Hoofdzaal(props) {
           emissiveIntensity={props.emissiveIntensity} />
         <Html
           position={ [0.1,1.5,0.25]}
-          distanceFactor={6}
+          distanceFactor={7}
           occlude>
            <p className='building-label'>Hoofdzaal</p>
          </Html>

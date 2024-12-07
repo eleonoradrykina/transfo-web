@@ -29,7 +29,7 @@ export default function Kunstacademie(props) {
       >
         <Html
           position={ [ -3, 4.5, 0 ]}
-          distanceFactor={6}
+          distanceFactor={7}
           occlude>
             <p className='building-label'>kunstacademie</p>
           </Html>

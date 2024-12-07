@@ -32,7 +32,7 @@ export default function Duiktank(props) {
       >
         <Html
           position={ [0.2,2.75,0.25]}
-          distanceFactor={6}
+          distanceFactor={7}
           occlude>
             <p className='building-label'>Duiktank - Zomerbar</p>
           </Html>

@@ -27,8 +27,8 @@ colorMap.colorSpace = SRGBColorSpace
         >
           <Html
             
-            position={ [-0.85,3.0,0.2]}
-            distanceFactor={6}
+            position={ [0.6,1.25,1.2]}
+            distanceFactor={7}
             occlude>
               <p onClick={(e) => {
               console.log('clicked')
