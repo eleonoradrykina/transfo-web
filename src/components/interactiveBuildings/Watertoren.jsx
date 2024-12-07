@@ -43,7 +43,12 @@ export default function Watertoren(props) {
          position={ [0.1,0.75,0.25]}
          distanceFactor={7}
          occlude>
-            <p className='building-label'>Watertoren</p>
+            <p 
+            onClick={(e) => {
+              e.stopPropagation()
+              props.handleClick()
+            }}
+            className='building-label'>Watertoren</p>
         </Html>
         <meshStandardMaterial 
           map={colorMap}

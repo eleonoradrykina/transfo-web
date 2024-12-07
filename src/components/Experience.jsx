@@ -32,7 +32,7 @@ import Plong from "./interactiveBuildings/Plong";
 
 import gsap from "gsap";
 
-const positions = new Map([["hoofdzaal", [-0.005, 0.584, -1.317]], ["mechaniekers", [0.573, 0.306, 0.635]], ["ketelhuis", [-0.793, 0.87, -0.556]], ["transformatoren", [1.014, 1.132, -4.375]], ["octagon", [1.89, -0.102, -1.122]], ["kunstacademie", [3.105, 0.186, -0.804]], ["duiktank", [1.0, 0.366, 4.596]], ["watertoren", [-0.665, 0.045, 2.214]], ["plong", [1.504, 0.12, -0.343]]]);
+const positions = new Map([["hoofdzaal", [-0.005, 0.584, -1.317]], ["mechaniekers", [0.573, 0.306, 0.635]], ["ketelhuis", [-0.793, 0.87, -0.556]], ["transformatoren", [1.014, 1.132, -4.375]], ["octagon", [1.89, -0.102, -1.122]], ["kunstacademie", [3.105, 0.186, -0.804]], ["duiktank", [1.0, 0.366, 4.596]], ["watertoren", [-0.665, 0.045, 2.214]], ["plong", [1.504, 0.12, -0.343]], ["hoogteparcours", [3.75,0,2.5]], ["waterbassin", [2.5,0,3.0]]]);
 
 export default function Experience({ onClickBuilding, clearSelection }) {
   const [selectedBuilding, setSelectedBuilding] = useState(null);
@@ -127,6 +127,16 @@ export default function Experience({ onClickBuilding, clearSelection }) {
     });
     tlLabels.to(
       ".building-label",
+      {
+        opacity: 1,
+        cursor: "pointer",
+        duration: 0.75,
+        ease: "power2.out",
+      },
+      "<"
+    )
+    .to(
+      ".map-label",
       {
         opacity: 1,
         duration: 0.75,
@@ -240,16 +250,19 @@ export default function Experience({ onClickBuilding, clearSelection }) {
         }}
       />
       <ambientLight intensity={1.5} />
-       <axesHelper
+       {/* <axesHelper
         args={[10]} 
-        />
-       <Ground />
+        /> */}
+       <Ground 
+        handleClickParcours={() => handleSelect("hoogteparcours")}
+        handleClickBassin={() => handleSelect("waterbassin")}
+       />
        <Trees />
        <MapModel />
       <Path intensity={0.5} />
       <Hoofdzaal
-      handleClick={() => handleSelect("hoofdzaal")}
-      emissiveIntensity={hoofdzaalEmissiveIntensity}
+        handleClick={() => handleSelect("hoofdzaal")}
+        emissiveIntensity={hoofdzaalEmissiveIntensity}
     />
       <Mechaniekers
         handleClick={() => handleSelect("mechaniekers")}

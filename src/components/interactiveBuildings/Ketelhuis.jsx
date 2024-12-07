@@ -30,7 +30,12 @@ export default function Ketelhuis(props) {
           position={ [0,2.125,0]}
           distanceFactor={7}
           occlude>
-            <p className='building-label'>Ketelhuis</p>
+            <p 
+            onClick={(e) => {
+              e.stopPropagation()
+              props.handleClick()
+            }}
+              className='building-label'>Ketelhuis</p>
           </Html>
         </mesh>
         <mesh

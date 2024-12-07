@@ -26,12 +26,10 @@ colorMap.colorSpace = SRGBColorSpace
           geometry={nodes.mechaniekers.geometry}
         >
           <Html
-            
             position={ [0.6,1.25,1.2]}
             distanceFactor={7}
             occlude>
               <p onClick={(e) => {
-              console.log('clicked')
               e.stopPropagation()
               props.handleClick()
             }} className='building-label'>Mechaniekersgebouw</p>

@@ -29,7 +29,12 @@ export default function Transformatoren(props) {
                       position={ [0.1,0.75,0.25]}
                       distanceFactor={7}
                       occlude>
-                       <p className='building-label'>Transformatoren</p>
+                       <p 
+                       onClick={(e) => {
+                        e.stopPropagation()
+                        props.handleClick()
+                      }}
+                       className='building-label'>Transformatoren</p>
                      </Html>
                      <meshStandardMaterial 
                      map={colorMap} 

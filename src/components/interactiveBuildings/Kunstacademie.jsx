@@ -31,7 +31,12 @@ export default function Kunstacademie(props) {
           position={ [ -3, 4.5, 0 ]}
           distanceFactor={7}
           occlude>
-            <p className='building-label'>kunstacademie</p>
+            <p 
+            onClick={(e) => {
+              e.stopPropagation()
+              props.handleClick()
+            }}
+            className='building-label'>Directeurswoning</p>
           </Html>
         <meshStandardMaterial 
           map={colorMap}
