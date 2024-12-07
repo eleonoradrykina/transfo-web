@@ -1,0 +1,20 @@
+.miefel {
+  @apply fixed inset-0 bottom-1/2;
+  @apply overflow-visible;
+
+  &__hand {
+    @apply absolute z-40;
+    @apply w-[50vw];
+    @apply -top-1/4;
+    transform-origin: 50% 0;
+
+    &.left {
+      @apply -right-1/4;
+    }
+
+    &.right {
+      @apply -left-1/4;
+      @apply rotate-[35deg];
+    }
+  }
+}

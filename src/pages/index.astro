@@ -9,6 +9,7 @@ import Countdown from "../components/Countdown";
 import Interactivity from "../components/Interactivity";
 import { Language, type IEvent } from "../services/types";
 import { getCollection } from "astro:content";
+import Miefel from "../components/Miefel";
 
 const copy = languages.nl;
 const temp = await getCollection("schedule");
@@ -63,6 +64,7 @@ const events = await Promise.all(
   <body id="body">
     <main class="main">
       <div id="hero" class="hero">
+        <Miefel client:load />
         <div class="hero__top margins">
           <span id="hero__date" class="hero__date">{copy.date.festival}</span>
           <h1 id="hero__title" class="hero__title">{copy.title}</h1>
