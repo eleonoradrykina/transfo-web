@@ -20,10 +20,22 @@ const { title, description, selectedBuilding, selectedEvent } = Astro.props;
 
 const copy = languages.nl;
 const temp = await getCollection("schedule");
+let tempRAW: string[] = [];
+
+const eventsRaw = await import.meta.glob("../content/schedule/*.md", {
+  eager: true,
+});
+if (eventsRaw) {
+  tempRAW = await Promise.all(
+    Object.values(eventsRaw).map(async (event: any) => {
+      const content = await event.compiledContent();
+      return content;
+    })
+  );
+}
 
 const events = await Promise.all(
-  temp.map(async (event: any): Promise<IEvent> => {
-    console.log(event);
+  temp.map(async (event: any, index): Promise<IEvent> => {
     return {
       slug: event.slug,
       title: event.data.title,
@@ -37,6 +49,7 @@ const events = await Promise.all(
       location: event.data.location,
       heroImage: event.data.heroImage,
       tags: event.data.tags,
+      content: tempRAW[index] ?? "",
     };
   })
 );

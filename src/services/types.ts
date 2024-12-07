@@ -1,3 +1,5 @@
+import type { RenderResult } from "astro:content";
+
 export enum Language {
   NL = "nl",
 }
@@ -30,4 +32,20 @@ export interface IEvent {
   location: string;
   subLocation?: string;
   heroImage: string;
+  content: string;
+}
+
+export interface IEventFull {
+  slug: string;
+  title: string;
+  name: string;
+  startTime: Date | null;
+  endTime: Date | null;
+  startTime2: Date | null;
+  endTime2: Date | null;
+  tags: string[] | null;
+  location: string;
+  subLocation?: string;
+  heroImage: string;
+  content: RenderResult;
 }

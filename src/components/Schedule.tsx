@@ -5,6 +5,7 @@ import { gsap } from "gsap";
 
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { type IEvent } from "../services/types";
+import Event from "./Event";
 
 interface Props {
   selectedBuilding: string | null;
@@ -20,7 +21,7 @@ const Schedule = ({ selectedBuilding, events, initialEvent }: Props) => {
     const event = events.find((event) => event.slug === initialEvent);
     if (event) {
       setSelectedEvent(event);
-      console.log(event);
+      console.log(event.content);
     }
 
     gsap.registerPlugin(ScrollTrigger);
@@ -88,49 +89,48 @@ const Schedule = ({ selectedBuilding, events, initialEvent }: Props) => {
   }, [selectedBuilding]);
 
   return (
-    <div id="schedule" className="schedule">
+    <div id="schedule" className={`schedule ${selectedEvent ? "event" : ""}`}>
       <div className="schedule__content">
-        <h3 className="schedule__title">
-          {selectedEvent
-            ? selectedEvent.title
-            : selectedBuilding
-              ? selectedBuilding
-              : "Programma"}
-        </h3>
-        {selectedEvent ? (
-          selectedEvent.name
-        ) : selectedBuilding ? (
-          <div></div>
-        ) : (
-          <p>
-            Heel het programma is weergegeven. Klik op het gebouw om te zien wat
-            er daar plaatsvindt.
-          </p>
-        )}
+        <div className="schedule__default">
+          <h3 className="schedule__title">
+            {selectedBuilding ? selectedBuilding : "Programma"}
+          </h3>
+          {selectedBuilding ? (
+            <div></div>
+          ) : (
+            <p>
+              Heel het programma is weergegeven. Klik op het gebouw om te zien
+              wat er daar plaatsvindt.
+            </p>
+          )}
 
-        <ul className="schedule__list">
-          {filteredSchedule
-            .sort((a: IEvent, b: IEvent) => {
-              if (a.startTime && b.startTime) {
-                return a.startTime.getTime() - b.startTime.getTime();
-              } else if (a.startTime && !b.startTime) {
-                return -1;
-              } else if (!a.startTime && b.startTime) {
-                return 1;
-              } else {
-                return 0;
-              }
-            })
-            .map((event) => (
-              <li key={event.title}>
-                <EventPreview
-                  selectEvent={setSelectedEvent}
-                  withLocation={!selectedBuilding}
-                  event={event}
-                />
-              </li>
-            ))}
-        </ul>
+          <ul className="schedule__list">
+            {filteredSchedule
+              .sort((a: IEvent, b: IEvent) => {
+                if (a.startTime && b.startTime) {
+                  return a.startTime.getTime() - b.startTime.getTime();
+                } else if (a.startTime && !b.startTime) {
+                  return -1;
+                } else if (!a.startTime && b.startTime) {
+                  return 1;
+                } else {
+                  return 0;
+                }
+              })
+              .map((event) => (
+                <li key={event.title}>
+                  <EventPreview
+                    selectEvent={setSelectedEvent}
+                    withLocation={!selectedBuilding}
+                    event={event}
+                  />
+                </li>
+              ))}
+          </ul>
+        </div>
+        <div className="schedule__event">
+          {selectedEvent && <Event event={selectedEvent} />}
+        </div>
       </div>
     </div>
   );

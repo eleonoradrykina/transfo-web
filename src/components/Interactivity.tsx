@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Map from "./Map";
 import Schedule from "./Schedule";
-import { type IEvent } from "../services/types";
+import { type IEvent, type IEventFull } from "../services/types";
 
 interface Props {
   events: IEvent[];
