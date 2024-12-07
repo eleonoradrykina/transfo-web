@@ -237,9 +237,9 @@ export default function Experience({ onClickBuilding, clearSelection }) {
     minDistance: 5.1,
     maxDistance: 16.3,
     minAzimuthAngle: 0.1,
-    maxAzimuthAngle: 1.5,
-    maxPolarAngle: 1.5,
-    minPolarAngle: 0.1,
+    maxAzimuthAngle: 1.4,
+    maxPolarAngle: 1.3,
+    minPolarAngle: 0.5,
     smoothTime: 0.1,
     draggingSmoothTime: 0.1,
   }

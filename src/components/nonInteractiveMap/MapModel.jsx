@@ -8,7 +8,7 @@ import { TextureLoader } from 'three/src/loaders/TextureLoader'
 import { SRGBColorSpace } from 'three'
 
 export default function MapModel(props) {
-  const { nodes} = useGLTF('models/static-map-bachelors.glb')
+  const { nodes} = useGLTF('models/compressed_static-map-bachelors.glb')
   const colorMap = useLoader(TextureLoader, 'models/textures/final-bake(1).webp')
   colorMap.flipY = false
   colorMap.colorSpace = SRGBColorSpace
@@ -188,17 +188,6 @@ export default function MapModel(props) {
         <meshStandardMaterial 
           map={colorMap} />
       </mesh>
-      {/* <mesh
-        castShadow
-        receiveShadow
-        geometry={nodes.ground.geometry}
-        position={[-0.138, -0.035, -0.012]}
-        rotation={[0, -1.568, 0]}
-        scale={[5.418, 2.464, 5.418]}
-      >
-        <meshStandardMaterial 
-          map={groundColorMap} />
-      </mesh> */}
       <mesh
         castShadow
         receiveShadow
@@ -320,17 +309,6 @@ export default function MapModel(props) {
         <meshStandardMaterial 
           map={colorMap}/>
       </mesh>
-      {/* <mesh
-        castShadow
-        receiveShadow
-        geometry={nodes.Cube001.geometry}
-
-        position={[0.656, 0.773, -1.939]}
-        rotation={[0, 0.009, 0]}
-      >
-        <meshStandardMaterial 
-          map={officeBuildingColorMap}/>
-      </mesh> */}
       <mesh
         castShadow
         receiveShadow
@@ -345,4 +323,4 @@ export default function MapModel(props) {
   )
 }
 
-useGLTF.preload('models/static-map-bachelors.glb')
+useGLTF.preload('models/compressed_static-map-bachelors.glb')

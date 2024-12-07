@@ -8,7 +8,7 @@ const Interactivity = () => {
   return (
     <div className="interactivity">
       <Map onChangeBuilding={setSelectedBuilding} />
-      {/* <Schedule selectedBuilding={selectedBuilding} /> */}
+      <Schedule selectedBuilding={selectedBuilding} />
     </div>
   );
 };

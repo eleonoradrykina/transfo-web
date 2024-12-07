@@ -9,7 +9,7 @@ import { TextureLoader } from 'three/src/loaders/TextureLoader'
 import { SRGBColorSpace } from 'three'
 
 export default function Mechaniekers(props) {
-const { nodes, materials } = useGLTF('models/mechaniekers.glb')
+const { nodes } = useGLTF('models/mechaniekers-no-materials.glb')
 const colorMap = useLoader(TextureLoader, 'models/textures/mechaniekers-baked.webp')
 colorMap.flipY = false
 colorMap.colorSpace = SRGBColorSpace
@@ -20,14 +20,10 @@ colorMap.colorSpace = SRGBColorSpace
       props.handleClick()
     }} dispose={null}>
       <group
-        position={[0.573, 0.306, 0.635]}
-        rotation={[0, 0.009, 0]}
-        scale={[0.209, 0.324, 0.624]}>
+        >
         <mesh
-          castShadow
           receiveShadow
-          geometry={nodes.Cube013.geometry}
-          material={materials.building}
+          geometry={nodes.mechaniekers.geometry}
         >
           <Html
             
@@ -39,21 +35,10 @@ colorMap.colorSpace = SRGBColorSpace
               e.stopPropagation()
               props.handleClick()
             }} className='building-label'>Mechaniekersgebouw</p>
-            </Html>
+          </Html>
           <meshStandardMaterial 
           roughness={1}
           metalness={0}
-          map={colorMap}
-          emissive="#BC78FF" 
-          emissiveIntensity={props.emissiveIntensity} />
-        </mesh>
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.Cube013_1.geometry}
-          material={materials.roof}
-        >
-          <meshStandardMaterial 
           map={colorMap}
           emissive="#BC78FF" 
           emissiveIntensity={props.emissiveIntensity} />
@@ -63,4 +48,4 @@ colorMap.colorSpace = SRGBColorSpace
   )
 }
 
-useGLTF.preload('models/mechaniekers.glb')
+useGLTF.preload('models/mechaniekers-no-materials.glb')
