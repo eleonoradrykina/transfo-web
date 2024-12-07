@@ -1,6 +1,6 @@
 ---
 title: "The Jazztronauts"
-name: "Wout Schepens (synths) en Jef Lapauw (drums)"
+name: "Wout Schepens en Jef Lapauw"
 tags: ["Muziek"]
 location: "mechaniekers"
 heroImage: "jazztronauts.png"
