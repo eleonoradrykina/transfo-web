@@ -3,7 +3,7 @@
   @apply inset-0;
   @apply flex flex-col justify-between gap-30;
   @apply -translate-x-[100%];
-  @apply py-30 pt-15 px-15 md:pt-120 md:pb-60 md:ml-60;
+  @apply py-30 pt-15 px-15 md:pt-120 md:px-60;
 
   &__questions {
     @apply max-w-[550px];
@@ -13,7 +13,7 @@
   }
 
   &__title {
-    @apply text-center font-bold text-4xl md:text-6xl;
+    @apply text-center md:text-start font-bold text-4xl md:text-6xl;
     @apply md:mb-30;
   }
 
@@ -53,6 +53,5 @@
     @apply w-fit;
     left: unset;
     @apply md:right-60;
-    @apply md:translate-x-[100vw];
   }
 }
