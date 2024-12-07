@@ -114,13 +114,7 @@ export default function Experience({ onClickBuilding, clearSelection }) {
         trigger: "#body",
         start: "top top",
         end: "20",
-        onEnter: () => {
-          setIsClickable(true);
-          console.log("isClickable", isClickable);
-        },
         onEnterBack: () => {
-          setIsClickable(false);
-          console.log("isClickable", isClickable);
           tlLabels.reverse();
         }
       },
@@ -167,23 +161,34 @@ export default function Experience({ onClickBuilding, clearSelection }) {
   }
 
   const setZoom = () => {
-    const tlZoom = gsap.timeline({
-      scrollTrigger: {
-        trigger: "#body",
-        start: "top top",
-        end: "20",
-        onEnter: () => {
+    const mm = gsap.matchMedia();
+
+    mm.add("(min-width: 767px)", () => {
+      const tlZoomDesktop = gsap.timeline({
+        scrollTrigger: {
+          trigger: "#body",
+          start: "top top",
+          end: "20",
+          onEnter: () => {
           cameraControlsRef.current.enabled = true;
+
+          //enable clickable buildings
+          setIsClickable(true);
 
           //move to the left and zoom in
           cameraControlsRef.current?.truck(3.5, 0, true)
           cameraControlsRef.current?.dolly(2, true)
+
+          //enable user gestures
           setUsersGestures({
             left: 1,
             one: 1,
           })
         },
         onEnterBack: () => {
+          //disable clickable buildings
+          setIsClickable(false);
+
           //move to the right and zoom out
           cameraControlsRef.current?.truck(-3.5, 0, true)
           cameraControlsRef.current?.dolly(-2, true)
@@ -191,6 +196,7 @@ export default function Experience({ onClickBuilding, clearSelection }) {
           //set camera to default position
           cameraControlsRef.current.setLookAt(10, 5, 10, 0, 0, 0, true)
 
+          //disable user gestures
           setUsersGestures({
             left: 0,
             one: 0,
@@ -200,7 +206,37 @@ export default function Experience({ onClickBuilding, clearSelection }) {
           //also clear url params
           window.history.pushState({}, "", window.location.pathname)
         }
-      },
+       },
+      })
+    })
+
+    mm.add("(max-width: 767px)", () => {
+      const tlZoomMobile = gsap.timeline({
+        scrollTrigger: {
+          trigger: "#body",
+          start: "top top",
+          end: "20",
+          onEnter: () => {
+          cameraControlsRef.current.enabled = true;
+
+          //and zoom in
+          cameraControlsRef.current?.dolly(2, true)
+
+          //no user gestures
+        },
+        onEnterBack: () => {
+          //zoom out
+          cameraControlsRef.current?.dolly(-2, true)
+
+          //set camera to default position
+          cameraControlsRef.current.setLookAt(10, 5, 10, 0, 0, 0, true)
+   
+          handleClear("setZoom")
+          //also clear url params
+          window.history.pushState({}, "", window.location.pathname)
+        }
+       },
+      })
     })
   }
 
