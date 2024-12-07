@@ -108,6 +108,8 @@ const events = await Promise.all(
         import { gsap } from "gsap";
         import { BUILDING } from "../services/types";
 
+        let mm = gsap.matchMedia();
+
         const queryString = window.location.search;
         const urlParams = new URLSearchParams(queryString);
 
@@ -123,12 +125,16 @@ const events = await Promise.all(
           }
         }
 
-        const faqTL = gsap.timeline({ paused: true });
+        const faqTL = gsap.timeline({ paused: true, autoRemoveChildren: true });
+        const reversedFaqTL = gsap.timeline({
+          paused: true,
+          autoRemoveChildren: true,
+        });
         const faqButton = document.getElementById("faq__button");
         const faqBackButton = document.getElementById("faq__back__button");
         if (faqButton) {
           faqButton.addEventListener("click", () => {
-            console.log("clicked");
+            reversedFaqTL.clear();
             faqTL
               .to("#schedule", {
                 y: "100%",
@@ -170,30 +176,85 @@ const events = await Promise.all(
                   ease: "power2.out",
                 },
                 "<"
-              )
-              .from(
+              );
+
+            mm.add("(min-width: 768px)", () => {
+              faqTL.to(
                 "#faq__back__button",
                 {
-                  y: 10,
-                  opacity: 0,
+                  y: 0,
+                  opacity: 1,
                   duration: 1,
                   ease: "power2.out",
                 },
                 "<0.5"
               );
+            });
+
             faqTL.play();
           });
         }
 
         if (faqBackButton) {
           faqBackButton.addEventListener("click", () => {
-            faqTL.reverse();
+            faqTL.clear();
+            mm.add("(min-width: 768px)", () => {
+              reversedFaqTL.to("#faq__back__button", {
+                y: 10,
+                opacity: 0,
+                duration: 1,
+                ease: "power2.out",
+              });
+            });
+            reversedFaqTL
+              .to(
+                "#hero__title",
+                {
+                  x: "0",
+                  duration: 1,
+                  ease: "power2.out",
+                },
+                "<+0.1"
+              )
+              .to(
+                "#hero__date",
+                {
+                  x: "0",
+                  duration: 1,
+                  ease: "power2.out",
+                },
+                "<"
+              )
+              .to(
+                "#faq__button",
+                {
+                  x: "0",
+                  duration: 1,
+                  ease: "power2.out",
+                },
+                "<"
+              )
+              .to(
+                "#faq",
+                {
+                  x: "-100%",
+                  duration: 1,
+                  ease: "power2.out",
+                },
+                "<"
+              )
+              .to(
+                "#schedule",
+                {
+                  y: "0",
+                  duration: 1,
+                  ease: "power2.out",
+                },
+                "<0.2"
+              );
+            reversedFaqTL.play();
           });
         }
-
-        window.addEventListener("scroll", () => {
-          faqTL.reverse();
-        });
       </script>
     </main>
     <script src="../services/gsap.ts"></script>
