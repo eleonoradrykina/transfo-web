@@ -7,7 +7,7 @@ const schedule = defineCollection({
     name: z.string(),
     startTime: z.coerce.date().optional(),
     endTime: z.coerce.date().optional(),
-    startTime1: z.coerce.date().optional(),
+    startTime2: z.coerce.date().optional(),
     endTime2: z.coerce.date().optional(),
     heroImage: z.string(),
     tags: z.array(z.string()).optional(),

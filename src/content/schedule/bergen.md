@@ -1,6 +1,6 @@
 ---
 title: "Bergen"
-name: "Bergen"
+name: "Jan Bulckaen, Jan Despiegelaere, Rik Lefevere, Jan Lernout"
 tags: ["Muziek"]
 location: "mechaniekers"
 heroImage: "bergen.png"

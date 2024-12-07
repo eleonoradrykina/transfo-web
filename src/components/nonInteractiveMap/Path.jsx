@@ -8,7 +8,7 @@ import { useRef, useEffect } from "react";
 import gsap from 'gsap'
 
 export default function Path(props) {
-  const { nodes, materials } = useGLTF('models/path.glb')
+  const { nodes, materials } = useGLTF('/models/path.glb')
   const pathRef = useRef(null);
 
   const glowingUpPath = () => {
@@ -59,4 +59,4 @@ export default function Path(props) {
   )
 }
 
-useGLTF.preload('models/path.glb')
+useGLTF.preload('/models/path.glb')

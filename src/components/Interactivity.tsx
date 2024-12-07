@@ -8,12 +8,27 @@ interface Props {
 }
 
 const Interactivity = ({ events }: Props) => {
-  const [selectedBuilding, setSelectedBuilding] = useState<string | null>(null);
+  const queryString = window.location.search;
+  const urlParams = new URLSearchParams(queryString);
+
+  const [selectedBuilding, setSelectedBuilding] = useState<string | null>(
+    urlParams.get("building") ?? null
+  );
+  const [selectedEvent] = useState<string | null>(
+    urlParams.get("event") ?? null
+  );
 
   return (
     <div className="interactivity">
-      <Map onChangeBuilding={setSelectedBuilding} />
-      <Schedule events={events} selectedBuilding={selectedBuilding} />
+      <Map
+        initialBuilding={selectedBuilding}
+        onChangeBuilding={setSelectedBuilding}
+      />
+      <Schedule
+        events={events}
+        initialBuilding={selectedBuilding}
+        initialEvent={selectedEvent}
+      />
     </div>
   );
 };

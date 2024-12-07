@@ -4,12 +4,12 @@ import "../styles/components/map.css";
 import Experience from "./Experience";
 import { useState } from "react";
 
-
 interface Props {
   onChangeBuilding: (building: string | null) => void;
+  initialBuilding: string | null;
 }
 
-export default function Map({ onChangeBuilding }: Props) {
+export default function Map({ onChangeBuilding, initialBuilding }: Props) {
   const [clearSelection, setClearSelection] = useState(0);
 
   return (
@@ -22,13 +22,13 @@ export default function Map({ onChangeBuilding }: Props) {
           position: [13, 7, 13],
         }}
         onPointerMissed={() => {
-          console.log("missed");
-          window.history.pushState({}, "", window.location.origin);
+          onChangeBuilding(null);
           setClearSelection(clearSelection + 1);
         }}
       >
         <Bvh>
           <Experience
+            initialBuilding={initialBuilding}
             clearSelection={clearSelection}
             onClickBuilding={onChangeBuilding}
           />

@@ -8,8 +8,8 @@ import { TextureLoader } from 'three/src/loaders/TextureLoader'
 import { SRGBColorSpace } from 'three'
 
 export default function Plong(props) {
-  const { nodes } = useGLTF('models/plong.glb')
-  const colorMap = useLoader(TextureLoader, 'models/textures/plong-baked.webp')
+  const { nodes } = useGLTF('/models/plong.glb')
+  const colorMap = useLoader(TextureLoader, '/models/textures/plong-baked.webp')
   colorMap.flipY = false
   colorMap.colorSpace = SRGBColorSpace
 
@@ -48,4 +48,4 @@ export default function Plong(props) {
   )
 }
 
-useGLTF.preload('models/plong.glb')
+useGLTF.preload('/models/plong.glb')

@@ -5,19 +5,74 @@ import { gsap } from "gsap";
 
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { type IEvent } from "../services/types";
+import Event from "./Event";
 
 interface Props {
-  selectedBuilding: string | null;
+  initialBuilding: string | null;
   events: IEvent[];
+  initialEvent: string | null;
 }
 
-const Schedule = ({ selectedBuilding, events }: Props) => {
-  const [filteredSchedule, setFilteredSchedule] = useState(events);
-  const [selectedEvent, setSelectedEvent] = useState<IEvent>();
+const Schedule = ({ initialBuilding, events, initialEvent }: Props) => {
+  const [selectedEvent, setSelectedEvent] = useState<IEvent | null>(
+    events.find((event) => event.slug === initialEvent) ?? null
+  );
+  const [selectedBuilding, setSelectedBuilding] = useState<string | null>(
+    initialBuilding
+  );
+  const [filteredSchedule, setFilteredSchedule] = useState(
+    events.filter((event) => {
+      if (selectedBuilding) {
+        return event.location.toLowerCase() === selectedBuilding.toLowerCase();
+      } else {
+        return true;
+      }
+    })
+  );
+
+  const [state, setState] = useState<"onDefault" | "onBuilding" | "onEvent">(
+    initialEvent ? "onEvent" : initialBuilding ? "onBuilding" : "onDefault"
+  );
+
+  useEffect(() => {
+    setState(initialBuilding ? "onBuilding" : "onDefault");
+    setSelectedEvent(null);
+    setFilteredSchedule(events);
+    setSelectedBuilding(initialBuilding);
+    setFilteredSchedule(
+      events.filter((event) => {
+        if (initialBuilding) {
+          return event.location.toLowerCase() === initialBuilding.toLowerCase();
+        } else {
+          return true;
+        }
+      })
+    );
+
+    window.history.replaceState(
+      {},
+      "",
+      initialBuilding ? "?building=" + initialBuilding : window.location.origin
+    );
+  }, [initialBuilding]);
+
+  const handleEventClick = (event: IEvent) => {
+    setSelectedEvent(event);
+    setState("onEvent");
+    window.history.replaceState(
+      {},
+      "",
+      `?building=${event.location}&event=${event.slug}`
+    );
+  };
+
+  const handleBack = (location: string) => {
+    setState("onBuilding");
+    window.history.replaceState({}, "", `?building=${location}`);
+  };
 
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
-    let mm = gsap.matchMedia();
 
     const scheduleTL = gsap.timeline({
       scrollTrigger: {
@@ -60,70 +115,72 @@ const Schedule = ({ selectedBuilding, events }: Props) => {
       },
       "<"
     );
-
-    mm.add("(max-width: 767px)", () => {});
-
-    mm.add("(min-width: 768px)", () => {});
   }, []);
 
-  useEffect(() => {
-    setFilteredSchedule(
-      events.filter((event) => {
-        if (selectedBuilding) {
-          return (
-            event.location.toLowerCase() === selectedBuilding.toLowerCase()
-          );
-        } else {
-          return true;
-        }
-      })
-    );
-  }, [selectedBuilding]);
-
   return (
-    <div id="schedule" className="schedule">
+    <div id="schedule" className={`schedule ${state}`}>
       <div className="schedule__content">
-        <h3 className="schedule__title">
-          {selectedEvent
-            ? selectedEvent.title
-            : selectedBuilding
-              ? selectedBuilding
-              : "Programma"}
-        </h3>
-        {selectedEvent ? (
-          selectedEvent.name
-        ) : selectedBuilding ? (
-          <div></div>
-        ) : (
+        <div className="schedule__default">
+          <h3 className="schedule__title">Programma</h3>
           <p>
             Heel het programma is weergegeven. Klik op het gebouw om te zien wat
             er daar plaatsvindt.
           </p>
-        )}
-
-        <ul className="schedule__list">
-          {filteredSchedule
-            .sort((a: IEvent, b: IEvent) => {
-              if (a.startTime && b.startTime) {
-                return a.startTime.getTime() - b.startTime.getTime();
-              } else if (a.startTime && !b.startTime) {
-                return -1;
-              } else if (!a.startTime && b.startTime) {
-                return 1;
-              } else {
-                return 0;
-              }
-            })
-            .map((event) => (
-              <li key={event.title}>
-                <EventPreview
-                  selectEvent={setSelectedEvent}
-                  withLocation={!selectedBuilding}
-                  event={event}
-                />
-              </li>
-            ))}
-        </ul>
+          <ul className="schedule__list">
+            {events
+              .sort((a: IEvent, b: IEvent) => {
+                if (a.startTime && b.startTime) {
+                  return a.startTime.getTime() - b.startTime.getTime();
+                } else if (a.startTime && !b.startTime) {
+                  return -1;
+                } else if (!a.startTime && b.startTime) {
+                  return 1;
+                } else {
+                  return 0;
+                }
+              })
+              .map((event) => (
+                <li key={event.title}>
+                  <EventPreview
+                    handleClick={() => handleEventClick(event)}
+                    withLocation={!selectedBuilding}
+                    event={event}
+                  />
+                </li>
+              ))}
+          </ul>
+        </div>
+        <div className="schedule__building">
+          <h3 className="schedule__title">{selectedBuilding}</h3>
+          <ul className="schedule__list">
+            {filteredSchedule
+              .sort((a: IEvent, b: IEvent) => {
+                if (a.startTime && b.startTime) {
+                  return a.startTime.getTime() - b.startTime.getTime();
+                } else if (a.startTime && !b.startTime) {
+                  return -1;
+                } else if (!a.startTime && b.startTime) {
+                  return 1;
+                } else {
+                  return 0;
+                }
+              })
+              .map((event) => (
+                <li key={event.title}>
+                  <EventPreview
+                    handleClick={() => handleEventClick(event)}
+                    withLocation={!selectedBuilding}
+                    event={event}
+                  />
+                </li>
+              ))}
+          </ul>
+        </div>
+        <div className="schedule__event">
+          {selectedEvent && (
+            <Event handleBack={handleBack} event={selectedEvent} />
+          )}
+        </div>
       </div>
     </div>
   );

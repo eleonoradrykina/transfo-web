@@ -34,8 +34,8 @@ import gsap from "gsap";
 
 const positions = new Map([["hoofdzaal", [-0.005, 0.584, -1.317]], ["mechaniekers", [0.573, 0.306, 0.635]], ["ketelhuis", [-0.793, 0.87, -0.556]], ["transformatoren", [1.014, 1.132, -4.375]], ["octagon", [1.89, -0.102, -1.122]], ["kunstacademie", [3.105, 0.186, -0.804]], ["duiktank", [1.0, 0.366, 4.596]], ["watertoren", [-0.665, 0.045, 2.214]], ["plong", [1.504, 0.12, -0.343]], ["hoogteparcours", [3.75,0,2.5]], ["waterbassin", [2.5,0,3.0]]]);
 
-export default function Experience({ onClickBuilding, clearSelection }) {
-  const [selectedBuilding, setSelectedBuilding] = useState(null);
+export default function Experience({ onClickBuilding, clearSelection, initialBuilding }) {
+  const [selectedBuilding, setSelectedBuilding] = useState(initialBuilding);
   const [hoofdzaalEmissiveIntensity, setHoofdzaalEmissiveIntensity] = useState(0);
   const [mechaniekersEmissiveIntensity, setMechaniekersEmissiveIntensity] = useState(0);
   const [ketelhuisEmissiveIntensity, setKetelhuisEmissiveIntensity] = useState(0);
@@ -241,12 +241,16 @@ export default function Experience({ onClickBuilding, clearSelection }) {
   }
 
   useEffect(() => {
+    if (selectedBuilding) {
+      handleSelect(selectedBuilding);
+    }
+  }, [selectedBuilding]);
+
+  useEffect(() => {
     setLabelsOpacity();
     setZoom();
-    const urlParams = new URLSearchParams(window.location.search)
-    if (urlParams.has("building")) {
-      handleSelect(urlParams.get("building"))
-    }
+    handleSelect(initialBuilding);
+
   }, []);
 
   const cameraControls = {

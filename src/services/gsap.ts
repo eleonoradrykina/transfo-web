@@ -32,6 +32,15 @@ mainTL.from(
   "<"
 );
 
+mainTL.to(
+  "#hero__bottom",
+  {
+    opacity: 0,
+    y: 100,
+  },
+  "<"
+);
+
 mm.add("(max-width: 767px)", () => {
   mainTL.to(
     "#hero",
@@ -77,15 +86,13 @@ mm.add("(min-width: 768px)", () => {
     },
     "<"
   );
+
+  mainTL.to(
+    "#footer",
+    {
+      y: 0,
+      duration: 0.2,
+    },
+    "<+0.2"
+  );
 });
-
-mainTL.to(
-  "#hero__bottom",
-  {
-    opacity: 0,
-    y: 100,
-  },
-  "<"
-);
-
-mainTL.to(".hero__top", {}, "<");

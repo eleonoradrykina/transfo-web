@@ -1,9 +1,16 @@
 import Question from "./Question";
 
-const FAQ = () => {
+interface Props {
+  copy: any;
+}
+
+const FAQ = ({ copy }: Props) => {
   return (
-    <div id="faq" className="faq margins">
-      <h2 className="faq__title">Veelgestelde vragen</h2>
+    <div id="faq" className="faq">
+      <button id="faq__back__button" className="faq__button back">
+        {copy.faq.back.toUpperCase()}
+      </button>
+      <h2 className="faq__title"> {copy.faq.title}</h2>
       <div className="faq__questions">
         <Question question="Hoe geraak ik op het evenement?">
           <p>

@@ -16,6 +16,7 @@
   &__date {
     @apply uppercase;
     @apply text-center font-normal text-xl;
+
     @apply mx-auto;
   }
 

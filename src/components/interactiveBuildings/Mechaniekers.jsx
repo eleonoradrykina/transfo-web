@@ -9,8 +9,8 @@ import { TextureLoader } from 'three/src/loaders/TextureLoader'
 import { SRGBColorSpace } from 'three'
 
 export default function Mechaniekers(props) {
-const { nodes } = useGLTF('models/mechaniekers-no-materials.glb')
-const colorMap = useLoader(TextureLoader, 'models/textures/mechaniekers-baked.webp')
+const { nodes } = useGLTF('/models/mechaniekers-no-materials.glb')
+const colorMap = useLoader(TextureLoader, '/models/textures/mechaniekers-baked.webp')
 colorMap.flipY = false
 colorMap.colorSpace = SRGBColorSpace
 
@@ -46,4 +46,4 @@ colorMap.colorSpace = SRGBColorSpace
   )
 }
 
-useGLTF.preload('models/mechaniekers-no-materials.glb')
+useGLTF.preload('/models/mechaniekers-no-materials.glb')
