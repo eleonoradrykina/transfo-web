@@ -10,8 +10,8 @@ import { SRGBColorSpace } from 'three'
 
 
 export default function Duiktank(props) {
-  const { nodes } = useGLTF('models/duiktank-no-materials.glb')
-  const colorMap = useLoader(TextureLoader, 'models/textures/duiktank-baked.webp')
+  const { nodes } = useGLTF('/models/duiktank-no-materials.glb')
+  const colorMap = useLoader(TextureLoader, '/models/textures/duiktank-baked.webp')
   //make sure the texture is srgb
   colorMap.colorSpace = SRGBColorSpace
   colorMap.flipY = false
@@ -46,4 +46,4 @@ export default function Duiktank(props) {
   )
 }
 
-useGLTF.preload('models/duiktank-no-materials.glb')
+useGLTF.preload('/models/duiktank-no-materials.glb')
