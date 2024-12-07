@@ -9,13 +9,20 @@ import { type IEvent } from "../services/types";
 interface Props {
   selectedBuilding: string | null;
   events: IEvent[];
+  initialEvent: string | null;
 }
 
-const Schedule = ({ selectedBuilding, events }: Props) => {
+const Schedule = ({ selectedBuilding, events, initialEvent }: Props) => {
   const [filteredSchedule, setFilteredSchedule] = useState(events);
   const [selectedEvent, setSelectedEvent] = useState<IEvent>();
 
   useEffect(() => {
+    const event = events.find((event) => event.slug === initialEvent);
+    if (event) {
+      setSelectedEvent(event);
+      console.log(event);
+    }
+
     gsap.registerPlugin(ScrollTrigger);
     let mm = gsap.matchMedia();
 

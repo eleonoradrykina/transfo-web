@@ -6,17 +6,18 @@ import { useGLTF, Html, meshBounds } from '@react-three/drei'
 import { useLoader } from '@react-three/fiber'
 import { TextureLoader } from 'three/src/loaders/TextureLoader'
 import { SRGBColorSpace } from 'three'
+import { navigate } from 'astro/virtual-modules/transitions-router.js'
 
 export default function Transformatoren(props) {
-  const { nodes } = useGLTF('models/transformatoren.glb')
-  const colorMap = useLoader(TextureLoader, 'models/textures/transformatoren-baked.jpg')
+  const { nodes } = useGLTF('/models/transformatoren.glb')
+  const colorMap = useLoader(TextureLoader, '/models/textures/transformatoren-baked.jpg')
   colorMap.flipY = false
   colorMap.colorSpace = SRGBColorSpace
 
   return (
     <group onClick={(e) => {
       e.stopPropagation()
-      props.handleClick()
+      navigate('/transformatoren')
     }} dispose={null}>
         <group>
              <mesh
@@ -42,4 +43,4 @@ export default function Transformatoren(props) {
   )
 }
 
-useGLTF.preload('models/transformatoren.glb')
+useGLTF.preload('/models/transformatoren.glb')

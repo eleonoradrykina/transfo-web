@@ -1,12 +1,45 @@
 ---
+import Countdown from "../components/Countdown";
+import Interactivity from "../components/Interactivity";
+import { Language, type IEvent } from "../services/types";
 import "../styles/global.css";
+import { ClientRouter } from "astro:transitions";
+import languages from "../services/languages.json";
+import "../styles/hero.css";
+import "../styles/faq.css";
+import { getCollection } from "astro:content";
 
 interface Props {
   title: string;
   description: string;
+  selectedBuilding?: string;
+  selectedEvent?: string;
 }
 
-const { title, description } = Astro.props;
+const { title, description, selectedBuilding, selectedEvent } = Astro.props;
+
+const copy = languages.nl;
+const temp = await getCollection("schedule");
+
+const events = await Promise.all(
+  temp.map(async (event: any): Promise<IEvent> => {
+    console.log(event);
+    return {
+      slug: event.slug,
+      title: event.data.title,
+      name: event.data.name,
+      startTime: event.data.startTime ? new Date(event.data.startTime) : null,
+      endTime: event.data.endTime ? new Date(event.data.endTime) : null,
+      startTime2: event.data.startTime2
+        ? new Date(event.data.startTime2)
+        : null,
+      endTime2: event.data.endTime2 ? new Date(event.data.endTime2) : null,
+      location: event.data.location,
+      heroImage: event.data.heroImage,
+      tags: event.data.tags,
+    };
+  })
+);
 ---
 
 <html lang="nl">
@@ -17,9 +50,55 @@ const { title, description } = Astro.props;
     <meta name="generator" content={Astro.generator} />
     <meta name="description" content={description} />
     <title>{title}</title>
+    <ClientRouter />
   </head>
   <body id="body">
     <main class="main">
+      <div id="hero" class="hero">
+        <div class="hero__top margins">
+          <span id="hero__date" class="hero__date">{copy.date.festival}</span>
+          <h1 id="hero__title" class="hero__title">{copy.title}</h1>
+          <button id="faq__button" class="faq__button"
+            >Veelgestelde vragen</button
+          >
+        </div>
+        <Interactivity
+          initialBuilding={selectedBuilding}
+          initialEvent={selectedEvent}
+          events={events}
+          client:only="react"
+        />
+        <div id="hero__bottom" class="hero__bottom margins">
+          <Countdown client:only="react" language={Language.NL} />
+
+          <p class="hero__intro">
+            Wandel langs sfeervolle routes en ontdek <span class="bold"
+              >intieme optredens</span
+            >, kunstinstallaties, muziek en meer. Laat je raken door het thema
+            ‘eenzaamheid’ en geniet van een avond vol <span class="bold"
+              >warmte en creativiteit</span
+            >.
+          </p>
+          <svg
+            class="hero__arrow"
+            width="16"
+            height="31"
+            viewBox="0 0 16 31"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              fill-rule="evenodd"
+              clip-rule="evenodd"
+              d="M9 0V30C9 30.5523 8.55228 31 8 31C7.44772 31 7 30.5523 7 30V0H9Z"
+            ></path>
+            <path
+              fill-rule="evenodd"
+              clip-rule="evenodd"
+              d="M0.292893 22.2929C0.683417 21.9024 1.31658 21.9024 1.70711 22.2929L8 28.5858L14.2929 22.2929C14.6834 21.9024 15.3166 21.9024 15.7071 22.2929C16.0976 22.6834 16.0976 23.3166 15.7071 23.7071L8.70711 30.7071C8.31658 31.0976 7.68342 31.0976 7.29289 30.7071L0.292893 23.7071C-0.0976311 23.3166 -0.0976311 22.6834 0.292893 22.2929Z"
+            ></path>
+          </svg>
+        </div>
+      </div>
       <slot />
     </main>
     <script src="../services/gsap.ts"></script>

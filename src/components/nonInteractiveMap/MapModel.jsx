@@ -11,8 +11,8 @@ import { SRGBColorSpace } from 'three'
 
 
 export default function MapModel(props) {
-  const { nodes} = useGLTF('models/static-map-bachelors.glb')
-  const colorMap = useLoader(TextureLoader, 'models/textures/final-bake.jpg')
+  const { nodes} = useGLTF('/models/static-map-bachelors.glb')
+  const colorMap = useLoader(TextureLoader, '/models/textures/final-bake.jpg')
   colorMap.flipY = false
   colorMap.colorSpace = SRGBColorSpace
   return (
@@ -348,4 +348,4 @@ export default function MapModel(props) {
   )
 }
 
-useGLTF.preload('models/static-map-bachelors.glb')
+useGLTF.preload('/models/static-map-bachelors.glb')

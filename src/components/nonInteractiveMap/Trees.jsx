@@ -6,7 +6,7 @@ import React from 'react'
 import { useGLTF } from '@react-three/drei'
 
 export default function Trees(props) {
-  const { nodes, materials } = useGLTF('models/compressed_trees.glb')
+  const { nodes, materials } = useGLTF('/models/compressed_trees.glb')
   return (
     <group {...props} dispose={null}>
       <mesh
@@ -87,4 +87,4 @@ export default function Trees(props) {
   )
 }
 
-useGLTF.preload('models/compressed_trees.glb')
+useGLTF.preload('/models/compressed_trees.glb')

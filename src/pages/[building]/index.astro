@@ -1,0 +1,19 @@
+---
+import Main from "../../layouts/Main.astro";
+import { BUILDING } from "../../services/types.ts";
+
+export function getStaticPaths() {
+  const buildings = Object.values(BUILDING);
+  console.log(buildings);
+  return buildings.map((building: string) => {
+    console.log(building);
+    return {
+      params: { building: building },
+    };
+  });
+}
+
+const { building } = Astro.params;
+---
+
+<Main selectedBuilding={building} title={building} description={building} />

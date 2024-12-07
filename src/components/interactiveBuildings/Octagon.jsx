@@ -9,10 +9,10 @@ import { TextureLoader } from "three/src/loaders/TextureLoader";
 import { SRGBColorSpace } from "three";
 
 export default function Octagon(props) {
-  const { nodes, materials } = useGLTF("models/octagon.glb");
+  const { nodes, materials } = useGLTF("/models/octagon.glb");
   const colorMap = useLoader(
     TextureLoader,
-    "models/textures/octagon-baked.jpg"
+    "/models/textures/octagon-baked.jpg"
   );
   colorMap.flipY = false;
   colorMap.colorSpace = SRGBColorSpace;
@@ -81,4 +81,4 @@ export default function Octagon(props) {
   );
 }
 
-useGLTF.preload("models/octagon.glb");
+useGLTF.preload("/models/octagon.glb");
