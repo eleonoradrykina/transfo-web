@@ -12,11 +12,9 @@ import { getCollection } from "astro:content";
 interface Props {
   title?: string;
   description: string;
-  selectedBuilding?: string;
-  selectedEvent?: string;
 }
 
-const { title, description, selectedBuilding, selectedEvent } = Astro.props;
+const { title, description } = Astro.props;
 
 const copy = languages.nl;
 const temp = await getCollection("schedule");
@@ -78,13 +76,7 @@ const events = await Promise.all(
             >Veelgestelde vragen</button
           >
         </div>
-        <Interactivity
-          transition:persist
-          initialBuilding={selectedBuilding}
-          initialEvent={selectedEvent}
-          events={events}
-          client:only="react"
-        />
+        <Interactivity transition:persist events={events} client:only="react" />
         <div id="hero__bottom" class="hero__bottom margins">
           <Countdown client:only="react" language={Language.NL} />
 

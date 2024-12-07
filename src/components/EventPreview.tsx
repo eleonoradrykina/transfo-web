@@ -4,11 +4,12 @@ import "../styles/components/schedule.css";
 interface Props {
   event: IEvent;
   withLocation?: boolean;
+  handleClick: (event: IEvent) => void;
 }
 
-const EventPreview = ({ event, withLocation }: Props) => {
+const EventPreview = ({ event, withLocation, handleClick }: Props) => {
   return (
-    <a href={`/${event.location}/${event.slug}`} className="event-preview">
+    <button onClick={() => handleClick(event)} className="event-preview">
       <div className="event-preview__main">
         <img
           className="event-preview__image"
@@ -53,7 +54,7 @@ const EventPreview = ({ event, withLocation }: Props) => {
           <span className="event-preview__tag no-bg">Heel de avond</span>
         )}
       </div>
-    </a>
+    </button>
   );
 };
 

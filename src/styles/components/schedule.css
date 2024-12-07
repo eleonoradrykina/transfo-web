@@ -5,7 +5,7 @@
   }
   @apply md:max-w-[750px] md:w-[45%] md:min-w-[600px];
 
-  &.has-event {
+  &.onEvent {
     .schedule__default {
       @apply -translate-x-[200%];
     }
@@ -19,7 +19,7 @@
     }
   }
 
-  &.has-building {
+  &.onBuilding {
     .schedule__default {
       @apply -translate-x-[100%];
     }

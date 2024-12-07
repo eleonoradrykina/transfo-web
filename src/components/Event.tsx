@@ -4,9 +4,10 @@ import "../styles/components/schedule.css";
 
 interface Props {
   event: IEvent;
+  handleBack: (location: string) => void;
 }
 
-const Event = ({ event }: Props) => {
+const Event = ({ event, handleBack }: Props) => {
   useEffect(() => {
     const test = document.getElementById(`content__${event.name}`);
     if (test) {
@@ -17,12 +18,17 @@ const Event = ({ event }: Props) => {
   return (
     <div className="event">
       <div className="w-full flex flex-row">
-        <a className="event__back" href={`/${event.location}`}>
+        <button
+          className="event__back"
+          onClick={() => {
+            handleBack(event.location);
+          }}
+        >
           <span className="hidden md:inline">
             Terug naar <span>{event.location}</span>
           </span>
           <span className="md:hidden">←</span>
-        </a>
+        </button>
       </div>
 
       <div>

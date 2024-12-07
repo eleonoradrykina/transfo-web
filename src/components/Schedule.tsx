@@ -6,6 +6,7 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { type IEvent } from "../services/types";
 import Event from "./Event";
+import { init } from "astro/virtual-modules/prefetch.js";
 
 interface Props {
   initialBuilding: string | null;
@@ -14,10 +15,12 @@ interface Props {
 }
 
 const Schedule = ({ initialBuilding, events, initialEvent }: Props) => {
-  const [selectedEvent] = useState<IEvent | null>(
+  const [selectedEvent, setSelectedEvent] = useState<IEvent | null>(
     events.find((event) => event.slug === initialEvent) ?? null
   );
-  const [selectedBuilding] = useState<string | null>(initialBuilding);
+  const [selectedBuilding, setSelectedBuilding] = useState<string | null>(
+    initialBuilding
+  );
   const [filteredSchedule, setFilteredSchedule] = useState(
     events.filter((event) => {
       if (selectedBuilding) {
@@ -27,6 +30,48 @@ const Schedule = ({ initialBuilding, events, initialEvent }: Props) => {
       }
     })
   );
+
+  const [state, setState] = useState<"onDefault" | "onBuilding" | "onEvent">(
+    initialEvent ? "onEvent" : initialBuilding ? "onBuilding" : "onDefault"
+  );
+
+  useEffect(() => {
+    console.log("getting here");
+    setState(initialBuilding ? "onBuilding" : "onDefault");
+    setSelectedEvent(null);
+    setFilteredSchedule(events);
+    setSelectedBuilding(initialBuilding);
+    setFilteredSchedule(
+      events.filter((event) => {
+        if (initialBuilding) {
+          return event.location.toLowerCase() === initialBuilding.toLowerCase();
+        } else {
+          return true;
+        }
+      })
+    );
+
+    window.history.replaceState(
+      {},
+      "",
+      initialBuilding ? "?building=" + initialBuilding : window.location.origin
+    );
+  }, [initialBuilding]);
+
+  const handleEventClick = (event: IEvent) => {
+    setSelectedEvent(event);
+    setState("onEvent");
+    window.history.replaceState(
+      {},
+      "",
+      `?building=${event.location}&event=${event.slug}`
+    );
+  };
+
+  const handleBack = (location: string) => {
+    setState("onBuilding");
+    window.history.replaceState({}, "", `?building=${location}`);
+  };
 
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
@@ -76,10 +121,7 @@ const Schedule = ({ initialBuilding, events, initialEvent }: Props) => {
   }, []);
 
   return (
-    <div
-      id="schedule"
-      className={`schedule ${selectedBuilding && !selectedEvent ? "has-building" : ""} ${selectedEvent ? "has-event" : ""}`}
-    >
+    <div id="schedule" className={`schedule ${state}`}>
       <div className="schedule__content">
         <div className="schedule__default">
           <h3 className="schedule__title">Programma</h3>
@@ -103,6 +145,7 @@ const Schedule = ({ initialBuilding, events, initialEvent }: Props) => {
               .map((event) => (
                 <li key={event.title}>
                   <EventPreview
+                    handleClick={() => handleEventClick(event)}
                     withLocation={!selectedBuilding}
                     event={event}
                   />
@@ -128,6 +171,7 @@ const Schedule = ({ initialBuilding, events, initialEvent }: Props) => {
               .map((event) => (
                 <li key={event.title}>
                   <EventPreview
+                    handleClick={() => handleEventClick(event)}
                     withLocation={!selectedBuilding}
                     event={event}
                   />
@@ -136,7 +180,9 @@ const Schedule = ({ initialBuilding, events, initialEvent }: Props) => {
           </ul>
         </div>
         <div className="schedule__event">
-          {selectedEvent && <Event event={selectedEvent} />}
+          {selectedEvent && (
+            <Event handleBack={handleBack} event={selectedEvent} />
+          )}
         </div>
       </div>
     </div>
