@@ -19,10 +19,10 @@ const Interactivity = ({ events, initialBuilding, initialEvent }: Props) => {
 
   return (
     <div className="interactivity">
-      <Map onChangeBuilding={setSelectedBuilding} />
+      {/* <Map onChangeBuilding={setSelectedBuilding} /> */}
       <Schedule
         events={events}
-        selectedBuilding={selectedBuilding}
+        initialBuilding={selectedBuilding}
         initialEvent={selectedEvent}
       />
     </div>

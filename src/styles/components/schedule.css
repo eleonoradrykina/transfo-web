@@ -7,11 +7,29 @@
 
   &.has-event {
     .schedule__default {
-      @apply -translate-x-full;
+      @apply -translate-x-[200%];
+    }
+
+    .schedule__building {
+      @apply -translate-x-[100%];
     }
 
     .schedule__event {
       @apply translate-x-0;
+    }
+  }
+
+  &.has-building {
+    .schedule__default {
+      @apply -translate-x-[100%];
+    }
+
+    .schedule__building {
+      @apply translate-x-0;
+    }
+
+    .schedule__event {
+      @apply translate-x-[100%];
     }
   }
 
@@ -23,19 +41,21 @@
     @apply overflow-x-hidden;
   }
 
-  &__default {
-    @apply absolute top-0 left-0;
-    @apply w-full px-5 pt-30 md:px-15 md:py-30;
-    @apply flex flex-col items-center text-center gap-5;
-    @apply transition-all duration-300 ease-in-out;
-  }
-
+  &__default,
+  &__building,
   &__event {
     @apply absolute inset-0;
     @apply w-full px-5 pt-30 md:px-15 md:py-30;
     @apply flex flex-col items-center text-center gap-5;
     @apply transition-all duration-300 ease-in-out;
+  }
+
+  &__building {
     @apply translate-x-full;
+  }
+
+  &__event {
+    @apply translate-x-[200%];
   }
 
   &__title {
@@ -96,7 +116,7 @@
 
 .event {
   @apply flex flex-col gap-15;
-  @apply p-15 rounded-lg;
+  @apply p-15 md:p-30 rounded-lg;
   @apply bg-black;
   @apply max-h-full overflow-y-hidden;
 
@@ -105,6 +125,7 @@
     @apply min-w-[38px] min-h-[38px];
     @apply flex items-center justify-center;
     @apply border-2 border-pink rounded-full;
+    @apply md:px-15;
   }
 
   &__title {
@@ -120,7 +141,10 @@
 
   &__image {
     @apply aspect-square object-cover;
-    @apply w-120;
+    @apply w-120 md:w-full;
+    @media (min-width: 768px) {
+      aspect-ratio: 59 / 21;
+    }
     @apply rounded-md;
   }
 

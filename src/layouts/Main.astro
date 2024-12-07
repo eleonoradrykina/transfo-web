@@ -58,7 +58,7 @@ const events = await Promise.all(
 );
 ---
 
-<html lang="nl">
+<html lang="nl" transition:animate="none">
   <head>
     <meta charset="utf-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.ico" />
@@ -79,6 +79,7 @@ const events = await Promise.all(
           >
         </div>
         <Interactivity
+          transition:persist
           initialBuilding={selectedBuilding}
           initialEvent={selectedEvent}
           events={events}

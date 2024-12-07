@@ -30,7 +30,7 @@ const Event = ({ event }: Props) => {
         <span>{event.name}</span>
       </div>
 
-      <div className="flex flex-row gap-15 mt-15">
+      <div className="flex flex-row md:flex-col gap-15 mt-15 md:mb-30">
         <img
           className="event__image"
           src={`/events/${event.heroImage}`}

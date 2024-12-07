@@ -1,7 +1,8 @@
 .hero {
   @apply h-screen w-full fixed max-w-screen-2xl z-10;
   @apply flex flex-col justify-between;
-  @apply pt-30 pb-30 md:pt-60 lg:pt-120;
+  /* @apply pt-30 pb-30 md:pt-60 lg:pt-120; */
+  @apply pt-10 pb-30 md:pt-60 lg:pt-120;
 
   &__top {
     @apply flex flex-col items-start;
@@ -14,15 +15,19 @@
   }
 
   &__date {
+    @apply ml-0 mr-auto;
     @apply uppercase;
-    @apply text-center font-normal text-xl;
-    @apply mx-auto;
+    /* @apply text-center font-normal text-xl; */
+    @apply text-center font-normal text-[0.7rem] leading-[1.2rem];
+    /* @apply mx-auto; */
   }
 
   &__title {
-    @apply mx-auto;
+    /* @apply mx-auto; */
+    @apply ml-0 mr-auto;
+    @apply text-[10vw];
     @apply font-camera font-bold text-center;
-    font-size: clamp(100px, 12vw, 160px);
+    /* font-size: clamp(100px, 12vw, 160px);
 
     @media (min-width: 768px) {
       font-size: clamp(80px, 11vw, 110px);
@@ -30,7 +35,7 @@
 
     @media (min-width: 1024px) {
       font-size: clamp(110px, 9vw, 170px);
-    }
+    } */
 
     @apply leading-none;
   }
