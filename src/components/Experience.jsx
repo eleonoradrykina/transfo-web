@@ -58,7 +58,6 @@ export default function Experience({ onClickBuilding, clearSelection, initialBui
 
   const cameraControlsRef = useRef();
 
-
   useEffect(() => {
     handleClear("useEffect");
   }, [clearSelection]);
@@ -272,6 +271,11 @@ export default function Experience({ onClickBuilding, clearSelection, initialBui
     if (!isClickable) return;
     //if we're not on desktop, return
     if (window.innerWidth < 768) return;
+
+   /*
+      HERE:
+      selectedBuilding is always NULL
+   */
 
     // If click happened, ensure mechaniekers intensity is reset to 0
     if (hasClickHappened && selectedBuilding !== "mechaniekers") {
