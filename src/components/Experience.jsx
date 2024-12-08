@@ -77,8 +77,8 @@ export default function Experience({ onClickBuilding, clearSelection, initialBui
       return;
     }
     setHasClickHappened(true);
-    //set svg display to none:
-    document.querySelector("svg").style.display = "none";
+    //set hotspot display to none:
+    document.querySelector("#hotspot").style.display = "none";
     
     handleClear("handleSelect");  
     onClickBuilding(key);
@@ -135,14 +135,14 @@ export default function Experience({ onClickBuilding, clearSelection, initialBui
 
     mm.add("(min-width: 768px)", () => {
       if (!hasClickHappened) {
-        const tlSvg = gsap.timeline({
+        const tlHotspot = gsap.timeline({
           scrollTrigger: {
             trigger: "#body",
             start: "top top",
             end: "20",
             onEnterBack: () => {
-              tlSvg.to(
-                  "svg",
+              tlHotspot.to(
+                  "#hotspot",
                 {
                   opacity: 0,
                   ease: "power1.inOut"
@@ -151,15 +151,15 @@ export default function Experience({ onClickBuilding, clearSelection, initialBui
             }
           }
         });
-        tlSvg.to(
-            "svg",
+        tlHotspot.to(
+            "#hotspot",
             {
               opacity: 1,
               delay: 4,
               ease: "power1.inOut"
             },
           ).to(
-            "svg .hotspot-circle",
+            "#hotspot__circle",
             { 
               strokeWidth: 4.2,
               repeat: -1,
