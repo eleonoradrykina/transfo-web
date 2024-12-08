@@ -170,7 +170,12 @@ export default function Experience({ onClickBuilding, clearSelection, initialBui
           start: "top top",
           end: "20",
           onEnter: () => {
-          cameraControlsRef.current.enabled = true;
+
+          //enable user gestures
+          setUsersGestures({
+            left: 1,
+            one: 1,
+          })
 
           //enable clickable buildings
           setIsClickable(true);
@@ -178,12 +183,6 @@ export default function Experience({ onClickBuilding, clearSelection, initialBui
           //move to the left and zoom in
           cameraControlsRef.current?.truck(3.5, 0, true)
           cameraControlsRef.current?.dolly(2, true)
-
-          //enable user gestures
-          setUsersGestures({
-            left: 1,
-            one: 1,
-          })
         },
         onEnterBack: () => {
           //disable clickable buildings
@@ -217,12 +216,11 @@ export default function Experience({ onClickBuilding, clearSelection, initialBui
           start: "top top",
           end: "20",
           onEnter: () => {
-          cameraControlsRef.current.enabled = true;
+          //no user gestures 
 
-          //and zoom in
+          //dolly in
           cameraControlsRef.current?.dolly(2, true)
-
-          //no user gestures
+  
         },
         onEnterBack: () => {
           //zoom out
@@ -276,7 +274,6 @@ export default function Experience({ onClickBuilding, clearSelection, initialBui
         minPolarAngle={cameraControls.minPolarAngle}
         maxAzimuthAngle={cameraControls.maxAzimuthAngle}
         minAzimuthAngle={cameraControls.minAzimuthAngle}
-
         mouseButtons={{
           left: usersGestures.left,
           middle: 0,
