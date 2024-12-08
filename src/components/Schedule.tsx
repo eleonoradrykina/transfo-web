@@ -118,29 +118,6 @@ const Schedule = ({
         end: "20",
         onEnterBack: () => {
           scheduleTL.reverse();
-          // gsap.to("#schedule", {
-          //   duration: 0.5,
-          //   ease: "power1.out",
-          //   x: "0vw",
-          // });
-
-          // gsap.to("#faq__button", {
-          //   duration: 0.5,
-          //   ease: "power1.out",
-          //   x: "0vw",
-          // });
-
-          // gsap.to("#hero__title", {
-          //   duration: 0.5,
-          //   ease: "power1.out",
-          //   x: "0vw",
-          // });
-
-          // gsap.to("#hero__date", {
-          //   duration: 0.5,
-          //   ease: "power1.out",
-          //   x: "0vw",
-          // });
         },
       },
     });
@@ -159,7 +136,7 @@ const Schedule = ({
       <div className="schedule__content">
         <div className="schedule__default">
           <h3 className="schedule__title">Programma</h3>
-          <p>
+          <p className="hidden md:inline">
             Heel het programma is weergegeven. Klik op het gebouw om te zien wat
             er daar plaatsvindt.
           </p>
