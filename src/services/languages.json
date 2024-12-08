@@ -20,6 +20,22 @@
         },
         "schedule": {
             "title": "Programma"
+        },
+        "buildings": {
+            "markt": "Markt",
+            "watertoren": "Watertoren",
+            "machinezaal-pompenzaal": "Machinezaal & Pompenzaal",
+            "transformatoren": "Transformatoren",
+            "ketelhuis": "Ketelhuis",
+            "waterbassin": "Waterbassin",
+            "hoogteparcours": "Hoogteparcours",
+            "duiktank": "Duiktank - Zomerbar",
+            "ingang": "Ingang",
+            "directeurswoning": "Directeurswoning",
+            "mechaniekers": "Mechaniekersruimte",
+            "octagon": "Octagon",
+            "plong": "Plong",
+            "default": "Locatie"
         }
     }
 }

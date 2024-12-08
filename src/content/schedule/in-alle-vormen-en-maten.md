@@ -2,7 +2,7 @@
 title: "In alle vormen en maten"
 name: "Klara Pogačar and Paulina Kuchta-Leśniak"
 tags: ["Installatie"]
-location: "hoofgebouw"
+location: "Machinezaal & pompenzaal"
 subLocation: "Machinezaal"
 heroImage: "alle-vormen.jpg"
 ---

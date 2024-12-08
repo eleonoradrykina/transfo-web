@@ -11,9 +11,10 @@ interface Props {
   initialBuilding: string | null;
   events: IEvent[];
   initialEvent: string | null;
+  copy: any;
 }
 
-const Schedule = ({ initialBuilding, events, initialEvent }: Props) => {
+const Schedule = ({ initialBuilding, events, initialEvent, copy }: Props) => {
   const [selectedEvent, setSelectedEvent] = useState<IEvent | null>(
     events.find((event) => event.slug === initialEvent) ?? null
   );
@@ -169,7 +170,9 @@ const Schedule = ({ initialBuilding, events, initialEvent }: Props) => {
           </ul>
         </div>
         <div className="schedule__building">
-          <h3 className="schedule__title">{selectedBuilding}</h3>
+          <h3 className="schedule__title">
+            {copy.buildings[selectedBuilding ?? "default"]}
+          </h3>
           <ul className="schedule__list">
             {filteredSchedule
               .sort((a: IEvent, b: IEvent) => {

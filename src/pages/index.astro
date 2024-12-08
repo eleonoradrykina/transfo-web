@@ -69,7 +69,12 @@ const events = await Promise.all(
             >{copy.faq.title.toUpperCase()}</button
           >
         </div>
-        <Interactivity transition:persist events={events} client:only="react" />
+        <Interactivity
+          copy={copy}
+          transition:persist
+          events={events}
+          client:only="react"
+        />
         <Miefel client:load />
         <div id="hero__bottom" class="hero__bottom margins">
           <Countdown client:only="react" language={Language.NL} />

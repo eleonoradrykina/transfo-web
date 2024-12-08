@@ -2,7 +2,7 @@
 title: "System Zero"
 name: "Bas Bulckaen, Kasper De Frene en Maxim Leyssens"
 tags: ["Installatie"]
-location: "hoofgebouw"
+location: "Machinezaal & pompenzaal"
 subLocation: "machinezaal"
 heroImage: "system-zero.jpeg"
 ---

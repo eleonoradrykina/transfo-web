@@ -32,9 +32,9 @@ import Plong from "./interactiveBuildings/Plong";
 
 import gsap from "gsap";
 
-const positions = new Map([["hoofdzaal", [-0.005, 0.584, -1.317]], ["mechaniekers", [0.573, 0.306, 0.635]], ["ketelhuis", [-0.793, 0.87, -0.556]], ["transformatoren", [1.014, 1.132, -4.375]], ["octagon", [1.89, -0.102, -1.122]], ["kunstacademie", [3.105, 0.186, -0.804]], ["duiktank", [1.0, 0.366, 4.596]], ["watertoren", [-0.665, 0.045, 2.214]], ["plong", [1.504, 0.12, -0.343]], ["hoogteparcours", [3.75,0,2.5]], ["waterbassin", [2.5,0,3.0]]]);
+const positions = new Map([["machinezaal-pompenzaal", [-0.005, 0.584, -1.317]], ["mechaniekers", [0.573, 0.306, 0.635]], ["ketelhuis", [-0.793, 0.87, -0.556]], ["transformatoren", [1.014, 1.132, -4.375]], ["octagon", [1.89, -0.102, -1.122]], ["directeurswoning", [3.105, 0.186, -0.804]], ["duiktank", [1.0, 0.366, 4.596]], ["watertoren", [-0.665, 0.045, 2.214]], ["plong", [1.504, 0.12, -0.343]], ["hoogteparcours", [3.75,0,2.5]], ["waterbassin", [2.5,0,3.0]]]);
 
-export default function Experience({ onClickBuilding, clearSelection, initialBuilding }) {
+export default function Experience({ onClickBuilding, clearSelection, initialBuilding, copy }) {
   const [selectedBuilding, setSelectedBuilding] = useState(initialBuilding);
   const [hoofdzaalEmissiveIntensity, setHoofdzaalEmissiveIntensity] = useState(0);
   const [mechaniekersEmissiveIntensity, setMechaniekersEmissiveIntensity] = useState(0);
@@ -84,12 +84,12 @@ export default function Experience({ onClickBuilding, clearSelection, initialBui
     setCameraControls(key);
 
     switch (key) {
-      case "hoofdzaal": setHoofdzaalEmissiveIntensity(3.0); break;
+      case "machinezaal-pompenzaal": setHoofdzaalEmissiveIntensity(3.0); break;
       case "mechaniekers": setMechaniekersEmissiveIntensity(3.0); break;
       case "ketelhuis": setKetelhuisEmissiveIntensity(3); break;
       case "transformatoren": setTransformatorenEmissiveIntensity(3.0); break;
       case "octagon": setOctagonEmissiveIntensity(3.0); break;
-      case "kunstacademie": setKunstacademieEmissiveIntensity(3.0); break;
+      case "directeurswoning": setKunstacademieEmissiveIntensity(3.0); break;
       case "duiktank": setDuiktankEmissiveIntensity(3.0); break;
       case "watertoren": setWatertorenEmissiveIntensity(3.0); break;
       case "plong": setPlongEmissiveIntensity(3.0); break;
@@ -293,7 +293,11 @@ export default function Experience({ onClickBuilding, clearSelection, initialBui
        {/* <axesHelper
         args={[10]} 
         /> */}
-       <Ground 
+       <Ground
+       hoogteparcours={copy.buildings.hoogteparcours}
+        waterbassin={copy.buildings.waterbassin}
+        markt={copy.buildings.markt}
+        ingang={copy.buildings.ingang} 
         handleClickParcours={() => handleSelect("hoogteparcours")}
         handleClickBassin={() => handleSelect("waterbassin")}
        />
@@ -301,40 +305,51 @@ export default function Experience({ onClickBuilding, clearSelection, initialBui
        <MapModel />
       <Path intensity={0.5} />
       <Hoofdzaal
-        handleClick={() => handleSelect("hoofdzaal")}
+        handleClick={() => handleSelect("machinezaal-pompenzaal")}
         emissiveIntensity={hoofdzaalEmissiveIntensity}
+        label={copy.buildings["machinezaal-pompenzaal"]}
     />
       <Mechaniekers
         handleClick={() => handleSelect("mechaniekers")}
         emissiveIntensity={mechaniekersEmissiveIntensity}
+        label={copy.buildings.mechaniekers}
       />
       <Ketelhuis
         handleClick={() => handleSelect("ketelhuis")}
         emissiveIntensity={ketelhuisEmissiveIntensity}
+        label={copy.buildings.ketelhuis}
       />
       <Transformatoren
         handleClick={() => handleSelect("transformatoren")}
         emissiveIntensity={transformatorenEmissiveIntensity}
+        label={copy.buildings.transformatoren}
       />
       <Octagon
         handleClick={() => handleSelect("octagon")}
         emissiveIntensity={octagonEmissiveIntensity}
+        label={copy.buildings.octagon}
       />
       <Kunstacademie
-        handleClick={() => handleSelect("kunstacademie")}
+        handleClick={() => handleSelect("directeurswoning")}
         emissiveIntensity={kunstacademieEmissiveIntensity}
+        label={copy.buildings.directeurswoning}
       />
       <Duiktank
         handleClick={() => handleSelect("duiktank")}
         emissiveIntensity={duiktankEmissiveIntensity}
+        label={copy.buildings.duiktank}
+
       />
       <Watertoren
         handleClick={() => handleSelect("watertoren")}
         emissiveIntensity={watertorenEmissiveIntensity}
+        label={copy.buildings.watertoren}
+
       />
       <Plong
         handleClick={() => handleSelect("plong")}
         emissiveIntensity={plongEmissiveIntensity}
+        label={copy.buildings.plong}
       />
        <OfficeBuilding />
     </>

@@ -23,27 +23,13 @@ const Miefel = () => {
       duration: 3 + deltaRight / 2,
       rotate: newRight,
       delay: randomDelay,
-      // onComplete: () => {
-      //   console.log("----RIGHT----");
-      //   console.log("rotation", newRight);
-      //   console.log("difference", deltaRight);
-      //   console.log("duration", 5 + deltaRight / 2);
-      //   console.log("delay", randomDelay);
-      //   console.log("time", 5 + deltaRight / 2 + randomDelay);
-      // },
+      overwrite: "auto",
     });
     gsap.to(".miefel__hand.left", {
       duration: 3 + deltaLeft / 2,
       rotate: newLeft,
       delay: randomDelay2,
-      // onComplete: () => {
-      //   console.log("----LEFT----");
-      //   console.log("rotation", newLeft);
-      //   console.log("difference", deltaLeft);
-      //   console.log("duration", 5 + deltaLeft / 2);
-      //   console.log("delay", randomDelay2);
-      //   console.log("time", 5 + deltaLeft / 2 + randomDelay2);
-      // },
+      overwrite: "auto",
     });
   };
 

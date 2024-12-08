@@ -2,7 +2,7 @@
 title: "Miokapi"
 name: "Freek Quartier"
 tags: ["Muziek"]
-location: "hoofgebouw"
+location: "Machinezaal & pompenzaal"
 subLocation: "pompenzaal"
 heroImage: "miokapi.png"
 startTime: "2024-12-14T22:00:00"
