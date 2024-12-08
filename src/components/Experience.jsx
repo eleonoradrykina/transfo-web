@@ -1,16 +1,12 @@
 import { useRef, useState, useEffect } from "react";
 import { OrbitControls, CameraControls } from "@react-three/drei";
-// import { Perf } from "r3f-perf";
 
-// import { useControls } from "leva";
-import { useThree, useFrame } from "@react-three/fiber";
+import { useThree} from "@react-three/fiber";
 import {
   ToneMapping,
   EffectComposer,
   Bloom,
-  DepthOfField,
 } from "@react-three/postprocessing";
-import { ToneMappingMode, BlendFunction } from "postprocessing";
 
 /* Non interactive map:*/
 import MapModel from "./nonInteractiveMap/MapModel";
@@ -80,6 +76,8 @@ export default function Experience({ onChangeBuilding, onChangeEvent, clearSelec
     //   return;
     // }
     setHasClickHappened(true);
+    //set hotspot display to none:
+    document.querySelector("#hotspot").style.display = "none";
     handleClear("handleSelect");
     if (!fromEvent) {
       onChangeBuilding(key);
@@ -175,12 +173,49 @@ export default function Experience({ onChangeBuilding, onChangeEvent, clearSelec
     
     mm.add("(max-width: 768px)", () => {
       tlLabels.to(".map", {
-        y: -180,
+        y: "-20%",
         duration: 0.75,
         ease: "power2.out",
       }, "<");
     });
 
+    mm.add("(min-width: 768px)", () => {
+      if (!hasClickHappened) {
+        const tlHotspot = gsap.timeline({
+          scrollTrigger: {
+            trigger: "#body",
+            start: "top top",
+            end: "20",
+            onEnterBack: () => {
+              tlHotspot.to(
+                  "#hotspot",
+                {
+                  opacity: 0,
+                  ease: "power1.inOut"
+                }
+              )
+            }
+          }
+        });
+        tlHotspot.to(
+            "#hotspot",
+            {
+              opacity: 1,
+              delay: 4,
+              ease: "power1.inOut"
+            },
+          ).to(
+            "#hotspot__circle",
+            { 
+              strokeWidth: 4.2,
+              repeat: -1,
+              yoyo: true,
+              duration: 1,
+              ease: "power1.inOut"
+            }
+          )
+        }
+      })
     
     
   }
@@ -234,53 +269,6 @@ export default function Experience({ onChangeBuilding, onChangeEvent, clearSelec
     maxAzimuthAngle: 1.1,
     minAzimuthAngle: -0.3,
   }
-
-  useFrame(() => {
-    //if not clickable, return
-    if (!isClickable) return;
-    //if we're not on desktop, return
-    if (window.innerWidth < 768) return;
-
-   /*
-      HERE:
-      selectedBuilding is always NULL
-   */
-
-    // If click happened, ensure mechaniekers intensity is reset to 0
-    if (hasClickHappened && selectedBuilding !== "mechaniekers") {
-      setMechaniekersEmissiveIntensity(0);
-      return;
-    }
-    // if click happened to mechaniekers ignore pulsating
-    if (hasClickHappened && selectedBuilding === "mechaniekers") {
-      setMechaniekersEmissiveIntensity(3.0);
-      return;
-    }
-
-    const elapsedTime = Date.now();
-    const timeBeforeInteraction = elapsedTime - timeAfterScroll;
-
-    if (timeBeforeInteraction > 5000) {
-      // Create a pulsating effect with pauses
-      const frequency = 0.0006; 
-      const pauseThreshold = 0.95; // Threshold for pause (0-1)
-      
-      // Base sine wave
-      let pulsate = Math.sin(elapsedTime * frequency);
-      
-      // Add easing (smooth step function)
-      pulsate = (3 * pulsate * pulsate - 2 * pulsate * pulsate * pulsate) / 2;
-      
-      // Add pause at the bottom
-      if (pulsate < -pauseThreshold) {
-          pulsate = -1;
-      }
-      
-      // Convert from -1,1 range to 0,1 range and apply intensity
-      const intensity = ((pulsate + 1) * 0.5) * 1.5;
-      setMechaniekersEmissiveIntensity(intensity);
-    }
-  });
 
   return (
     <>

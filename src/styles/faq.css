@@ -53,6 +53,5 @@
     @apply w-fit;
     left: unset;
     @apply md:right-60;
-    @apply md:translate-y-[10px] md:opacity-0;
   }
 }

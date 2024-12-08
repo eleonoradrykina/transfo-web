@@ -34,6 +34,12 @@ colorMap.colorSpace = SRGBColorSpace
               props.handleClick()
             }} className='building-label'>{props.label}</p>
           </Html>
+          <Html position={[-0.5,0,0.2]}>
+            <svg id="hotspot" width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle id='hotspot__circle' cx="11" cy="11" r="9" stroke="white" strokeWidth="0.1"/>
+              <circle cx="11" cy="11" r="7" fill="#DEC1FB"/>
+            </svg>
+          </Html>
           <meshStandardMaterial 
           roughness={1}
           metalness={0}
