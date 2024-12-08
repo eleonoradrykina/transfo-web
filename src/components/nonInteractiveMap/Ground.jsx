@@ -28,7 +28,7 @@ export default function Ground(props) {
               e.stopPropagation()
               props.handleClickParcours()
             }}
-            className='building-label'>hoogteparcours</p>
+            className='building-label'>{props.hoogteparcours}</p>
         </Html>
         <Html
           position={ [2.5,0.25,3.0]}
@@ -39,13 +39,13 @@ export default function Ground(props) {
               e.stopPropagation()
               props.handleClickBassin()
             }}
-            className='building-label'>waterbassin</p>
+            className='building-label'>{props.waterbassin}</p>
         </Html>
           <Html
           position={ [0.3,0.25,-2.25]}
           distanceFactor={6}
           occlude>
-          <p className='map-label'>markt</p>
+          <p className='map-label'>{props.markt}</p>
         </Html>
         <Html
           position={ [2.0,0.25,-3.0]}
@@ -56,7 +56,7 @@ export default function Ground(props) {
               e.stopPropagation()
               props.handleClickIngang()
             }}
-            className='building-label'>ingang</p>
+            className='building-label'>{props.ingang}</p>
         </Html>
         <meshStandardMaterial 
           map={groundColorMap} />

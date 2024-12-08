@@ -3,11 +3,11 @@ import "../styles/components/schedule.css";
 
 interface Props {
   event: IEvent;
-  withLocation?: boolean;
+  location?: string;
   handleClick: (event: IEvent) => void;
 }
 
-const EventPreview = ({ event, withLocation, handleClick }: Props) => {
+const EventPreview = ({ event, handleClick, location }: Props) => {
   return (
     <button onClick={() => handleClick(event)} className="event-preview">
       <div className="event-preview__main">
@@ -23,8 +23,8 @@ const EventPreview = ({ event, withLocation, handleClick }: Props) => {
             {tag}
           </span>
         ))}
-        {withLocation && (
-          <span className="event-preview__tag location">{event.location}</span>
+        {location && (
+          <span className="event-preview__tag location">{location}</span>
         )}
 
         {event.startTime && event.endTime ? (
@@ -32,20 +32,24 @@ const EventPreview = ({ event, withLocation, handleClick }: Props) => {
             <span className="event-preview__tag time">
               {new Intl.DateTimeFormat("nl-BE", {
                 timeStyle: "short",
+                timeZone: "Europe/Brussels",
               }).format(event.startTime)}{" "}
               -{" "}
               {new Intl.DateTimeFormat("nl-BE", {
                 timeStyle: "short",
+                timeZone: "Europe/Brussels",
               }).format(event.endTime)}
             </span>
             {event.startTime2 && event.endTime2 && (
               <span className="event-preview__tag time">
                 {new Intl.DateTimeFormat("nl-BE", {
                   timeStyle: "short",
+                  timeZone: "Europe/Brussels",
                 }).format(event.startTime2)}{" "}
                 -{" "}
                 {new Intl.DateTimeFormat("nl-BE", {
                   timeStyle: "short",
+                  timeZone: "Europe/Brussels",
                 }).format(event.endTime2)}
               </span>
             )}{" "}

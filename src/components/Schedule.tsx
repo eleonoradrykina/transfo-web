@@ -11,9 +11,11 @@ interface Props {
   initialBuilding: string | null;
   events: IEvent[];
   initialEvent: string | null;
+  copy: any;
+  onChangeBuilding: (building: string | null) => void;
 }
 
-const Schedule = ({ initialBuilding, events, initialEvent }: Props) => {
+const Schedule = ({ initialBuilding, events, initialEvent, copy }: Props) => {
   const [selectedEvent, setSelectedEvent] = useState<IEvent | null>(
     events.find((event) => event.slug === initialEvent) ?? null
   );
@@ -57,6 +59,9 @@ const Schedule = ({ initialBuilding, events, initialEvent }: Props) => {
   }, [initialBuilding]);
 
   const handleEventClick = (event: IEvent) => {
+    if (!selectedBuilding) {
+      setSelectedBuilding(event.location);
+    }
     setSelectedEvent(event);
     setState("onEvent");
     window.history.replaceState(
@@ -67,8 +72,34 @@ const Schedule = ({ initialBuilding, events, initialEvent }: Props) => {
   };
 
   const handleBack = (location: string) => {
-    setState("onBuilding");
-    window.history.replaceState({}, "", `?building=${location}`);
+    let mm = gsap.matchMedia();
+    mm.add("(max-width: 768px)", () => {
+      setState("onDefault");
+      setSelectedBuilding(null);
+      window.history.replaceState({}, "", window.location.origin);
+    });
+    mm.add("(min-width: 768px)", () => {
+      setState("onBuilding");
+      window.history.replaceState({}, "", `?building=${location}`);
+    });
+  };
+
+  const handleScroll = (e: React.UIEvent<HTMLElement>) => {
+    if (window.innerWidth < 768) {
+      if (e.currentTarget.scrollTop > 100) {
+        gsap.to("#schedule", {
+          duration: 0.5,
+          ease: "power1.out",
+          top: "35%",
+        });
+      } else {
+        gsap.to("#schedule", {
+          duration: 0.5,
+          ease: "power1.out",
+          top: "50%",
+        });
+      }
+    }
   };
 
   useEffect(() => {
@@ -79,31 +110,8 @@ const Schedule = ({ initialBuilding, events, initialEvent }: Props) => {
         trigger: "#body",
         start: "top top",
         end: "20",
-        scrub: 1,
-        onUpdate() {
-          gsap.to("#schedule", {
-            duration: 0.5,
-            ease: "power1.out",
-            x: "0vw",
-          });
-
-          gsap.to("#faq__button", {
-            duration: 0.5,
-            ease: "power1.out",
-            x: "0vw",
-          });
-
-          gsap.to("#hero__title", {
-            duration: 0.5,
-            ease: "power1.out",
-            x: "0vw",
-          });
-
-          gsap.to("#hero__date", {
-            duration: 0.5,
-            ease: "power1.out",
-            x: "0vw",
-          });
+        onEnterBack: () => {
+          scheduleTL.reverse();
         },
       },
     });
@@ -117,34 +125,16 @@ const Schedule = ({ initialBuilding, events, initialEvent }: Props) => {
     );
   }, []);
 
-  const handleScheduleFocuse = () => {
-    const mm = gsap.matchMedia();
-
-    mm.add("(max-width: 768px)", () => {
-      gsap.to("#schedule", {
-        duration: 0.5,
-        ease: "power1.out",
-        top: "30%",
-      });
-    });
-  };
-
   return (
-    <div
-      id="schedule"
-      onFocusCapture={handleScheduleFocuse}
-      onClickCapture={handleScheduleFocuse}
-      onScrollCapture={handleScheduleFocuse}
-      className={`schedule ${state}`}
-    >
+    <div id="schedule" className={`schedule ${state}`}>
       <div className="schedule__content">
         <div className="schedule__default">
           <h3 className="schedule__title">Programma</h3>
-          <p>
+          <p className="hidden md:inline">
             Heel het programma is weergegeven. Klik op het gebouw om te zien wat
             er daar plaatsvindt.
           </p>
-          <ul className="schedule__list">
+          <ul onScroll={handleScroll} className="schedule__list">
             {events
               .sort((a: IEvent, b: IEvent) => {
                 if (a.startTime && b.startTime) {
@@ -161,7 +151,9 @@ const Schedule = ({ initialBuilding, events, initialEvent }: Props) => {
                 <li key={event.title}>
                   <EventPreview
                     handleClick={() => handleEventClick(event)}
-                    withLocation={!selectedBuilding}
+                    location={
+                      selectedBuilding ? null : copy.buildings[event.location]
+                    }
                     event={event}
                   />
                 </li>
@@ -169,7 +161,9 @@ const Schedule = ({ initialBuilding, events, initialEvent }: Props) => {
           </ul>
         </div>
         <div className="schedule__building">
-          <h3 className="schedule__title">{selectedBuilding}</h3>
+          <h3 className="schedule__title">
+            {copy.buildings[selectedBuilding ?? "default"]}
+          </h3>
           <ul className="schedule__list">
             {filteredSchedule
               .sort((a: IEvent, b: IEvent) => {
@@ -187,7 +181,9 @@ const Schedule = ({ initialBuilding, events, initialEvent }: Props) => {
                 <li key={event.title}>
                   <EventPreview
                     handleClick={() => handleEventClick(event)}
-                    withLocation={!selectedBuilding}
+                    location={
+                      selectedBuilding ? null : copy.buildings[event.location]
+                    }
                     event={event}
                   />
                 </li>
@@ -196,7 +192,11 @@ const Schedule = ({ initialBuilding, events, initialEvent }: Props) => {
         </div>
         <div className="schedule__event">
           {selectedEvent && (
-            <Event handleBack={handleBack} event={selectedEvent} />
+            <Event
+              location={copy.buildings[selectedEvent.location]}
+              handleBack={handleBack}
+              event={selectedEvent}
+            />
           )}
         </div>
       </div>

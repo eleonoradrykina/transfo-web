@@ -1,18 +1,6 @@
 import { gsap } from "gsap";
-import { BUILDING } from "../services/types";
 
 let mm = gsap.matchMedia();
-
-const queryString = window.location.search;
-const urlParams = new URLSearchParams(queryString);
-
-if (urlParams.get("building")) {
-  if (Object.values(BUILDING).includes(urlParams.get("building") as BUILDING)) {
-    window.scrollTo(0, document.body.scrollHeight);
-  } else {
-    window.history.replaceState({}, document.title, "/");
-  }
-}
 
 const faqTL = gsap.timeline({ paused: true, autoRemoveChildren: true });
 const reversedFaqTL = gsap.timeline({

@@ -2,7 +2,7 @@
 title: "Schaduwdans"
 name: "Eva Dehullu en Martijn Peirs"
 tags: ["Dans en beeld"]
-location: "hoofgebouw"
+location: "machinezaal-pompenzaal"
 subLocation: "pompenzaal"
 heroImage: "schaduwdans.png"
 startTime: "2024-12-14T17:00:00"

@@ -48,7 +48,7 @@ export default function Watertoren(props) {
               e.stopPropagation()
               props.handleClick()
             }}
-            className='building-label'>Watertoren</p>
+            className='building-label'>{props.label}</p>
         </Html>
         <meshStandardMaterial 
           map={colorMap}

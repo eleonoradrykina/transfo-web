@@ -2,7 +2,7 @@
 title: "Zwevegems Theater"
 name: "Pieter Hellin, Mieke Vanoverberghe en Trui Verbeke"
 tags: ["Theater"]
-location: "hoofgebouw"
+location: "machinezaal-pompenzaal"
 subLocation: "pompenzaal"
 heroImage: "theater.png"
 startTime: "2024-12-14T20:00:00"

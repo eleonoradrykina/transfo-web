@@ -17,7 +17,7 @@
 
 .building-label,
 .map-label {
-  @apply font-whyte italic lowercase text-white text-base text-center;
+  @apply font-whyte italic text-white text-base text-center;
   @apply opacity-0;
   @apply select-none;
   white-space: nowrap;

@@ -35,7 +35,7 @@ export default function Plong(props) {
                 e.stopPropagation()
                 props.handleClick()
               }}
-              className='building-label'>plonggebouw</p>
+              className='building-label'>{props.label}</p>
             </Html>
         <meshStandardMaterial 
         map={colorMap}

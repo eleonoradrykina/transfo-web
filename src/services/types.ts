@@ -7,7 +7,7 @@ export enum Language {
 export enum BUILDING {
   MARKT = "markt",
   WATERTOREN = "watertoren",
-  MACHINEZAAL_POMPENZAAL = "machinezaal+pompenzaal",
+  MACHINEZAAL_POMPENZAAL = "machinezaal-pompenzaal",
   TRANSFORMATOREN = "transformatoren",
   KETELHUIS = "ketelhuis",
   WATERBASSIN = "waterbassin",
