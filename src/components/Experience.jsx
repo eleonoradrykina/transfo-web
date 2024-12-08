@@ -301,7 +301,7 @@ export default function Experience({ onClickBuilding, clearSelection, initialBui
       <Hoofdzaal
         handleClick={() => handleSelect("hoofdzaal")}
         emissiveIntensity={hoofdzaalEmissiveIntensity}
-    />
+      />
       <Mechaniekers
         handleClick={() => handleSelect("mechaniekers")}
         emissiveIntensity={mechaniekersEmissiveIntensity}
