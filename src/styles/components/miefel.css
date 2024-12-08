@@ -5,17 +5,26 @@
   &__hand {
     @apply absolute z-40;
     width: clamp(200px, 45vw, 600px);
-    @apply -top-[10vw];
 
     &.left {
       @apply -right-[10vw];
-      top: clamp(200px, 10vw, 500px);
+      top: clamp(100px, 10vw, 500px);
+
+      @media (min-width: 768px) {
+        top: clamp(300px, 10vw, 400px);
+      }
+
       transform-origin: center right;
       @apply rotate-[-20deg];
     }
 
     &.right {
       @apply -left-[10vw];
+      top: clamp(100px, 5vw, 60px);
+
+      @media (min-width: 768px) {
+        top: clamp(0px, -5vw, 60px);
+      }
       @apply rotate-[35deg];
       transform-origin: center left;
     }

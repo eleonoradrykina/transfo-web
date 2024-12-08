@@ -117,8 +117,26 @@ const Schedule = ({ initialBuilding, events, initialEvent }: Props) => {
     );
   }, []);
 
+  const handleScheduleFocuse = () => {
+    const mm = gsap.matchMedia();
+
+    mm.add("(max-width: 768px)", () => {
+      gsap.to("#schedule", {
+        duration: 0.5,
+        ease: "power1.out",
+        top: "30%",
+      });
+    });
+  };
+
   return (
-    <div id="schedule" className={`schedule ${state}`}>
+    <div
+      id="schedule"
+      onFocusCapture={handleScheduleFocuse}
+      onClickCapture={handleScheduleFocuse}
+      onScrollCapture={handleScheduleFocuse}
+      className={`schedule ${state}`}
+    >
       <div className="schedule__content">
         <div className="schedule__default">
           <h3 className="schedule__title">Programma</h3>
