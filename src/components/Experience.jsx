@@ -111,6 +111,7 @@ export default function Experience({ onClickBuilding, clearSelection, initialBui
   }
 
   const setLabelsOpacity = () => {
+    console.log("setting labels opacity")
     const tlLabels = gsap.timeline({
       scrollTrigger: {
         trigger: "#body",
@@ -131,15 +132,6 @@ export default function Experience({ onClickBuilding, clearSelection, initialBui
       },
       "<"
     )
-    .to(
-      ".map-label",
-      {
-        opacity: 1,
-        duration: 0.75,
-        ease: "power2.out",
-      },
-      "<"
-    );
   }
 
   const setCameraControls = (key) => {
