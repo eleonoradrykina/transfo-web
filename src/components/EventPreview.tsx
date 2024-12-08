@@ -1,3 +1,4 @@
+import { getTime } from "../services/functions";
 import type { IEvent } from "../services/types";
 import "../styles/components/schedule.css";
 
@@ -30,27 +31,11 @@ const EventPreview = ({ event, handleClick, location }: Props) => {
         {event.startTime && event.endTime ? (
           <>
             <span className="event-preview__tag time">
-              {new Intl.DateTimeFormat("nl-BE", {
-                timeStyle: "short",
-                timeZone: "Europe/Brussels",
-              }).format(event.startTime)}{" "}
-              -{" "}
-              {new Intl.DateTimeFormat("nl-BE", {
-                timeStyle: "short",
-                timeZone: "Europe/Brussels",
-              }).format(event.endTime)}
+              {getTime(event.startTime)} - {getTime(event.endTime)}
             </span>
             {event.startTime2 && event.endTime2 && (
               <span className="event-preview__tag time">
-                {new Intl.DateTimeFormat("nl-BE", {
-                  timeStyle: "short",
-                  timeZone: "Europe/Brussels",
-                }).format(event.startTime2)}{" "}
-                -{" "}
-                {new Intl.DateTimeFormat("nl-BE", {
-                  timeStyle: "short",
-                  timeZone: "Europe/Brussels",
-                }).format(event.endTime2)}
+                {getTime(event.startTime2)} - {getTime(event.endTime2)}
               </span>
             )}{" "}
           </>
