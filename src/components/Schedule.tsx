@@ -91,23 +91,23 @@ const Schedule = ({
     onChangeEvent(null);
   };
 
-  const handleScroll = (e: React.UIEvent<HTMLElement>) => {
-    if (window.innerWidth < 768) {
-      if (e.currentTarget.scrollTop > 100) {
-        gsap.to("#schedule", {
-          duration: 0.5,
-          ease: "power1.out",
-          top: "35%",
-        });
-      } else {
-        gsap.to("#schedule", {
-          duration: 0.5,
-          ease: "power1.out",
-          top: "50%",
-        });
-      }
-    }
-  };
+  // const handleScroll = (e: React.UIEvent<HTMLElement>) => {
+  //   if (window.innerWidth < 768) {
+  //     if (e.currentTarget.scrollTop > 100) {
+  //       gsap.to("#schedule", {
+  //         duration: 0.5,
+  //         ease: "power1.out",
+  //         top: "35%",
+  //       });
+  //     } else {
+  //       gsap.to("#schedule", {
+  //         duration: 0.5,
+  //         ease: "power1.out",
+  //         top: "50%",
+  //       });
+  //     }
+  //   }
+  // };
 
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
@@ -141,7 +141,7 @@ const Schedule = ({
             Heel het programma is weergegeven. Klik op het gebouw om te zien wat
             er daar plaatsvindt.
           </p>
-          <ul onScroll={handleScroll} className="schedule__list">
+          <ul className="schedule__list">
             {events
               .sort((a: IEvent, b: IEvent) => {
                 if (a.startTime && b.startTime) {

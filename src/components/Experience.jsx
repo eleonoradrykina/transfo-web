@@ -219,7 +219,8 @@ export default function Experience({ onChangeBuilding, onChangeEvent, clearSelec
           //no user gestures 
 
           //dolly in
-          cameraControlsRef.current?.dolly(2, true)
+          cameraControlsRef.current?.dolly(-50, true)
+          cameraControlsRef.current?.truck(0, 1, true)
   
         },
         onEnterBack: () => {
@@ -228,8 +229,7 @@ export default function Experience({ onChangeBuilding, onChangeEvent, clearSelec
 
           //set camera to default position
           cameraControlsRef.current.setLookAt(10, 5, 10, 0, 0, 0, true)
-   
-          handleClear("setZoom")
+  
         }
        },
       })
@@ -238,7 +238,6 @@ export default function Experience({ onChangeBuilding, onChangeEvent, clearSelec
 
 
   useEffect(() => {
-    console.log("here?")
     if (selectedEvent) {
       const localEvent = events.find((event) => event.slug === selectedEvent) ?? null;
       if (localEvent) {
@@ -259,9 +258,6 @@ export default function Experience({ onChangeBuilding, onChangeEvent, clearSelec
   useEffect(() => {
     setLabelsOpacity();
     setZoom();
-    // if (selectedBuilding) {
-    //   handleSelect(selectedBuilding);
-    // }
   }, []);
 
   const cameraControls = {
