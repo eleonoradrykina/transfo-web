@@ -42,7 +42,7 @@ export default function Ground(props) {
             className='building-label'>waterbassin</p>
         </Html>
           <Html
-          position={ [0.6,0.25,-2.4]}
+          position={ [0.3,0.25,-2.25]}
           distanceFactor={6}
           occlude>
           <p className='map-label'>markt</p>
