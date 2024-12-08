@@ -55,20 +55,24 @@ const Event = ({ event, handleBack }: Props) => {
               <span className="event__tag time">
                 {new Intl.DateTimeFormat("nl-BE", {
                   timeStyle: "short",
+                  timeZone: "Europe/Brussels",
                 }).format(event.startTime)}{" "}
                 -{" "}
                 {new Intl.DateTimeFormat("nl-BE", {
                   timeStyle: "short",
+                  timeZone: "Europe/Brussels",
                 }).format(event.endTime)}
               </span>
               {event.startTime2 && event.endTime2 && (
                 <span className="event__tag time">
                   {new Intl.DateTimeFormat("nl-BE", {
                     timeStyle: "short",
+                    timeZone: "Europe/Brussels",
                   }).format(event.startTime2)}{" "}
                   -{" "}
                   {new Intl.DateTimeFormat("nl-BE", {
                     timeStyle: "short",
+                    timeZone: "Europe/Brussels",
                   }).format(event.endTime2)}
                 </span>
               )}{" "}
