@@ -9,6 +9,10 @@ import Interactivity from "../components/Interactivity";
 import { Language, type IEvent } from "../services/types";
 import { getCollection } from "astro:content";
 import Miefel from "../components/Miefel";
+import { Image } from "astro:assets";
+import westVlaanderen from "../../public/footer/west-vlaanderen-logo.webp";
+import zwevegem from "../../public/footer/zwevegem-logo.webp";
+import transfo from "../../public/footer/transfo-logo.webp";
 
 const copy = languages.nl;
 const temp = await getCollection("schedule");
@@ -115,30 +119,72 @@ const events = await Promise.all(
       <div class="footer__side left">
         <div class="flex flex-row gap-15 items-center">
           <a target="_blank" href="https://www.transfozwevegem.be/">
-            <img src="/footer/transfo-logo-2.png" />
+            <Image
+              width="387"
+              height="153"
+              decoding="async"
+              loading="lazy"
+              src={transfo}
+              alt="Transfo logo"
+            />
           </a>
           <a
             class="md:hidden"
             target="_blank"
             href="https://www.west-vlaanderen.be/"
-            ><img src="/footer/west-vlaanderen-logo.png" /></a
+            ><Image
+              width="150"
+              height="150"
+              decoding="async"
+              loading="lazy"
+              src={westVlaanderen}
+              alt="West-Vlaanderen logo"
+            /></a
           >
-          <a class="md:hidden" target="_blank" href="https://www.zwevegem.be/">
-            <img src="/footer/zwevegem-logo.png" /></a
-          >
-        </div>
 
+          <a class="md:hidden" target="_blank" href="https://www.zwevegem.be/">
+            <Image
+              width="150"
+              height="150"
+              decoding="async"
+              loading="lazy"
+              src={zwevegem}
+              alt="Zwevegem logo"
+            />
+          </a>
+        </div>
         <a target="_blank" href="https://maps.app.goo.gl/t7pKtMWzNho41mCL6"
           >Blokellestraat 113b, Zwevegem</a
         >
       </div>
       <div class="footer__side right">
-        <a target="_blank" href="https://www.west-vlaanderen.be/"
-          ><img src="/footer/west-vlaanderen-logo.png" /></a
+        <a
+          class="hidden md:block"
+          target="_blank"
+          href="https://www.west-vlaanderen.be/"
+          ><Image
+            width="150"
+            height="150"
+            decoding="async"
+            loading="lazy"
+            src={westVlaanderen}
+            alt="West-Vlaanderen logo"
+          /></a
         >
-        <a target="_blank" href="https://www.zwevegem.be/">
-          <img src="/footer/zwevegem-logo.png" /></a
+        <a
+          class="hidden md:block"
+          target="_blank"
+          href="https://www.zwevegem.be/"
         >
+          <Image
+            width="150"
+            height="150"
+            decoding="async"
+            loading="lazy"
+            src={zwevegem}
+            alt="Zwevegem logo"
+          />
+        </a>
       </div>
     </footer>
 

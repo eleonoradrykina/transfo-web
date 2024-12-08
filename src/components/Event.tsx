@@ -1,7 +1,6 @@
 import { useEffect } from "react";
 import { type IEvent } from "../services/types";
 import "../styles/components/schedule.css";
-import { gsap } from "gsap";
 
 interface Props {
   event: IEvent;
@@ -17,23 +16,23 @@ const Event = ({ event, handleBack, location }: Props) => {
     }
   }, [event]);
 
-  const handleScroll = (e: React.UIEvent<HTMLElement>) => {
-    if (window.innerWidth < 768) {
-      if (e.currentTarget.scrollTop > 1) {
-        gsap.to("#schedule", {
-          duration: 0.5,
-          ease: "power1.out",
-          top: "30%",
-        });
-      } else {
-        gsap.to("#schedule", {
-          duration: 0.5,
-          ease: "power1.out",
-          top: "50%",
-        });
-      }
-    }
-  };
+  // const handleScroll = (e: React.UIEvent<HTMLElement>) => {
+  //   if (window.innerWidth < 768) {
+  //     if (e.currentTarget.scrollTop > 1) {
+  //       gsap.to("#schedule", {
+  //         duration: 0.5,
+  //         ease: "power1.out",
+  //         top: "30%",
+  //       });
+  //     } else {
+  //       gsap.to("#schedule", {
+  //         duration: 0.5,
+  //         ease: "power1.out",
+  //         top: "50%",
+  //       });
+  //     }
+  //   }
+  // };
 
   return (
     <div className="event">
@@ -56,7 +55,7 @@ const Event = ({ event, handleBack, location }: Props) => {
         </div>
       </div>
 
-      <div onScroll={handleScroll} className="event__scroll">
+      <div className="event__scroll">
         <div className="flex flex-row md:flex-col gap-15 mt-15 md:mb-30">
           <img
             className="event__image"

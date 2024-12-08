@@ -3,7 +3,7 @@ title: "Radio Clash"
 name: "Jonas en Midas"
 tags: ["Muziek"]
 location: "hoogteparcours"
-heroImage: "radio-clash.jpg"
+heroImage: "radio-clash.webp"
 ---
 
 Radio Clash brengt de unieke festivalvibe naar Transfo Intiem!
