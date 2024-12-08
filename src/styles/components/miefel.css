@@ -1,6 +1,7 @@
 .miefel {
   @apply fixed z-40 inset-0 bottom-[95%];
   @apply overflow-visible;
+  @apply pointer-events-none select-none;
 
   &__hand {
     @apply absolute z-40;
@@ -25,6 +26,7 @@
       @media (min-width: 768px) {
         top: clamp(0px, -5vw, 60px);
       }
+
       @apply rotate-[35deg];
       transform-origin: center left;
     }
