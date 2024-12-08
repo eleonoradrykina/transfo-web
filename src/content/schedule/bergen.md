@@ -3,7 +3,7 @@ title: "Bergen"
 name: "Jan Bulckaen, Jan Despiegelaere, Rik Lefevere, Jan Lernout"
 tags: ["Muziek"]
 location: "mechaniekers"
-heroImage: "bergen.png"
+heroImage: "bergen.webp"
 startTime: "2024-12-14T19:00:00"
 endTime: "2024-12-14T20:00:00"
 ---

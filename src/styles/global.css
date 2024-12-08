@@ -147,6 +147,7 @@ body {
 
     img {
       @apply h-30 md:h-[45px];
+      width: auto;
     }
   }
 }

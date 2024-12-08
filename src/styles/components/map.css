@@ -1,15 +1,23 @@
 .map {
-  @apply fixed top-0 bottom-0 right-0 left-0;
-  @apply z-10;
+  @apply sticky top-0 bottom-0 right-0 left-0;
+  height: 70vh;
+  z-index: -10;
 
   & canvas {
-    @apply relative z-10;
+    touch-action: none;
+  }
+}
+
+@media (min-width: 768px) {
+  .map {
+    @apply fixed top-0 bottom-0 right-0 left-0;
+    height: 100%;
   }
 }
 
 .building-label,
 .map-label {
-  @apply font-whyte italic lowercase text-white text-base text-center;
+  @apply font-whyte italic text-white text-base text-center;
   @apply opacity-0;
   @apply select-none;
   white-space: nowrap;

@@ -3,7 +3,7 @@ title: "The Jazztronauts"
 name: "Wout Schepens en Jef Lapauw"
 tags: ["Muziek"]
 location: "mechaniekers"
-heroImage: "jazztronauts.png"
+heroImage: "jazztronauts.webp"
 startTime: "2024-12-14T17:00:00"
 endTime: "2024-12-14T18:00:00"
 ---

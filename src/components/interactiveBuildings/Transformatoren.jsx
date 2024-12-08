@@ -35,7 +35,7 @@ export default function Transformatoren(props) {
                         e.stopPropagation()
                         props.handleClick()
                       }}
-                       className='building-label'>Transformatoren</p>
+                       className='building-label'>{props.label}</p>
                      </Html>
                      <meshStandardMaterial 
                      map={colorMap} 

@@ -3,7 +3,7 @@ title: "Alexander Cheyns"
 name: "Alexander Cheyns"
 tags: ["Muziek"]
 location: "watertoren"
-heroImage: "cheyns.png"
+heroImage: "cheyns.webp"
 ---
 
 Meneer Korveel zit opnieuw alleen in zijn woonkamer, gamend op zijn tablet met wat televisieruis op de achtergrond. Maar dan gebeurt er iets bijzonders… de lepel van zijn avondeten op de tafel begint te tikken, de ventilator laat diepe bastonen horen, en zelfs het strijkijzer stoomt mee op de beat. Is het pure verbeelding na jarenlang alleen te wonen, of is zijn huiskamer nu huiskamermuziek aan het maken?

@@ -3,7 +3,7 @@ title: "Iedereen in beeld"
 name: "Margo Callens en Mirthe Oosthoek"
 tags: ["installatie"]
 location: "ingang"
-heroImage: "iedereen-in-beeld.jpeg"
+heroImage: "iedereen-in-beeld.webp"
 ---
 
 “Iedereen in Beeld” creëert bij binnenkomst van Transfo Intiem direct een gevoel van verbondenheid. Het evenement draait om eenzaamheid, maar met dit concept willen we laten zien dat eenzaamheid niet per se negatief hoeft te zijn. Iedereen voelt zich immers weleens eenzaam, en dat is helemaal normaal.

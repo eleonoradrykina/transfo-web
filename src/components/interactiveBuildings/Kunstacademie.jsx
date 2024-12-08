@@ -36,7 +36,7 @@ export default function Kunstacademie(props) {
               e.stopPropagation()
               props.handleClick()
             }}
-            className='building-label'>Directeurswoning</p>
+            className='building-label'>{props.label}</p>
           </Html>
         <meshStandardMaterial 
           map={colorMap}

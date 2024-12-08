@@ -39,7 +39,7 @@ export default function Duiktank(props) {
               e.stopPropagation()
               props.handleClick()
             }}
-              className='building-label'>Duiktank - Zomerbar</p>
+              className='building-label'>{props.label}</p>
           </Html>
         <meshStandardMaterial 
           map={colorMap}

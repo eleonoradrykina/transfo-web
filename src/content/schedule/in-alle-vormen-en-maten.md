@@ -2,9 +2,9 @@
 title: "In alle vormen en maten"
 name: "Klara Pogačar and Paulina Kuchta-Leśniak"
 tags: ["Installatie"]
-location: "hoofgebouw"
+location: "machinezaal-pompenzaal"
 subLocation: "Machinezaal"
-heroImage: "alle-vormen.jpg"
+heroImage: "alle-vormen.webp"
 ---
 
 Onze installatie, "Eenzaamheid komt in alle vormen en maten," nodigt je uit om te ontdekken hoe anderen eenzaamheid ervaren en tegelijkertijd je eigen emoties op een creatieve manier te uiten.

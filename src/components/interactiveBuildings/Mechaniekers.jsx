@@ -32,7 +32,7 @@ colorMap.colorSpace = SRGBColorSpace
               <p onClick={(e) => {
               e.stopPropagation()
               props.handleClick()
-            }} className='building-label'>Mechaniekersgebouw</p>
+            }} className='building-label'>{props.label}</p>
           </Html>
           <meshStandardMaterial 
           roughness={1}

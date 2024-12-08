@@ -3,7 +3,7 @@ title: "GRNDLGGRS"
 name: "GRNDLGGRS"
 tags: ["Muziek"]
 location: "ketelhuis"
-heroImage: "grndlggrs.png"
+heroImage: "grndlggrs.webp"
 ---
 
 Ook het Grndlggrs collectief zal ons vergezellen op deze prachtige avond vol culturele ingrepen. Maar wie zijn ze en wat doen ze 🤷‍♂️
