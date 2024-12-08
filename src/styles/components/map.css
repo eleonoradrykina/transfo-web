@@ -1,9 +1,17 @@
 .map {
-  @apply fixed top-0 bottom-0 right-0 left-0;
-  @apply z-[-10];
+  @apply sticky top-0 bottom-0 right-0 left-0;
+  height: 70vh;
+  z-index: -10;
 
   & canvas {
     touch-action: none;
+  }
+}
+
+@media (min-width: 768px) {
+  .map {
+    @apply fixed top-0 bottom-0 right-0 left-0;
+    height: 100%;
   }
 }
 

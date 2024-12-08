@@ -32,7 +32,7 @@ import Plong from "./interactiveBuildings/Plong";
 
 import gsap from "gsap";
 
-const positions = new Map([["machinezaal-pompenzaal", [-0.005, 0.584, -1.317]], ["mechaniekers", [0.573, 0.306, 0.635]], ["ketelhuis", [-0.793, 0.87, -0.556]], ["transformatoren", [1.014, 1.132, -4.375]], ["octagon", [1.89, -0.102, -1.122]], ["directeurswoning", [3.105, 0.186, -0.804]], ["duiktank", [1.0, 0.366, 4.596]], ["watertoren", [-0.665, 0.045, 2.214]], ["plong", [1.504, 0.12, -0.343]], ["hoogteparcours", [3.75,0,2.5]], ["waterbassin", [2.5,0,3.0]]]);
+const positions = new Map([["machinezaal-pompenzaal", [-0.005, 0.584, -1.317]], ["mechaniekers", [0.573, 0.306, 0.635]], ["ketelhuis", [-0.793, 0.87, -0.556]], ["transformatoren", [1.014, 1.132, -4.375]], ["octagon", [1.89, -0.102, -1.122]], ["directeurswoning", [3.105, 0.186, -0.804]], ["duiktank", [1.0, 0.366, 4.596]], ["watertoren", [-0.665, 0.045, 2.214]], ["plong", [1.504, 0.12, -0.343]], ["hoogteparcours", [3.75,0,2.5]], ["waterbassin", [2.5,0,3.0]], , ["ingang", [2.0,0.25,-3.0]]]);
 
 export default function Experience({ onClickBuilding, clearSelection, initialBuilding, copy }) {
   const [selectedBuilding, setSelectedBuilding] = useState(initialBuilding);
@@ -170,7 +170,12 @@ export default function Experience({ onClickBuilding, clearSelection, initialBui
           start: "top top",
           end: "20",
           onEnter: () => {
-          cameraControlsRef.current.enabled = true;
+
+          //enable user gestures
+          setUsersGestures({
+            left: 1,
+            one: 1,
+          })
 
           //enable clickable buildings
           setIsClickable(true);
@@ -178,12 +183,6 @@ export default function Experience({ onClickBuilding, clearSelection, initialBui
           //move to the left and zoom in
           cameraControlsRef.current?.truck(3.5, 0, true)
           cameraControlsRef.current?.dolly(2, true)
-
-          //enable user gestures
-          setUsersGestures({
-            left: 1,
-            one: 1,
-          })
         },
         onEnterBack: () => {
           //disable clickable buildings
@@ -217,12 +216,11 @@ export default function Experience({ onClickBuilding, clearSelection, initialBui
           start: "top top",
           end: "20",
           onEnter: () => {
-          cameraControlsRef.current.enabled = true;
+          //no user gestures 
 
-          //and zoom in
+          //dolly in
           cameraControlsRef.current?.dolly(2, true)
-
-          //no user gestures
+  
         },
         onEnterBack: () => {
           //zoom out
@@ -276,7 +274,6 @@ export default function Experience({ onClickBuilding, clearSelection, initialBui
         minPolarAngle={cameraControls.minPolarAngle}
         maxAzimuthAngle={cameraControls.maxAzimuthAngle}
         minAzimuthAngle={cameraControls.minAzimuthAngle}
-
         mouseButtons={{
           left: usersGestures.left,
           middle: 0,
@@ -300,6 +297,7 @@ export default function Experience({ onClickBuilding, clearSelection, initialBui
         ingang={copy.buildings.ingang} 
         handleClickParcours={() => handleSelect("hoogteparcours")}
         handleClickBassin={() => handleSelect("waterbassin")}
+        handleClickIngang={() => handleSelect("ingang")}
        />
        <Trees />
        <MapModel />

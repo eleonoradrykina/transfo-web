@@ -42,7 +42,7 @@ export default function Ground(props) {
             className='building-label'>{props.waterbassin}</p>
         </Html>
           <Html
-          position={ [0.6,0.25,-2.4]}
+          position={ [0.3,0.25,-2.25]}
           distanceFactor={6}
           occlude>
           <p className='map-label'>{props.markt}</p>
@@ -51,7 +51,12 @@ export default function Ground(props) {
           position={ [2.0,0.25,-3.0]}
           distanceFactor={6}
           occlude>
-            <p className='map-label'>{props.ingang}</p>
+            <p 
+            onClick={(e) => {
+              e.stopPropagation()
+              props.handleClickIngang()
+            }}
+            className='building-label'>{props.ingang}</p>
         </Html>
         <meshStandardMaterial 
           map={groundColorMap} />
