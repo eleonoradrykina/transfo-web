@@ -15,13 +15,7 @@ interface Props {
   onChangeBuilding: (building: string | null) => void;
 }
 
-const Schedule = ({
-  initialBuilding,
-  events,
-  initialEvent,
-  copy,
-  onChangeBuilding,
-}: Props) => {
+const Schedule = ({ initialBuilding, events, initialEvent, copy }: Props) => {
   const [selectedEvent, setSelectedEvent] = useState<IEvent | null>(
     events.find((event) => event.slug === initialEvent) ?? null
   );

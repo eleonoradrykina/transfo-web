@@ -14,7 +14,7 @@ const copy = languages.nl;
 const temp = await getCollection("schedule");
 let tempRAW: { content: string; title: string }[] = [];
 
-const eventsRaw = await import.meta.glob("../content/schedule/*.md", {
+const eventsRaw = import.meta.glob("../content/schedule/*.md", {
   eager: true,
 });
 if (eventsRaw) {
