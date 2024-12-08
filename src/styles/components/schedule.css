@@ -148,8 +148,17 @@
 
   &__content {
     @apply text-start;
-    p {
+    p,
+    a {
       @apply mb-15;
+    }
+
+    a {
+      @apply font-bold text-orange;
+
+      &:hover {
+        @apply underline;
+      }
     }
   }
 
