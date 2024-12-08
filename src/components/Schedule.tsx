@@ -168,7 +168,7 @@ const Schedule = ({
           </ul>
         </div>
         <div className="schedule__building">
-          <div className="w-full gap-30 flex flex-col items-start ">
+          <div className="w-full gap-15 flex flex-col items-start ">
             <button
               className="event__back"
               onClick={() => {

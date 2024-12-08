@@ -48,7 +48,7 @@
   &__building,
   &__event {
     @apply absolute inset-0 z-30;
-    @apply w-full px-5 pt-15 md:pt-30 md:px-15 md:py-30;
+    @apply w-full px-5 pt-15 md:p-30 md:pb-0;
     @apply flex flex-col items-center text-center gap-5;
     @apply transition-all duration-300 ease-in-out;
   }
@@ -119,8 +119,8 @@
 
 .event {
   @apply flex flex-col gap-15;
-  @apply p-15 md:p-30 rounded-lg;
-  @apply bg-black;
+  @apply p-15 md:p-0 rounded-lg;
+  @apply bg-black md:bg-transparent;
   @apply max-h-full h-full overflow-y-hidden;
 
   &__header {
