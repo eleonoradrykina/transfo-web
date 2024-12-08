@@ -33,10 +33,6 @@ const Interactivity = ({ events, copy }: Props) => {
   }, []);
 
   useEffect(() => {
-    console.log("useEffect");
-    console.log("selectedBuilding", selectedBuilding);
-    console.log("selectedEvent", selectedEvent);
-
     if (selectedBuilding && selectedEvent) {
       window.history.replaceState(
         {},
