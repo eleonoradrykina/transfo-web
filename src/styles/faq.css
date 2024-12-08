@@ -8,7 +8,7 @@
   &__questions {
     @apply max-w-[550px];
     @apply flex flex-col gap-15;
-    @apply overflow-y-scroll;
+    @apply overflow-y-auto overscroll-contain;
     @apply pb-60;
   }
 
