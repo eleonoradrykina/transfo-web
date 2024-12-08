@@ -13,22 +13,11 @@ export default function Path(props) {
 
   const glowingUpPath = () => {
 
-  const tl = gsap.timeline({
-    scrollTrigger: {
-      trigger: "#body",
-      start: "top top",
-      end: "20",
-      onEnterBack: () => {
-        tl.reverse();
-      },
-    },
-  });
-
-  tl.to(pathRef.current, {
+  props.timeline.to(pathRef.current, {
     emissiveIntensity: 1.7,
-    duration: 1.25,
+    duration: 1,
     ease: "power2.out",
-    });
+    }, "<");
   };
 
   useEffect(() => {

@@ -8,12 +8,14 @@ interface Props {
   onChangeBuilding: (building: string | null) => void;
   initialBuilding: string | null;
   copy: any;
+  timeline: gsap.core.Timeline;
 }
 
 export default function Map({
   onChangeBuilding,
   initialBuilding,
   copy,
+  timeline,
 }: Props) {
   const [clearSelection, setClearSelection] = useState(0);
 
@@ -33,6 +35,7 @@ export default function Map({
       >
         <Bvh>
           <Experience
+            timeline={timeline}
             copy={copy}
             initialBuilding={initialBuilding}
             clearSelection={clearSelection}

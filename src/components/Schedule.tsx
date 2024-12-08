@@ -2,8 +2,6 @@ import { useEffect, useState } from "react";
 import "../styles/components/schedule.css";
 import EventPreview from "./EventPreview";
 import { gsap } from "gsap";
-
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { type IEvent } from "../services/types";
 import Event from "./Event";
 
@@ -13,9 +11,16 @@ interface Props {
   initialEvent: string | null;
   copy: any;
   onChangeBuilding: (building: string | null) => void;
+  timeline: gsap.core.Timeline;
 }
 
-const Schedule = ({ initialBuilding, events, initialEvent, copy }: Props) => {
+const Schedule = ({
+  initialBuilding,
+  events,
+  initialEvent,
+  copy,
+  timeline,
+}: Props) => {
   const [selectedEvent, setSelectedEvent] = useState<IEvent | null>(
     events.find((event) => event.slug === initialEvent) ?? null
   );
@@ -103,20 +108,7 @@ const Schedule = ({ initialBuilding, events, initialEvent, copy }: Props) => {
   };
 
   useEffect(() => {
-    gsap.registerPlugin(ScrollTrigger);
-
-    const scheduleTL = gsap.timeline({
-      scrollTrigger: {
-        trigger: "#body",
-        start: "top top",
-        end: "20",
-        onEnterBack: () => {
-          scheduleTL.reverse();
-        },
-      },
-    });
-
-    scheduleTL.from(
+    timeline.from(
       "#schedule",
       {
         y: "100%",
