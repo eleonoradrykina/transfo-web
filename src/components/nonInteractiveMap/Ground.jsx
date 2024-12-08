@@ -51,7 +51,12 @@ export default function Ground(props) {
           position={ [2.0,0.25,-3.0]}
           distanceFactor={6}
           occlude>
-            <p className='map-label'>ingang</p>
+            <p 
+            onClick={(e) => {
+              e.stopPropagation()
+              props.handleClickIngang()
+            }}
+            className='building-label'>ingang</p>
         </Html>
         <meshStandardMaterial 
           map={groundColorMap} />

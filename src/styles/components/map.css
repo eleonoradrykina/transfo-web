@@ -1,12 +1,9 @@
 .map {
   @apply sticky top-0 bottom-0 right-0 left-0;
-  /* @apply z-10; */
-  /* touch-action: none; */
   height: 70vh;
   z-index: -10;
 
   & canvas {
-    /* @apply relative z-10; */
     touch-action: none;
   }
 }
