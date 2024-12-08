@@ -5,9 +5,10 @@ import "../styles/components/schedule.css";
 interface Props {
   event: IEvent;
   handleBack: (location: string) => void;
+  location: string;
 }
 
-const Event = ({ event, handleBack }: Props) => {
+const Event = ({ event, handleBack, location }: Props) => {
   useEffect(() => {
     console.log("renew");
     const test = document.getElementById(`content__${event.name}`);
@@ -26,7 +27,7 @@ const Event = ({ event, handleBack }: Props) => {
           }}
         >
           <span className="hidden md:inline">
-            Terug naar <span>{event.location}</span>
+            ← &nbsp; <span>{location}</span>
           </span>
           <span className="md:hidden">←</span>
         </button>

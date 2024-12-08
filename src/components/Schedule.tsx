@@ -36,6 +36,7 @@ const Schedule = ({ initialBuilding, events, initialEvent, copy }: Props) => {
   );
 
   useEffect(() => {
+    console.log("clearing???");
     setState(initialBuilding ? "onBuilding" : "onDefault");
     setSelectedEvent(null);
     setFilteredSchedule(events);
@@ -58,6 +59,9 @@ const Schedule = ({ initialBuilding, events, initialEvent, copy }: Props) => {
   }, [initialBuilding]);
 
   const handleEventClick = (event: IEvent) => {
+    if (!selectedBuilding) {
+      setSelectedBuilding(event.location);
+    }
     setSelectedEvent(event);
     setState("onEvent");
     window.history.replaceState(
@@ -68,6 +72,7 @@ const Schedule = ({ initialBuilding, events, initialEvent, copy }: Props) => {
   };
 
   const handleBack = (location: string) => {
+    console.log(selectedBuilding);
     setState("onBuilding");
     window.history.replaceState({}, "", `?building=${location}`);
   };
@@ -162,7 +167,9 @@ const Schedule = ({ initialBuilding, events, initialEvent, copy }: Props) => {
                 <li key={event.title}>
                   <EventPreview
                     handleClick={() => handleEventClick(event)}
-                    withLocation={!selectedBuilding}
+                    location={
+                      selectedBuilding ? null : copy.buildings[event.location]
+                    }
                     event={event}
                   />
                 </li>
@@ -190,7 +197,9 @@ const Schedule = ({ initialBuilding, events, initialEvent, copy }: Props) => {
                 <li key={event.title}>
                   <EventPreview
                     handleClick={() => handleEventClick(event)}
-                    withLocation={!selectedBuilding}
+                    location={
+                      selectedBuilding ? null : copy.buildings[event.location]
+                    }
                     event={event}
                   />
                 </li>
@@ -199,7 +208,11 @@ const Schedule = ({ initialBuilding, events, initialEvent, copy }: Props) => {
         </div>
         <div className="schedule__event">
           {selectedEvent && (
-            <Event handleBack={handleBack} event={selectedEvent} />
+            <Event
+              location={copy.buildings[selectedEvent.location]}
+              handleBack={handleBack}
+              event={selectedEvent}
+            />
           )}
         </div>
       </div>
