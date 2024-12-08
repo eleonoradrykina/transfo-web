@@ -119,8 +119,13 @@ export default function Experience({ onClickBuilding, clearSelection, initialBui
         end: "20",
         onEnterBack: () => {
           tlLabels.reverse();
+          
+          
         }
       },
+      onReverseComplete: () => {
+        onClickBuilding(null);
+      }
     });
     tlLabels.to(
       ".building-label",
