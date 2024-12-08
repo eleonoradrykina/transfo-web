@@ -73,6 +73,14 @@ mm.add("(max-width: 767px)", () => {
       },
       "<"
     );
+  // .to(
+  //   "#scroll-trigger",
+  //   {
+  //     bottom: "40%",
+  //     top: "50px",
+  //   },
+  //   ">"
+  // );
 });
 
 mm.add("(min-width: 768px)", () => {

@@ -68,13 +68,16 @@ const events = await Promise.all(
             >{copy.faq.title.toUpperCase()}</button
           >
         </div>
+
         <Interactivity
           copy={copy}
           transition:persist
           events={events}
           client:only="react"
         />
+        <div id="scroll-trigger" class="md:hidden fixed inset-0 z-10"></div>
         <Miefel client:load />
+
         <div id="hero__bottom" class="hero__bottom margins">
           <Countdown client:only="react" language={Language.NL} />
 
@@ -138,6 +141,7 @@ const events = await Promise.all(
         >
       </div>
     </footer>
+
     <script src="../services/gsapFAQ.ts"></script>
     <script src="../services/gsap.ts"></script>
   </body>
