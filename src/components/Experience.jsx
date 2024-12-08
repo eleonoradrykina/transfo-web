@@ -105,15 +105,56 @@ export default function Experience({ onChangeBuilding, onChangeEvent, clearSelec
 
   const setLabelsOpacity = () => {
     console.log("setting labels opacity")
+    const mm = gsap.matchMedia();
     const tlLabels = gsap.timeline({
       scrollTrigger: {
         trigger: "#body",
         start: "top top",
         end: "20",
+        onEnter: () => {
+          mm.add("(min-width: 767px)", () => {
+            //enable user gestures
+          setUsersGestures({
+            left: 1,
+            one: 1,
+          })
+
+          //enable clickable buildings
+          setIsClickable(true);
+          //set time after scroll
+          setTimeAfterScroll(Date.now());
+
+          //move to the left and zoom in
+          cameraControlsRef.current?.truck(3.5, 0, true)
+          cameraControlsRef.current?.dolly(2, true)
+          });
+        
+
+          
+        },
         onEnterBack: () => {
           tlLabels.reverse();
           
+          mm.add("(min-width: 767px)", () => {
+            cameraControlsRef.current.setLookAt(10, 5, 10, 0, 0, 0, true);
+            //disable clickable buildings
+            setIsClickable(false);
+  
+            //move to the right and zoom out
+            cameraControlsRef.current?.truck(-3.5, 0, true)
+            cameraControlsRef.current?.dolly(-2, true)
+  
+            //set camera to default position
+            cameraControlsRef.current.setLookAt(10, 5, 10, 0, 0, 0, true)
+  
+            //disable user gestures
+            setUsersGestures({
+              left: 0,
+              one: 0,
+            })
+          });
           
+        
         }
       },
       onReverseComplete: () => {
@@ -131,6 +172,17 @@ export default function Experience({ onChangeBuilding, onChangeEvent, clearSelec
       },
       "<"
     )
+    
+    mm.add("(max-width: 768px)", () => {
+      tlLabels.to(".map", {
+        y: -180,
+        duration: 0.75,
+        ease: "power2.out",
+      }, "<");
+    });
+
+    
+    
   }
 
   const setCameraControls = (key) => {
@@ -138,7 +190,7 @@ export default function Experience({ onChangeBuilding, onChangeEvent, clearSelec
     const camera = [10, 7, 10]
     const offsetCenter = [5, 1, 0]; 
 
-     if (cameraControlsRef.current) {
+     if (cameraControlsRef.current && window.innerWidth > 767) {
       // Lerp from current position to new position
       cameraControlsRef.current.lerpLookAt(
         ...camera,           // camera position
@@ -149,82 +201,6 @@ export default function Experience({ onChangeBuilding, onChangeEvent, clearSelec
         true                // enable transition
       );
     }
-  }
-
-  const setZoom = () => {
-    const mm = gsap.matchMedia();
-
-    mm.add("(min-width: 767px)", () => {
-      const tlZoomDesktop = gsap.timeline({
-        scrollTrigger: {
-          trigger: "#body",
-          start: "top top",
-          end: "20",
-          onEnter: () => {
-
-          //enable user gestures
-          setUsersGestures({
-            left: 1,
-            one: 1,
-          })
-
-          //enable clickable buildings
-          setIsClickable(true);
-          //set time after scroll
-          setTimeAfterScroll(Date.now());
-
-          //move to the left and zoom in
-          cameraControlsRef.current?.truck(3.5, 0, true)
-          cameraControlsRef.current?.dolly(2, true)
-        },
-        onEnterBack: () => {
-          //disable clickable buildings
-          setIsClickable(false);
-
-          //move to the right and zoom out
-          cameraControlsRef.current?.truck(-3.5, 0, true)
-          cameraControlsRef.current?.dolly(-2, true)
-
-          //set camera to default position
-          cameraControlsRef.current.setLookAt(10, 5, 10, 0, 0, 0, true)
-
-          //disable user gestures
-          setUsersGestures({
-            left: 0,
-            one: 0,
-          })
-   
-          handleClear("setZoom")
-        }
-       },
-      })
-    })
-
-    mm.add("(max-width: 767px)", () => {
-      const tlZoomMobile = gsap.timeline({
-        scrollTrigger: {
-          trigger: "#body",
-          start: "top top",
-          end: "20",
-          onEnter: () => {
-          //no user gestures 
-
-          //dolly in
-          cameraControlsRef.current?.dolly(-50, true)
-          cameraControlsRef.current?.truck(0, 1, true)
-  
-        },
-        onEnterBack: () => {
-          //zoom out
-          cameraControlsRef.current?.dolly(-2, true)
-
-          //set camera to default position
-          cameraControlsRef.current.setLookAt(10, 5, 10, 0, 0, 0, true)
-  
-        }
-       },
-      })
-    })
   }
 
 
@@ -248,7 +224,6 @@ export default function Experience({ onChangeBuilding, onChangeEvent, clearSelec
 
   useEffect(() => {
     setLabelsOpacity();
-    setZoom();
   }, []);
 
   const cameraControls = {
