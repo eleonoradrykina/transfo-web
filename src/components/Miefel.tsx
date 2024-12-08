@@ -49,7 +49,11 @@ const Miefel = () => {
 
   useEffect(() => {
     moveHands();
-    let repeater = setInterval(moveHands, 10000);
+    let repeater: NodeJS.Timeout | undefined;
+    if (!repeater) {
+      console.log("setting interval");
+      repeater = setInterval(moveHands, 10000);
+    }
 
     const miefelTL = gsap.timeline({
       scrollTrigger: {
@@ -57,8 +61,10 @@ const Miefel = () => {
         start: "top top",
         end: "20",
         onEnterBack: () => {
-          moveHands();
-          repeater = setInterval(moveHands, 10000);
+          if (!repeater) {
+            console.log("setting interval");
+            repeater = setInterval(moveHands, 10000);
+          }
           miefelTL.reverse();
         },
       },
@@ -92,14 +98,8 @@ const Miefel = () => {
 
   return (
     <div className="miefel">
-      <img
-        className="miefel__hand right"
-        src="/miefel/character-hand-right.png"
-      />
-      <img
-        className="miefel__hand left"
-        src="/miefel/character-hand-left.png"
-      />
+      <img className="miefel__hand right" src="/miefel/right.png" />
+      <img className="miefel__hand left" src="/miefel/left.png" />
     </div>
   );
 };

@@ -3,7 +3,7 @@
   @apply z-10;
 
   & canvas {
-    @apply relative z-10;
+    touch-action: auto;
   }
 }
 
