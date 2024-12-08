@@ -6,7 +6,7 @@ import { SRGBColorSpace } from 'three'
 
 export default function Ground(props) {
   const { nodes} = useGLTF('/models/ground-no-materials.glb')
-  const groundColorMap = useLoader(TextureLoader, '/models/textures/ground-baked.jpg')
+  const groundColorMap = useLoader(TextureLoader, '/models/textures/ground-baked4.webp')
   groundColorMap.flipY = false
   groundColorMap.colorSpace = SRGBColorSpace
 
@@ -45,7 +45,12 @@ export default function Ground(props) {
           position={ [0.3,0.25,-2.25]}
           distanceFactor={6}
           occlude>
-          <p className='map-label'>{props.markt}</p>
+          <p 
+            onClick={(e) => {
+            e.stopPropagation()
+            props.handleClickMarkt()
+            }}
+            className='building-label'>{props.markt}</p>
         </Html>
         <Html
           position={ [2.0,0.25,-3.0]}

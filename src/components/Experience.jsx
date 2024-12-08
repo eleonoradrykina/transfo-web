@@ -32,10 +32,9 @@ import Plong from "./interactiveBuildings/Plong";
 
 import gsap from "gsap";
 
-const positions = new Map([["machinezaal-pompenzaal", [-0.005, 0.584, -1.317]], ["mechaniekers", [0.573, 0.306, 0.635]], ["ketelhuis", [-0.793, 0.87, -0.556]], ["transformatoren", [1.014, 1.132, -4.375]], ["octagon", [1.89, -0.102, -1.122]], ["directeurswoning", [3.105, 0.186, -0.804]], ["duiktank", [1.0, 0.366, 4.596]], ["watertoren", [-0.665, 0.045, 2.214]], ["plong", [1.504, 0.12, -0.343]], ["hoogteparcours", [3.75,0,2.5]], ["waterbassin", [2.5,0,3.0]], ["ingang", [2.0,0.25,-3.0]]]);
+const positions = new Map([["machinezaal-pompenzaal", [-0.005, 0.584, -1.317]], ["mechaniekers", [0.573, 0.306, 0.635]], ["ketelhuis", [-0.793, 0.87, -0.556]], ["transformatoren", [1.014, 1.132, -4.375]], ["octagon", [1.89, -0.102, -1.122]], ["directeurswoning", [3.105, 0.186, -0.804]], ["duiktank", [1.0, 0.366, 4.596]], ["watertoren", [-0.665, 0.045, 2.214]], ["plong", [1.504, 0.12, -0.343]], ["hoogteparcours", [3.75,0,2.5]], ["waterbassin", [2.5,0,3.0]], ["ingang", [2.0,0.25,-3.0]], ["markt", [0.3,0.25,-2.25]]]);
 
-export default function Experience({ onClickBuilding, clearSelection, initialBuilding, copy }) {
-  const [selectedBuilding, setSelectedBuilding] = useState(initialBuilding);
+export default function Experience({ onChangeBuilding, onChangeEvent, clearSelection, selectedBuilding, selectedEvent, copy, events }) {
   const [hoofdzaalEmissiveIntensity, setHoofdzaalEmissiveIntensity] = useState(0);
   const [mechaniekersEmissiveIntensity, setMechaniekersEmissiveIntensity] = useState(0);
   const [ketelhuisEmissiveIntensity, setKetelhuisEmissiveIntensity] = useState(0);
@@ -58,7 +57,6 @@ export default function Experience({ onClickBuilding, clearSelection, initialBui
 
   const cameraControlsRef = useRef();
 
-
   useEffect(() => {
     handleClear("useEffect");
   }, [clearSelection]);
@@ -77,14 +75,19 @@ export default function Experience({ onClickBuilding, clearSelection, initialBui
     setPlongEmissiveIntensity(0);
   };
 
-  const handleSelect = (key) => {
-    if (!isClickable) {
-      return;
-    }
+  const handleSelect = (key, fromEvent) => {
+    // if (!isClickable) {
+    //   return;
+    // }
     setHasClickHappened(true);
-    handleClear("handleSelect");  
-    onClickBuilding(key);
-    setCameraControls(key);
+    handleClear("handleSelect");
+    if (!fromEvent) {
+      onChangeBuilding(key);
+      onChangeEvent(null);
+    }  
+    
+        setCameraControls(key);
+
 
     switch (key) {
       case "machinezaal-pompenzaal": setHoofdzaalEmissiveIntensity(3.0); break;
@@ -97,84 +100,20 @@ export default function Experience({ onClickBuilding, clearSelection, initialBui
       case "watertoren": setWatertorenEmissiveIntensity(3.0); break;
       case "plong": setPlongEmissiveIntensity(3.0); break;
     }
-    
-    window.scrollTo({
-      top: document.body.scrollHeight,
-      left: 0,
-      behavior: "smooth",
-    })
 
-    window.history.pushState(
-      {},
-      "",
-      `${window.location.origin}/?building=${key.toLowerCase()}`
-    )
   }
 
   const setLabelsOpacity = () => {
+    console.log("setting labels opacity")
+    const mm = gsap.matchMedia();
     const tlLabels = gsap.timeline({
       scrollTrigger: {
         trigger: "#body",
         start: "top top",
         end: "20",
-        onEnterBack: () => {
-          tlLabels.reverse();
-        }
-      },
-    });
-    tlLabels.to(
-      ".building-label",
-      {
-        opacity: 1,
-        cursor: "pointer",
-        duration: 0.75,
-        ease: "power2.out",
-      },
-      "<"
-    )
-    .to(
-      ".map-label",
-      {
-        opacity: 1,
-        duration: 0.75,
-        ease: "power2.out",
-      },
-      "<"
-    );
-  }
-
-  const setCameraControls = (key) => {
-    const tl = gsap.timeline();
-
-    const position = positions.get(key);
-    const camera = [10, 5, 10]
-    const offsetCenter = [5, 0, 0]; 
-
-     if (cameraControlsRef.current) {
-      // Lerp from current position to new position
-      cameraControlsRef.current.lerpLookAt(
-        ...camera,           // camera position
-        ...offsetCenter,     // current target (scene center)
-        ...camera,           // same camera position
-        ...position,         // new target (building position)
-        0.17,                // animation duration/strength (0-1)
-        true                // enable transition
-      );
-    }
-  }
-
-  const setZoom = () => {
-    const mm = gsap.matchMedia();
-
-    mm.add("(min-width: 767px)", () => {
-      const tlZoomDesktop = gsap.timeline({
-        scrollTrigger: {
-          trigger: "#body",
-          start: "top top",
-          end: "20",
-          onEnter: () => {
-
-          //enable user gestures
+        onEnter: () => {
+          mm.add("(min-width: 767px)", () => {
+            //enable user gestures
           setUsersGestures({
             left: 1,
             one: 1,
@@ -188,74 +127,103 @@ export default function Experience({ onClickBuilding, clearSelection, initialBui
           //move to the left and zoom in
           cameraControlsRef.current?.truck(3.5, 0, true)
           cameraControlsRef.current?.dolly(2, true)
+          });
+        
+
+          
         },
         onEnterBack: () => {
-          //disable clickable buildings
-          setIsClickable(false);
-
-          //move to the right and zoom out
-          cameraControlsRef.current?.truck(-3.5, 0, true)
-          cameraControlsRef.current?.dolly(-2, true)
-
-          //set camera to default position
-          cameraControlsRef.current.setLookAt(10, 5, 10, 0, 0, 0, true)
-
-          //disable user gestures
-          setUsersGestures({
-            left: 0,
-            one: 0,
-          })
-   
-          handleClear("setZoom")
-          //also clear url params
-          window.history.pushState({}, "", window.location.pathname)
-        }
-       },
-      })
-    })
-
-    mm.add("(max-width: 767px)", () => {
-      const tlZoomMobile = gsap.timeline({
-        scrollTrigger: {
-          trigger: "#body",
-          start: "top top",
-          end: "20",
-          onEnter: () => {
-          //no user gestures 
-
-          //dolly in
-          cameraControlsRef.current?.dolly(2, true)
+          tlLabels.reverse();
+          
+          mm.add("(min-width: 767px)", () => {
+            cameraControlsRef.current.setLookAt(10, 5, 10, 0, 0, 0, true);
+            //disable clickable buildings
+            setIsClickable(false);
   
-        },
-        onEnterBack: () => {
-          //zoom out
-          cameraControlsRef.current?.dolly(-2, true)
-
-          //set camera to default position
-          cameraControlsRef.current.setLookAt(10, 5, 10, 0, 0, 0, true)
-   
-          handleClear("setZoom")
-          //also clear url params
-          window.history.pushState({}, "", window.location.pathname)
+            //move to the right and zoom out
+            cameraControlsRef.current?.truck(-3.5, 0, true)
+            cameraControlsRef.current?.dolly(-2, true)
+  
+            //set camera to default position
+            cameraControlsRef.current.setLookAt(10, 5, 10, 0, 0, 0, true)
+  
+            //disable user gestures
+            setUsersGestures({
+              left: 0,
+              one: 0,
+            })
+          });
+          
+        
         }
-       },
-      })
-    })
+      },
+      onReverseComplete: () => {
+        onChangeBuilding(null);
+        onChangeEvent(null);
+      }
+    });
+    tlLabels.to(
+      ".building-label",
+      {
+        opacity: 1,
+        cursor: "pointer",
+        duration: 0.75,
+        ease: "power2.out",
+      },
+      "<"
+    )
+    
+    mm.add("(max-width: 768px)", () => {
+      tlLabels.to(".map", {
+        y: -180,
+        duration: 0.75,
+        ease: "power2.out",
+      }, "<");
+    });
+
+    
+    
+  }
+
+  const setCameraControls = (key) => {
+    const position = positions.get(key);
+    const camera = [10, 7, 10]
+    const offsetCenter = [5, 1, 0]; 
+
+     if (cameraControlsRef.current && window.innerWidth > 767) {
+      // Lerp from current position to new position
+      cameraControlsRef.current.lerpLookAt(
+        ...camera,           // camera position
+        ...offsetCenter,     // current target (scene center)
+        ...camera,           // same camera position
+        ...position,         // new target (building position)
+        0.17,                // animation duration/strength (0-1)
+        true                // enable transition
+      );
+    }
   }
 
 
   useEffect(() => {
-    if (selectedBuilding) {
-      handleSelect(selectedBuilding);
-    }
-  }, [selectedBuilding]);
+    if (selectedEvent) {
+      const localEvent = events.find((event) => event.slug === selectedEvent) ?? null;
+      if (localEvent) {
+        handleSelect(localEvent.location, true);
+      }
+    } else
+    {
+      if (selectedBuilding) {
+        handleSelect(selectedBuilding, false);
+      }
+      else {
+        handleClear("useEffect2");
+      }
+    } 
+  }, [selectedBuilding, selectedEvent]);
+  
 
   useEffect(() => {
     setLabelsOpacity();
-    setZoom();
-    if (initialBuilding) {
-      handleSelect(initialBuilding);
-    }
   }, []);
 
   const cameraControls = {
@@ -272,6 +240,11 @@ export default function Experience({ onClickBuilding, clearSelection, initialBui
     if (!isClickable) return;
     //if we're not on desktop, return
     if (window.innerWidth < 768) return;
+
+   /*
+      HERE:
+      selectedBuilding is always NULL
+   */
 
     // If click happened, ensure mechaniekers intensity is reset to 0
     if (hasClickHappened && selectedBuilding !== "mechaniekers") {
@@ -336,65 +309,63 @@ export default function Experience({ onClickBuilding, clearSelection, initialBui
         }}
       />
       <ambientLight intensity={1.5} />
-       {/* <axesHelper
-        args={[10]} 
-        /> */}
        <Ground
        hoogteparcours={copy.buildings.hoogteparcours}
         waterbassin={copy.buildings.waterbassin}
         markt={copy.buildings.markt}
         ingang={copy.buildings.ingang} 
-        handleClickParcours={() => handleSelect("hoogteparcours")}
-        handleClickBassin={() => handleSelect("waterbassin")}
-        handleClickIngang={() => handleSelect("ingang")}
+        handleClickParcours={() => handleSelect("hoogteparcours", false)}
+        handleClickBassin={() => handleSelect("waterbassin", false)}
+        handleClickIngang={() => handleSelect("ingang", false)}
+        handleClickMarkt={() => handleSelect("markt", false)}
        />
        <Trees />
        <MapModel />
       <Path intensity={0.5} />
       <Hoofdzaal
-        handleClick={() => handleSelect("machinezaal-pompenzaal")}
+        handleClick={() => handleSelect("machinezaal-pompenzaal", false)}
         emissiveIntensity={hoofdzaalEmissiveIntensity}
         label={copy.buildings["machinezaal-pompenzaal"]}
     />
       <Mechaniekers
-        handleClick={() => handleSelect("mechaniekers")}
+        handleClick={() => handleSelect("mechaniekers", false)}
         emissiveIntensity={mechaniekersEmissiveIntensity}
         label={copy.buildings.mechaniekers}
       />
       <Ketelhuis
-        handleClick={() => handleSelect("ketelhuis")}
+        handleClick={() => handleSelect("ketelhuis", false)}
         emissiveIntensity={ketelhuisEmissiveIntensity}
         label={copy.buildings.ketelhuis}
       />
       <Transformatoren
-        handleClick={() => handleSelect("transformatoren")}
+        handleClick={() => handleSelect("transformatoren", false)}
         emissiveIntensity={transformatorenEmissiveIntensity}
         label={copy.buildings.transformatoren}
       />
       <Octagon
-        handleClick={() => handleSelect("octagon")}
+        handleClick={() => handleSelect("octagon", false)}
         emissiveIntensity={octagonEmissiveIntensity}
         label={copy.buildings.octagon}
       />
       <Kunstacademie
-        handleClick={() => handleSelect("directeurswoning")}
+        handleClick={() => handleSelect("directeurswoning", false)}
         emissiveIntensity={kunstacademieEmissiveIntensity}
         label={copy.buildings.directeurswoning}
       />
       <Duiktank
-        handleClick={() => handleSelect("duiktank")}
+        handleClick={() => handleSelect("duiktank", false)}
         emissiveIntensity={duiktankEmissiveIntensity}
         label={copy.buildings.duiktank}
 
       />
       <Watertoren
-        handleClick={() => handleSelect("watertoren")}
+        handleClick={() => handleSelect("watertoren", false)}
         emissiveIntensity={watertorenEmissiveIntensity}
         label={copy.buildings.watertoren}
 
       />
       <Plong
-        handleClick={() => handleSelect("plong")}
+        handleClick={() => handleSelect("plong", false)}
         emissiveIntensity={plongEmissiveIntensity}
         label={copy.buildings.plong}
       />

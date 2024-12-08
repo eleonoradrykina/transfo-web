@@ -8,19 +8,24 @@ import { type IEvent } from "../services/types";
 import Event from "./Event";
 
 interface Props {
-  initialBuilding: string | null;
+  selectedBuilding: string | null;
   events: IEvent[];
-  initialEvent: string | null;
+  selectedEvent: string | null;
   copy: any;
   onChangeBuilding: (building: string | null) => void;
+  onChangeEvent: (event: string | null) => void;
 }
 
-const Schedule = ({ initialBuilding, events, initialEvent, copy }: Props) => {
-  const [selectedEvent, setSelectedEvent] = useState<IEvent | null>(
-    events.find((event) => event.slug === initialEvent) ?? null
-  );
-  const [selectedBuilding, setSelectedBuilding] = useState<string | null>(
-    initialBuilding
+const Schedule = ({
+  selectedBuilding,
+  events,
+  selectedEvent,
+  copy,
+  onChangeBuilding,
+  onChangeEvent,
+}: Props) => {
+  const [localEvent, setLocalEvent] = useState<IEvent | null>(
+    events.find((event) => event.slug === selectedEvent) ?? null
   );
   const [filteredSchedule, setFilteredSchedule] = useState(
     events.filter((event) => {
@@ -33,74 +38,76 @@ const Schedule = ({ initialBuilding, events, initialEvent, copy }: Props) => {
   );
 
   const [state, setState] = useState<"onDefault" | "onBuilding" | "onEvent">(
-    initialEvent ? "onEvent" : initialBuilding ? "onBuilding" : "onDefault"
+    selectedBuilding ? "onEvent" : selectedBuilding ? "onBuilding" : "onDefault"
   );
 
   useEffect(() => {
-    setState(initialBuilding ? "onBuilding" : "onDefault");
-    setSelectedEvent(null);
-    setFilteredSchedule(events);
-    setSelectedBuilding(initialBuilding);
+    setState(
+      selectedEvent ? "onEvent" : selectedBuilding ? "onBuilding" : "onDefault"
+    );
+    if (selectedEvent) {
+      setLocalEvent(
+        events.find((event) => event.slug === selectedEvent) ?? null
+      );
+    } else {
+      setLocalEvent(null);
+    }
     setFilteredSchedule(
       events.filter((event) => {
-        if (initialBuilding) {
-          return event.location.toLowerCase() === initialBuilding.toLowerCase();
+        if (selectedBuilding) {
+          return (
+            event.location.toLowerCase() === selectedBuilding.toLowerCase()
+          );
         } else {
           return true;
         }
       })
     );
-
-    window.history.replaceState(
-      {},
-      "",
-      initialBuilding ? "?building=" + initialBuilding : window.location.origin
-    );
-  }, [initialBuilding]);
+  }, [selectedBuilding, selectedEvent]);
 
   const handleEventClick = (event: IEvent) => {
+    setLocalEvent(event);
+    console.log("event", event);
+    onChangeEvent(event.slug);
     if (!selectedBuilding) {
-      setSelectedBuilding(event.location);
+      onChangeBuilding(event.location);
     }
-    setSelectedEvent(event);
     setState("onEvent");
-    window.history.replaceState(
-      {},
-      "",
-      `?building=${event.location}&event=${event.slug}`
-    );
   };
 
   const handleBack = (location: string) => {
     let mm = gsap.matchMedia();
     mm.add("(max-width: 768px)", () => {
       setState("onDefault");
-      setSelectedBuilding(null);
-      window.history.replaceState({}, "", window.location.origin);
+      onChangeBuilding(null);
     });
+
     mm.add("(min-width: 768px)", () => {
       setState("onBuilding");
-      window.history.replaceState({}, "", `?building=${location}`);
+      if (!selectedBuilding) {
+        onChangeBuilding(location);
+      }
     });
+    onChangeEvent(null);
   };
 
-  const handleScroll = (e: React.UIEvent<HTMLElement>) => {
-    if (window.innerWidth < 768) {
-      if (e.currentTarget.scrollTop > 100) {
-        gsap.to("#schedule", {
-          duration: 0.5,
-          ease: "power1.out",
-          top: "35%",
-        });
-      } else {
-        gsap.to("#schedule", {
-          duration: 0.5,
-          ease: "power1.out",
-          top: "50%",
-        });
-      }
-    }
-  };
+  // const handleScroll = (e: React.UIEvent<HTMLElement>) => {
+  //   if (window.innerWidth < 768) {
+  //     if (e.currentTarget.scrollTop > 100) {
+  //       gsap.to("#schedule", {
+  //         duration: 0.5,
+  //         ease: "power1.out",
+  //         top: "35%",
+  //       });
+  //     } else {
+  //       gsap.to("#schedule", {
+  //         duration: 0.5,
+  //         ease: "power1.out",
+  //         top: "50%",
+  //       });
+  //     }
+  //   }
+  // };
 
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
@@ -134,7 +141,7 @@ const Schedule = ({ initialBuilding, events, initialEvent, copy }: Props) => {
             Heel het programma is weergegeven. Klik op het gebouw om te zien wat
             er daar plaatsvindt.
           </p>
-          <ul onScroll={handleScroll} className="schedule__list">
+          <ul className="schedule__list">
             {events
               .sort((a: IEvent, b: IEvent) => {
                 if (a.startTime && b.startTime) {
@@ -161,9 +168,23 @@ const Schedule = ({ initialBuilding, events, initialEvent, copy }: Props) => {
           </ul>
         </div>
         <div className="schedule__building">
-          <h3 className="schedule__title">
-            {copy.buildings[selectedBuilding ?? "default"]}
-          </h3>
+          <div className="w-full gap-15 flex flex-col items-start ">
+            <button
+              className="event__back"
+              onClick={() => {
+                onChangeBuilding(null);
+              }}
+            >
+              <span className="hidden md:inline">
+                ← &nbsp; <span>terug</span>
+              </span>
+              <span className="md:hidden">←</span>
+            </button>
+            <h3 className="schedule__title">
+              {copy.buildings[selectedBuilding ?? "default"]}
+            </h3>
+          </div>
+
           <ul className="schedule__list">
             {filteredSchedule
               .sort((a: IEvent, b: IEvent) => {
@@ -191,11 +212,11 @@ const Schedule = ({ initialBuilding, events, initialEvent, copy }: Props) => {
           </ul>
         </div>
         <div className="schedule__event">
-          {selectedEvent && (
+          {localEvent && (
             <Event
-              location={copy.buildings[selectedEvent.location]}
+              location={copy.buildings[localEvent.location]}
               handleBack={handleBack}
-              event={selectedEvent}
+              event={localEvent}
             />
           )}
         </div>

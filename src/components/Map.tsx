@@ -3,17 +3,24 @@ import { Bvh } from "@react-three/drei";
 import "../styles/components/map.css";
 import Experience from "./Experience";
 import { useState } from "react";
+import type { IEvent } from "../services/types";
 
 interface Props {
   onChangeBuilding: (building: string | null) => void;
-  initialBuilding: string | null;
+  onChangeEvent: (event: string | null) => void;
+  selectedBuilding: string | null;
+  selectedEvent: string | null;
   copy: any;
+  events: IEvent[];
 }
 
 export default function Map({
   onChangeBuilding,
-  initialBuilding,
+  onChangeEvent,
+  selectedBuilding,
+  selectedEvent,
   copy,
+  events,
 }: Props) {
   const [clearSelection, setClearSelection] = useState(0);
 
@@ -27,16 +34,21 @@ export default function Map({
           position: [13, 7, 13],
         }}
         onPointerMissed={() => {
+          console.log("clearing");
           onChangeBuilding(null);
+          onChangeEvent(null);
           setClearSelection(clearSelection + 1);
         }}
       >
         <Bvh>
           <Experience
             copy={copy}
-            initialBuilding={initialBuilding}
+            events={events}
+            selectedBuilding={selectedBuilding}
+            selectedEvent={selectedEvent}
             clearSelection={clearSelection}
-            onClickBuilding={onChangeBuilding}
+            onChangeBuilding={onChangeBuilding}
+            onChangeEvent={onChangeEvent}
           />
         </Bvh>
       </Canvas>
