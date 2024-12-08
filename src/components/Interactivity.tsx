@@ -13,12 +13,32 @@ const Interactivity = ({ events, copy }: Props) => {
   const urlParams = new URLSearchParams(queryString);
 
   const [selectedBuilding, setSelectedBuilding] = useState<string | null>(null);
-  const [selectedEvent] = useState<string | null>(
-    urlParams.get("event") ?? null
-  );
+  const [selectedEvent, setSelectedEvent] = useState<string | null>(null);
 
   useEffect(() => {
-    if (urlParams.get("building")) {
+    console.log("useEffect");
+    console.log("selectedBuilding", selectedBuilding);
+    console.log("selectedEvent", selectedEvent);
+
+    if (selectedBuilding && selectedEvent) {
+      window.history.replaceState(
+        {},
+        document.title,
+        `?building=${selectedBuilding}&event=${selectedEvent}`
+      );
+    } else if (selectedBuilding && !selectedEvent) {
+      window.history.replaceState(
+        {},
+        document.title,
+        `?building=${selectedBuilding}`
+      );
+    } else {
+      window.history.replaceState({}, document.title, "/");
+    }
+  }, [selectedBuilding, selectedEvent]);
+
+  useEffect(() => {
+    if (urlParams.get("building") && window.innerWidth > 768) {
       if (
         Object.values(BUILDING).includes(urlParams.get("building") as BUILDING)
       ) {
@@ -28,21 +48,29 @@ const Interactivity = ({ events, copy }: Props) => {
         window.history.replaceState({}, document.title, "/");
       }
     }
+    if (urlParams.get("event")) {
+      setSelectedEvent(urlParams.get("event") ?? null);
+      window.scrollTo(0, document.body.scrollHeight);
+    }
   }, []);
 
   return (
     <div className="interactivity">
       <Map
         copy={copy}
-        initialBuilding={selectedBuilding}
+        events={events}
+        selectedBuilding={selectedBuilding}
+        selectedEvent={selectedEvent}
         onChangeBuilding={setSelectedBuilding}
+        onChangeEvent={setSelectedEvent}
       />
       <Schedule
         copy={copy}
         events={events}
-        initialBuilding={selectedBuilding}
-        initialEvent={selectedEvent}
+        selectedBuilding={selectedBuilding}
+        selectedEvent={selectedEvent}
         onChangeBuilding={setSelectedBuilding}
+        onChangeEvent={setSelectedEvent}
       />
     </div>
   );
