@@ -69,6 +69,9 @@ const Schedule = ({
     setLocalEvent(event);
     console.log("event", event);
     onChangeEvent(event.slug);
+    if (!selectedBuilding) {
+      onChangeBuilding(event.location);
+    }
     setState("onEvent");
   };
 

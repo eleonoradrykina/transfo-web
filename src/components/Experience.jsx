@@ -117,7 +117,8 @@ export default function Experience({ onChangeBuilding, onChangeEvent, clearSelec
         }
       },
       onReverseComplete: () => {
-        onClickBuilding(null);
+        onChangeBuilding(null);
+        onChangeEvent(null);
       }
     });
     tlLabels.to(
