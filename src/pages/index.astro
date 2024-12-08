@@ -4,7 +4,6 @@ import "../styles/hero.css";
 import "../styles/faq.css";
 import "../styles/global.css";
 import FAQ from "../components/FAQ";
-import { ClientRouter } from "astro:transitions";
 import Countdown from "../components/Countdown";
 import Interactivity from "../components/Interactivity";
 import { Language, type IEvent } from "../services/types";
@@ -58,8 +57,7 @@ const events = await Promise.all(
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
     <meta name="description" content={copy.description} />
-    <title>Transfo Intiem {copy.title}</title>
-    <ClientRouter />
+    <title>{copy["title-lower-case"]}</title>
   </head>
   <body id="body">
     <main class="main">
