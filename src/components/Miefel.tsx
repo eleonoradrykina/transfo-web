@@ -82,8 +82,8 @@ const Miefel = () => {
 
   return (
     <div className="miefel">
-      <img className="miefel__hand right" src="/miefel/right.png" />
-      <img className="miefel__hand left" src="/miefel/left.png" />
+      <img className="miefel__hand right" src="/miefel/right.webp" />
+      <img className="miefel__hand left" src="/miefel/left.webp" />
     </div>
   );
 };
