@@ -3,7 +3,7 @@ import { OrbitControls, CameraControls } from "@react-three/drei";
 // import { Perf } from "r3f-perf";
 
 // import { useControls } from "leva";
-import { useThree } from "@react-three/fiber";
+import { useThree, useFrame } from "@react-three/fiber";
 import {
   ToneMapping,
   EffectComposer,
@@ -47,6 +47,9 @@ export default function Experience({ onClickBuilding, clearSelection, initialBui
   const [plongEmissiveIntensity, setPlongEmissiveIntensity] = useState(0);
 
   const [isClickable, setIsClickable] = useState(false);
+  const [hasClickHappened, setHasClickHappened] = useState(false);
+  const [timeAfterScroll, setTimeAfterScroll] = useState(null);
+
 
   const [usersGestures, setUsersGestures] = useState({
     left: 0,
@@ -76,9 +79,9 @@ export default function Experience({ onClickBuilding, clearSelection, initialBui
 
   const handleSelect = (key) => {
     if (!isClickable) {
-      console.log("not clickable");
       return;
     }
+    setHasClickHappened(true);
     handleClear("handleSelect");  
     onClickBuilding(key);
     setCameraControls(key);
@@ -179,6 +182,8 @@ export default function Experience({ onClickBuilding, clearSelection, initialBui
 
           //enable clickable buildings
           setIsClickable(true);
+          //set time after scroll
+          setTimeAfterScroll(Date.now());
 
           //move to the left and zoom in
           cameraControlsRef.current?.truck(3.5, 0, true)
@@ -238,6 +243,7 @@ export default function Experience({ onClickBuilding, clearSelection, initialBui
     })
   }
 
+
   useEffect(() => {
     if (selectedBuilding) {
       handleSelect(selectedBuilding);
@@ -247,8 +253,9 @@ export default function Experience({ onClickBuilding, clearSelection, initialBui
   useEffect(() => {
     setLabelsOpacity();
     setZoom();
-    handleSelect(initialBuilding);
-
+    if (initialBuilding) {
+      handleSelect(initialBuilding);
+    }
   }, []);
 
   const cameraControls = {
@@ -259,6 +266,48 @@ export default function Experience({ onClickBuilding, clearSelection, initialBui
     maxAzimuthAngle: 1.1,
     minAzimuthAngle: -0.3,
   }
+
+  useFrame(() => {
+    //if not clickable, return
+    if (!isClickable) return;
+    //if we're not on desktop, return
+    if (window.innerWidth < 768) return;
+
+    // If click happened, ensure mechaniekers intensity is reset to 0
+    if (hasClickHappened && selectedBuilding !== "mechaniekers") {
+      setMechaniekersEmissiveIntensity(0);
+      return;
+    }
+    // if click happened to mechaniekers ignore pulsating
+    if (hasClickHappened && selectedBuilding === "mechaniekers") {
+      setMechaniekersEmissiveIntensity(3.0);
+      return;
+    }
+
+    const elapsedTime = Date.now();
+    const timeBeforeInteraction = elapsedTime - timeAfterScroll;
+
+    if (timeBeforeInteraction > 5000) {
+      // Create a pulsating effect with pauses
+      const frequency = 0.0006; 
+      const pauseThreshold = 0.95; // Threshold for pause (0-1)
+      
+      // Base sine wave
+      let pulsate = Math.sin(elapsedTime * frequency);
+      
+      // Add easing (smooth step function)
+      pulsate = (3 * pulsate * pulsate - 2 * pulsate * pulsate * pulsate) / 2;
+      
+      // Add pause at the bottom
+      if (pulsate < -pauseThreshold) {
+          pulsate = -1;
+      }
+      
+      // Convert from -1,1 range to 0,1 range and apply intensity
+      const intensity = ((pulsate + 1) * 0.5) * 1.5;
+      setMechaniekersEmissiveIntensity(intensity);
+    }
+  });
 
   return (
     <>

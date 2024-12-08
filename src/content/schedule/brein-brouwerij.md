@@ -3,7 +3,7 @@ title: "Breinbrouwerij"
 name: "Breinbrouwerij"
 tags: ["Robots"]
 location: "plong"
-heroImage: "kioskobot.png"
+heroImage: "kioskobot.webp"
 ---
 
 Deze interactieve speelinstallatie neemt je mee op een ontdekkingstocht waarbij jij aan het roer staat! Vanuit een ver sterrenstelsel zijn Kioskobot en zijn vrienden, de Amibots, op onze planeet geland. Hun reis verliep niet zonder problemen en nu hebben ze jouw hulp nodig om de draad weer op te pakken. Lukt het jou om de puzzels en spelletjes op te lossen? Schuif, draai, duw en werk samen om de geheimen van deze bots te ontrafelen.

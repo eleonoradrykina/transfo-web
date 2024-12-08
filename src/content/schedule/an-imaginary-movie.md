@@ -3,7 +3,7 @@ title: "An Imaginary movie"
 name: "Eva Dehullu en Martijn Peirs"
 tags: ["kortfilm"]
 location: "directeurswoning"
-heroImage: "kortfilm.png"
+heroImage: "kortfilm.webp"
 ---
 
 De muziek focust op enkele typische emoties en expressies die je wel in één of andere vorm in elke film kunt terugvinden, het zijn basisemoties die bij mens en verhaal horen en die het verhaal richting, structuur en inhoud kunnen geven. De muziek kan ook vanuit de klank onze perceptie van de beelden sturen en beïnvloeden.
