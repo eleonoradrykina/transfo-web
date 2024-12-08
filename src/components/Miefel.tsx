@@ -37,7 +37,6 @@ const Miefel = () => {
     moveHands();
     let repeater: NodeJS.Timeout | undefined;
     if (!repeater) {
-      console.log("setting interval");
       repeater = setInterval(moveHands, 10000);
     }
 
@@ -48,7 +47,6 @@ const Miefel = () => {
         end: "20",
         onEnterBack: () => {
           if (!repeater) {
-            console.log("setting interval");
             repeater = setInterval(moveHands, 10000);
           }
           miefelTL.reverse();

@@ -19,7 +19,6 @@ const Interactivity = ({ events, copy }: Props) => {
 
   useEffect(() => {
     if (urlParams.get("building")) {
-      console.log(urlParams.get("building"));
       if (
         Object.values(BUILDING).includes(urlParams.get("building") as BUILDING)
       ) {
@@ -43,6 +42,7 @@ const Interactivity = ({ events, copy }: Props) => {
         events={events}
         initialBuilding={selectedBuilding}
         initialEvent={selectedEvent}
+        onChangeBuilding={setSelectedBuilding}
       />
     </div>
   );

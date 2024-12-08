@@ -10,7 +10,6 @@ interface Props {
 
 const Event = ({ event, handleBack, location }: Props) => {
   useEffect(() => {
-    console.log("renew");
     const test = document.getElementById(`content__${event.name}`);
     if (test) {
       test.innerHTML = event.content;

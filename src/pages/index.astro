@@ -20,7 +20,6 @@ const eventsRaw = await import.meta.glob("../content/schedule/*.md", {
 if (eventsRaw) {
   tempRAW = await Promise.all(
     Object.values(eventsRaw).map(async (event: any) => {
-      console.log(await event.frontmatter);
       const content = await event.compiledContent();
       return { content: content, title: event.frontmatter.title };
     })

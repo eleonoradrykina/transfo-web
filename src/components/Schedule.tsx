@@ -12,9 +12,16 @@ interface Props {
   events: IEvent[];
   initialEvent: string | null;
   copy: any;
+  onChangeBuilding: (building: string | null) => void;
 }
 
-const Schedule = ({ initialBuilding, events, initialEvent, copy }: Props) => {
+const Schedule = ({
+  initialBuilding,
+  events,
+  initialEvent,
+  copy,
+  onChangeBuilding,
+}: Props) => {
   const [selectedEvent, setSelectedEvent] = useState<IEvent | null>(
     events.find((event) => event.slug === initialEvent) ?? null
   );
@@ -36,7 +43,6 @@ const Schedule = ({ initialBuilding, events, initialEvent, copy }: Props) => {
   );
 
   useEffect(() => {
-    console.log("clearing???");
     setState(initialBuilding ? "onBuilding" : "onDefault");
     setSelectedEvent(null);
     setFilteredSchedule(events);
