@@ -58,6 +58,14 @@ if (faqButton) {
           ease: "power2.out",
         },
         "<"
+      )
+      .to(
+        ".map",
+        {
+          opacity: 0,
+          duration: 1,
+        },
+        "<"
       );
 
     mm.add("(max-width: 767px)", () => {
@@ -110,6 +118,14 @@ if (faqBackButton) {
       });
     });
     reversedFaqTL
+      .to(
+        ".map",
+        {
+          opacity: 100,
+          duration: 1,
+        },
+        "<"
+      )
       .to(
         "#hero__title",
         {
