@@ -1,5 +1,5 @@
 .schedule {
-  @apply fixed z-30 right-0 left-0 bottom-0 top-[45%] md:top-0;
+  @apply fixed z-30 right-0 left-0 bottom-0 top-[50%] md:top-0;
   @media (min-width: 768px) {
     left: unset;
   }
@@ -122,6 +122,16 @@
   @apply p-15 md:p-30 rounded-lg;
   @apply bg-black;
   @apply max-h-full h-full overflow-y-hidden;
+
+  &__header {
+    @apply w-full flex flex-row md:flex-col items-start gap-15;
+    @apply text-start md:text-center;
+  }
+
+  &__scroll {
+    @apply overflow-y-auto overscroll-contain;
+    @apply flex flex-col gap-15;
+  }
 
   &__back {
     @apply bg-white/20;

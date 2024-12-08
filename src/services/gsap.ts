@@ -11,6 +11,14 @@ const mainTL = gsap.timeline({
     start: "top top",
     end: "20",
     onEnterBack: () => {
+      mm.add("(max-width: 768px)", () => {
+        gsap.to("#schedule", {
+          duration: 0.2,
+          ease: "power1.out",
+          top: "45%",
+        });
+      });
+
       mainTL.reverse();
     },
   },

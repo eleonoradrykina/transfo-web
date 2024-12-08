@@ -78,9 +78,34 @@ const Schedule = ({
   };
 
   const handleBack = (location: string) => {
-    console.log(selectedBuilding);
-    setState("onBuilding");
-    window.history.replaceState({}, "", `?building=${location}`);
+    let mm = gsap.matchMedia();
+    mm.add("(max-width: 768px)", () => {
+      setState("onDefault");
+      setSelectedBuilding(null);
+      window.history.replaceState({}, "", window.location.origin);
+    });
+    mm.add("(min-width: 768px)", () => {
+      setState("onBuilding");
+      window.history.replaceState({}, "", `?building=${location}`);
+    });
+  };
+
+  const handleScroll = (e: React.UIEvent<HTMLElement>) => {
+    if (window.innerWidth < 768) {
+      if (e.currentTarget.scrollTop > 100) {
+        gsap.to("#schedule", {
+          duration: 0.5,
+          ease: "power1.out",
+          top: "35%",
+        });
+      } else {
+        gsap.to("#schedule", {
+          duration: 0.5,
+          ease: "power1.out",
+          top: "50%",
+        });
+      }
+    }
   };
 
   useEffect(() => {
@@ -91,31 +116,31 @@ const Schedule = ({
         trigger: "#body",
         start: "top top",
         end: "20",
-        scrub: 1,
-        onUpdate() {
-          gsap.to("#schedule", {
-            duration: 0.5,
-            ease: "power1.out",
-            x: "0vw",
-          });
+        onEnterBack: () => {
+          scheduleTL.reverse();
+          // gsap.to("#schedule", {
+          //   duration: 0.5,
+          //   ease: "power1.out",
+          //   x: "0vw",
+          // });
 
-          gsap.to("#faq__button", {
-            duration: 0.5,
-            ease: "power1.out",
-            x: "0vw",
-          });
+          // gsap.to("#faq__button", {
+          //   duration: 0.5,
+          //   ease: "power1.out",
+          //   x: "0vw",
+          // });
 
-          gsap.to("#hero__title", {
-            duration: 0.5,
-            ease: "power1.out",
-            x: "0vw",
-          });
+          // gsap.to("#hero__title", {
+          //   duration: 0.5,
+          //   ease: "power1.out",
+          //   x: "0vw",
+          // });
 
-          gsap.to("#hero__date", {
-            duration: 0.5,
-            ease: "power1.out",
-            x: "0vw",
-          });
+          // gsap.to("#hero__date", {
+          //   duration: 0.5,
+          //   ease: "power1.out",
+          //   x: "0vw",
+          // });
         },
       },
     });
@@ -129,26 +154,8 @@ const Schedule = ({
     );
   }, []);
 
-  const handleScheduleFocuse = () => {
-    const mm = gsap.matchMedia();
-
-    mm.add("(max-width: 768px)", () => {
-      gsap.to("#schedule", {
-        duration: 0.5,
-        ease: "power1.out",
-        top: "30%",
-      });
-    });
-  };
-
   return (
-    <div
-      id="schedule"
-      onFocusCapture={handleScheduleFocuse}
-      onClickCapture={handleScheduleFocuse}
-      onScrollCapture={handleScheduleFocuse}
-      className={`schedule ${state}`}
-    >
+    <div id="schedule" className={`schedule ${state}`}>
       <div className="schedule__content">
         <div className="schedule__default">
           <h3 className="schedule__title">Programma</h3>
@@ -156,7 +163,7 @@ const Schedule = ({
             Heel het programma is weergegeven. Klik op het gebouw om te zien wat
             er daar plaatsvindt.
           </p>
-          <ul className="schedule__list">
+          <ul onScroll={handleScroll} className="schedule__list">
             {events
               .sort((a: IEvent, b: IEvent) => {
                 if (a.startTime && b.startTime) {
