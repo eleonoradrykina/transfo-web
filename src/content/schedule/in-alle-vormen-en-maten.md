@@ -16,3 +16,7 @@ Begrijp dat eenzaamheid universeel is, maar door iedereen anders wordt beleefd.
 Deze unieke mix van kunst, data en empathie verandert je kijk op eenzaamheid en inspireert om anderen te steunen. Doe mee en word onderdeel van deze interactieve reis.
 
 Ontdek hoe eenzaamheid echt in verschillende vormen en maten voorkomt.
+
+[Klara Pogačar](https://www.klara-pogacar.com/)
+
+[Paulina Kuchta-Leśniak](https://www.paulinakuchta.com)
