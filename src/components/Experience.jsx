@@ -244,9 +244,15 @@ export default function Experience({ onChangeBuilding, onChangeEvent, clearSelec
       if (localEvent) {
         handleSelect(localEvent.location, true);
       }
-    } else if (selectedBuilding) {
-      handleSelect(selectedBuilding, false);
-    }
+    } else
+    {
+      if (selectedBuilding) {
+        handleSelect(selectedBuilding, false);
+      }
+      else {
+        handleClear("useEffect2");
+      }
+    } 
   }, [selectedBuilding, selectedEvent]);
   
 

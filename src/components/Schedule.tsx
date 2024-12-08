@@ -168,9 +168,23 @@ const Schedule = ({
           </ul>
         </div>
         <div className="schedule__building">
-          <h3 className="schedule__title">
-            {copy.buildings[selectedBuilding ?? "default"]}
-          </h3>
+          <div className="w-full gap-30 flex flex-col items-start ">
+            <button
+              className="event__back"
+              onClick={() => {
+                onChangeBuilding(null);
+              }}
+            >
+              <span className="hidden md:inline">
+                ← &nbsp; <span>terug</span>
+              </span>
+              <span className="md:hidden">←</span>
+            </button>
+            <h3 className="schedule__title">
+              {copy.buildings[selectedBuilding ?? "default"]}
+            </h3>
+          </div>
+
           <ul className="schedule__list">
             {filteredSchedule
               .sort((a: IEvent, b: IEvent) => {

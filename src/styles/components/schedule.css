@@ -62,7 +62,7 @@
   }
 
   &__title {
-    @apply font-bold text-3xl md:text-5xl;
+    @apply w-full text-center font-bold text-3xl md:text-5xl;
   }
 
   &__list {
@@ -139,6 +139,7 @@
     @apply flex items-center justify-center;
     @apply border-2 border-pink rounded-full;
     @apply md:px-15;
+    @apply text-nowrap;
   }
 
   &__title {
