@@ -35,7 +35,7 @@ export default function Ketelhuis(props) {
               e.stopPropagation()
               props.handleClick()
             }}
-              className='building-label'>Ketelhuis</p>
+              className='building-label'>{props.label}</p>
           </Html>
         </mesh>
         <mesh

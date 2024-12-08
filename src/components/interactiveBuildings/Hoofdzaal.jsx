@@ -41,7 +41,7 @@ export default function Hoofdzaal(props) {
             e.stopPropagation()
             props.handleClick()
           }}
-            className='building-label'>machinezaal & pompenzaal</p>
+            className='building-label'>{props.label}</p>
          </Html>
       </mesh>
         <mesh

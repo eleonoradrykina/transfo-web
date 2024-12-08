@@ -7,9 +7,14 @@ import { useState } from "react";
 interface Props {
   onChangeBuilding: (building: string | null) => void;
   initialBuilding: string | null;
+  copy: any;
 }
 
-export default function Map({ onChangeBuilding, initialBuilding }: Props) {
+export default function Map({
+  onChangeBuilding,
+  initialBuilding,
+  copy,
+}: Props) {
   const [clearSelection, setClearSelection] = useState(0);
 
   return (
@@ -28,6 +33,7 @@ export default function Map({ onChangeBuilding, initialBuilding }: Props) {
       >
         <Bvh>
           <Experience
+            copy={copy}
             initialBuilding={initialBuilding}
             clearSelection={clearSelection}
             onClickBuilding={onChangeBuilding}
