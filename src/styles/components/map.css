@@ -55,3 +55,8 @@
 .map-label::after {
   background: #dec1fb;
 }
+
+svg {
+  @apply opacity-0;
+  @apply pointer-events-none;
+}
