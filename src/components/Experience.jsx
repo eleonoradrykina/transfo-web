@@ -32,7 +32,7 @@ import Plong from "./interactiveBuildings/Plong";
 
 import gsap from "gsap";
 
-const positions = new Map([["machinezaal-pompenzaal", [-0.005, 0.584, -1.317]], ["mechaniekers", [0.573, 0.306, 0.635]], ["ketelhuis", [-0.793, 0.87, -0.556]], ["transformatoren", [1.014, 1.132, -4.375]], ["octagon", [1.89, -0.102, -1.122]], ["directeurswoning", [3.105, 0.186, -0.804]], ["duiktank", [1.0, 0.366, 4.596]], ["watertoren", [-0.665, 0.045, 2.214]], ["plong", [1.504, 0.12, -0.343]], ["hoogteparcours", [3.75,0,2.5]], ["waterbassin", [2.5,0,3.0]], ["ingang", [2.0,0.25,-3.0]]]);
+const positions = new Map([["machinezaal-pompenzaal", [-0.005, 0.584, -1.317]], ["mechaniekers", [0.573, 0.306, 0.635]], ["ketelhuis", [-0.793, 0.87, -0.556]], ["transformatoren", [1.014, 1.132, -4.375]], ["octagon", [1.89, -0.102, -1.122]], ["directeurswoning", [3.105, 0.186, -0.804]], ["duiktank", [1.0, 0.366, 4.596]], ["watertoren", [-0.665, 0.045, 2.214]], ["plong", [1.504, 0.12, -0.343]], ["hoogteparcours", [3.75,0,2.5]], ["waterbassin", [2.5,0,3.0]], ["ingang", [2.0,0.25,-3.0]], ["markt", [0.3,0.25,-2.25]]]);
 
 export default function Experience({ onClickBuilding, clearSelection, initialBuilding, copy }) {
   const [selectedBuilding, setSelectedBuilding] = useState(initialBuilding);
@@ -146,8 +146,8 @@ export default function Experience({ onClickBuilding, clearSelection, initialBui
     const tl = gsap.timeline();
 
     const position = positions.get(key);
-    const camera = [10, 5, 10]
-    const offsetCenter = [5, 0, 0]; 
+    const camera = [10, 7, 10]
+    const offsetCenter = [5, 1, 0]; 
 
      if (cameraControlsRef.current) {
       // Lerp from current position to new position
@@ -340,9 +340,6 @@ export default function Experience({ onClickBuilding, clearSelection, initialBui
         }}
       />
       <ambientLight intensity={1.5} />
-       {/* <axesHelper
-        args={[10]} 
-        /> */}
        <Ground
        hoogteparcours={copy.buildings.hoogteparcours}
         waterbassin={copy.buildings.waterbassin}
@@ -351,6 +348,7 @@ export default function Experience({ onClickBuilding, clearSelection, initialBui
         handleClickParcours={() => handleSelect("hoogteparcours")}
         handleClickBassin={() => handleSelect("waterbassin")}
         handleClickIngang={() => handleSelect("ingang")}
+        handleClickMarkt={() => handleSelect("markt")}
        />
        <Trees />
        <MapModel />
