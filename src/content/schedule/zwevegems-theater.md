@@ -4,7 +4,7 @@ name: "Pieter Hellin, Mieke Vanoverberghe en Trui Verbeke"
 tags: ["Theater"]
 location: "machinezaal-pompenzaal"
 subLocation: "pompenzaal"
-heroImage: "theater.png"
+heroImage: "theater.webp"
 startTime: "2024-12-14T20:00:00"
 endTime: "2024-12-14T21:00:00"
 ---

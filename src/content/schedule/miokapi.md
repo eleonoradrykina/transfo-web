@@ -4,7 +4,7 @@ name: "Freek Quartier"
 tags: ["Muziek"]
 location: "machinezaal-pompenzaal"
 subLocation: "pompenzaal"
-heroImage: "miokapi.png"
+heroImage: "miokapi.webp"
 startTime: "2024-12-14T22:00:00"
 endTime: "2024-12-14T23:00:00"
 ---
