@@ -16,76 +16,87 @@ const mainTL = gsap.timeline({
   },
 });
 
-mainTL.to(
-  "#hero__date",
-  {
-    marginLeft: "0px",
-  },
-  "<"
-);
-
-mainTL.from(
-  "#faq__button",
-  {
-    opacity: 0,
-  },
-  "<"
-);
-
-mm.add("(max-width: 767px)", () => {
-  mainTL.to(
-    "#hero",
+mainTL
+  .to(
+    "#hero__date",
     {
-      paddingTop: "10px",
-    },
-    "<"
-  );
-
-  mainTL.to(
-    "#hero__title",
-    {
-      fontSize: "10vw",
       marginLeft: "0px",
     },
     "<"
-  );
-
-  mainTL.to(
-    "#hero__date",
+  )
+  .to(
+    "#hero__bottom",
     {
-      fontSize: "0.7rem",
-      lineHeight: "1.2rem",
+      opacity: 0,
+      y: 100,
+    },
+    "<"
+  )
+  .from(
+    "#faq__button",
+    {
+      opacity: 0,
     },
     "<"
   );
+
+mm.add("(max-width: 767px)", () => {
+  mainTL
+    .to(
+      "#hero",
+      {
+        paddingTop: "10px",
+      },
+      "<"
+    )
+    .to(
+      "#hero__title",
+      {
+        fontSize: "10vw",
+        marginLeft: "0px",
+      },
+      "<"
+    )
+    .to(
+      "#hero__date",
+      {
+        fontSize: "0.7rem",
+        lineHeight: "1.2rem",
+      },
+      "<"
+    );
 });
 
 mm.add("(min-width: 768px)", () => {
-  mainTL.to(
-    "#hero",
-    {
-      paddingTop: "15px",
-    },
-    "<"
-  );
-
-  mainTL.to(
-    "#hero__title",
-    {
-      fontSize: "7vw",
-      marginLeft: "0px",
-    },
-    "<"
-  );
+  mainTL
+    .to(
+      "#hero__top",
+      {
+        paddingLeft: "30px",
+      },
+      "<"
+    )
+    .to(
+      "#hero",
+      {
+        paddingTop: "60px",
+      },
+      "<"
+    )
+    .to(
+      "#hero__title",
+      {
+        fontSize: "6vw",
+        marginLeft: "0px",
+      },
+      "<"
+    )
+    .to(
+      "#footer",
+      {
+        y: 0,
+        duration: 0.2,
+      },
+      "<+0.2"
+    );
 });
-
-mainTL.to(
-  "#hero__bottom",
-  {
-    opacity: 0,
-    y: 100,
-  },
-  "<"
-);
-
-mainTL.to(".hero__top", {}, "<");

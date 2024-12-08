@@ -9,8 +9,8 @@ import { TextureLoader } from 'three/src/loaders/TextureLoader'
 import { SRGBColorSpace } from 'three'
 
 export default function Hoofdzaal(props) {
-  const { nodes } = useGLTF('models/hoofdzaal.glb')
-  const colorMap = useLoader(TextureLoader, 'models/textures/hoofdzaal-baked.jpg')
+  const { nodes } = useGLTF('/models/hoofdzaal.glb')
+  const colorMap = useLoader(TextureLoader, '/models/textures/hoofdzaal-baked.webp')
   colorMap.colorSpace = SRGBColorSpace;
   colorMap.flipY = false
 
@@ -18,7 +18,8 @@ export default function Hoofdzaal(props) {
     <group onClick={(e) => {
       e.stopPropagation()
       props.handleClick()
-    }} dispose={null}>
+    }}
+    dispose={null}>
       <group>
       <mesh
         castShadow
@@ -31,11 +32,16 @@ export default function Hoofdzaal(props) {
           map={colorMap}
           emissive="#BC78FF" 
           emissiveIntensity={props.emissiveIntensity} />
-        <Html
-          position={ [0.1,1.5,0.25]}
-          distanceFactor={6}
+          <Html
+          position={ [0.5,1.75,0.75]}
+          distanceFactor={7}
           occlude>
-           <p className='building-label'>Hoofdzaal</p>
+           <p 
+           onClick={(e) => {
+            e.stopPropagation()
+            props.handleClick()
+          }}
+            className='building-label'>machinezaal & pompenzaal</p>
          </Html>
       </mesh>
         <mesh
@@ -91,4 +97,4 @@ export default function Hoofdzaal(props) {
   )
 }
 
-useGLTF.preload('models/hoofdzaal.glb')
+useGLTF.preload('/models/hoofdzaal.glb')

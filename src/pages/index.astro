@@ -1,154 +1,142 @@
 ---
-import Countdown from "../components/Countdown";
-import Main from "../layouts/Main.astro";
 import languages from "../services/languages.json";
 import "../styles/hero.css";
 import "../styles/faq.css";
-import { Language } from "../services/types";
-import Interactivity from "../components/Interactivity";
+import "../styles/global.css";
 import FAQ from "../components/FAQ";
-import type { IEvent } from "../services/types";
+import { ClientRouter } from "astro:transitions";
+import Countdown from "../components/Countdown";
+import Interactivity from "../components/Interactivity";
+import { Language, type IEvent } from "../services/types";
+import { getCollection } from "astro:content";
+import Miefel from "../components/Miefel";
 
 const copy = languages.nl;
-const temp = await Astro.glob("../content/schedule/*.md");
+const temp = await getCollection("schedule");
+let tempRAW: { content: string; title: string }[] = [];
+
+const eventsRaw = await import.meta.glob("../content/schedule/*.md", {
+  eager: true,
+});
+if (eventsRaw) {
+  tempRAW = await Promise.all(
+    Object.values(eventsRaw).map(async (event: any) => {
+      console.log(await event.frontmatter);
+      const content = await event.compiledContent();
+      return { content: content, title: event.frontmatter.title };
+    })
+  );
+}
 
 const events = await Promise.all(
   temp.map(async (event: any): Promise<IEvent> => {
     return {
-      title: event.frontmatter.title,
-      name: event.frontmatter.name,
-      startTime: event.frontmatter.startTime
-        ? new Date(event.frontmatter.startTime)
+      slug: event.slug,
+      title: event.data.title,
+      name: event.data.name,
+      startTime: event.data.startTime ? new Date(event.data.startTime) : null,
+      endTime: event.data.endTime ? new Date(event.data.endTime) : null,
+      startTime2: event.data.startTime2
+        ? new Date(event.data.startTime2)
         : null,
-      endTime: event.frontmatter.endTime
-        ? new Date(event.frontmatter.endTime)
-        : null,
-      startTime2: event.frontmatter.startTime2
-        ? new Date(event.frontmatter.startTime2)
-        : null,
-      endTime2: event.frontmatter.endTime2
-        ? new Date(event.frontmatter.endTime2)
-        : null,
-      location: event.frontmatter.location,
-      heroImage: event.frontmatter.heroImage,
-      tags: event.frontmatter.tags,
-      content: event.compiledContent(),
+      endTime2: event.data.endTime2 ? new Date(event.data.endTime2) : null,
+      location: event.data.location,
+      heroImage: event.data.heroImage,
+      tags: event.data.tags,
+      content:
+        tempRAW.find((eventRAW) => eventRAW.title === event.data.title)
+          ?.content ?? "",
     };
   })
 );
 ---
 
-<Main title={copy.title} description={copy.description}>
-  <div id="hero" class="hero">
-    <div class="hero__top margins">
-      <span id="hero__date" class="hero__date">{copy.date.festival}</span>
-      <h1 id="hero__title" class="hero__title">{copy.title}</h1>
-      <button id="faq__button" class="faq__button">Veelgestelde vragen</button>
-    </div>
-    <Interactivity events={events} client:only="react" />
-    <div id="hero__bottom" class="hero__bottom margins">
-      <Countdown client:only="react" language={Language.NL} />
+<html lang="nl" transition:animate="none">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.ico" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <meta name="description" content={copy.description} />
+    <title>Transfo Intiem {copy.title}</title>
+    <ClientRouter />
+  </head>
+  <body id="body">
+    <main class="main">
+      <div id="hero" class="hero">
+        <div id="hero__top" class="hero__top margins">
+          <span id="hero__date" class="hero__date">{copy.date.festival}</span>
+          <h1 id="hero__title" class="hero__title">{copy.title}</h1>
+          <button id="faq__button" class="faq__button"
+            >{copy.faq.title.toUpperCase()}</button
+          >
+        </div>
+        <Interactivity transition:persist events={events} client:only="react" />
+        <Miefel client:load />
+        <div id="hero__bottom" class="hero__bottom margins">
+          <Countdown client:only="react" language={Language.NL} />
 
-      <p class="hero__intro">
-        Wandel langs sfeervolle routes en ontdek <span class="bold"
-          >intieme optredens</span
-        >, kunstinstallaties, muziek en meer. Laat je raken door het thema
-        ‘eenzaamheid’ en geniet van een avond vol <span class="bold"
-          >warmte en creativiteit</span
-        >.
-      </p>
-      <svg
-        class="hero__arrow"
-        width="16"
-        height="31"
-        viewBox="0 0 16 31"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <path
-          fill-rule="evenodd"
-          clip-rule="evenodd"
-          d="M9 0V30C9 30.5523 8.55228 31 8 31C7.44772 31 7 30.5523 7 30V0H9Z"
-        ></path>
-        <path
-          fill-rule="evenodd"
-          clip-rule="evenodd"
-          d="M0.292893 22.2929C0.683417 21.9024 1.31658 21.9024 1.70711 22.2929L8 28.5858L14.2929 22.2929C14.6834 21.9024 15.3166 21.9024 15.7071 22.2929C16.0976 22.6834 16.0976 23.3166 15.7071 23.7071L8.70711 30.7071C8.31658 31.0976 7.68342 31.0976 7.29289 30.7071L0.292893 23.7071C-0.0976311 23.3166 -0.0976311 22.6834 0.292893 22.2929Z"
-        ></path>
-      </svg>
-    </div>
-  </div>
-  <FAQ client:load />
-  <button id="faq__back__button" class="faq__button back">
-    Terug naar overzicht
-  </button>
-  <script>
-    import { gsap } from "gsap";
+          <p class="hero__intro">
+            Wandel langs sfeervolle routes en ontdek <span class="bold"
+              >intieme optredens</span
+            >, kunstinstallaties, muziek en meer. Laat je raken door het thema
+            ‘eenzaamheid’ en geniet van een avond vol <span class="bold"
+              >warmte en creativiteit</span
+            >.
+          </p>
+          <svg
+            class="hero__arrow"
+            width="16"
+            height="31"
+            viewBox="0 0 16 31"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              fill-rule="evenodd"
+              clip-rule="evenodd"
+              d="M9 0V30C9 30.5523 8.55228 31 8 31C7.44772 31 7 30.5523 7 30V0H9Z"
+            ></path>
+            <path
+              fill-rule="evenodd"
+              clip-rule="evenodd"
+              d="M0.292893 22.2929C0.683417 21.9024 1.31658 21.9024 1.70711 22.2929L8 28.5858L14.2929 22.2929C14.6834 21.9024 15.3166 21.9024 15.7071 22.2929C16.0976 22.6834 16.0976 23.3166 15.7071 23.7071L8.70711 30.7071C8.31658 31.0976 7.68342 31.0976 7.29289 30.7071L0.292893 23.7071C-0.0976311 23.3166 -0.0976311 22.6834 0.292893 22.2929Z"
+            ></path>
+          </svg>
+        </div>
+      </div>
+      <FAQ copy={copy} client:load />
+    </main>
+    <footer id="footer" class="footer">
+      <div class="footer__side left">
+        <div class="flex flex-row gap-15 items-center">
+          <a target="_blank" href="https://www.transfozwevegem.be/">
+            <img src="/footer/transfo-logo-2.png" />
+          </a>
+          <a
+            class="md:hidden"
+            target="_blank"
+            href="https://www.west-vlaanderen.be/"
+            ><img src="/footer/west-vlaanderen-logo.png" /></a
+          >
+          <a class="md:hidden" target="_blank" href="https://www.zwevegem.be/">
+            <img src="/footer/zwevegem-logo.png" /></a
+          >
+        </div>
 
-    const faqTL = gsap.timeline({ paused: true });
-    const faqButton = document.getElementById("faq__button");
-    const faqBackButton = document.getElementById("faq__back__button");
-    if (faqButton) {
-      faqButton.addEventListener("click", () => {
-        console.log("clicked");
-        faqTL
-          .to("#schedule", {
-            x: "100vw",
-            duration: 1,
-            ease: "power2.out",
-          })
-          .to(
-            "#hero__title",
-            {
-              x: "100vw",
-              duration: 1,
-              ease: "power2.out",
-            },
-            "<"
-          )
-          .to(
-            "#hero__date",
-            {
-              x: "100vw",
-              duration: 1,
-              ease: "power2.out",
-            },
-            "<"
-          )
-          .to(
-            "#faq__button",
-            {
-              x: "100vw",
-              duration: 1,
-              ease: "power2.out",
-            },
-            "<"
-          )
-          .to(
-            "#faq",
-            {
-              x: "0",
-              duration: 1,
-              ease: "power2.out",
-            },
-            "<"
-          )
-          .to(
-            "#faq__back__button",
-            {
-              x: "0",
-              duration: 1,
-              ease: "power2.out",
-            },
-            "<+=0.5"
-          );
-        faqTL.play();
-      });
-    }
-
-    if (faqBackButton) {
-      faqBackButton.addEventListener("click", () => {
-        faqTL.reverse();
-      });
-    }
-  </script>
-</Main>
+        <a target="_blank" href="https://maps.app.goo.gl/t7pKtMWzNho41mCL6"
+          >Blokellestraat 113b, Zwevegem</a
+        >
+      </div>
+      <div class="footer__side right">
+        <a target="_blank" href="https://www.west-vlaanderen.be/"
+          ><img src="/footer/west-vlaanderen-logo.png" /></a
+        >
+        <a target="_blank" href="https://www.zwevegem.be/">
+          <img src="/footer/zwevegem-logo.png" /></a
+        >
+      </div>
+    </footer>
+    <script src="../services/gsapFAQ.ts"></script>
+    <script src="../services/gsap.ts"></script>
+  </body>
+</html>

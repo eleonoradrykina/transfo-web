@@ -9,8 +9,8 @@ import { TextureLoader } from 'three/src/loaders/TextureLoader'
 import { SRGBColorSpace } from 'three'
 
 export default function Kunstacademie(props) {
-  const { nodes } = useGLTF('models/kunstacademie-no-materials.glb')
-  const colorMap = useLoader(TextureLoader, 'models/textures/kunstacademie-baked.jpg')
+  const { nodes } = useGLTF('/models/kunstacademie-no-materials.glb')
+  const colorMap = useLoader(TextureLoader, '/models/textures/kunstacademie-baked.webp')
   colorMap.flipY = false
   colorMap.colorSpace = SRGBColorSpace
   return (
@@ -29,9 +29,14 @@ export default function Kunstacademie(props) {
       >
         <Html
           position={ [ -3, 4.5, 0 ]}
-          distanceFactor={6}
+          distanceFactor={7}
           occlude>
-            <p className='building-label'>kunstacademie</p>
+            <p 
+            onClick={(e) => {
+              e.stopPropagation()
+              props.handleClick()
+            }}
+            className='building-label'>Directeurswoning</p>
           </Html>
         <meshStandardMaterial 
           map={colorMap}
@@ -69,4 +74,4 @@ export default function Kunstacademie(props) {
   )
 }
 
-useGLTF.preload('models/kunstacademie-no-materials.glb')
+useGLTF.preload('/models/kunstacademie-no-materials.glb')
