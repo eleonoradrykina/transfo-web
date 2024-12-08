@@ -1,7 +1,6 @@
 import { useEffect } from "react";
 import { type IEvent } from "../services/types";
 import "../styles/components/schedule.css";
-import { gsap } from "gsap";
 
 interface Props {
   event: IEvent;
