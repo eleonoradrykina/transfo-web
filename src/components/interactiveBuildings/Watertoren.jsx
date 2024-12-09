@@ -40,7 +40,7 @@ export default function Watertoren(props) {
         rotation={[0, -1.568, 0]}
       >
            <Html
-         position={ [0.1,0.75,0.25]}
+         position={ [0.3,0.75,0.2]}
          distanceFactor={7}
          occlude>
             <p 

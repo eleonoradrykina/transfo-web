@@ -20,7 +20,7 @@ export default function Ground(props) {
         rotation={[0, -1.568, 0]}
       >
         <Html
-          position={ [3.75,0.25,2.5]}
+          position={ [3.75,0.25,2.75]}
           distanceFactor={6}
           occlude>
             <p 
@@ -31,7 +31,7 @@ export default function Ground(props) {
             className={`building-label ${props.hoogteparcoursActive ? 'building-label--active' : ''}`} >{props.hoogteparcours}</p>
         </Html>
         <Html
-          position={ [2.5,0.25,3.0]}
+          position={ [2.5,0.25,3.2]}
           distanceFactor={6}
           occlude>
             <p 
@@ -42,7 +42,7 @@ export default function Ground(props) {
             className={`building-label ${props.waterbassinActive ? 'building-label--active' : ''}`} >{props.waterbassin}</p>
         </Html>
           <Html
-          position={ [0.3,0.25,-2.25]}
+          position={ [0.1,0.35,-2.1]}
           distanceFactor={6}
           occlude>
           <p 
