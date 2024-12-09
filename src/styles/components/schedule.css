@@ -148,6 +148,7 @@
 
   &__content {
     @apply text-start;
+    @apply mb-30;
     p {
       @apply mb-15;
     }
@@ -162,6 +163,11 @@
 
     h3 {
       @apply text-2xl font-semibold;
+      @apply mt-30;
+
+      &:first-of-type {
+        @apply mt-0;
+      }
     }
   }
 

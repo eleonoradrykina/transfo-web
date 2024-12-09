@@ -55,7 +55,7 @@ const Event = ({ event, handleBack, location }: Props) => {
       </div>
 
       <div className="event__scroll">
-        <div className="flex flex-row md:flex-col gap-15 mt-15 md:mb-30">
+        <div className="flex flex-row md:flex-col gap-15 mt-15 md:mb-15">
           <img
             className="event__image"
             src={`/events/${event.heroImage}`}

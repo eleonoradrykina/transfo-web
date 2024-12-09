@@ -9,4 +9,10 @@ startTime: "2024-12-14T22:00:00+01:00"
 endTime: "2024-12-14T23:00:00+01:00"
 ---
 
+### Over de performance
+
 Miokapi is het solo project van Freek Quartier waarin hij met behulp van een keyboard en loopstation laidback instrumentale improvisaties creëert. Het is de perfecte soundtrack voor een relaxte avond, waarbij de muziek je meeneemt op een dromerige trip.
+
+### Meer van deze artiest
+
+[Instagram](https://www.instagram.com/miokapi.music/)
