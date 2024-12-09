@@ -1,12 +1,12 @@
 import { useRef, useState, useEffect } from "react";
-const { CameraControls } = await import("@react-three/drei");
+import { CameraControls } from "@react-three/drei";
 
 import { useThree } from "@react-three/fiber";
-const {
+import {
   ToneMapping,
   EffectComposer,
   Bloom,
-} = await import("@react-three/postprocessing");
+} from "@react-three/postprocessing";
 
 /* Non interactive map:*/
 const MapModel = await import("./nonInteractiveMap/MapModel");

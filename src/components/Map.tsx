@@ -1,10 +1,9 @@
 import "../styles/components/map.css";
 import { useState } from "react";
 import type { IEvent } from "../services/types";
-
-const { Canvas } = await import("@react-three/fiber");
-const Experience = await import("./Experience");
-const { Bvh } = await import("@react-three/drei");
+import { Bvh } from "@react-three/drei";
+import { Canvas } from "@react-three/fiber";
+import Experience from "./Experience";
 
 interface Props {
   onChangeBuilding: (building: string | null) => void;
@@ -43,7 +42,7 @@ export default function Map({
         }}
       >
         <Bvh>
-          <Experience.default
+          <Experience
             copy={copy}
             events={events}
             selectedBuilding={selectedBuilding}
