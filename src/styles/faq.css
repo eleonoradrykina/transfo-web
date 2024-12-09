@@ -54,8 +54,10 @@
 .faq__button {
   @apply mt-5 relative z-30;
   @apply md:fixed md:bottom-60 md:left-60;
+  @apply opacity-0;
 
   &.back {
+    @apply opacity-100;
     @apply w-fit;
     left: unset;
     @apply md:right-60;

@@ -107,10 +107,10 @@ mainTL
     },
     "<"
   )
-  .from(
+  .to(
     "#faq__button",
     {
-      opacity: 0,
+      opacity: 1,
     },
     "<"
   );
