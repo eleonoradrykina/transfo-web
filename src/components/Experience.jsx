@@ -171,7 +171,7 @@ export default function Experience({ onChangeBuilding, onChangeEvent, clearSelec
     
     mm.add("(max-width: 768px)", () => {
       tlLabels.to(".map", {
-        y: "-20%",
+        y: "-20vh",
         duration: 0.75,
         ease: "power2.out",
       }, "<");

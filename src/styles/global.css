@@ -117,7 +117,7 @@ body {
 
 .main {
   @apply max-w-screen-2xl mx-auto;
-  @apply w-full h-screen;
+  @apply w-full h-dvh;
 }
 
 .margins {
