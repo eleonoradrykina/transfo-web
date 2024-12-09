@@ -100,6 +100,28 @@
 
 html {
   @apply bg-black;
+
+  /* width */
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  /* Track */
+  ::-webkit-scrollbar-track {
+    @apply bg-transparent;
+  }
+
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    @apply bg-purple/50;
+    @apply rounded-full;
+    @apply w-2;
+  }
+
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-pink/70;
+  }
 }
 
 body {
@@ -176,6 +198,11 @@ body {
   @apply overflow-hidden;
 
   &.small {
+    @apply min-w-[38px] h-[38px] md:w-fit md:h-fit;
+    @apply border-[1.5px] py-[2.5px] md:py-[5px];
+  }
+
+  &.round {
     @apply w-[38px] h-[38px] md:w-fit md:h-fit;
     @apply border-[1.5px] py-[2.5px] md:py-[5px];
   }

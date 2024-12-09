@@ -148,8 +148,8 @@
 
   &__content {
     @apply text-start;
-    p,
-    a {
+    @apply mb-30;
+    p {
       @apply mb-15;
     }
 
@@ -158,6 +158,15 @@
 
       &:hover {
         @apply underline;
+      }
+    }
+
+    h3 {
+      @apply text-2xl font-semibold;
+      @apply mt-30;
+
+      &:first-of-type {
+        @apply mt-0;
       }
     }
   }
@@ -174,12 +183,14 @@
   &__tags {
     @apply w-full;
     @apply flex flex-col md:flex-row flex-wrap gap-10 md:justify-center items-start;
+    @apply overflow-x-hidden;
   }
 
   &__tag {
     @apply block px-15;
     @apply bg-orange rounded-full;
     @apply text-base;
+    @apply text-nowrap;
 
     &.time {
       @apply bg-purple;
