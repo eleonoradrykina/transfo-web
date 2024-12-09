@@ -120,6 +120,7 @@
 
 html {
   @apply bg-black;
+  @apply overflow-y-hidden;
 
   /* width */
   ::-webkit-scrollbar {
