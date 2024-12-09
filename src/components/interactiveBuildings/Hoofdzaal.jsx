@@ -31,7 +31,7 @@ export default function Hoofdzaal(props) {
         <meshStandardMaterial 
           map={colorMap}
           emissive="#BC78FF" 
-          emissiveIntensity={props.emissiveIntensity} />
+          emissiveIntensity={props.active ? 3.0 : 0} />
           <Html
           position={ [0.5,1.75,0.75]}
           distanceFactor={7}
@@ -41,7 +41,7 @@ export default function Hoofdzaal(props) {
             e.stopPropagation()
             props.handleClick()
           }}
-            className='building-label'>{props.label}</p>
+            className={`building-label ${props.active ? 'building-label--active' : ''}`}>{props.label}</p>
          </Html>
       </mesh>
         <mesh

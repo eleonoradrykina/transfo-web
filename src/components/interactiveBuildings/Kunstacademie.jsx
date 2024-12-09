@@ -28,7 +28,7 @@ export default function Kunstacademie(props) {
         scale={[-0.143, -0.15, -0.241]}
       >
         <Html
-          position={ [ -3, 4.5, 0 ]}
+          position={ [ -3, 5, 0 ]}
           distanceFactor={7}
           occlude>
             <p 
@@ -36,12 +36,12 @@ export default function Kunstacademie(props) {
               e.stopPropagation()
               props.handleClick()
             }}
-            className='building-label'>{props.label}</p>
+            className={`building-label ${props.active ? 'building-label--active' : ''}`}>{props.label}</p>
           </Html>
         <meshStandardMaterial 
           map={colorMap}
           emissive="#BC78FF" 
-          emissiveIntensity={props.emissiveIntensity} />
+          emissiveIntensity={props.active ? 3.0 : 0} />
       </mesh>
       <mesh
         castShadow
@@ -54,7 +54,7 @@ export default function Kunstacademie(props) {
         <meshStandardMaterial 
           map={colorMap}
           emissive="#BC78FF" 
-          emissiveIntensity={props.emissiveIntensity} />
+          emissiveIntensity={props.active ? 3.0 : 0} />
       </mesh>
       <mesh
         castShadow
@@ -67,7 +67,7 @@ export default function Kunstacademie(props) {
         <meshStandardMaterial 
           map={colorMap}
           emissive="#BC78FF" 
-          emissiveIntensity={props.emissiveIntensity} />
+          emissiveIntensity={props.active ? 3.0 : 0} />
       </mesh>
       </group>
     </group>

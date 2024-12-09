@@ -28,7 +28,7 @@ export default function Ground(props) {
               e.stopPropagation()
               props.handleClickParcours()
             }}
-            className='building-label'>{props.hoogteparcours}</p>
+            className={`building-label ${props.hoogteparcoursActive ? 'building-label--active' : ''}`} >{props.hoogteparcours}</p>
         </Html>
         <Html
           position={ [2.5,0.25,3.0]}
@@ -39,7 +39,7 @@ export default function Ground(props) {
               e.stopPropagation()
               props.handleClickBassin()
             }}
-            className='building-label'>{props.waterbassin}</p>
+            className={`building-label ${props.waterbassinActive ? 'building-label--active' : ''}`} >{props.waterbassin}</p>
         </Html>
           <Html
           position={ [0.3,0.25,-2.25]}
@@ -50,7 +50,7 @@ export default function Ground(props) {
             e.stopPropagation()
             props.handleClickMarkt()
             }}
-            className='building-label'>{props.markt}</p>
+            className={`building-label ${props.marktActive ? 'building-label--active' : ''}`} >{props.markt}</p>
         </Html>
         <Html
           position={ [2.0,0.25,-3.0]}
@@ -61,7 +61,7 @@ export default function Ground(props) {
               e.stopPropagation()
               props.handleClickIngang()
             }}
-            className='building-label'>{props.ingang}</p>
+            className={`building-label ${props.ingangActive ? 'building-label--active' : ''}`} >{props.ingang}</p>
         </Html>
         <meshStandardMaterial 
           map={groundColorMap} />
