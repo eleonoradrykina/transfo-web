@@ -46,7 +46,7 @@ const FAQ = ({ copy }: Props) => {
               De parking aan de achterkant van de site, bereikbaar via de
               Otegemstraat.
             </li>
-            <li>Parkeren in de stoomstraat</li>
+            <li>Parkeren in de Stoomstraat</li>
           </ul>
           <p className="mt-8">
             De volgende parkings liggen iets verder, maar zijn ook beschikbaar,

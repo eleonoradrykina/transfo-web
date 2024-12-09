@@ -23,7 +23,7 @@
     &__question {
       @apply relative z-20;
       @apply flex flex-row gap-15 items-start;
-      @apply font-medium text-xl md:text-2xl;
+      @apply font-bold text-xl md:text-2xl;
       @apply p-15 md:px-30 bg-purple/30 rounded-lg;
       backdrop-filter: blur(10px);
 

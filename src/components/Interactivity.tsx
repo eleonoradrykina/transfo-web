@@ -41,6 +41,9 @@ const Interactivity = ({ events, copy }: Props) => {
 
   useEffect(() => {
     if (!loading) {
+      gsap.set("html", {
+        overflowY: "auto",
+      });
       gsap.set(".loading", {
         display: "none",
       });
