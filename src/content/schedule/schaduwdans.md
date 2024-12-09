@@ -5,8 +5,8 @@ tags: ["Dans en beeld"]
 location: "machinezaal-pompenzaal"
 subLocation: "pompenzaal"
 heroImage: "schaduwdans.webp"
-startTime: "2024-12-14T17:00:00"
-endTime: "2024-12-14T19:00:00"
+startTime: "2024-12-14T17:00:00+01:00"
+endTime: "2024-12-14T19:00:00+01:00"
 ---
 
 Schaduwen
