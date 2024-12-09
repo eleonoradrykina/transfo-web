@@ -108,19 +108,19 @@ html {
 
   /* Track */
   ::-webkit-scrollbar-track {
-    @apply bg-black/10;
+    @apply bg-transparent;
   }
 
   /* Handle */
   ::-webkit-scrollbar-thumb {
-    @apply bg-purple;
+    @apply bg-purple/50;
     @apply rounded-full;
     @apply w-2;
   }
 
   /* Handle on hover */
   ::-webkit-scrollbar-thumb:hover {
-    @apply bg-pink;
+    @apply bg-pink/70;
   }
 }
 
