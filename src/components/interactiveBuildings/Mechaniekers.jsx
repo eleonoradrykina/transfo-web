@@ -44,8 +44,6 @@ colorMap.colorSpace = SRGBColorSpace
             </svg>
           </Html>
           <meshStandardMaterial 
-          roughness={1}
-          metalness={0}
           map={colorMap}
           emissive="#BC78FF" 
           emissiveIntensity={props.active ? 3.0 : 0} />

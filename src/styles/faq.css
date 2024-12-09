@@ -37,6 +37,20 @@
       @apply max-h-0 opacity-0;
       @apply transition-all duration-300;
       @apply mx-2;
+
+      p,
+      ul,
+      img {
+        @apply mb-4;
+      }
+
+      ul {
+        @apply list-disc list-inside;
+      }
+
+      img {
+        @apply rounded-lg;
+      }
     }
 
     &.open {
@@ -54,8 +68,10 @@
 .faq__button {
   @apply mt-5 relative z-30;
   @apply md:fixed md:bottom-60 md:left-60;
+  @apply opacity-0;
 
   &.back {
+    @apply opacity-100;
     @apply w-fit;
     left: unset;
     @apply md:right-60;

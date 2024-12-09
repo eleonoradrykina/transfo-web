@@ -27,7 +27,7 @@ export default function Plong(props) {
         rotation={[0, 0.009, 0]}
       >
           <Html
-            position={ [-0.2,0.6,0.7]}
+            position={ [-0.2,0.6,0]}
             distanceFactor={7}
             occlude>
               <p 

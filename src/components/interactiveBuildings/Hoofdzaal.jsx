@@ -54,7 +54,7 @@ export default function Hoofdzaal(props) {
         <meshStandardMaterial 
           map={colorMap}
           emissive="#BC78FF" 
-          emissiveIntensity={props.emissiveIntensity} />
+          emissiveIntensity={props.active ? 3.0 : 0} />
         </mesh>
         <mesh
           castShadow
@@ -66,7 +66,7 @@ export default function Hoofdzaal(props) {
         <meshStandardMaterial 
           map={colorMap}
           emissive="#BC78FF" 
-          emissiveIntensity={props.emissiveIntensity} />
+          emissiveIntensity={props.active ? 3.0 : 0} />
         </mesh>
         <mesh
           castShadow
@@ -78,7 +78,7 @@ export default function Hoofdzaal(props) {
         <meshStandardMaterial 
           map={colorMap}
           emissive="#BC78FF" 
-          emissiveIntensity={props.emissiveIntensity} />
+          emissiveIntensity={props.active ? 3.0 : 0} />
         </mesh>
         <mesh
           castShadow
@@ -90,7 +90,7 @@ export default function Hoofdzaal(props) {
         <meshStandardMaterial 
           map={colorMap}
           emissive="#BC78FF" 
-          emissiveIntensity={props.emissiveIntensity} />
+          emissiveIntensity={props.active ? 3.0 : 0} />
         </mesh>
       </group>
     </group>

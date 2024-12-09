@@ -29,6 +29,9 @@ export default function Map({
   return (
     <div className="map">
       <Canvas
+        gl={{
+          pixelRatio: 1,
+        }}
         camera={{
           fov: 45,
           near: 0.1,
