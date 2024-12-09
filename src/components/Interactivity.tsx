@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import Schedule from "./Schedule";
 import { BUILDING, type IEvent } from "../services/types";
 import Map from "./Map";
+import { gsap } from "gsap";
 
 interface Props {
   events: IEvent[];
@@ -39,6 +40,22 @@ const Interactivity = ({ events, copy }: Props) => {
   }, []);
 
   useEffect(() => {
+    if (!loading) {
+      gsap.set(".loading", {
+        display: "none",
+      });
+      gsap.to(".main", {
+        opacity: 1,
+        duration: 1,
+      });
+      gsap.to("#footer", {
+        opacity: 1,
+        duration: 1,
+      });
+    }
+  }, [loading]);
+
+  useEffect(() => {
     if (selectedBuilding && selectedEvent) {
       window.history.replaceState(
         {},
@@ -58,7 +75,6 @@ const Interactivity = ({ events, copy }: Props) => {
 
   return (
     <div className="interactivity">
-      {loading && <pre className="fixed top-0 left-0 z-40">LOADING</pre>}
       <Map
         copy={copy}
         events={events}

@@ -13,6 +13,7 @@ import { Image } from "astro:assets";
 import westVlaanderen from "../../public/footer/west-vlaanderen-logo.webp";
 import zwevegem from "../../public/footer/zwevegem-logo.webp";
 import transfo from "../../public/footer/transfo-logo.webp";
+import loading from "../../public/loading.webp";
 
 const copy = languages.nl;
 const temp = await getCollection("schedule");
@@ -63,13 +64,16 @@ const events = await Promise.all(
     <title>{copy["title-lower-case"]}</title>
   </head>
   <body id="body">
+    <div class="loading"><Image src={loading} alt="loading icon" /></div>
     <main class="main">
       <div id="hero" class="hero">
         <div id="hero__top" class="hero__top margins">
           <span id="hero__date" class="hero__date">{copy.date.festival}</span>
           <h1 id="hero__title" class="hero__title">{copy.title}</h1>
-          <button id="faq__button" class="faq__button"
-            >{copy.faq.title.toUpperCase()}</button
+          <button id="faq__button" class="button faq__button"
+            ><span class="button__arrow left">←</span>{
+              copy.faq.title.toUpperCase()
+            }</button
           >
         </div>
 
@@ -115,6 +119,7 @@ const events = await Promise.all(
       </div>
       <FAQ copy={copy} client:load />
     </main>
+
     <footer id="footer" class="footer">
       <div class="footer__side left">
         <div class="flex flex-row gap-15 items-center">
@@ -188,5 +193,11 @@ const events = await Promise.all(
       </div>
     </footer>
     <script src="../services/gsap.ts"></script>
+    <script>
+      const title = document.getElementById("hero__title");
+      title?.addEventListener("click", () => {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      });
+    </script>
   </body>
 </html>

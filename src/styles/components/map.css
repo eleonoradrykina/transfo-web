@@ -12,6 +12,8 @@
   @apply font-whyte italic text-white text-base text-center;
   @apply opacity-0;
   @apply select-none;
+  padding: 0.25rem 0.5rem;
+  border-radius: 1rem;
   white-space: nowrap;
   transition: font-weight 0.3s ease;
 }
@@ -19,6 +21,7 @@
 .building-label:hover {
   font-weight: 700;
 }
+
 
 .map-label {
   color: #dec1fb;
@@ -33,7 +36,7 @@
   border-radius: 50%;
   background: #fff;
   position: absolute;
-  top: 110%;
+  top: 130%;
   left: 50%;
   transform: translate(-50%, -50%);
 }
@@ -46,7 +49,7 @@
   width: 2px;
   background: #fff;
   position: absolute;
-  top: 128%;
+  top: 148%;
   left: 50%;
   transform: translate(-50%, -50%);
 }
@@ -56,7 +59,20 @@
   background: #dec1fb;
 }
 
+.building-label--active {
+  background: #ea5739;
+}
+
+.building-label--active::before,
+.building-label--active::after {
+  background: #ea5739;
+}
+
 svg {
   @apply opacity-0;
+  @apply pointer-events-none;
+}
+
+.hotspot-wrapper {
   @apply pointer-events-none;
 }

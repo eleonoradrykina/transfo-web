@@ -113,10 +113,15 @@ body {
   );
 
   @apply text-white font-whyte;
+
+  *::selection {
+    @apply bg-orange text-white;
+  }
 }
 
 .main {
   @apply w-full h-dvh;
+  @apply opacity-0;
 }
 
 .margins {
@@ -126,6 +131,7 @@ body {
 }
 
 .footer {
+  @apply opacity-0;
   @apply h-60;
   @apply fixed z-20 bottom-0 left-30 right-30;
   @apply flex flex-row justify-center md:justify-between items-center;
@@ -147,6 +153,49 @@ body {
     img {
       @apply h-30 md:h-[45px];
       width: auto;
+    }
+  }
+}
+
+.loading {
+  @apply fixed inset-0 z-50;
+  @apply flex flex-col justify-center items-center;
+
+  img {
+    @apply h-20 w-20 md:h-24 md:w-24;
+    @apply animate-spin-slow;
+  }
+}
+
+.button {
+  @apply min-h-[35px];
+  @apply px-15 md:px-[20px] py-5 md:py-[7px] bg-purple/30;
+  @apply border-[2.5px] border-pink rounded-full;
+  @apply transition-all duration-300;
+  @apply flex flex-row items-center justify-center gap-5 w-fit;
+  @apply overflow-hidden;
+
+  &.small {
+    @apply w-[38px] h-[38px] md:w-fit md:h-fit;
+    @apply border-[1.5px] py-[2.5px] md:py-[5px];
+  }
+
+  .button__arrow {
+    @apply transition-all duration-300;
+  }
+
+  backdrop-filter: blur(10px);
+  @apply text-white font-bold text-sm md:text-base;
+
+  &:hover {
+    @apply bg-purple border-purple;
+
+    .button__arrow.left {
+      @apply -translate-x-[100px];
+    }
+
+    .button__arrow.right {
+      @apply translate-x-[100px];
     }
   }
 }

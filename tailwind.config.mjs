@@ -59,6 +59,9 @@ export default {
         smallParagraph: "520px",
         paragraph: "640px",
       },
+      animation: {
+        "spin-slow": "spin 3s linear infinite",
+      },
     },
   },
   plugins: [],
