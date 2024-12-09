@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import Schedule from "./Schedule";
 import { BUILDING, type IEvent } from "../services/types";
-import Map from "./Map";
+const Map = await import("./Map");
 
 interface Props {
   events: IEvent[];
@@ -14,21 +14,27 @@ const Interactivity = ({ events, copy }: Props) => {
 
   const [selectedBuilding, setSelectedBuilding] = useState<string | null>(null);
   const [selectedEvent, setSelectedEvent] = useState<string | null>(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    if (urlParams.get("building") && window.innerWidth > 768) {
+    if (urlParams.get("building")) {
       if (
         Object.values(BUILDING).includes(urlParams.get("building") as BUILDING)
       ) {
-        window.scrollTo(0, document.body.scrollHeight);
         setSelectedBuilding(urlParams.get("building") ?? null);
+
+        if (urlParams.get("event")) {
+          setSelectedEvent(urlParams.get("event") ?? null);
+        }
+
+        window.scrollTo({
+          left: 0,
+          top: document.body.scrollHeight,
+          behavior: "smooth",
+        });
       } else {
         window.history.replaceState({}, document.title, "/");
       }
-    }
-    if (urlParams.get("event")) {
-      setSelectedEvent(urlParams.get("event") ?? null);
-      window.scrollTo(0, document.body.scrollHeight);
     }
   }, []);
 
@@ -52,13 +58,15 @@ const Interactivity = ({ events, copy }: Props) => {
 
   return (
     <div className="interactivity">
-      <Map
+      {loading && <pre className="fixed top-0 left-0 z-40">LOADING</pre>}
+      <Map.default
         copy={copy}
         events={events}
         selectedBuilding={selectedBuilding}
         selectedEvent={selectedEvent}
         onChangeBuilding={setSelectedBuilding}
         onChangeEvent={setSelectedEvent}
+        setLoading={setLoading}
       />
       <Schedule
         copy={copy}

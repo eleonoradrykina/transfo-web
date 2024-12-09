@@ -41,7 +41,7 @@
     @media (min-width: 768px) {
       height: calc(100% - 90px);
     }
-    @apply overflow-x-hidden;
+    @apply overflow-x-hidden relative;
   }
 
   &__default,
@@ -179,9 +179,14 @@
   &__tag {
     @apply block px-15;
     @apply bg-orange rounded-full;
+    @apply text-base;
 
     &.time {
       @apply bg-purple;
+    }
+
+    &.location {
+      @apply bg-blue;
     }
 
     &.no-bg {
