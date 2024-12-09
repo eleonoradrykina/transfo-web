@@ -21,7 +21,8 @@ const FAQ = ({ copy }: Props) => {
           </p>
         </Question>
         <Question question="Waar kan ik mijn fiets parkeren?">
-          <p>Met de fiets heb je de volgende opties:</p>
+          <img src="/map-bikes.webp" />
+          <p className="font-bold">Met de fiets heb je de volgende opties:</p>
           <ul>
             <li>
               Het grasplein vooraan de site, bereikbaar via de Blokellestraat en
@@ -34,7 +35,8 @@ const FAQ = ({ copy }: Props) => {
           </ul>
         </Question>
         <Question question="Waar kan ik mijn auto parkeren?">
-          <p>Met de auto heb je de volgende opties:</p>
+          <img src="/map-cars.webp" />
+          <p className="font-bold">Met de auto heb je de volgende opties:</p>
           <ul>
             <li>
               Een beperkt aantal plaatsen zijn beschikbaar aan de voorkant van
@@ -46,7 +48,7 @@ const FAQ = ({ copy }: Props) => {
             </li>
             <li>Parkeren in de stoomstraat</li>
           </ul>
-          <p>
+          <p className="mt-8">
             De volgende parkings liggen iets verder, maar zijn ook beschikbaar,
             indien nodig:
           </p>
