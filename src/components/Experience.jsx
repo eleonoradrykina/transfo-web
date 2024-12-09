@@ -121,8 +121,11 @@ export default function Experience({ onChangeBuilding, onChangeEvent, clearSelec
           setTimeAfterScroll(Date.now());
 
           //move to the left and zoom in
-          cameraControlsRef.current?.truck(3.5, 0, true)
+          if (!selectedBuilding && !selectedEvent) {
+                      cameraControlsRef.current?.truck(3.5, 0, true)
           cameraControlsRef.current?.dolly(2, true)
+          }
+
           });
         
 

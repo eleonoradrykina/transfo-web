@@ -16,19 +16,20 @@ const Interactivity = ({ events, copy }: Props) => {
   const [selectedEvent, setSelectedEvent] = useState<string | null>(null);
 
   useEffect(() => {
-    if (urlParams.get("building") && window.innerWidth > 768) {
+    if (urlParams.get("building")) {
       if (
         Object.values(BUILDING).includes(urlParams.get("building") as BUILDING)
       ) {
-        window.scrollTo(0, document.body.scrollHeight);
         setSelectedBuilding(urlParams.get("building") ?? null);
+
+        if (urlParams.get("event")) {
+          setSelectedEvent(urlParams.get("event") ?? null);
+        }
+
+        window.scrollTo(0, document.body.scrollHeight);
       } else {
         window.history.replaceState({}, document.title, "/");
       }
-    }
-    if (urlParams.get("event")) {
-      setSelectedEvent(urlParams.get("event") ?? null);
-      window.scrollTo(0, document.body.scrollHeight);
     }
   }, []);
 
