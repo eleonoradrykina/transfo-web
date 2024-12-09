@@ -31,15 +31,19 @@ import gsap from "gsap";
 const positions = new Map([["machinezaal-pompenzaal", [-0.005, 0.584, -1.317]], ["mechaniekers", [0.573, 0.306, 0.635]], ["ketelhuis", [-0.793, 0.87, -0.556]], ["transformatoren", [1.014, 1.132, -4.375]], ["octagon", [1.89, -0.102, -1.122]], ["directeurswoning", [3.105, 0.186, -0.804]], ["duiktank", [1.0, 0.366, 4.596]], ["watertoren", [-0.665, 0.045, 2.214]], ["plong", [1.504, 0.12, -0.343]], ["hoogteparcours", [3.75,0,2.5]], ["waterbassin", [2.5,0,3.0]], ["ingang", [2.0,0.25,-3.0]], ["markt", [0.3,0.25,-2.25]]]);
 
 export default function Experience({ onChangeBuilding, onChangeEvent, clearSelection, selectedBuilding, selectedEvent, copy, events, setLoading }) {
-  const [hoofdzaalEmissiveIntensity, setHoofdzaalEmissiveIntensity] = useState(0);
-  const [mechaniekersEmissiveIntensity, setMechaniekersEmissiveIntensity] = useState(0);
-  const [ketelhuisEmissiveIntensity, setKetelhuisEmissiveIntensity] = useState(0);
-  const [transformatorenEmissiveIntensity, setTransformatorenEmissiveIntensity] = useState(0);
-  const [octagonEmissiveIntensity, setOctagonEmissiveIntensity] = useState(0);
-  const [kunstacademieEmissiveIntensity, setKunstacademieEmissiveIntensity] = useState(0);
-  const [duiktankEmissiveIntensity, setDuiktankEmissiveIntensity] = useState(0);
-  const [watertorenEmissiveIntensity, setWatertorenEmissiveIntensity] = useState(0);
-  const [plongEmissiveIntensity, setPlongEmissiveIntensity] = useState(0);
+  const [hoofdzaaActive, setHoofdzaalActive] = useState(false);
+  const [mechaniekersActive, setMechaniekersActive] = useState(false);
+  const [ketelhuisActive, setKetelhuisActive] = useState(false);
+  const [transformatorenActive, setTransformatorenActive] = useState(false);
+  const [octagonActive, setOctagonActive] = useState(false);
+  const [kunstacademieActive, setKunstacademieActive] = useState(false);
+  const [duiktankActive, setDuiktankActive] = useState(false);
+  const [watertorenActive, setWatertorenActive] = useState(false);
+  const [plongActive, setPlongActive] = useState(false);
+  const [hoogteparcoursActive, setHoogteparcoursActive] = useState(false);
+  const [waterbassinActive, setWaterbassinActive] = useState(false);
+  const [ingangActive, setIngangActive] = useState(false);
+  const [marktActive, setMarktActive] = useState(false);
 
   const [isClickable, setIsClickable] = useState(false);
   const [hasClickHappened, setHasClickHappened] = useState(false);
@@ -59,21 +63,22 @@ export default function Experience({ onChangeBuilding, onChangeEvent, clearSelec
 
 
   const handleClear = (location) => {
-    setHoofdzaalEmissiveIntensity(0);
-    setMechaniekersEmissiveIntensity(0);
-    setKetelhuisEmissiveIntensity(0);
-    setTransformatorenEmissiveIntensity(0);
-    setOctagonEmissiveIntensity(0);
-    setKunstacademieEmissiveIntensity(0);
-    setDuiktankEmissiveIntensity(0);
-    setWatertorenEmissiveIntensity(0);
-    setPlongEmissiveIntensity(0);
+    setHoofdzaalActive(false);
+    setMechaniekersActive(false);
+    setKetelhuisActive(false);
+    setTransformatorenActive(false);
+    setOctagonActive(false);
+    setKunstacademieActive(false);
+    setDuiktankActive(false);
+    setWatertorenActive(false);
+    setPlongActive(false);
+    setHoogteparcoursActive(false);
+    setWaterbassinActive(false);
+    setIngangActive(false);
+    setMarktActive(false);
   };
 
   const handleSelect = (key, fromEvent) => {
-    // if (!isClickable) {
-    //   return;
-    // }
     setHasClickHappened(true);
     //set hotspot display to none:
     document.querySelector("#hotspot").style.display = "none";
@@ -82,20 +87,23 @@ export default function Experience({ onChangeBuilding, onChangeEvent, clearSelec
       onChangeBuilding(key);
       onChangeEvent(null);
     }  
-    
-        setCameraControls(key);
 
+    setCameraControls(key);
 
     switch (key) {
-      case "machinezaal-pompenzaal": setHoofdzaalEmissiveIntensity(3.0); break;
-      case "mechaniekers": setMechaniekersEmissiveIntensity(3.0); break;
-      case "ketelhuis": setKetelhuisEmissiveIntensity(3); break;
-      case "transformatoren": setTransformatorenEmissiveIntensity(3.0); break;
-      case "octagon": setOctagonEmissiveIntensity(3.0); break;
-      case "directeurswoning": setKunstacademieEmissiveIntensity(3.0); break;
-      case "duiktank": setDuiktankEmissiveIntensity(3.0); break;
-      case "watertoren": setWatertorenEmissiveIntensity(3.0); break;
-      case "plong": setPlongEmissiveIntensity(3.0); break;
+      case "machinezaal-pompenzaal": setHoofdzaalActive(true); break;
+      case "mechaniekers": setMechaniekersActive(true); break;
+      case "ketelhuis": setKetelhuisActive(true); break;
+      case "transformatoren": setTransformatorenActive(true); break;
+      case "octagon": setOctagonActive(true); break;
+      case "directeurswoning": setKunstacademieActive(true); break;
+      case "duiktank": setDuiktankActive(true); break;
+      case "watertoren": setWatertorenActive(true); break;
+      case "plong": setPlongActive(true); break;
+      case "hoogteparcours": setHoogteparcoursActive(true); break;
+      case "waterbassin": setWaterbassinActive(true); break;
+      case "ingang": setIngangActive(true); break;
+      case "markt": setMarktActive(true); break;
     }
 
   }
@@ -122,17 +130,17 @@ export default function Experience({ onChangeBuilding, onChangeEvent, clearSelec
 
           //move to the left and zoom in
           if (!selectedBuilding && !selectedEvent) {
-                      cameraControlsRef.current?.truck(3.5, 0, true)
+          cameraControlsRef.current?.truck(3.5, 0, true)
           cameraControlsRef.current?.dolly(2, true)
           }
 
-          });
-        
-
-          
+          }) 
         },
         onEnterBack: () => {
           tlLabels.reverse();
+
+          //set cursor .building-label to default
+          document.querySelector(".building-label").style.cursor = "default";
           
           mm.add("(min-width: 767px)", () => {
             cameraControlsRef.current.setLookAt(10, 5, 10, 0, 0, 0, true);
@@ -152,8 +160,6 @@ export default function Experience({ onChangeBuilding, onChangeEvent, clearSelec
               one: 0,
             })
           });
-          
-        
         }
       },
       onReverseComplete: () => {
@@ -202,7 +208,7 @@ export default function Experience({ onChangeBuilding, onChangeEvent, clearSelec
             "#hotspot",
             {
               opacity: 1,
-              delay: 4,
+              delay: 1.5,
               ease: "power1.inOut"
             },
           ).to(
@@ -300,14 +306,34 @@ export default function Experience({ onChangeBuilding, onChangeEvent, clearSelec
       />
       <ambientLight intensity={1.5} />
        <Ground
-       hoogteparcours={copy.buildings.hoogteparcours}
+        hoogteparcours={copy.buildings.hoogteparcours}
+        hoogteparcoursActive={hoogteparcoursActive}
         waterbassin={copy.buildings.waterbassin}
+        waterbassinActive={waterbassinActive}
         markt={copy.buildings.markt}
+        marktActive={marktActive}
         ingang={copy.buildings.ingang} 
-        handleClickParcours={() => handleSelect("hoogteparcours", false)}
-        handleClickBassin={() => handleSelect("waterbassin", false)}
-        handleClickIngang={() => handleSelect("ingang", false)}
-        handleClickMarkt={() => handleSelect("markt", false)}
+        ingangActive={ingangActive}
+        handleClickParcours={() => {
+          if (isClickable) {
+            handleSelect("hoogteparcours", false)
+          }
+        }}
+        handleClickBassin={() => {
+          if (isClickable) {
+            handleSelect("waterbassin", false)
+          }
+        }}
+        handleClickIngang={() => {
+          if (isClickable) {
+            handleSelect("ingang", false)
+          }
+        }}
+        handleClickMarkt={() => {
+          if (isClickable) {
+            handleSelect("markt", false)
+          }
+        }}
        />
        <Trees />
        <MapModel />
@@ -316,51 +342,81 @@ export default function Experience({ onChangeBuilding, onChangeEvent, clearSelec
         handleClick={() => {
           if (isClickable) {
             handleSelect("machinezaal-pompenzaal", false)
-          } 
-          }}
-        emissiveIntensity={hoofdzaalEmissiveIntensity}
+          }
+        }}
+        active={hoofdzaaActive}
         label={copy.buildings["machinezaal-pompenzaal"]}
     />
       <Mechaniekers
-        handleClick={() => handleSelect("mechaniekers", false)}
-        emissiveIntensity={mechaniekersEmissiveIntensity}
+        handleClick={() => {
+          if (isClickable) {
+            handleSelect("mechaniekers", false)
+          }
+        }}
+        active={mechaniekersActive}
         label={copy.buildings.mechaniekers}
       />
       <Ketelhuis
-        handleClick={() => handleSelect("ketelhuis", false)}
-        emissiveIntensity={ketelhuisEmissiveIntensity}
+          handleClick={() => {
+            if (isClickable) {
+              handleSelect("ketelhuis", false)
+            }
+          }}
+        active={ketelhuisActive}
         label={copy.buildings.ketelhuis}
       />
       <Transformatoren
-        handleClick={() => handleSelect("transformatoren", false)}
-        emissiveIntensity={transformatorenEmissiveIntensity}
+        handleClick={() => {
+          if (isClickable) {
+            handleSelect("transformatoren", false)
+          }
+        }}
+        active={transformatorenActive}
         label={copy.buildings.transformatoren}
       />
       <Octagon
-        handleClick={() => handleSelect("octagon", false)}
-        emissiveIntensity={octagonEmissiveIntensity}
+        handleClick={() => {
+          if (isClickable) {
+            handleSelect("octagon", false)
+          }
+        }}
+        active={octagonActive}
         label={copy.buildings.octagon}
       />
       <Kunstacademie
-        handleClick={() => handleSelect("directeurswoning", false)}
-        emissiveIntensity={kunstacademieEmissiveIntensity}
+        handleClick={() => {
+          if (isClickable) {
+            handleSelect("directeurswoning", false)
+          }
+        }}
+        active={kunstacademieActive}
         label={copy.buildings.directeurswoning}
       />
       <Duiktank
-        handleClick={() => handleSelect("duiktank", false)}
-        emissiveIntensity={duiktankEmissiveIntensity}
+        handleClick={() => {
+          if (isClickable) {
+            handleSelect("duiktank", false)
+          }
+        }}
+        active={duiktankActive}
         label={copy.buildings.duiktank}
-
       />
       <Watertoren
-        handleClick={() => handleSelect("watertoren", false)}
-        emissiveIntensity={watertorenEmissiveIntensity}
+        handleClick={() => {
+          if (isClickable) {
+            handleSelect("watertoren", false)
+          }
+        }}
+        active={watertorenActive}
         label={copy.buildings.watertoren}
-
       />
       <Plong
-        handleClick={() => handleSelect("plong", false)}
-        emissiveIntensity={plongEmissiveIntensity}
+        handleClick={() => {
+          if (isClickable) {
+            handleSelect("plong", false)
+          }
+        }}
+        active={plongActive}
         label={copy.buildings.plong}
       />
        <OfficeBuilding />
