@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import Schedule from "./Schedule";
 import { BUILDING, type IEvent } from "../services/types";
-const Map = await import("./Map");
+import Map from "./Map";
 
 interface Props {
   events: IEvent[];
@@ -59,7 +59,7 @@ const Interactivity = ({ events, copy }: Props) => {
   return (
     <div className="interactivity">
       {loading && <pre className="fixed top-0 left-0 z-40">LOADING</pre>}
-      <Map.default
+      <Map
         copy={copy}
         events={events}
         selectedBuilding={selectedBuilding}
