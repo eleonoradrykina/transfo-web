@@ -1,9 +1,10 @@
-import { Canvas } from "@react-three/fiber";
-import { Bvh } from "@react-three/drei";
 import "../styles/components/map.css";
-import Experience from "./Experience";
 import { useState } from "react";
 import type { IEvent } from "../services/types";
+
+const { Canvas } = await import("@react-three/fiber");
+const Experience = await import("./Experience");
+const { Bvh } = await import("@react-three/drei");
 
 interface Props {
   onChangeBuilding: (building: string | null) => void;
@@ -12,6 +13,7 @@ interface Props {
   selectedEvent: string | null;
   copy: any;
   events: IEvent[];
+  setLoading: (loading: boolean) => void;
 }
 
 export default function Map({
@@ -21,6 +23,7 @@ export default function Map({
   selectedEvent,
   copy,
   events,
+  setLoading,
 }: Props) {
   const [clearSelection, setClearSelection] = useState(0);
 
@@ -40,7 +43,7 @@ export default function Map({
         }}
       >
         <Bvh>
-          <Experience
+          <Experience.default
             copy={copy}
             events={events}
             selectedBuilding={selectedBuilding}
@@ -48,6 +51,7 @@ export default function Map({
             clearSelection={clearSelection}
             onChangeBuilding={onChangeBuilding}
             onChangeEvent={onChangeEvent}
+            setLoading={setLoading}
           />
         </Bvh>
       </Canvas>

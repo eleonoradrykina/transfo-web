@@ -1,5 +1,5 @@
 .faq {
-  @apply max-h-screen fixed z-20;
+  @apply max-h-dvh fixed z-20;
   @apply inset-0;
   @apply flex flex-col justify-between gap-30;
   @apply -translate-x-[100%];
