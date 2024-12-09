@@ -67,7 +67,7 @@ const Event = ({ event, handleBack, location }: Props) => {
                 {tag}
               </span>
             ))}
-            <span className="event__tag location">{event.location}</span>
+            <span className="event__tag location">{location}</span>
             {event.startTime && event.endTime ? (
               <>
                 <span className="event__tag time">

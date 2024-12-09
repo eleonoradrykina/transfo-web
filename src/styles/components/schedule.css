@@ -183,12 +183,14 @@
   &__tags {
     @apply w-full;
     @apply flex flex-col md:flex-row flex-wrap gap-10 md:justify-center items-start;
+    @apply overflow-x-hidden;
   }
 
   &__tag {
     @apply block px-15;
     @apply bg-orange rounded-full;
     @apply text-base;
+    @apply text-nowrap;
 
     &.time {
       @apply bg-purple;
