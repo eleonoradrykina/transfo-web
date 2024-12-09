@@ -41,7 +41,7 @@
     @media (min-width: 768px) {
       height: calc(100% - 90px);
     }
-    @apply overflow-x-hidden;
+    @apply overflow-x-hidden relative;
   }
 
   &__default,

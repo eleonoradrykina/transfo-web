@@ -1,7 +1,7 @@
 import { useRef, useState, useEffect } from "react";
-const { OrbitControls, CameraControls } = await import("@react-three/drei");
+const { CameraControls } = await import("@react-three/drei");
 
-import { useThree} from "@react-three/fiber";
+import { useThree } from "@react-three/fiber";
 const {
   ToneMapping,
   EffectComposer,
