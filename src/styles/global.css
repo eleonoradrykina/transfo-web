@@ -41,6 +41,16 @@
 @font-face {
   font-family: "Whyte";
   src:
+    url("/fonts/ABCWhyte-Medium-Trial.woff") format("woff"),
+    url("/fonts/ABCWhyte-Medium-Trial.woff2") format("woff2");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Whyte";
+  src:
     url("/fonts/ABCWhyte-RegularItalic-Trial.woff") format("woff"),
     url("/fonts/ABCWhyte-RegularItalic-Trial.woff2") format("woff2");
   font-weight: 500;
@@ -54,6 +64,16 @@
     url("/fonts/ABCWhyte-BoldItalic-Trial.woff") format("woff"),
     url("/fonts/ABCWhyte-BoldItalic-Trial.woff2") format("woff2");
   font-weight: 700;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Whyte";
+  src:
+    url("/fonts/ABCWhyte-MediumItalic-Trial.woff") format("woff"),
+    url("/fonts/ABCWhyte-MediumItalic-Trial.woff2") format("woff2");
+  font-weight: 600;
   font-style: italic;
   font-display: swap;
 }
