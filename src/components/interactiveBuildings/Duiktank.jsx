@@ -23,8 +23,6 @@ export default function Duiktank(props) {
     }} dispose={null}>
       <group>
       <mesh
-        // castShadow
-        // receiveShadow
         geometry={nodes.duiktank.geometry}
         position={[1.496, 0.366, 4.596]}
         rotation={[0, -1.568, 0]}
