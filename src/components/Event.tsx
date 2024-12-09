@@ -108,12 +108,14 @@ const Event = ({ event, handleBack, location }: Props) => {
         </div>
         <div className="event__content">
           <div id={`content__${event.name}`}></div>
-          <button
-            className=" button small mx-auto"
-            onClick={() => setShared(true)}
-          >
-            {share ? "Gekopieerd!" : "Delen"}
-          </button>
+          <div className="md:hidden">
+            <button
+              className=" button small mx-auto"
+              onClick={() => setShared(true)}
+            >
+              {share ? "Gekopieerd!" : "Delen"}
+            </button>
+          </div>
         </div>
       </div>
     </div>
