@@ -59,7 +59,6 @@ export default function Experience({ onChangeBuilding, onChangeEvent, clearSelec
 
 
   const handleClear = (location) => {
-    console.log("clearing", location);
     setHoofdzaalEmissiveIntensity(0);
     setMechaniekersEmissiveIntensity(0);
     setKetelhuisEmissiveIntensity(0);
@@ -102,7 +101,6 @@ export default function Experience({ onChangeBuilding, onChangeEvent, clearSelec
   }
 
   const setLabelsOpacity = () => {
-    console.log("setting labels opacity")
     const mm = gsap.matchMedia();
     const tlLabels = gsap.timeline({
       scrollTrigger: {

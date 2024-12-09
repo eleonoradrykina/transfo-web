@@ -34,7 +34,6 @@ export default function Map({
           position: [13, 7, 13],
         }}
         onPointerMissed={() => {
-          console.log("clearing");
           onChangeBuilding(null);
           onChangeEvent(null);
           setClearSelection(clearSelection + 1);

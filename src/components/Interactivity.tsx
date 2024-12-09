@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import Map from "./Map";
 import Schedule from "./Schedule";
 import { BUILDING, type IEvent } from "../services/types";
 
@@ -33,10 +32,6 @@ const Interactivity = ({ events, copy }: Props) => {
   }, []);
 
   useEffect(() => {
-    console.log("useEffect");
-    console.log("selectedBuilding", selectedBuilding);
-    console.log("selectedEvent", selectedEvent);
-
     if (selectedBuilding && selectedEvent) {
       window.history.replaceState(
         {},
@@ -56,14 +51,14 @@ const Interactivity = ({ events, copy }: Props) => {
 
   return (
     <div className="interactivity">
-      <Map
+      {/* <Map
         copy={copy}
         events={events}
         selectedBuilding={selectedBuilding}
         selectedEvent={selectedEvent}
         onChangeBuilding={setSelectedBuilding}
         onChangeEvent={setSelectedEvent}
-      />
+      /> */}
       <Schedule
         copy={copy}
         events={events}

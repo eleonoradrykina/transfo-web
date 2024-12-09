@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { type IEvent } from "../services/types";
 import "../styles/components/schedule.css";
+import { getTime } from "../services/functions";
 
 interface Props {
   event: IEvent;
@@ -74,27 +75,11 @@ const Event = ({ event, handleBack, location }: Props) => {
             {event.startTime && event.endTime ? (
               <>
                 <span className="event__tag time">
-                  {new Intl.DateTimeFormat("nl-BE", {
-                    timeStyle: "short",
-                    timeZone: "Europe/Brussels",
-                  }).format(event.startTime)}{" "}
-                  -{" "}
-                  {new Intl.DateTimeFormat("nl-BE", {
-                    timeStyle: "short",
-                    timeZone: "Europe/Brussels",
-                  }).format(event.endTime)}
+                  {getTime(event.startTime)} - {getTime(event.endTime)}
                 </span>
                 {event.startTime2 && event.endTime2 && (
                   <span className="event__tag time">
-                    {new Intl.DateTimeFormat("nl-BE", {
-                      timeStyle: "short",
-                      timeZone: "Europe/Brussels",
-                    }).format(event.startTime2)}{" "}
-                    -{" "}
-                    {new Intl.DateTimeFormat("nl-BE", {
-                      timeStyle: "short",
-                      timeZone: "Europe/Brussels",
-                    }).format(event.endTime2)}
+                    {getTime(event.startTime2)} - {getTime(event.endTime2)}
                   </span>
                 )}{" "}
               </>
