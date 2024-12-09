@@ -1,8 +1,8 @@
 @font-face {
   font-family: "Whyte";
   src:
-    url("/fonts/ABCWhyte-Book-Trial.woff") format("woff"),
-    url("/fonts/ABCWhyte-Book-Trial.woff2") format("woff2");
+    url("/fonts/ABCWhyteEdu-Book.woff") format("woff"),
+    url("/fonts/ABCWhyteEdu-Book.woff2") format("woff2");
   font-weight: 400;
   font-style: normal;
   font-display: swap;
@@ -11,8 +11,8 @@
 @font-face {
   font-family: "Whyte";
   src:
-    url("/fonts/ABCWhyte-BookItalic-Trial.woff") format("woff"),
-    url("/fonts/ABCWhyte-BookItalic-Trial.woff2") format("woff2");
+    url("/fonts/ABCWhyteEdu-BookItalic.woff") format("woff"),
+    url("/fonts/ABCWhyteEdu-BookItalic.woff2") format("woff2");
   font-weight: 400;
   font-style: italic;
   font-display: swap;
@@ -21,8 +21,8 @@
 @font-face {
   font-family: "Whyte";
   src:
-    url("/fonts/ABCWhyte-Regular-Trial.woff") format("woff"),
-    url("/fonts/ABCWhyte-Regular-Trial.woff2") format("woff2");
+    url("/fonts/ABCWhyteEdu-Regular.woff") format("woff"),
+    url("/fonts/ABCWhyteEdu-Regular.woff2") format("woff2");
   font-weight: 500;
   font-style: normal;
   font-display: swap;
@@ -31,8 +31,8 @@
 @font-face {
   font-family: "Whyte";
   src:
-    url("/fonts/ABCWhyte-Bold-Trial.woff") format("woff"),
-    url("/fonts/ABCWhyte-Bold-Trial.woff2") format("woff2");
+    url("/fonts/ABCWhyteEdu-Bold.woff") format("woff"),
+    url("/fonts/ABCWhyteEdu-Bold.woff2") format("woff2");
   font-weight: 700;
   font-style: normal;
   font-display: swap;
@@ -41,8 +41,18 @@
 @font-face {
   font-family: "Whyte";
   src:
-    url("/fonts/ABCWhyte-RegularItalic-Trial.woff") format("woff"),
-    url("/fonts/ABCWhyte-RegularItalic-Trial.woff2") format("woff2");
+    url("/fonts/ABCWhyteEdu-Medium.woff") format("woff"),
+    url("/fonts/ABCWhyteEdu-Medium.woff2") format("woff2");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Whyte";
+  src:
+    url("/fonts/ABCWhyteEdu-RegularItalic.woff") format("woff"),
+    url("/fonts/ABCWhyteEdu-RegularItalic.woff2") format("woff2");
   font-weight: 500;
   font-style: italic;
   font-display: swap;
@@ -51,8 +61,28 @@
 @font-face {
   font-family: "Whyte";
   src:
-    url("/fonts/ABCWhyte-BoldItalic-Trial.woff") format("woff"),
-    url("/fonts/ABCWhyte-BoldItalic-Trial.woff2") format("woff2");
+    url("/fonts/ABCWhyteEdu-BoldItalic.woff") format("woff"),
+    url("/fonts/ABCWhyteEdu-BoldItalic.woff2") format("woff2");
+  font-weight: 700;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Whyte";
+  src:
+    url("/fonts/ABCWhyteEdu-MediumItalic.woff") format("woff"),
+    url("/fonts/ABCWhyteEdu-MediumItalic.woff2") format("woff2");
+  font-weight: 600;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Camera";
+  src:
+    url("/fonts/ABCCameraEdu-BoldItalic.woff") format("woff"),
+    url("/fonts/ABCCameraEdu-BoldItalic.woff2") format("woff2");
   font-weight: 700;
   font-style: italic;
   font-display: swap;
@@ -61,18 +91,8 @@
 @font-face {
   font-family: "Camera";
   src:
-    url("/fonts/ABCCamera-BoldItalic-Trial.woff") format("woff"),
-    url("/fonts/ABCCamera-BoldItalic-Trial.woff2") format("woff2");
-  font-weight: 700;
-  font-style: italic;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Camera";
-  src:
-    url("/fonts/ABCCamera-Bold-Trial.woff") format("woff"),
-    url("/fonts/ABCCamera-Bold-Trial.woff2") format("woff2");
+    url("/fonts/ABCCameraEdu-Bold.woff") format("woff"),
+    url("/fonts/ABCCameraEdu-Bold.woff2") format("woff2");
   font-weight: 700;
   font-style: normal;
   font-display: swap;
@@ -81,8 +101,8 @@
 @font-face {
   font-family: "Camera";
   src:
-    url("/fonts/ABCCamera-Regular-Trial.woff") format("woff"),
-    url("/fonts/ABCCamera-Regular-Trial.woff2") format("woff2");
+    url("/fonts/ABCCameraEdu-Regular.woff") format("woff"),
+    url("/fonts/ABCCameraEdu-Regular.woff2") format("woff2");
   font-weight: 400;
   font-style: normal;
   font-display: swap;
@@ -91,8 +111,8 @@
 @font-face {
   font-family: "Camera";
   src:
-    url("/fonts/ABCCamera-RegularItalic-Trial.woff") format("woff"),
-    url("/fonts/ABCCamera-RegularItalic-Trial.woff2") format("woff2");
+    url("/fonts/ABCCameraEdu-RegularItalic.woff") format("woff"),
+    url("/fonts/ABCCameraEdu-RegularItalic.woff2") format("woff2");
   font-weight: 400;
   font-style: italic;
   font-display: swap;
@@ -100,6 +120,7 @@
 
 html {
   @apply bg-black;
+  @apply overflow-y-hidden;
 
   /* width */
   ::-webkit-scrollbar {
