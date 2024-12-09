@@ -4,6 +4,7 @@
 
   & canvas {
     touch-action: none;
+    @apply cursor-pointer;
   }
 }
 
