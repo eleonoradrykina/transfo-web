@@ -23,9 +23,7 @@ const Question = ({ question, children }: Props) => {
   return (
     <button onClick={handleClick} className={`faq__item ${open ? "open" : ""}`}>
       <h2 className="faq__item__question">
-        <span className="min-w-3 md:min-w-4 text-center">
-          {open ? "-" : "+"}
-        </span>{" "}
+        <span className="faq__item__question__dot">{open ? "-" : "+"}</span>{" "}
         <span>{question}</span>
       </h2>
       <div id={`answer-${question}`} className="faq__item__answer">
