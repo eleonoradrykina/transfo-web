@@ -4,5 +4,5 @@ const zeroPad = (num: number, places: number) => {
 };
 
 export const getTime = (date: Date) => {
-  return `${zeroPad(date.getHours() - 1, 2)}:${zeroPad(date.getMinutes(), 2)}`;
+  return `${zeroPad(date.getHours(), 2)}:${zeroPad(date.getMinutes(), 2)}`;
 };
