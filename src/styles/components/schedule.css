@@ -148,8 +148,7 @@
 
   &__content {
     @apply text-start;
-    p,
-    a {
+    p {
       @apply mb-15;
     }
 
@@ -159,6 +158,10 @@
       &:hover {
         @apply underline;
       }
+    }
+
+    h3 {
+      @apply text-2xl font-semibold;
     }
   }
 
