@@ -5,21 +5,88 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 gsap.registerPlugin(ScrollTrigger);
 let mm = gsap.matchMedia();
 
+const faqButton = document.getElementById("faq__button");
+const faqBackButton = document.getElementById("faq__back__button");
+if (faqButton) {
+  faqButton.addEventListener("click", () => {
+    const faqTL = gsap.timeline({ paused: true, autoRemoveChildren: true });
+    faqTL
+      .to("#faq", {
+        x: "0",
+      })
+      .to(
+        "#hero",
+        {
+          x: "100%",
+        },
+        "<"
+      )
+      .set(
+        ".miefel",
+        {
+          opacity: 0,
+        },
+        "<"
+      );
+    faqTL.play();
+  });
+}
+
+if (faqBackButton) {
+  faqBackButton.addEventListener("click", () => {
+    const revertTL = gsap.timeline({ paused: true, autoRemoveChildren: true });
+    revertTL
+      .to("#faq", {
+        x: "-100%",
+      })
+      .to(
+        "#hero",
+        {
+          x: "0",
+        },
+        "<"
+      )
+      .set(
+        ".miefel",
+        {
+          opacity: 1,
+        },
+        ">"
+      );
+    revertTL.play();
+  });
+}
+
 const mainTL = gsap.timeline({
   scrollTrigger: {
     trigger: "#body",
     start: "top top",
     end: "20",
     onEnterBack: () => {
-      mm.add("(max-width: 768px)", () => {
-        gsap.to("#schedule", {
-          duration: 0.2,
-          ease: "power1.out",
-          top: "45%",
-        });
-      });
-
       mainTL.reverse();
+      const revertTL = gsap.timeline({
+        paused: true,
+        autoRemoveChildren: true,
+      });
+      revertTL
+        .to("#faq", {
+          x: "-100%",
+        })
+        .to(
+          "#hero",
+          {
+            x: "0",
+          },
+          "<"
+        )
+        .set(
+          ".miefel",
+          {
+            opacity: 1,
+          },
+          ">"
+        );
+      revertTL.play();
     },
   },
 });
@@ -73,14 +140,6 @@ mm.add("(max-width: 767px)", () => {
       },
       "<"
     );
-  // .to(
-  //   "#scroll-trigger",
-  //   {
-  //     bottom: "40%",
-  //     top: "50px",
-  //   },
-  //   ">"
-  // );
 });
 
 mm.add("(min-width: 768px)", () => {

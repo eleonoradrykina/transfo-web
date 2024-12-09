@@ -1,7 +1,7 @@
 import { useRef, useState, useEffect } from "react";
-import { OrbitControls, CameraControls } from "@react-three/drei";
+import { CameraControls } from "@react-three/drei";
 
-import { useThree} from "@react-three/fiber";
+import { useThree } from "@react-three/fiber";
 import {
   ToneMapping,
   EffectComposer,
@@ -9,28 +9,28 @@ import {
 } from "@react-three/postprocessing";
 
 /* Non interactive map:*/
-import MapModel from "./nonInteractiveMap/MapModel";
-import Ground from "./nonInteractiveMap/Ground";
-import OfficeBuilding from "./nonInteractiveMap/OfficeBuilding";
-import Path from "./nonInteractiveMap/Path";
-import Trees from "./nonInteractiveMap/Trees";
+import MapModel from"./nonInteractiveMap/MapModel";
+import Ground from"./nonInteractiveMap/Ground";
+import OfficeBuilding from"./nonInteractiveMap/OfficeBuilding";
+import Path from"./nonInteractiveMap/Path";
+import Trees from"./nonInteractiveMap/Trees";
 
 /* Interactive buldings:*/
-import Hoofdzaal from "./interactiveBuildings/Hoofdzaal";
-import Mechaniekers from "./interactiveBuildings/Mechaniekers";
-import Ketelhuis from "./interactiveBuildings/Ketelhuis";
-import Transformatoren from "./interactiveBuildings/Transformatoren";
-import Octagon from "./interactiveBuildings/Octagon";
-import Kunstacademie from "./interactiveBuildings/Kunstacademie";
-import Duiktank from "./interactiveBuildings/Duiktank";
-import Watertoren from "./interactiveBuildings/Watertoren";
-import Plong from "./interactiveBuildings/Plong";
+import Hoofdzaal from"./interactiveBuildings/Hoofdzaal";
+import Mechaniekers from"./interactiveBuildings/Mechaniekers";
+import Ketelhuis from"./interactiveBuildings/Ketelhuis";
+import Transformatoren from"./interactiveBuildings/Transformatoren";
+import Octagon from"./interactiveBuildings/Octagon";
+import Kunstacademie from"./interactiveBuildings/Kunstacademie";
+import Duiktank from"./interactiveBuildings/Duiktank";
+import Watertoren from"./interactiveBuildings/Watertoren";
+import Plong from"./interactiveBuildings/Plong";
 
 import gsap from "gsap";
 
 const positions = new Map([["machinezaal-pompenzaal", [-0.005, 0.584, -1.317]], ["mechaniekers", [0.573, 0.306, 0.635]], ["ketelhuis", [-0.793, 0.87, -0.556]], ["transformatoren", [1.014, 1.132, -4.375]], ["octagon", [1.89, -0.102, -1.122]], ["directeurswoning", [3.105, 0.186, -0.804]], ["duiktank", [1.0, 0.366, 4.596]], ["watertoren", [-0.665, 0.045, 2.214]], ["plong", [1.504, 0.12, -0.343]], ["hoogteparcours", [3.75,0,2.5]], ["waterbassin", [2.5,0,3.0]], ["ingang", [2.0,0.25,-3.0]], ["markt", [0.3,0.25,-2.25]]]);
 
-export default function Experience({ onChangeBuilding, onChangeEvent, clearSelection, selectedBuilding, selectedEvent, copy, events }) {
+export default function Experience({ onChangeBuilding, onChangeEvent, clearSelection, selectedBuilding, selectedEvent, copy, events, setLoading }) {
   const [hoofdzaalEmissiveIntensity, setHoofdzaalEmissiveIntensity] = useState(0);
   const [mechaniekersEmissiveIntensity, setMechaniekersEmissiveIntensity] = useState(0);
   const [ketelhuisEmissiveIntensity, setKetelhuisEmissiveIntensity] = useState(0);
@@ -59,7 +59,6 @@ export default function Experience({ onChangeBuilding, onChangeEvent, clearSelec
 
 
   const handleClear = (location) => {
-    console.log("clearing", location);
     setHoofdzaalEmissiveIntensity(0);
     setMechaniekersEmissiveIntensity(0);
     setKetelhuisEmissiveIntensity(0);
@@ -102,7 +101,6 @@ export default function Experience({ onChangeBuilding, onChangeEvent, clearSelec
   }
 
   const setLabelsOpacity = () => {
-    console.log("setting labels opacity")
     const mm = gsap.matchMedia();
     const tlLabels = gsap.timeline({
       scrollTrigger: {
@@ -123,8 +121,11 @@ export default function Experience({ onChangeBuilding, onChangeEvent, clearSelec
           setTimeAfterScroll(Date.now());
 
           //move to the left and zoom in
-          cameraControlsRef.current?.truck(3.5, 0, true)
+          if (!selectedBuilding && !selectedEvent) {
+                      cameraControlsRef.current?.truck(3.5, 0, true)
           cameraControlsRef.current?.dolly(2, true)
+          }
+
           });
         
 
@@ -173,7 +174,7 @@ export default function Experience({ onChangeBuilding, onChangeEvent, clearSelec
     
     mm.add("(max-width: 768px)", () => {
       tlLabels.to(".map", {
-        y: -180,
+        y: "-20vh",
         duration: 0.75,
         ease: "power2.out",
       }, "<");
@@ -259,6 +260,7 @@ export default function Experience({ onChangeBuilding, onChangeEvent, clearSelec
 
   useEffect(() => {
     setLabelsOpacity();
+    setLoading(false);
   }, []);
 
   const cameraControls = {

@@ -41,7 +41,7 @@
     @media (min-width: 768px) {
       height: calc(100% - 90px);
     }
-    @apply overflow-x-hidden;
+    @apply overflow-x-hidden relative;
   }
 
   &__default,
@@ -148,8 +148,17 @@
 
   &__content {
     @apply text-start;
-    p {
+    p,
+    a {
       @apply mb-15;
+    }
+
+    a {
+      @apply font-bold text-orange;
+
+      &:hover {
+        @apply underline;
+      }
     }
   }
 
@@ -170,9 +179,14 @@
   &__tag {
     @apply block px-15;
     @apply bg-orange rounded-full;
+    @apply text-base;
 
     &.time {
       @apply bg-purple;
+    }
+
+    &.location {
+      @apply bg-blue;
     }
 
     &.no-bg {

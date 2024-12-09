@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
-import Map from "./Map";
 import Schedule from "./Schedule";
 import { BUILDING, type IEvent } from "../services/types";
+import Map from "./Map";
+import { gsap } from "gsap";
 
 interface Props {
   events: IEvent[];
@@ -14,12 +15,47 @@ const Interactivity = ({ events, copy }: Props) => {
 
   const [selectedBuilding, setSelectedBuilding] = useState<string | null>(null);
   const [selectedEvent, setSelectedEvent] = useState<string | null>(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    console.log("useEffect");
-    console.log("selectedBuilding", selectedBuilding);
-    console.log("selectedEvent", selectedEvent);
+    if (urlParams.get("building")) {
+      if (
+        Object.values(BUILDING).includes(urlParams.get("building") as BUILDING)
+      ) {
+        setSelectedBuilding(urlParams.get("building") ?? null);
 
+        if (urlParams.get("event")) {
+          setSelectedEvent(urlParams.get("event") ?? null);
+        }
+
+        window.scrollTo({
+          left: 0,
+          top: document.body.scrollHeight,
+          behavior: "smooth",
+        });
+      } else {
+        window.history.replaceState({}, document.title, "/");
+      }
+    }
+  }, []);
+
+  useEffect(() => {
+    if (!loading) {
+      gsap.set(".loading", {
+        display: "none",
+      });
+      gsap.to(".main", {
+        opacity: 1,
+        duration: 1,
+      });
+      gsap.to("#footer", {
+        opacity: 1,
+        duration: 1,
+      });
+    }
+  }, [loading]);
+
+  useEffect(() => {
     if (selectedBuilding && selectedEvent) {
       window.history.replaceState(
         {},
@@ -37,23 +73,6 @@ const Interactivity = ({ events, copy }: Props) => {
     }
   }, [selectedBuilding, selectedEvent]);
 
-  useEffect(() => {
-    if (urlParams.get("building") && window.innerWidth > 768) {
-      if (
-        Object.values(BUILDING).includes(urlParams.get("building") as BUILDING)
-      ) {
-        window.scrollTo(0, document.body.scrollHeight);
-        setSelectedBuilding(urlParams.get("building") ?? null);
-      } else {
-        window.history.replaceState({}, document.title, "/");
-      }
-    }
-    if (urlParams.get("event")) {
-      setSelectedEvent(urlParams.get("event") ?? null);
-      window.scrollTo(0, document.body.scrollHeight);
-    }
-  }, []);
-
   return (
     <div className="interactivity">
       <Map
@@ -63,6 +82,7 @@ const Interactivity = ({ events, copy }: Props) => {
         selectedEvent={selectedEvent}
         onChangeBuilding={setSelectedBuilding}
         onChangeEvent={setSelectedEvent}
+        setLoading={setLoading}
       />
       <Schedule
         copy={copy}

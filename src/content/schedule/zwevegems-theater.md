@@ -5,8 +5,8 @@ tags: ["Theater"]
 location: "machinezaal-pompenzaal"
 subLocation: "pompenzaal"
 heroImage: "theater.webp"
-startTime: "2024-12-14T20:00:00"
-endTime: "2024-12-14T21:00:00"
+startTime: "2024-12-14T20:00:00+01:00"
+endTime: "2024-12-14T21:00:00+01:00"
 ---
 
 🎭 Aankondiging: Zwevegems Teater op Transfo Intiem! 🎭

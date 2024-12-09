@@ -9,7 +9,7 @@ interface CountdownProps {
 
 const Countdown = ({ language }: CountdownProps) => {
   const copy = languages[language];
-  const startFestival = new Date("2024-12-14T17:00:00");
+  const startFestival = new Date("2024-12-14T17:00:00+01:00");
   const [timeLeft, setTimeLeft] = useState(
     Math.floor((startFestival.getTime() - new Date().getTime()) / 1000)
   );
