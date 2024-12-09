@@ -28,7 +28,7 @@
       backdrop-filter: blur(10px);
 
       &__dot {
-        @apply min-w-3 md:w-8 md:h-8 md:min-w-8 text-center;
+        @apply min-w-7 w-7 md:w-8 md:h-8 md:min-w-8 text-center;
         @apply bg-purple/50 rounded-lg;
       }
     }
