@@ -166,3 +166,36 @@ body {
     @apply animate-spin-slow;
   }
 }
+
+.button {
+  @apply min-h-[35px];
+  @apply px-15 md:px-[20px] py-5 md:py-[7px] bg-purple/30;
+  @apply border-[2.5px] border-pink rounded-full;
+  @apply transition-all duration-300;
+  @apply flex flex-row items-center justify-center gap-5 w-fit;
+  @apply overflow-hidden;
+
+  &.small {
+    @apply w-[38px] h-[38px] md:w-fit md:h-fit;
+    @apply border-[1.5px] py-[2.5px] md:py-[5px];
+  }
+
+  .button__arrow {
+    @apply transition-all duration-300;
+  }
+
+  backdrop-filter: blur(10px);
+  @apply text-white font-bold text-sm md:text-base;
+
+  &:hover {
+    @apply bg-purple border-purple;
+
+    .button__arrow.left {
+      @apply -translate-x-[100px];
+    }
+
+    .button__arrow.right {
+      @apply translate-x-[100px];
+    }
+  }
+}

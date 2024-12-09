@@ -22,20 +22,30 @@
     @apply transition-all duration-300;
     &__question {
       @apply relative z-20;
-      @apply flex flex-row gap-15;
+      @apply flex flex-row gap-15 items-start;
       @apply font-medium text-xl md:text-2xl;
       @apply p-15 md:px-30 bg-purple/30 rounded-lg;
       backdrop-filter: blur(10px);
+
+      &__dot {
+        @apply min-w-7 w-7 md:w-8 md:h-8 md:min-w-8 text-center;
+        @apply bg-purple/50 rounded-lg;
+      }
     }
 
     &__answer {
       @apply max-h-0 opacity-0;
       @apply transition-all duration-300;
+      @apply mx-2;
     }
 
     &.open {
       .faq__item__answer {
         @apply opacity-100 mt-15 mb-30;
+      }
+
+      .faq__item__question__dot {
+        @apply bg-purple;
       }
     }
   }
@@ -44,10 +54,6 @@
 .faq__button {
   @apply mt-5 relative z-30;
   @apply md:fixed md:bottom-60 md:left-60;
-  @apply px-15 md:px-[20px] py-5 md:py-[7px] bg-purple/30;
-  @apply border-[2.5px] border-pink rounded-full;
-  backdrop-filter: blur(10px);
-  @apply text-white font-bold text-sm md:text-base;
 
   &.back {
     @apply w-fit;

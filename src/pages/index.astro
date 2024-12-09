@@ -70,8 +70,10 @@ const events = await Promise.all(
         <div id="hero__top" class="hero__top margins">
           <span id="hero__date" class="hero__date">{copy.date.festival}</span>
           <h1 id="hero__title" class="hero__title">{copy.title}</h1>
-          <button id="faq__button" class="faq__button"
-            >{copy.faq.title.toUpperCase()}</button
+          <button id="faq__button" class="button faq__button"
+            ><span class="button__arrow left">←</span>{
+              copy.faq.title.toUpperCase()
+            }</button
           >
         </div>
 
@@ -191,5 +193,11 @@ const events = await Promise.all(
       </div>
     </footer>
     <script src="../services/gsap.ts"></script>
+    <script>
+      const title = document.getElementById("hero__title");
+      title?.addEventListener("click", () => {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      });
+    </script>
   </body>
 </html>

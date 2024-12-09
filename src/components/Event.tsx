@@ -39,15 +39,13 @@ const Event = ({ event, handleBack, location }: Props) => {
     <div className="event">
       <div className="event__header">
         <button
-          className="event__back"
+          className="button small"
           onClick={() => {
             handleBack(event.location);
           }}
         >
-          <span className="hidden md:inline">
-            ← &nbsp; <span>{location}</span>
-          </span>
-          <span className="md:hidden">←</span>
+          <span className="button__arrow left">←</span>
+          <span className="hidden md:inline">{location}</span>
         </button>
 
         <div className="w-full">

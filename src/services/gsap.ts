@@ -163,6 +163,7 @@ mm.add("(min-width: 768px)", () => {
       {
         fontSize: "6vw",
         marginLeft: "0px",
+        zIndex: 1,
       },
       "<"
     )
