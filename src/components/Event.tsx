@@ -55,7 +55,7 @@ const Event = ({ event, handleBack, location }: Props) => {
       <div className="event__header">
         <div className="flex flex-row md:w-full justify-between">
           <button
-            className="button small"
+            className="button round"
             onClick={() => {
               handleBack(event.location);
             }}
@@ -108,7 +108,10 @@ const Event = ({ event, handleBack, location }: Props) => {
         </div>
         <div className="event__content">
           <div id={`content__${event.name}`}></div>
-          <button className=" button mx-auto" onClick={() => setShared(true)}>
+          <button
+            className=" button small mx-auto"
+            onClick={() => setShared(true)}
+          >
             {share ? "Gekopieerd!" : "Delen"}
           </button>
         </div>

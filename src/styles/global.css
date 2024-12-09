@@ -198,6 +198,11 @@ body {
   @apply overflow-hidden;
 
   &.small {
+    @apply min-w-[38px] h-[38px] md:w-fit md:h-fit;
+    @apply border-[1.5px] py-[2.5px] md:py-[5px];
+  }
+
+  &.round {
     @apply w-[38px] h-[38px] md:w-fit md:h-fit;
     @apply border-[1.5px] py-[2.5px] md:py-[5px];
   }
