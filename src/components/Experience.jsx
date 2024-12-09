@@ -313,7 +313,11 @@ export default function Experience({ onChangeBuilding, onChangeEvent, clearSelec
        <MapModel />
       <Path intensity={0.5} />
       <Hoofdzaal
-        handleClick={() => handleSelect("machinezaal-pompenzaal", false)}
+        handleClick={() => {
+          if (isClickable) {
+            handleSelect("machinezaal-pompenzaal", false)
+          } 
+          }}
         emissiveIntensity={hoofdzaalEmissiveIntensity}
         label={copy.buildings["machinezaal-pompenzaal"]}
     />

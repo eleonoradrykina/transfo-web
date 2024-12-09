@@ -137,7 +137,8 @@ const Schedule = ({
         <div className="schedule__default">
           <h3 className="schedule__title">Programma</h3>
           <p className="hidden md:inline">
-            Heel het programma is weergegeven. Klik op het gebouw om te zien wat
+            Heel het programma is weergegeven.{" "}
+            <span className="font-bold">Klik</span> op het gebouw om te zien wat
             er daar plaatsvindt.
           </p>
           <ul className="schedule__list">
@@ -169,15 +170,13 @@ const Schedule = ({
         <div className="schedule__building">
           <div className="w-full gap-15 flex flex-col items-start ">
             <button
-              className="event__back"
+              className="button small"
               onClick={() => {
                 onChangeBuilding(null);
               }}
             >
-              <span className="hidden md:inline">
-                ← &nbsp; <span>terug</span>
-              </span>
-              <span className="md:hidden">←</span>
+              <span className="button__arrow left">←</span>
+              <span className="hidden md:inline">TERUG</span>
             </button>
             <h3 className="schedule__title">
               {copy.buildings[selectedBuilding ?? "default"]}

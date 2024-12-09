@@ -7,8 +7,9 @@ interface Props {
 const FAQ = ({ copy }: Props) => {
   return (
     <div id="faq" className="faq">
-      <button id="faq__back__button" className="faq__button back">
+      <button id="faq__back__button" className="button faq__button back">
         {copy.faq.back.toUpperCase()}
+        <span className="button__arrow right">→</span>
       </button>
       <h2 className="faq__title"> {copy.faq.title}</h2>
       <div className="faq__questions">
