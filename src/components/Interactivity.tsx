@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import Schedule from "./Schedule";
 import { BUILDING, type IEvent } from "../services/types";
+import Map from "./Map";
 
 interface Props {
   events: IEvent[];
@@ -51,14 +52,14 @@ const Interactivity = ({ events, copy }: Props) => {
 
   return (
     <div className="interactivity">
-      {/* <Map
+      <Map
         copy={copy}
         events={events}
         selectedBuilding={selectedBuilding}
         selectedEvent={selectedEvent}
         onChangeBuilding={setSelectedBuilding}
         onChangeEvent={setSelectedEvent}
-      /> */}
+      />
       <Schedule
         copy={copy}
         events={events}
