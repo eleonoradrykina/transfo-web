@@ -193,5 +193,11 @@ const events = await Promise.all(
       </div>
     </footer>
     <script src="../services/gsap.ts"></script>
+    <script>
+      const title = document.getElementById("hero__title");
+      title?.addEventListener("click", () => {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      });
+    </script>
   </body>
 </html>

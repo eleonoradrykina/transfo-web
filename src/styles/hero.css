@@ -5,6 +5,7 @@
 
   &__top {
     @apply flex flex-col items-start;
+    @apply relative;
   }
 
   &__bottom {
@@ -22,6 +23,8 @@
   &__title {
     @apply mx-auto;
     @apply font-camera font-bold text-center;
+    @apply cursor-pointer;
+    z-index: -11;
     font-size: clamp(65px, 12vw, 160px);
 
     @media (min-width: 768px) {
