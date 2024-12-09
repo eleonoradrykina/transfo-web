@@ -60,3 +60,7 @@ svg {
   @apply opacity-0;
   @apply pointer-events-none;
 }
+
+.hotspot-wrapper {
+  @apply pointer-events-none;
+}
