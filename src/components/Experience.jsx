@@ -1,36 +1,36 @@
 import { useRef, useState, useEffect } from "react";
-import { OrbitControls, CameraControls } from "@react-three/drei";
+const { OrbitControls, CameraControls } = await import("@react-three/drei");
 
 import { useThree} from "@react-three/fiber";
-import {
+const {
   ToneMapping,
   EffectComposer,
   Bloom,
-} from "@react-three/postprocessing";
+} = await import("@react-three/postprocessing");
 
 /* Non interactive map:*/
-import MapModel from "./nonInteractiveMap/MapModel";
-import Ground from "./nonInteractiveMap/Ground";
-import OfficeBuilding from "./nonInteractiveMap/OfficeBuilding";
-import Path from "./nonInteractiveMap/Path";
-import Trees from "./nonInteractiveMap/Trees";
+const MapModel = await import("./nonInteractiveMap/MapModel");
+const Ground = await import("./nonInteractiveMap/Ground");
+const OfficeBuilding = await import("./nonInteractiveMap/OfficeBuilding");
+const Path = await import("./nonInteractiveMap/Path");
+const Trees = await import("./nonInteractiveMap/Trees");
 
 /* Interactive buldings:*/
-import Hoofdzaal from "./interactiveBuildings/Hoofdzaal";
-import Mechaniekers from "./interactiveBuildings/Mechaniekers";
-import Ketelhuis from "./interactiveBuildings/Ketelhuis";
-import Transformatoren from "./interactiveBuildings/Transformatoren";
-import Octagon from "./interactiveBuildings/Octagon";
-import Kunstacademie from "./interactiveBuildings/Kunstacademie";
-import Duiktank from "./interactiveBuildings/Duiktank";
-import Watertoren from "./interactiveBuildings/Watertoren";
-import Plong from "./interactiveBuildings/Plong";
+const Hoofdzaal = await import("./interactiveBuildings/Hoofdzaal");
+const Mechaniekers = await import("./interactiveBuildings/Mechaniekers");
+const Ketelhuis = await import("./interactiveBuildings/Ketelhuis");
+const Transformatoren = await import("./interactiveBuildings/Transformatoren");
+const Octagon = await import("./interactiveBuildings/Octagon");
+const Kunstacademie = await import("./interactiveBuildings/Kunstacademie");
+const Duiktank = await import("./interactiveBuildings/Duiktank");
+const Watertoren = await import("./interactiveBuildings/Watertoren");
+const Plong = await import("./interactiveBuildings/Plong");
 
 import gsap from "gsap";
 
 const positions = new Map([["machinezaal-pompenzaal", [-0.005, 0.584, -1.317]], ["mechaniekers", [0.573, 0.306, 0.635]], ["ketelhuis", [-0.793, 0.87, -0.556]], ["transformatoren", [1.014, 1.132, -4.375]], ["octagon", [1.89, -0.102, -1.122]], ["directeurswoning", [3.105, 0.186, -0.804]], ["duiktank", [1.0, 0.366, 4.596]], ["watertoren", [-0.665, 0.045, 2.214]], ["plong", [1.504, 0.12, -0.343]], ["hoogteparcours", [3.75,0,2.5]], ["waterbassin", [2.5,0,3.0]], ["ingang", [2.0,0.25,-3.0]], ["markt", [0.3,0.25,-2.25]]]);
 
-export default function Experience({ onChangeBuilding, onChangeEvent, clearSelection, selectedBuilding, selectedEvent, copy, events }) {
+export default function Experience({ onChangeBuilding, onChangeEvent, clearSelection, selectedBuilding, selectedEvent, copy, events, setLoading }) {
   const [hoofdzaalEmissiveIntensity, setHoofdzaalEmissiveIntensity] = useState(0);
   const [mechaniekersEmissiveIntensity, setMechaniekersEmissiveIntensity] = useState(0);
   const [ketelhuisEmissiveIntensity, setKetelhuisEmissiveIntensity] = useState(0);
@@ -260,6 +260,7 @@ export default function Experience({ onChangeBuilding, onChangeEvent, clearSelec
 
   useEffect(() => {
     setLabelsOpacity();
+    setLoading(false);
   }, []);
 
   const cameraControls = {
@@ -298,7 +299,7 @@ export default function Experience({ onChangeBuilding, onChangeEvent, clearSelec
         }}
       />
       <ambientLight intensity={1.5} />
-       <Ground
+       <Ground.default
        hoogteparcours={copy.buildings.hoogteparcours}
         waterbassin={copy.buildings.waterbassin}
         markt={copy.buildings.markt}
@@ -308,57 +309,57 @@ export default function Experience({ onChangeBuilding, onChangeEvent, clearSelec
         handleClickIngang={() => handleSelect("ingang", false)}
         handleClickMarkt={() => handleSelect("markt", false)}
        />
-       <Trees />
-       <MapModel />
-      <Path intensity={0.5} />
-      <Hoofdzaal
+       <Trees.default />
+       <MapModel.default />
+      <Path.default intensity={0.5} />
+      <Hoofdzaal.default
         handleClick={() => handleSelect("machinezaal-pompenzaal", false)}
         emissiveIntensity={hoofdzaalEmissiveIntensity}
         label={copy.buildings["machinezaal-pompenzaal"]}
     />
-      <Mechaniekers
+      <Mechaniekers.default
         handleClick={() => handleSelect("mechaniekers", false)}
         emissiveIntensity={mechaniekersEmissiveIntensity}
         label={copy.buildings.mechaniekers}
       />
-      <Ketelhuis
+      <Ketelhuis.default
         handleClick={() => handleSelect("ketelhuis", false)}
         emissiveIntensity={ketelhuisEmissiveIntensity}
         label={copy.buildings.ketelhuis}
       />
-      <Transformatoren
+      <Transformatoren.default
         handleClick={() => handleSelect("transformatoren", false)}
         emissiveIntensity={transformatorenEmissiveIntensity}
         label={copy.buildings.transformatoren}
       />
-      <Octagon
+      <Octagon.default
         handleClick={() => handleSelect("octagon", false)}
         emissiveIntensity={octagonEmissiveIntensity}
         label={copy.buildings.octagon}
       />
-      <Kunstacademie
+      <Kunstacademie.default
         handleClick={() => handleSelect("directeurswoning", false)}
         emissiveIntensity={kunstacademieEmissiveIntensity}
         label={copy.buildings.directeurswoning}
       />
-      <Duiktank
+      <Duiktank.default
         handleClick={() => handleSelect("duiktank", false)}
         emissiveIntensity={duiktankEmissiveIntensity}
         label={copy.buildings.duiktank}
 
       />
-      <Watertoren
+      <Watertoren.default
         handleClick={() => handleSelect("watertoren", false)}
         emissiveIntensity={watertorenEmissiveIntensity}
         label={copy.buildings.watertoren}
 
       />
-      <Plong
+      <Plong.default
         handleClick={() => handleSelect("plong", false)}
         emissiveIntensity={plongEmissiveIntensity}
         label={copy.buildings.plong}
       />
-       <OfficeBuilding />
+       <OfficeBuilding.default />
     </>
   );
 }
