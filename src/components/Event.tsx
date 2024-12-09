@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { type IEvent } from "../services/types";
 import "../styles/components/schedule.css";
 import { getTime } from "../services/functions";
@@ -16,6 +16,21 @@ const Event = ({ event, handleBack, location }: Props) => {
       test.innerHTML = event.content;
     }
   }, [event]);
+
+  const [share, setShared] = useState(false);
+
+  useEffect(() => {
+    if (share) {
+      navigator.clipboard.writeText(
+        `https://transfo-intiem.be/?building=${event.location}&event=${event.slug}`
+      );
+
+      const delay = setTimeout(() => {
+        setShared(false);
+        clearTimeout(delay);
+      }, 3000);
+    }
+  }, [share]);
 
   // const handleScroll = (e: React.UIEvent<HTMLElement>) => {
   //   if (window.innerWidth < 768) {
@@ -38,15 +53,22 @@ const Event = ({ event, handleBack, location }: Props) => {
   return (
     <div className="event">
       <div className="event__header">
-        <button
-          className="button small"
-          onClick={() => {
-            handleBack(event.location);
-          }}
-        >
-          <span className="button__arrow left">←</span>
-          <span className="hidden md:inline">{location}</span>
-        </button>
+        <div className="flex flex-row md:w-full justify-between">
+          <button
+            className="button small"
+            onClick={() => {
+              handleBack(event.location);
+            }}
+          >
+            <span className="button__arrow left">←</span>
+            <span className="hidden md:inline">{location}</span>
+          </button>
+          <div className="hidden md:block">
+            <button className=" button small" onClick={() => setShared(true)}>
+              {share ? "Gekopieerd!" : "Delen"}
+            </button>
+          </div>
+        </div>
 
         <div className="w-full">
           <h4 className="event__title">{event.title}</h4>
@@ -86,6 +108,9 @@ const Event = ({ event, handleBack, location }: Props) => {
         </div>
         <div className="event__content">
           <div id={`content__${event.name}`}></div>
+          <button className=" button mx-auto" onClick={() => setShared(true)}>
+            {share ? "Gekopieerd!" : "Delen"}
+          </button>
         </div>
       </div>
     </div>
