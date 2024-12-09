@@ -39,12 +39,12 @@ export default function Duiktank(props) {
               e.stopPropagation()
               props.handleClick()
             }}
-              className='building-label'>{props.label}</p>
+              className={`building-label ${props.active ? 'building-label--active' : ''}`}>{props.label}</p>
           </Html>
         <meshStandardMaterial 
           map={colorMap}
           emissive="#BC78FF" 
-          emissiveIntensity={props.emissiveIntensity} />
+          emissiveIntensity={props.active ? 3.0 : 0} />
       </mesh>
       </group>
     </group>

@@ -27,14 +27,17 @@ colorMap.colorSpace = SRGBColorSpace
         >
           <Html
             position={ [0.6,1.25,1.2]}
+            wrapperClass='label-wrapper'
             distanceFactor={7}
             occlude>
               <p onClick={(e) => {
               e.stopPropagation()
               props.handleClick()
-            }} className='building-label'>{props.label}</p>
+            }} className={`building-label ${props.active ? 'building-label--active' : ''}`}>{props.label}</p>
           </Html>
-          <Html position={[-0.5,0,0.2]}>
+          <Html position={[-0.5,0,0.2]}
+              wrapperClass='hotspot-wrapper'
+            >
             <svg id="hotspot" width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
               <circle id='hotspot__circle' cx="11" cy="11" r="9" stroke="white" strokeWidth="0.1"/>
               <circle cx="11" cy="11" r="7" fill="#DEC1FB"/>
@@ -45,7 +48,7 @@ colorMap.colorSpace = SRGBColorSpace
           metalness={0}
           map={colorMap}
           emissive="#BC78FF" 
-          emissiveIntensity={props.emissiveIntensity} />
+          emissiveIntensity={props.active ? 3.0 : 0} />
         </mesh>
       </group>
     </group>
