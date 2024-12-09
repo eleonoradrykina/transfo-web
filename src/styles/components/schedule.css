@@ -179,9 +179,14 @@
   &__tag {
     @apply block px-15;
     @apply bg-orange rounded-full;
+    @apply text-base;
 
     &.time {
       @apply bg-purple;
+    }
+
+    &.location {
+      @apply bg-blue;
     }
 
     &.no-bg {
