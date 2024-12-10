@@ -12,6 +12,9 @@ import { Language } from "./src/services/types";
 export default defineConfig({
   integrations: [react(), tailwind()],
   output: "static",
+  redirects: {
+    "/[error]": "/",
+  },
   adapter: vercel(),
   i18n: {
     defaultLocale: Language.NL,
