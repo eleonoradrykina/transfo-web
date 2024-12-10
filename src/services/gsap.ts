@@ -21,6 +21,14 @@ if (faqButton) {
         },
         "<"
       )
+      .to(
+        "#footer",
+        {
+          y: 0,
+          duration: 0.2,
+        },
+        "<+0.2"
+      )
       .set(
         ".miefel",
         {
@@ -43,6 +51,14 @@ if (faqBackButton) {
         "#hero",
         {
           x: "0",
+        },
+        "<"
+      )
+      .to(
+        "#footer",
+        {
+          y: "100%",
+          duration: 0.2,
         },
         "<"
       )
