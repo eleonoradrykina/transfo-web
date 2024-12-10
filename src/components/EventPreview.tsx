@@ -9,8 +9,6 @@ interface Props {
 }
 
 const EventPreview = ({ event, handleClick, location }: Props) => {
-  console.log(event.title);
-
   return (
     <button onClick={() => handleClick(event)} className="event-preview">
       <div className="event-preview__main">
