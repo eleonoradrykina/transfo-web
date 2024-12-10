@@ -81,7 +81,13 @@ export default function Experience({ onChangeBuilding, onChangeEvent, clearSelec
   const handleSelect = (key, fromEvent) => {
     setHasClickHappened(true);
     //set hotspot display to none:
-    document.querySelector("#hotspot").style.display = "none";
+
+    const hotspot = document.querySelector("#hotspot");
+
+    if (hotspot) {
+      hotspot.style.display = "none";
+    }
+    
     handleClear("handleSelect");
     if (!fromEvent) {
       onChangeBuilding(key);
@@ -140,7 +146,15 @@ export default function Experience({ onChangeBuilding, onChangeEvent, clearSelec
           tlLabels.reverse();
 
           //set cursor .building-label to default
-          document.querySelector(".building-label").style.cursor = "default";
+
+          const hotspot = document.querySelector("#hotspot");
+
+          if (hotspot) {
+            hotspot.style.cursor = "default";
+          }
+
+
+          
           
           mm.add("(min-width: 767px)", () => {
             cameraControlsRef.current.setLookAt(10, 5, 10, 0, 0, 0, true);
