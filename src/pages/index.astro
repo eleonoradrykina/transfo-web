@@ -14,6 +14,7 @@ import westVlaanderen from "../../public/footer/west-vlaanderen-logo.webp";
 import zwevegem from "../../public/footer/zwevegem-logo.webp";
 import transfo from "../../public/footer/transfo-logo.webp";
 import loading from "../../public/loading.webp";
+import leieDal from "../../public/footer/leiedal-logo.webp";
 
 const copy = languages.nl;
 const temp = await getCollection("schedule");
@@ -129,7 +130,16 @@ const events = await Promise.all(
               alt="West-Vlaanderen logo"
             /></a
           >
-
+          <a class="md:hidden" target="_blank" href="https://www.leiedal.be/"
+            ><Image
+              width="150"
+              height="150"
+              decoding="async"
+              loading="lazy"
+              src={leieDal}
+              alt="Leiedal logo"
+            /></a
+          >
           <a class="md:hidden" target="_blank" href="https://www.zwevegem.be/">
             <Image
               width="150"
@@ -157,6 +167,19 @@ const events = await Promise.all(
             loading="lazy"
             src={westVlaanderen}
             alt="West-Vlaanderen logo"
+          /></a
+        >
+        <a
+          class="hidden md:block"
+          target="_blank"
+          href="https://www.leiedal.be/"
+          ><Image
+            width="150"
+            height="150"
+            decoding="async"
+            loading="lazy"
+            src={leieDal}
+            alt="Leiedal logo"
           /></a
         >
         <a
