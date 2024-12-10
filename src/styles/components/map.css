@@ -67,9 +67,9 @@
   background: #ea5739;
 }
 
-svg {
+
+#hotspot {
   @apply opacity-0;
-  @apply pointer-events-none;
 }
 
 .hotspot-wrapper {
