@@ -16,6 +16,24 @@ const Interactivity = ({ events, copy }: Props) => {
   const [selectedBuilding, setSelectedBuilding] = useState<string | null>(null);
   const [selectedEvent, setSelectedEvent] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
+  const [onEnterBack, setEnterBack] = useState<boolean | null>(null);
+  const [timeline] = useState(
+    gsap.timeline({
+      scrollTrigger: {
+        trigger: "#body",
+        start: "top top",
+        end: "20",
+        onEnterBack: () => {
+          timeline.reverse();
+          setEnterBack(true);
+        },
+      },
+      onComplete: () => {
+        console.log("complete");
+        setEnterBack(false);
+      },
+    })
+  );
 
   useEffect(() => {
     if (urlParams.get("building")) {
@@ -41,6 +59,25 @@ const Interactivity = ({ events, copy }: Props) => {
 
   useEffect(() => {
     if (!loading) {
+      timeline
+        .from(
+          "#schedule",
+          {
+            y: "100%",
+          },
+          0
+        )
+        .to(
+          ".building-label",
+          {
+            opacity: 1,
+            cursor: "pointer",
+            duration: 0.75,
+            ease: "power2.out",
+          },
+          "<"
+        );
+
       gsap.set("html", {
         overflowY: "auto",
       });
@@ -79,6 +116,7 @@ const Interactivity = ({ events, copy }: Props) => {
   return (
     <div className="interactivity">
       <Map
+        onEnterBack={onEnterBack}
         copy={copy}
         events={events}
         selectedBuilding={selectedBuilding}

@@ -13,6 +13,7 @@ interface Props {
   copy: any;
   events: IEvent[];
   setLoading: (loading: boolean) => void;
+  onEnterBack: boolean | null;
 }
 
 export default function Map({
@@ -23,6 +24,7 @@ export default function Map({
   copy,
   events,
   setLoading,
+  onEnterBack,
 }: Props) {
   const [clearSelection, setClearSelection] = useState(0);
 
@@ -54,6 +56,7 @@ export default function Map({
             onChangeBuilding={onChangeBuilding}
             onChangeEvent={onChangeEvent}
             setLoading={setLoading}
+            onEnterBack={onEnterBack}
           />
         </Bvh>
       </Canvas>

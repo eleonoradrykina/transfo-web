@@ -32,24 +32,6 @@ const Event = ({ event, handleBack, location }: Props) => {
     }
   }, [share]);
 
-  // const handleScroll = (e: React.UIEvent<HTMLElement>) => {
-  //   if (window.innerWidth < 768) {
-  //     if (e.currentTarget.scrollTop > 1) {
-  //       gsap.to("#schedule", {
-  //         duration: 0.5,
-  //         ease: "power1.out",
-  //         top: "30%",
-  //       });
-  //     } else {
-  //       gsap.to("#schedule", {
-  //         duration: 0.5,
-  //         ease: "power1.out",
-  //         top: "50%",
-  //       });
-  //     }
-  //   }
-  // };
-
   return (
     <div className="event">
       <div className="event__header">
