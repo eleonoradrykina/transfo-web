@@ -12,7 +12,7 @@
   @apply font-whyte italic text-white text-base text-center;
   @apply opacity-0;
   @apply select-none;
-  padding: 0.25rem 0.5rem;
+  padding: 0.25rem 1rem;
   border-radius: 1rem;
   white-space: nowrap;
   transition: font-weight 0.3s ease;
@@ -21,7 +21,6 @@
 .building-label:hover {
   font-weight: 700;
 }
-
 
 .map-label {
   color: #dec1fb;
@@ -67,6 +66,7 @@
 .building-label--active::after {
   background: #ea5739;
 }
+
 
 #hotspot {
   @apply opacity-0;

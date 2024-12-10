@@ -7,8 +7,9 @@ interface Props {
 const FAQ = ({ copy }: Props) => {
   return (
     <div id="faq" className="faq">
-      <button id="faq__back__button" className="faq__button back">
+      <button id="faq__back__button" className="button faq__button back">
         {copy.faq.back.toUpperCase()}
+        <span className="button__arrow right">→</span>
       </button>
       <h2 className="faq__title"> {copy.faq.title}</h2>
       <div className="faq__questions">
@@ -20,7 +21,8 @@ const FAQ = ({ copy }: Props) => {
           </p>
         </Question>
         <Question question="Waar kan ik mijn fiets parkeren?">
-          <p>Met de fiets heb je de volgende opties:</p>
+          <img src="/map-bikes.webp" />
+          <p className="font-bold">Met de fiets heb je de volgende opties:</p>
           <ul>
             <li>
               Het grasplein vooraan de site, bereikbaar via de Blokellestraat en
@@ -33,7 +35,8 @@ const FAQ = ({ copy }: Props) => {
           </ul>
         </Question>
         <Question question="Waar kan ik mijn auto parkeren?">
-          <p>Met de auto heb je de volgende opties:</p>
+          <img src="/map-cars.webp" />
+          <p className="font-bold">Met de auto heb je de volgende opties:</p>
           <ul>
             <li>
               Een beperkt aantal plaatsen zijn beschikbaar aan de voorkant van
@@ -43,9 +46,9 @@ const FAQ = ({ copy }: Props) => {
               De parking aan de achterkant van de site, bereikbaar via de
               Otegemstraat.
             </li>
-            <li>Parkeren in de stoomstraat</li>
+            <li>Parkeren in de Stoomstraat</li>
           </ul>
-          <p>
+          <p className="mt-8">
             De volgende parkings liggen iets verder, maar zijn ook beschikbaar,
             indien nodig:
           </p>

@@ -79,8 +79,14 @@ export default function Experience({ onChangeBuilding, onChangeEvent, clearSelec
 
   const handleSelect = (key, fromEvent) => {
     setHasClickHappened(true);
+    
     //set hotspot display to none:
-    // document.querySelector("#hotspot").style.display = "none";
+    const hotspot = document.querySelector("#hotspot");
+
+    if (hotspot) {
+      hotspot.style.display = "none";
+    }
+    
     handleClear("handleSelect");
     if (!fromEvent) {
       onChangeBuilding(key);
