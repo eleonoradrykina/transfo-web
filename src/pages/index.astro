@@ -33,6 +33,8 @@ if (eventsRaw) {
 
 const events = await Promise.all(
   temp.map(async (event: any): Promise<IEvent> => {
+    console.log(event.data.title);
+
     return {
       slug: event.slug,
       title: event.data.title,

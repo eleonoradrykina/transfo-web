@@ -18,3 +18,5 @@ Elk moment roept meer vragen op dan antwoorden, en nodigt je uit om de grenzen t
 [Bas Bulckaen](https://bbulckaen.framer.website/)
 
 [Maxim Leyssens](https://leyssensmaxim.framer.website/)
+
+[Kasper De Frene](https://www.behance.net/kasperdefrene)
