@@ -21,4 +21,4 @@ Ervaar hoe kleine gebaren een grote impact kunnen maken en zie hoe simpel het is
 
 [Joline Vandenborre](https://www.behance.net/jolinevandenb)
 
-[Yana Decoene]()
+[Yana Decoene](https://www.yanaportfolio.be/)
