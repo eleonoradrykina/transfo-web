@@ -80,7 +80,7 @@ export default function Experience({ onChangeBuilding, onChangeEvent, clearSelec
   const handleSelect = (key, fromEvent) => {
     setHasClickHappened(true);
     //set hotspot display to none:
-    document.querySelector("#hotspot").style.display = "none";
+    // document.querySelector("#hotspot").style.display = "none";
     handleClear("handleSelect");
     if (!fromEvent) {
       onChangeBuilding(key);
@@ -188,7 +188,7 @@ export default function Experience({ onChangeBuilding, onChangeEvent, clearSelec
               ease: "power1.inOut"
             }
           )
-        }
+        } 
       })
   }
 
@@ -235,9 +235,7 @@ export default function Experience({ onChangeBuilding, onChangeEvent, clearSelec
           cameraControlsRef.current?.dolly(-2, true)
 
           //set camera to default position
-          cameraControlsRef.current.setLookAt(10, 5, 10, 0, 0, 0, true)
-          console.log("cameraControlsRef.current.getPosition()", cameraControlsRef.current.getPosition());
-  
+          cameraControlsRef.current.setLookAt(10, 5, 10, 0, 0, 0, true)  
           //disable user gestures
           setUsersGestures({
             left: 0,
@@ -384,7 +382,8 @@ export default function Experience({ onChangeBuilding, onChangeEvent, clearSelec
         active={mechaniekersActive}
         label={copy.buildings.mechaniekers}
         labelGsap={() => setLabelsOpacity()}
-        hotspotGsap={() => hotspotInteraction(hasClickHappened)}
+        hotspotGsap={() => hotspotInteraction()}
+        hasClickHappened={hasClickHappened}
       />
       <Ketelhuis
           handleClick={() => {
