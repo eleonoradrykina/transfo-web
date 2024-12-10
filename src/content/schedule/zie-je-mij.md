@@ -1,5 +1,5 @@
 ---
-title: "Zie je mij"
+title: "Zie je mij?"
 name: "Bridget Barbier, Joline Vandenborre en Yana Decoene"
 tags: ["Installatie"]
 location: "machinezaal-pompenzaal"
@@ -18,3 +18,7 @@ Ervaar hoe kleine gebaren een grote impact kunnen maken en zie hoe simpel het is
 ### Meer van deze artiest
 
 [Bridget Barbier](https://www.behance.net/bridgetbarbier)
+
+[Joline Vandenborre](https://www.behance.net/jolinevandenb)
+
+[Yana Decoene]()

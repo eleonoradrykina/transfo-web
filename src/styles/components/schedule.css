@@ -153,11 +153,15 @@
       @apply mb-15;
     }
 
+    p:has(a) {
+      @apply mb-0;
+    }
+
     a {
-      @apply font-bold text-orange;
+      @apply font-medium underline italic;
 
       &:hover {
-        @apply underline;
+        @apply text-orange;
       }
     }
 
