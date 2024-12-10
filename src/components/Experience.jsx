@@ -31,6 +31,7 @@ import gsap from "gsap";
 const positions = new Map([["machinezaal-pompenzaal", [-0.005, 0.584, -1.317]], ["mechaniekers", [0.573, 0.306, 0.635]], ["ketelhuis", [-0.793, 0.87, -0.556]], ["transformatoren", [1.014, 1.132, -4.375]], ["octagon", [1.89, -0.102, -1.122]], ["directeurswoning", [3.105, 0.186, -0.804]], ["duiktank", [1.0, 0.366, 4.596]], ["watertoren", [-0.665, 0.045, 2.214]], ["plong", [1.504, 0.12, -0.343]], ["hoogteparcours", [3.75,0,2.5]], ["waterbassin", [2.5,0,3.0]], ["ingang", [2.0,0.25,-3.0]], ["markt", [0.3,0.25,-2.25]]]);
 
 export default function Experience({ onChangeBuilding, onChangeEvent, clearSelection, selectedBuilding, selectedEvent, copy, events, setLoading }) {
+  //Building states:
   const [hoofdzaaActive, setHoofdzaalActive] = useState(false);
   const [mechaniekersActive, setMechaniekersActive] = useState(false);
   const [ketelhuisActive, setKetelhuisActive] = useState(false);
@@ -45,21 +46,19 @@ export default function Experience({ onChangeBuilding, onChangeEvent, clearSelec
   const [ingangActive, setIngangActive] = useState(false);
   const [marktActive, setMarktActive] = useState(false);
 
+  //Global states:
   const [isClickable, setIsClickable] = useState(false);
   const [hasClickHappened, setHasClickHappened] = useState(false);
   const [timeAfterScroll, setTimeAfterScroll] = useState(null);
 
-
+  //User gestures:
   const [usersGestures, setUsersGestures] = useState({
     left: 0,
     one: 0,
   });
 
+  //Camera controls:
   const cameraControlsRef = useRef();
-
-  useEffect(() => {
-    handleClear("useEffect");
-  }, [clearSelection]);
 
 
   const handleClear = (location) => {
@@ -80,8 +79,8 @@ export default function Experience({ onChangeBuilding, onChangeEvent, clearSelec
 
   const handleSelect = (key, fromEvent) => {
     setHasClickHappened(true);
+    
     //set hotspot display to none:
-
     const hotspot = document.querySelector("#hotspot");
 
     if (hotspot) {
@@ -114,92 +113,52 @@ export default function Experience({ onChangeBuilding, onChangeEvent, clearSelec
 
   }
 
+  const setCameraControls = (key) => {
+    const position = positions.get(key);
+    const camera = [10, 7, 10]
+    const offsetCenter = [5, 1, 0]; 
+
+     if (cameraControlsRef.current && window.innerWidth > 767) {
+      // Lerp from current position to new position
+      cameraControlsRef.current.lerpLookAt(
+        ...camera,           // camera position
+        ...offsetCenter,     // current target (scene center)
+        ...camera,           // same camera position
+        ...position,         // new target (building position)
+        0.17,                // animation duration/strength (0-1)
+        true                // enable transition
+      );
+    }
+  }
+
+  /*
+    GSAP:
+  */
+
+   //this is passed to jsx building
   const setLabelsOpacity = () => {
-    const mm = gsap.matchMedia();
     const tlLabels = gsap.timeline({
       scrollTrigger: {
         trigger: "#body",
         start: "top top",
-        end: "20",
-        onEnter: () => {
-          mm.add("(min-width: 767px)", () => {
-            //enable user gestures
-          setUsersGestures({
-            left: 1,
-            one: 1,
-          })
-
-          //enable clickable buildings
-          setIsClickable(true);
-          //set time after scroll
-          setTimeAfterScroll(Date.now());
-
-          //move to the left and zoom in
-          if (!selectedBuilding && !selectedEvent) {
-          cameraControlsRef.current?.truck(3.5, 0, true)
-          cameraControlsRef.current?.dolly(2, true)
-          }
-
-          }) 
-        },
-        onEnterBack: () => {
-          tlLabels.reverse();
-
-          //set cursor .building-label to default
-
-          const hotspot = document.querySelector("#hotspot");
-
-          if (hotspot) {
-            hotspot.style.cursor = "default";
-          }
-
-
-          
-          
-          mm.add("(min-width: 767px)", () => {
-            cameraControlsRef.current.setLookAt(10, 5, 10, 0, 0, 0, true);
-            //disable clickable buildings
-            setIsClickable(false);
-  
-            //move to the right and zoom out
-            cameraControlsRef.current?.truck(-3.5, 0, true)
-            cameraControlsRef.current?.dolly(-2, true)
-  
-            //set camera to default position
-            cameraControlsRef.current.setLookAt(10, 5, 10, 0, 0, 0, true)
-  
-            //disable user gestures
-            setUsersGestures({
-              left: 0,
-              one: 0,
-            })
-          });
-        }
+        end: "+=20",
+        scrub: true,      
       },
-      onReverseComplete: () => {
-        onChangeBuilding(null);
-        onChangeEvent(null);
-      }
     });
     tlLabels.to(
       ".building-label",
       {
         opacity: 1,
-        cursor: "pointer",
         duration: 0.75,
         ease: "power2.out",
       },
       "<"
     )
-    
-    mm.add("(max-width: 768px)", () => {
-      tlLabels.to(".map", {
-        y: "-20vh",
-        duration: 0.75,
-        ease: "power2.out",
-      }, "<");
-    });
+  }
 
+  //this is passed to mechaniekers
+  const hotspotInteraction = (hasClickHappened) => {
+    const mm = gsap.matchMedia();
     mm.add("(min-width: 768px)", () => {
       if (!hasClickHappened) {
         const tlHotspot = gsap.timeline({
@@ -235,29 +194,89 @@ export default function Experience({ onChangeBuilding, onChangeEvent, clearSelec
               ease: "power1.inOut"
             }
           )
+        } 
+      })
+  }
+
+  //this happens here:
+  const setCanvasInteraction = () => {
+    console.log("setCanvasInteraction");
+    const mm = gsap.matchMedia();
+    //Desktop move and clickable:
+    mm.add("(min-width: 768px)", () => {
+      const tlCanvas = gsap.timeline({
+        scrollTrigger: {
+          trigger: "#body",
+          start: "top top",
+          end: "+=20",
+          onEnter: () => {
+            document.querySelector("canvas").style.cursor = "pointer";
+
+            //enable user gestures
+            setUsersGestures({
+              left: 1,
+              one: 1,
+            })
+
+            //enable clickable buildings
+            setIsClickable(true);
+            //set time after scroll
+            setTimeAfterScroll(Date.now());
+
+            //move to the left and zoom in 
+            if (!selectedBuilding && !selectedEvent) {
+              cameraControlsRef.current?.truck(3.5, 0, true)
+              cameraControlsRef.current?.dolly(2, true)
+            }
+           },
+          onEnterBack: () => {
+          //set cursor of canvas to default
+          document.querySelector("canvas").style.cursor = "default";
+
+          //disable clickable buildings
+          setIsClickable(false);
+  
+          //move to the right and zoom out
+          cameraControlsRef.current?.truck(-3.5, 0, true)
+          cameraControlsRef.current?.dolly(-2, true)
+
+          //set camera to default position
+          cameraControlsRef.current.setLookAt(10, 5, 10, 0, 0, 0, true)  
+          //disable user gestures
+          setUsersGestures({
+            left: 0,
+            one: 0,
+          })
+
+          //moving this from reverse complete:
+          onChangeBuilding(null);
+          onChangeEvent(null);
+          }
         }
       })
-    
-    
+    })
+
+    //mobile just move up:
+    mm.add("(max-width: 767.9px)", () => {
+      const tlCanvas = gsap.timeline({
+        scrollTrigger: {
+          trigger: "#body",
+          start: "top top",
+          end: "+=20",
+          onEnter: () => {  
+            cameraControlsRef.current?.truck(0, 3.0, true)
+          },
+          onEnterBack: () => {
+            cameraControlsRef.current?.truck(0, -3.0, true)
+          }
+        },
+      })
+    })
   }
 
-  const setCameraControls = (key) => {
-    const position = positions.get(key);
-    const camera = [10, 7, 10]
-    const offsetCenter = [5, 1, 0]; 
-
-     if (cameraControlsRef.current && window.innerWidth > 767) {
-      // Lerp from current position to new position
-      cameraControlsRef.current.lerpLookAt(
-        ...camera,           // camera position
-        ...offsetCenter,     // current target (scene center)
-        ...camera,           // same camera position
-        ...position,         // new target (building position)
-        0.17,                // animation duration/strength (0-1)
-        true                // enable transition
-      );
-    }
-  }
+  useEffect(() => {
+    handleClear("useEffect");
+  }, [clearSelection]);
 
 
   useEffect(() => {
@@ -276,11 +295,10 @@ export default function Experience({ onChangeBuilding, onChangeEvent, clearSelec
       }
     } 
   }, [selectedBuilding, selectedEvent]);
-  
 
   useEffect(() => {
-    setLabelsOpacity();
     setLoading(false);
+    setCanvasInteraction();
   }, []);
 
   const cameraControls = {
@@ -369,6 +387,9 @@ export default function Experience({ onChangeBuilding, onChangeEvent, clearSelec
         }}
         active={mechaniekersActive}
         label={copy.buildings.mechaniekers}
+        labelGsap={() => setLabelsOpacity()}
+        hotspotGsap={() => hotspotInteraction()}
+        hasClickHappened={hasClickHappened}
       />
       <Ketelhuis
           handleClick={() => {
