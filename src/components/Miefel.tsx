@@ -39,42 +39,6 @@ const Miefel = () => {
     if (!repeater) {
       repeater = setInterval(moveHands, 10000);
     }
-
-    const miefelTL = gsap.timeline({
-      scrollTrigger: {
-        trigger: "#body",
-        start: "top top",
-        end: "20",
-        onEnterBack: () => {
-          if (!repeater) {
-            repeater = setInterval(moveHands, 10000);
-          }
-          miefelTL.reverse();
-        },
-      },
-      onComplete: () => {
-        clearInterval(repeater);
-      },
-    });
-
-    miefelTL
-      .to(
-        ".miefel__hand.right",
-        {
-          x: "-100%",
-          ease: "power2.out",
-        },
-        "<"
-      )
-      .to(
-        ".miefel__hand.left",
-        {
-          x: "100%",
-          ease: "power2.out",
-        },
-        "<"
-      );
-
     return () => {
       clearInterval(repeater);
     };
