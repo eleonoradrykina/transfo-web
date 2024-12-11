@@ -43,21 +43,19 @@ export default function Experience({ onChangeBuilding, onChangeEvent, clearSelec
   const [ingangActive, setIngangActive] = useState(false);
   const [marktActive, setMarktActive] = useState(false);
 
+  //Global states:
   const [isClickable, setIsClickable] = useState(false);
   const [hasClickHappened, setHasClickHappened] = useState(false);
   const [timeAfterScroll, setTimeAfterScroll] = useState(null);
 
-
+  //User gestures:
   const [usersGestures, setUsersGestures] = useState({
     left: 0,
     one: 0,
   });
 
+  //Camera controls:
   const cameraControlsRef = useRef();
-
-  useEffect(() => {
-    handleClear("useEffect");
-  }, [clearSelection]);
 
 
   const handleClear = (location) => {
@@ -78,8 +76,14 @@ export default function Experience({ onChangeBuilding, onChangeEvent, clearSelec
 
   const handleSelect = (key, fromEvent) => {
     setHasClickHappened(true);
+    
     //set hotspot display to none:
-    document.querySelector("#hotspot").style.display = "none";
+    const hotspot = document.querySelector("#hotspot");
+
+    if (hotspot) {
+      hotspot.style.display = "none";
+    }
+    
     handleClear("handleSelect");
     if (!fromEvent) {
       onChangeBuilding(key);
@@ -106,188 +110,12 @@ export default function Experience({ onChangeBuilding, onChangeEvent, clearSelec
 
   }
 
-  useEffect(() => {
-
-    console.log("onEnterBack", onEnterBack); 
-
-    if (onEnterBack !== null)
-    {
-      const mm = gsap.matchMedia();
-
-      if (onEnterBack) {
-        //set cursor .building-label to default
-        document.querySelector(".building-label").style.cursor = "default";
-  
-        mm.add("(min-width: 767px)", () => {
-          cameraControlsRef.current.setLookAt(10, 5, 10, 0, 0, 0, true);
-          //disable clickable buildings
-          setIsClickable(false);
-  
-          //move to the right and zoom out
-          cameraControlsRef.current?.truck(-3.5, 0, true)
-          cameraControlsRef.current?.dolly(-2, true)
-  
-          //set camera to default position
-          cameraControlsRef.current.setLookAt(10, 5, 10, 0, 0, 0, true)
-  
-          //disable user gestures
-          setUsersGestures({
-            left: 0,
-            one: 0,
-          })
-        });
-      }
-      else {
-        mm.add("(min-width: 767px)", () => {
-          //enable user gestures
-          setUsersGestures({
-            left: 1,
-            one: 1,
-          })
-  
-          //enable clickable buildings
-          setIsClickable(true);
-          //set time after scroll
-          setTimeAfterScroll(Date.now());
-  
-          //move to the left and zoom in
-          if (!selectedBuilding && !selectedEvent) {
-            cameraControlsRef.current?.truck(3.5, 0, true)
-            cameraControlsRef.current?.dolly(2, true)
-          }
-  
-        })
-      }
-    }
-
-   
-  }, [onEnterBack]);
-
-  // const setLabelsOpacity = () => {
-  //   const mm = gsap.matchMedia();
-  //   const tlLabels = gsap.timeline({
-  //     scrollTrigger: {
-  //       trigger: "#body",
-  //       start: "top top",
-  //       end: "20",
-  //       onEnter: () => {
-  //         mm.add("(min-width: 767px)", () => {
-  //           //enable user gestures
-  //         setUsersGestures({
-  //           left: 1,
-  //           one: 1,
-  //         })
-
-  //         //enable clickable buildings
-  //         setIsClickable(true);
-  //         //set time after scroll
-  //         setTimeAfterScroll(Date.now());
-
-  //         //move to the left and zoom in
-  //         if (!selectedBuilding && !selectedEvent) {
-  //         cameraControlsRef.current?.truck(3.5, 0, true)
-  //         cameraControlsRef.current?.dolly(2, true)
-  //         }
-
-  //         }) 
-  //       },
-  //       onEnterBack: () => {
-  //         tlLabels.reverse();
-
-  //         //set cursor .building-label to default
-  //         document.querySelector(".building-label").style.cursor = "default";
-
-  //         mm.add("(min-width: 767px)", () => {
-  //           cameraControlsRef.current.setLookAt(10, 5, 10, 0, 0, 0, true);
-  //           //disable clickable buildings
-  //           setIsClickable(false);
-
-  //           //move to the right and zoom out
-  //           cameraControlsRef.current?.truck(-3.5, 0, true)
-  //           cameraControlsRef.current?.dolly(-2, true)
-
-  //           //set camera to default position
-  //           cameraControlsRef.current.setLookAt(10, 5, 10, 0, 0, 0, true)
-
-  //           //disable user gestures
-  //           setUsersGestures({
-  //             left: 0,
-  //             one: 0,
-  //           })
-  //         });
-  //       }
-  //     },
-  //     onReverseComplete: () => {
-  //       onChangeBuilding(null);
-  //       onChangeEvent(null);
-  //     }
-  //   });
-  //   tlLabels.to(
-  //     ".building-label",
-  //     {
-  //       opacity: 1,
-  //       cursor: "pointer",
-  //       duration: 0.75,
-  //       ease: "power2.out",
-  //     },
-  //     "<"
-  //   )
-
-  //   mm.add("(max-width: 768px)", () => {
-  //     tlLabels.to(".map", {
-  //       y: "-20vh",
-  //       duration: 0.75,
-  //       ease: "power2.out",
-  //     }, "<");
-  //   });
-
-  //   mm.add("(min-width: 768px)", () => {
-  //     if (!hasClickHappened) {
-  //       const tlHotspot = gsap.timeline({
-  //         scrollTrigger: {
-  //           trigger: "#body",
-  //           start: "top top",
-  //           end: "20",
-  //           onEnterBack: () => {
-  //             tlHotspot.to(
-  //                 "#hotspot",
-  //               {
-  //                 opacity: 0,
-  //                 ease: "power1.inOut"
-  //               }
-  //             )
-  //           }
-  //         }
-  //       });
-  //       tlHotspot.to(
-  //           "#hotspot",
-  //           {
-  //             opacity: 1,
-  //             delay: 1.5,
-  //             ease: "power1.inOut"
-  //           },
-  //         ).to(
-  //           "#hotspot__circle",
-  //           { 
-  //             strokeWidth: 4.2,
-  //             repeat: -1,
-  //             yoyo: true,
-  //             duration: 1,
-  //             ease: "power1.inOut"
-  //           }
-  //         )
-  //       }
-  //     })
-
-
-  // }
-
   const setCameraControls = (key) => {
     const position = positions.get(key);
     const camera = [10, 7, 10]
-    const offsetCenter = [5, 1, 0];
+    const offsetCenter = [5, 1, 0]; 
 
-    if (cameraControlsRef.current && window.innerWidth > 767) {
+     if (cameraControlsRef.current && window.innerWidth > 767) {
       // Lerp from current position to new position
       cameraControlsRef.current.lerpLookAt(
         ...camera,           // camera position
@@ -299,6 +127,153 @@ export default function Experience({ onChangeBuilding, onChangeEvent, clearSelec
       );
     }
   }
+
+  /*
+    GSAP:
+  */
+
+   //this is passed to jsx building
+  const setLabelsOpacity = () => {
+    const tlLabels = gsap.timeline({
+      scrollTrigger: {
+        trigger: "#body",
+        start: "top top",
+        end: "+=20",
+        scrub: true,      
+      },
+    });
+    tlLabels.to(
+      ".building-label",
+      {
+        opacity: 1,
+        duration: 0.75,
+        ease: "power2.out",
+      },
+      "<"
+    )
+  }
+
+  //this is passed to mechaniekers
+  const hotspotInteraction = (hasClickHappened) => {
+    const mm = gsap.matchMedia();
+    mm.add("(min-width: 768px)", () => {
+      if (!hasClickHappened) {
+        const tlHotspot = gsap.timeline({
+          scrollTrigger: {
+            trigger: "#body",
+            start: "top top",
+            end: "20",
+            onEnterBack: () => {
+              tlHotspot.to(
+                  "#hotspot",
+                {
+                  opacity: 0,
+                  ease: "power1.inOut"
+                }
+              )
+            }
+          }
+        });
+        tlHotspot.to(
+            "#hotspot",
+            {
+              opacity: 1,
+              delay: 1.5,
+              ease: "power1.inOut"
+            },
+          ).to(
+            "#hotspot__circle",
+            { 
+              strokeWidth: 4.2,
+              repeat: -1,
+              yoyo: true,
+              duration: 1,
+              ease: "power1.inOut"
+            }
+          )
+        } 
+      })
+  }
+
+  //this happens here:
+  const setCanvasInteraction = () => {
+    console.log("setCanvasInteraction");
+    const mm = gsap.matchMedia();
+    //Desktop move and clickable:
+    mm.add("(min-width: 768px)", () => {
+      const tlCanvas = gsap.timeline({
+        scrollTrigger: {
+          trigger: "#body",
+          start: "top top",
+          end: "+=20",
+          onEnter: () => {
+            document.querySelector("canvas").style.cursor = "pointer";
+
+            //enable user gestures
+            setUsersGestures({
+              left: 1,
+              one: 1,
+            })
+
+            //enable clickable buildings
+            setIsClickable(true);
+            //set time after scroll
+            setTimeAfterScroll(Date.now());
+
+            //move to the left and zoom in 
+            if (!selectedBuilding && !selectedEvent) {
+              cameraControlsRef.current?.truck(3.5, 0, true)
+              cameraControlsRef.current?.dolly(2, true)
+            }
+           },
+          onEnterBack: () => {
+          //set cursor of canvas to default
+          document.querySelector("canvas").style.cursor = "default";
+
+          //disable clickable buildings
+          setIsClickable(false);
+  
+          //move to the right and zoom out
+          cameraControlsRef.current?.truck(-3.5, 0, true)
+          cameraControlsRef.current?.dolly(-2, true)
+
+          //set camera to default position
+          cameraControlsRef.current.setLookAt(10, 5, 10, 0, 0, 0, true)  
+          //disable user gestures
+          setUsersGestures({
+            left: 0,
+            one: 0,
+          })
+
+          //moving this from reverse complete:
+          onChangeBuilding(null);
+          onChangeEvent(null);
+          }
+        }
+      })
+    })
+
+    //mobile just move up:
+    mm.add("(max-width: 767.9px)", () => {
+      const tlCanvas = gsap.timeline({
+        scrollTrigger: {
+          trigger: "#body",
+          start: "top top",
+          end: "+=20",
+          onEnter: () => {  
+            cameraControlsRef.current?.truck(0, 3.0, true)
+          },
+          onEnterBack: () => {
+            cameraControlsRef.current?.truck(0, -3.0, true)
+          }
+        },
+      })
+    })
+  }
+
+  useEffect(() => {
+    handleClear("useEffect");
+  }, [clearSelection]);
 
 
   useEffect(() => {
@@ -317,10 +292,9 @@ export default function Experience({ onChangeBuilding, onChangeEvent, clearSelec
     }
   }, [selectedBuilding, selectedEvent]);
 
-
   useEffect(() => {
-    // setLabelsOpacity();
     setLoading(false);
+    setCanvasInteraction();
   }, []);
 
   const cameraControls = {
@@ -409,6 +383,9 @@ export default function Experience({ onChangeBuilding, onChangeEvent, clearSelec
         }}
         active={mechaniekersActive}
         label={copy.buildings.mechaniekers}
+        labelGsap={() => setLabelsOpacity()}
+        hotspotGsap={() => hotspotInteraction()}
+        hasClickHappened={hasClickHappened}
       />
       <Ketelhuis
         handleClick={() => {

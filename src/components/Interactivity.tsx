@@ -97,19 +97,19 @@ const Interactivity = ({ events, copy }: Props) => {
 
   useEffect(() => {
     if (selectedBuilding && selectedEvent) {
-      window.history.replaceState(
+      window.history.pushState(
         {},
         document.title,
         `?building=${selectedBuilding}&event=${selectedEvent}`
       );
     } else if (selectedBuilding && !selectedEvent) {
-      window.history.replaceState(
+      window.history.pushState(
         {},
         document.title,
         `?building=${selectedBuilding}`
       );
     } else {
-      window.history.replaceState({}, document.title, "/");
+      window.history.pushState({}, document.title, "/");
     }
   }, [selectedBuilding, selectedEvent]);
 
