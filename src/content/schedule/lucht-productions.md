@@ -1,7 +1,7 @@
 ---
 title: "Lucht Productions"
 name: "Lucht Productions"
-tags: ["lichtinstallatie"]
+tags: ["Lichtinstallatie"]
 location: "transformatoren"
 heroImage: "lucht-productions.webp"
 ---

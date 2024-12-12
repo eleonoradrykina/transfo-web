@@ -3,6 +3,12 @@
   @apply flex flex-col justify-between;
   @apply pt-30 pb-30 md:pt-60 lg:pt-120;
 
+  &:has(.countdown.started) {
+    & .ar-button {
+      @apply block lg:hidden;
+    }
+  }
+
   &__top {
     @apply flex flex-col items-start;
     @apply relative;
@@ -10,7 +16,6 @@
 
   &__bottom {
     @apply flex flex-col items-center gap-15 md:gap-30;
-    @apply pointer-events-none;
   }
 
   &__date {
@@ -50,5 +55,10 @@
     & .bold {
       @apply font-bold;
     }
+  }
+
+  .ar-button {
+    @apply hidden;
+    @apply z-50 mb-30;
   }
 }

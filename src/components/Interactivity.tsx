@@ -1,8 +1,10 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Schedule from "./Schedule";
 import { BUILDING, type IEvent } from "../services/types";
 import Map from "./Map";
 import { gsap } from "gsap";
+import { useGSAP } from "@gsap/react";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 interface Props {
   events: IEvent[];
@@ -10,12 +12,64 @@ interface Props {
 }
 
 const Interactivity = ({ events, copy }: Props) => {
+  const container = useRef<HTMLDivElement>(null);
+  const timeline = useRef<gsap.core.Timeline>();
   const queryString = window.location.search;
   const urlParams = new URLSearchParams(queryString);
 
   const [selectedBuilding, setSelectedBuilding] = useState<string | null>(null);
   const [selectedEvent, setSelectedEvent] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
+  const [onEnterBack, setEnterBack] = useState<boolean | null>(null);
+
+  useGSAP(
+    () => {
+      gsap.registerPlugin(ScrollTrigger);
+
+      if (!loading) {
+        timeline.current = gsap.timeline({
+          scrollTrigger: {
+            trigger: "#body",
+            start: "top top",
+            end: "20",
+            onEnterBack: () => {
+              setEnterBack(true);
+              if (timeline.current) {
+                timeline.current.reverse();
+              }
+            },
+            onEnter: () => {
+              setEnterBack(false);
+            },
+          },
+        });
+
+        timeline.current
+          // SCHEDULE
+          .from(
+            "#schedule",
+            {
+              y: "100%",
+              duration: 0.5,
+              ease: "power1.inOut",
+            },
+            0
+          )
+          // LABELS
+          .to(
+            ".building-label",
+            {
+              opacity: 1,
+              cursor: "pointer",
+              duration: 0.25,
+              ease: "power2.out",
+            },
+            0.25
+          );
+      }
+    },
+    { dependencies: [loading] }
+  );
 
   useEffect(() => {
     if (urlParams.get("building")) {
@@ -77,15 +131,18 @@ const Interactivity = ({ events, copy }: Props) => {
   }, [selectedBuilding, selectedEvent]);
 
   return (
-    <div className="interactivity">
+    <div ref={container} className="interactivity">
       <Map
+        onEnterBack={onEnterBack}
         copy={copy}
         events={events}
         selectedBuilding={selectedBuilding}
         selectedEvent={selectedEvent}
         onChangeBuilding={setSelectedBuilding}
         onChangeEvent={setSelectedEvent}
+        loading={loading}
         setLoading={setLoading}
+        timeline={timeline}
       />
       <Schedule
         copy={copy}

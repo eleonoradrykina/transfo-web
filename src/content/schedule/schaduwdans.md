@@ -7,6 +7,7 @@ subLocation: "pompenzaal"
 heroImage: "schaduwdans.webp"
 startTime: "2024-12-14T17:00:00+01:00"
 endTime: "2024-12-14T19:00:00+01:00"
+extraTime: "Elke 15 minuten een performance."
 ---
 
 ### Over de performance

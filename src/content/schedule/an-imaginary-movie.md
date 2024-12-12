@@ -1,6 +1,6 @@
 ---
 title: "An Imaginary movie"
-name: "Eva Dehullu en Martijn Peirs"
+name: "Kunstacademie"
 tags: ["kortfilm"]
 location: "directeurswoning"
 heroImage: "kortfilm.webp"

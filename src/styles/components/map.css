@@ -67,9 +67,13 @@
   background: #ea5739;
 }
 
-
 #hotspot {
-  @apply opacity-0;
+  @apply hidden md:block;
+  @apply scale-0;
+}
+
+#hotspot__circle {
+  transform-origin: center center;
 }
 
 .hotspot-wrapper {

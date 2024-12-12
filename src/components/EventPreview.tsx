@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import { getTime } from "../services/functions";
 import type { IEvent } from "../services/types";
 import "../styles/components/schedule.css";
@@ -6,9 +7,50 @@ interface Props {
   event: IEvent;
   location?: string;
   handleClick: (event: IEvent) => void;
+  time: number;
+  copy: any;
 }
 
-const EventPreview = ({ event, handleClick, location }: Props) => {
+export const determineTimeTag = (event: IEvent, copy: any) => {
+  const now = new Date().getTime();
+
+  if (event.startTime && event.endTime) {
+    if (now > event.endTime.getTime()) {
+      return <span className="tag time over">{copy.schedule.over}</span>;
+    } else if (
+      now > event.startTime.getTime() &&
+      now < event.endTime.getTime()
+    ) {
+      return (
+        <span className="tag time almost">
+          {copy.schedule["currently-happening"]}
+        </span>
+      );
+    } else if (now > event.startTime.getTime() - 1000 * 60 * 30) {
+      const timeLeft = Math.floor(
+        (event.startTime.getTime() - now) / (1000 * 60)
+      );
+      return (
+        <span className="tag time almost">{`${copy.schedule.in} ${timeLeft} ${timeLeft === 1 ? copy.date.minute : copy.date.minutes}`}</span>
+      );
+    } else {
+      return (
+        <span className="tag time">
+          {getTime(event.startTime)} - {getTime(event.endTime)}
+        </span>
+      );
+    }
+  }
+  return <span className="tag no-bg">{copy.schedule["all-night"]}</span>;
+};
+
+const EventPreview = ({ event, handleClick, location, time, copy }: Props) => {
+  const [timeTag, setTimeTag] = useState(determineTimeTag(event, copy));
+
+  useEffect(() => {
+    setTimeTag(determineTimeTag(event, copy));
+  }, [time]);
+
   return (
     <button onClick={() => handleClick(event)} className="event-preview">
       <div className="event-preview__main">
@@ -18,30 +60,15 @@ const EventPreview = ({ event, handleClick, location }: Props) => {
         />
         <h4 className="event-preview__title">{event.title}</h4>
       </div>
-      <div className="event-preview__tags">
+      <div className="tags">
         {event.tags.map((tag) => (
-          <span key={tag} className="event-preview__tag regular">
+          <span key={tag} className="tag regular">
             {tag}
           </span>
         ))}
-        {location && (
-          <span className="event-preview__tag location">{location}</span>
-        )}
-
-        {event.startTime && event.endTime ? (
-          <>
-            <span className="event-preview__tag time">
-              {getTime(event.startTime)} - {getTime(event.endTime)}
-            </span>
-            {event.startTime2 && event.endTime2 && (
-              <span className="event-preview__tag time">
-                {getTime(event.startTime2)} - {getTime(event.endTime2)}
-              </span>
-            )}{" "}
-          </>
-        ) : (
-          <span className="event-preview__tag no-bg">Heel de avond</span>
-        )}
+        {location && <span className="tag location">{location}</span>}
+        {timeTag}
+        <span className="tag no-bg">{event.extraTime}</span>
       </div>
     </button>
   );
