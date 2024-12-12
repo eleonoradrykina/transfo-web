@@ -8,25 +8,30 @@ interface Props {
   location?: string;
   handleClick: (event: IEvent) => void;
   time: number;
+  copy: any;
 }
 
-export const determineTimeTag = (event: IEvent) => {
+export const determineTimeTag = (event: IEvent, copy: any) => {
   const now = new Date().getTime();
 
   if (event.startTime && event.endTime) {
     if (now > event.endTime.getTime()) {
-      return <span className="tag time over">Voorbij</span>;
+      return <span className="tag time over">{copy.schedule.over}</span>;
     } else if (
       now > event.startTime.getTime() &&
       now < event.endTime.getTime()
     ) {
-      return <span className="tag time almost">Op dit moment bezig</span>;
+      return (
+        <span className="tag time almost">
+          {copy.schedule["currently-happening"]}
+        </span>
+      );
     } else if (now > event.startTime.getTime() - 1000 * 60 * 30) {
       const timeLeft = Math.floor(
         (event.startTime.getTime() - now) / (1000 * 60)
       );
       return (
-        <span className="tag time almost">{`Binnen ${timeLeft} ${timeLeft === 1 ? "minuut" : "minuten"}`}</span>
+        <span className="tag time almost">{`${copy.schedule.in} ${timeLeft} ${timeLeft === 1 ? copy.date.minute : copy.date.minutes}`}</span>
       );
     } else {
       return (
@@ -36,14 +41,14 @@ export const determineTimeTag = (event: IEvent) => {
       );
     }
   }
-  return <span className="tag no-bg">Heel de avond</span>;
+  return <span className="tag no-bg">{copy.schedule["all-night"]}</span>;
 };
 
-const EventPreview = ({ event, handleClick, location, time }: Props) => {
-  const [timeTag, setTimeTag] = useState(determineTimeTag(event));
+const EventPreview = ({ event, handleClick, location, time, copy }: Props) => {
+  const [timeTag, setTimeTag] = useState(determineTimeTag(event, copy));
 
   useEffect(() => {
-    setTimeTag(determineTimeTag(event));
+    setTimeTag(determineTimeTag(event, copy));
   }, [time]);
 
   return (

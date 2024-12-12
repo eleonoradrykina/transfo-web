@@ -8,9 +8,10 @@ interface Props {
   handleBack: (location: string) => void;
   location: string;
   time: number;
+  copy: any;
 }
 
-const Event = ({ event, handleBack, location, time }: Props) => {
+const Event = ({ event, handleBack, location, time, copy }: Props) => {
   useEffect(() => {
     const test = document.getElementById(`content__${event.name}`);
     if (test) {
@@ -19,10 +20,10 @@ const Event = ({ event, handleBack, location, time }: Props) => {
   }, [event]);
 
   const [share, setShared] = useState(false);
-  const [timeTag, setTimeTag] = useState(determineTimeTag(event));
+  const [timeTag, setTimeTag] = useState(determineTimeTag(event, copy));
 
   useEffect(() => {
-    setTimeTag(determineTimeTag(event));
+    setTimeTag(determineTimeTag(event, copy));
   }, [time]);
 
   useEffect(() => {
@@ -53,7 +54,7 @@ const Event = ({ event, handleBack, location, time }: Props) => {
           </button>
           <div className="hidden md:block">
             <button className=" button small" onClick={() => setShared(true)}>
-              {share ? "Gekopieerd!" : "Delen"}
+              {share ? copy.buttons.copied : copy.buttons.share}
             </button>
           </div>
         </div>
@@ -88,7 +89,7 @@ const Event = ({ event, handleBack, location, time }: Props) => {
               className=" button small mx-auto"
               onClick={() => setShared(true)}
             >
-              {share ? "Gekopieerd!" : "Delen"}
+              {share ? copy.buttons.copied : copy.buttons.share}
             </button>
           </div>
         </div>

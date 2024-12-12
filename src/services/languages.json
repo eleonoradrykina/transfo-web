@@ -64,11 +64,17 @@
                 "program-is-shown": "Heel het programma is weergegeven.",
                 "click": "Klik",
                 "on-a-building": " op het gebouw om te zien wat er daar plaatsvindt."
-            }
+            },
+            "over": "Voorbij",
+            "currently-happening": "Op dit moment bezig",
+            "all-night": "Heel de avond",
+            "in": "Binnen"
         },
         "buttons": {
             "transfo-in-ar": "Transfo Intiem in AR",
-            "back": "Terug"
+            "back": "Terug",
+            "share": "Delen",
+            "copied": "Gekopieerd!"
         },
         "buildings": {
             "markt": "Markt",

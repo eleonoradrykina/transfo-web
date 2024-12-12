@@ -115,6 +115,7 @@ const Schedule = ({
             {events.sort(sortDates).map((event) => (
               <li key={event.title}>
                 <EventPreview
+                  copy={copy}
                   time={time}
                   handleClick={() => handleEventClick(event)}
                   location={
@@ -148,6 +149,7 @@ const Schedule = ({
             {filteredSchedule.sort(sortDates).map((event) => (
               <li key={event.title}>
                 <EventPreview
+                  copy={copy}
                   time={time}
                   handleClick={() => handleEventClick(event)}
                   location={
@@ -162,6 +164,7 @@ const Schedule = ({
         <div className="schedule__event">
           {localEvent && (
             <Event
+              copy={copy}
               time={time}
               location={copy.buildings[localEvent.location]}
               handleBack={handleBack}
