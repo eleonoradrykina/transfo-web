@@ -8,91 +8,54 @@ const FAQ = ({ copy }: Props) => {
   return (
     <div id="faq" className="faq">
       <button id="faq__back__button" className="button faq__button back">
-        {copy.faq.back.toUpperCase()}
+        {copy.buttons.back.toUpperCase()}
         <span className="button__arrow right">→</span>
       </button>
-      <h2 className="faq__title"> {copy.faq.title}</h2>
+      <h2 className="faq__title"> {copy.faq?.title}</h2>
       <div id="faq__questions" className="faq__questions">
         <div className="faq__questions__col">
-          <Question question="Hoe geraak ik op het evenement?">
-            <p>
-              Dicht bij het evenement zijn de parkeerplaatsen beperkt. We raden
-              dus aan op zo veel mogelijk met de fiets, te voet of met het
-              openbaar vervoer te komen.
-            </p>
+          <Question question={copy.faq?.questions["nr-1"]?.question}>
+            <p>{copy.faq?.questions["nr-1"]["p-1"]}</p>
           </Question>
-          <Question question="Waar kan ik mijn fiets parkeren?">
+          <Question question={copy.faq?.questions["nr-2"]?.question}>
             <img src="/map-bikes.webp" />
-            <p className="font-bold">Met de fiets heb je de volgende opties:</p>
+            <p className="font-bold">{copy.faq?.questions["nr-2"]["p-1"]}</p>
             <ul>
-              <li>
-                Het grasplein vooraan de site, bereikbaar via de Blokellestraat
-                en de Transfostraat
-              </li>
-              <li>
-                De parking aan de achterkant van de site, bereikbaar via de
-                Otegemstraat.
-              </li>
+              <li>{copy.faq?.questions["nr-2"]["li-1"]}</li>
+              <li>{copy.faq?.questions["nr-2"]["li-2"]}</li>
             </ul>
           </Question>
-          <Question question="Waar kan ik mijn auto parkeren?">
+          <Question question={copy.faq?.questions["nr-3"]?.question}>
             <img src="/map-cars.webp" />
-            <p className="font-bold">Met de auto heb je de volgende opties:</p>
+            <p className="font-bold">{copy.faq?.questions["nr-3"]["p-1"]}</p>
             <ul>
-              <li>
-                Een beperkt aantal plaatsen zijn beschikbaar aan de voorkant van
-                de site, bereikbaar via de Blokellestraat
-              </li>
-              <li>
-                De parking aan de achterkant van de site, bereikbaar via de
-                Otegemstraat.
-              </li>
-              <li>Parkeren in de Stoomstraat</li>
+              <li>{copy.faq?.questions["nr-3"]["li-1"]}</li>
+              <li>{copy.faq?.questions["nr-3"]["li-2"]}</li>
+              <li>{copy.faq?.questions["nr-3"]["li-3"]}</li>
             </ul>
-            <p className="mt-8">
-              De volgende parkings liggen iets verder, maar zijn ook
-              beschikbaar, indien nodig:
-            </p>
+            <p className="mt-8">{copy.faq?.questions["nr-3"]["p-2"]}</p>
             <ul>
-              <li>Parking Intratuin</li>
-              <li>Parking OC Slypemolen (OC Kappaert) </li>
-              <li>Parking Gemeentepunt</li>
-              <li>Parkeren in omliggende straten</li>
+              <li>{copy.faq?.questions["nr-3"]["li-4"]}</li>
+              <li>{copy.faq?.questions["nr-3"]["li-5"]}</li>
+              <li>{copy.faq?.questions["nr-3"]["li-6"]}</li>
+              <li>{copy.faq?.questions["nr-3"]["li-7"]}</li>
             </ul>
           </Question>
-          <Question question="Hoeveel kost het evenement?">
-            <p>
-              De avond is helemaal gratis! Je kan op elk moment vrij binnen- en
-              buitenwandelen.
-            </p>
+          <Question question={copy.faq?.questions["nr-4"]?.question}>
+            <p>{copy.faq?.questions["nr-4"]["p-1"]}</p>
           </Question>
         </div>
         <div className="faq__questions__col">
-          <Question question="Zijn er ook activiteiten speciaal voor kinderen?">
-            <p>
-              Het evenement is bedoeld voor alle leeftijden! Zo zullen de
-              kinderen bijvoorbeeld de Amibots van de Breinbrouwerij kunnen
-              bewonderen en op stickerzoektocht kunnen gaan.
-            </p>
+          <Question question={copy.faq?.questions["nr-5"]?.question}>
+            <p>{copy.faq?.questions["nr-5"]["p-1"]}</p>
           </Question>
-          <Question question="Is het evenement toegankelijk voor mensen met beperkte mobiliteit?">
-            <p>
-              Het evenement is toegankelijk voor mensen met beperkte mobiliteit.
-              De route is ongeveer 750m lang en bevat één trap. Mensen met
-              beperkte mobiliteit kunnen hier gebruik maken van een lift
-              (uitgang machinezaal).
-            </p>
-            <p>
-              Hou er rekening mee dat het terrein buiten niet altijd effen is en
-              dat er stukken deels of volledig onverhard zijn.
-            </p>
+          <Question question={copy.faq?.questions["nr-6"]?.question}>
+            <p>{copy.faq?.questions["nr-6"]["p-1"]}</p>
+            <p>{copy.faq?.questions["nr-6"]["p-2"]}</p>
           </Question>
 
-          <Question question="Kan ik iets drinken en eten op het evenement?">
-            <p>
-              Aan de Duiktank zal je de kans hebben om iets te drinken. Er zal
-              geen eten verkocht worden op het evenement.
-            </p>
+          <Question question={copy.faq?.questions["nr-7"]?.question}>
+            <p>{copy.faq?.questions["nr-7"]["p-1"]}</p>
           </Question>
         </div>
       </div>

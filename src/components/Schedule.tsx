@@ -5,6 +5,7 @@ import { gsap } from "gsap";
 
 import { type IEvent } from "../services/types";
 import Event from "./Event";
+import { sortDates } from "../services/functions";
 
 interface Props {
   selectedBuilding: string | null;
@@ -26,6 +27,17 @@ const Schedule = ({
   const [localEvent, setLocalEvent] = useState<IEvent | null>(
     events.find((event) => event.slug === selectedEvent) ?? null
   );
+
+  const [time, setTime] = useState(Math.floor(Date.now() / (1000 * 60)));
+
+  useEffect(() => {
+    const timerInterval = setInterval(() => {
+      setTime(Math.floor(Date.now() / (1000 * 60)));
+    }, 1000);
+    // Cleanup the interval when the component unmounts
+    return () => clearInterval(timerInterval);
+  });
+
   const [filteredSchedule, setFilteredSchedule] = useState(
     events.filter((event) => {
       if (selectedBuilding) {
@@ -93,36 +105,26 @@ const Schedule = ({
     <div id="schedule" className={`schedule ${state}`}>
       <div className="schedule__content">
         <div className="schedule__default">
-          <h3 className="schedule__title">Programma</h3>
+          <h3 className="schedule__title">{copy.schedule.title}</h3>
           <p className="hidden md:inline">
-            Heel het programma is weergegeven.{" "}
-            <span className="font-bold">Klik</span> op het gebouw om te zien wat
-            er daar plaatsvindt.
+            {copy.schedule.subtitle["program-is-shown"]}{" "}
+            <span className="font-bold">{copy.schedule.subtitle["click"]}</span>
+            {copy.schedule.subtitle["on-a-building"]}
           </p>
           <ul className="schedule__list">
-            {events
-              .sort((a: IEvent, b: IEvent) => {
-                if (a.startTime && b.startTime) {
-                  return a.startTime.getTime() - b.startTime.getTime();
-                } else if (a.startTime && !b.startTime) {
-                  return -1;
-                } else if (!a.startTime && b.startTime) {
-                  return 1;
-                } else {
-                  return 0;
-                }
-              })
-              .map((event) => (
-                <li key={event.title}>
-                  <EventPreview
-                    handleClick={() => handleEventClick(event)}
-                    location={
-                      selectedBuilding ? null : copy.buildings[event.location]
-                    }
-                    event={event}
-                  />
-                </li>
-              ))}
+            {events.sort(sortDates).map((event) => (
+              <li key={event.title}>
+                <EventPreview
+                  copy={copy}
+                  time={time}
+                  handleClick={() => handleEventClick(event)}
+                  location={
+                    selectedBuilding ? null : copy.buildings[event.location]
+                  }
+                  event={event}
+                />
+              </li>
+            ))}
           </ul>
         </div>
         <div className="schedule__building">
@@ -134,7 +136,9 @@ const Schedule = ({
               }}
             >
               <span className="button__arrow left">←</span>
-              <span className="hidden md:inline">TERUG</span>
+              <span className="hidden md:inline">
+                {copy.buttons.back.toUpperCase()}
+              </span>
             </button>
             <h3 className="schedule__title">
               {copy.buildings[selectedBuilding ?? "default"]}
@@ -142,34 +146,26 @@ const Schedule = ({
           </div>
 
           <ul className="schedule__list">
-            {filteredSchedule
-              .sort((a: IEvent, b: IEvent) => {
-                if (a.startTime && b.startTime) {
-                  return a.startTime.getTime() - b.startTime.getTime();
-                } else if (a.startTime && !b.startTime) {
-                  return -1;
-                } else if (!a.startTime && b.startTime) {
-                  return 1;
-                } else {
-                  return 0;
-                }
-              })
-              .map((event) => (
-                <li key={event.title}>
-                  <EventPreview
-                    handleClick={() => handleEventClick(event)}
-                    location={
-                      selectedBuilding ? null : copy.buildings[event.location]
-                    }
-                    event={event}
-                  />
-                </li>
-              ))}
+            {filteredSchedule.sort(sortDates).map((event) => (
+              <li key={event.title}>
+                <EventPreview
+                  copy={copy}
+                  time={time}
+                  handleClick={() => handleEventClick(event)}
+                  location={
+                    selectedBuilding ? null : copy.buildings[event.location]
+                  }
+                  event={event}
+                />
+              </li>
+            ))}
           </ul>
         </div>
         <div className="schedule__event">
           {localEvent && (
             <Event
+              copy={copy}
+              time={time}
               location={copy.buildings[localEvent.location]}
               handleBack={handleBack}
               event={localEvent}
