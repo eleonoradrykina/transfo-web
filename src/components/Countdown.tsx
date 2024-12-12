@@ -9,7 +9,7 @@ interface CountdownProps {
 
 const Countdown = ({ language }: CountdownProps) => {
   const copy = languages[language];
-  const startFestival = new Date("2024-12-14T17:00:00+01:00");
+  const startFestival = new Date("2024-12-12T18:17:00+01:00"); //TODO: CHANGE BACK
   const [timeLeft, setTimeLeft] = useState(
     Math.floor((startFestival.getTime() - new Date().getTime()) / 1000)
   );
@@ -34,8 +34,14 @@ const Countdown = ({ language }: CountdownProps) => {
     return () => clearInterval(timerInterval);
   });
 
+  useEffect(() => {
+    if (timeLeft < 0) {
+      setTimeLeft(0);
+    }
+  }, [timeLeft]);
+
   return (
-    <div className="countdown">
+    <div className={`countdown ${timeLeft <= 0 ? "started" : ""}`}>
       <div className="countdown__time days">
         <span className="countdown__number">{days}</span>
         <span className="countdown__text">
