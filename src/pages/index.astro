@@ -40,10 +40,7 @@ const events = await Promise.all(
       name: event.data.name,
       startTime: event.data.startTime ? new Date(event.data.startTime) : null,
       endTime: event.data.endTime ? new Date(event.data.endTime) : null,
-      startTime2: event.data.startTime2
-        ? new Date(event.data.startTime2)
-        : null,
-      endTime2: event.data.endTime2 ? new Date(event.data.endTime2) : null,
+      extraTime: event.data.extraTime,
       location: event.data.location,
       heroImage: event.data.heroImage,
       tags: event.data.tags,

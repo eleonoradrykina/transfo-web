@@ -62,7 +62,8 @@ const EventPreview = ({ event, handleClick, location, time }: Props) => {
           </span>
         ))}
         {location && <span className="tag location">{location}</span>}
-        <span>{timeTag}</span>
+        {timeTag}
+        <span className="tag no-bg">{event.extraTime}</span>
       </div>
     </button>
   );

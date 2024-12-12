@@ -7,6 +7,7 @@ subLocation: "pompenzaal"
 heroImage: "theater.webp"
 startTime: "2024-12-14T20:00:00+01:00"
 endTime: "2024-12-14T21:00:00+01:00"
+extraTime: "Speelt 4 keer 10 minuten."
 ---
 
 ### Over de performance
