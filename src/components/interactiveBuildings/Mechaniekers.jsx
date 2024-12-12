@@ -25,15 +25,15 @@ export default function Mechaniekers(props, onEnterBack) {
   useGSAP(
     () => {
       if (!props.loading && props.onEnterBack !== null) {
-        if (props.hasClickHappened || !props.onEnterBack) {
+        if (props.hasClickHappened || props.onEnterBack) {
           gsap.to("#hotspot", {
-            opacity: 0,
+            scale: 0,
             ease: "power1.inOut",
           });
         } else {
           gsap.to("#hotspot", {
-            opacity: 1,
-            ease: "power1.inOut",
+            scale: 1,
+            ease: "bounce.out",
             delay: 2,
           });
           if (!hasAnimation) {
@@ -42,8 +42,6 @@ export default function Mechaniekers(props, onEnterBack) {
               repeat: -1,
               yoyo: true,
               duration: 1,
-              ease: "power1.inOut",
-              overwrite: "",
             });
             setHasAnimation(true);
           }

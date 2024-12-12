@@ -103,11 +103,10 @@ export default function Experience({
     setHasClickHappened(true);
 
     //set hotspot display to none:
-    const hotspot = document.querySelector("#hotspot");
-
-    if (hotspot) {
-      hotspot.style.display = "none";
-    }
+    gsap.to("#hotspot", {
+      scale: 1,
+      ease: "bounce.out",
+    });
 
     handleClear();
     if (!fromEvent) {
