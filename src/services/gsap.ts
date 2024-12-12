@@ -23,7 +23,6 @@ faqTL
     },
     "0"
   )
-
   .set(
     ".miefel",
     {
@@ -31,52 +30,6 @@ faqTL
     },
     "0"
   );
-
-const revertTL = gsap.timeline({ paused: true });
-revertTL
-  .to(
-    "#faq",
-    {
-      x: "-100%",
-      duration: 0.5,
-    },
-    "0"
-  )
-  .to(
-    "#hero",
-    {
-      x: "0",
-      duration: 0.5,
-    },
-    "0"
-  )
-  .set(
-    ".miefel",
-    {
-      opacity: 1,
-    },
-    ">"
-  );
-
-mm.add("(max-width: 767px)", () => {
-  faqTL.to(
-    "#footer",
-    {
-      y: 0,
-      duration: 0.25,
-    },
-    "0.25"
-  );
-
-  revertTL.to(
-    "#footer",
-    {
-      y: "100%",
-      duration: 0.25,
-    },
-    "0"
-  );
-});
 
 const faqButton = document.getElementById("faq__button");
 const faqBackButton = document.getElementById("faq__back__button");
@@ -88,7 +41,8 @@ if (faqButton) {
 
 if (faqBackButton) {
   faqBackButton.addEventListener("click", () => {
-    revertTL.restart();
+    console.log(faqTL);
+    faqTL.reverse();
   });
 }
 
@@ -99,7 +53,7 @@ const mainTL = gsap.timeline({
     end: "20",
     onEnterBack: () => {
       mainTL.reverse();
-      revertTL.restart();
+      faqTL.reverse();
     },
   },
 });
