@@ -59,7 +59,7 @@ const events = await Promise.all(
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
     <meta name="description" content={copy.description} />
-    <title>{copy["title-lower-case"]}</title>
+    <title>{copy.title}</title>
   </head>
   <body id="body">
     <div class="loading"><Image src={loading} alt="loading icon" /></div>
@@ -67,7 +67,9 @@ const events = await Promise.all(
       <div id="hero" class="hero">
         <div id="hero__top" class="hero__top margins">
           <span id="hero__date" class="hero__date">{copy.date.festival}</span>
-          <h1 id="hero__title" class="hero__title">{copy.title}</h1>
+          <h1 id="hero__title" class="hero__title">
+            {copy.title.toUpperCase()}
+          </h1>
           <button id="faq__button" class="button faq__button"
             ><span class="button__arrow left">←</span>{
               copy.faq.title.toUpperCase()
@@ -87,17 +89,12 @@ const events = await Promise.all(
         <div id="hero__bottom" class="hero__bottom margins">
           <Countdown client:only="react" language={Language.NL} />
 
-          <p class="hero__intro">
-            Wandel langs sfeervolle routes en ontdek <span class="bold"
-              >intieme optredens</span
-            >, kunstinstallaties, muziek en meer. Laat je raken door het thema
-            ‘eenzaamheid’ en geniet van een avond vol <span class="bold"
-              >warmte en creativiteit</span
-            >.
-          </p>
+          <Fragment set:html={copy.intro} />
           <div class="ar-button">
             <a href="https://ar.transfo-intiem.be/" class="button"
-              >TRANSFO INTIEM IN AR<span class="button__arrow right">→</span></a
+              >{copy.buttons["transfo-in-ar"].toUpperCase()}<span
+                class="button__arrow right">→</span
+              ></a
             >
           </div>
           <span class="text-2xl animate-bounce">↓</span>

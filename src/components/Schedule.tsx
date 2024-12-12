@@ -105,11 +105,11 @@ const Schedule = ({
     <div id="schedule" className={`schedule ${state}`}>
       <div className="schedule__content">
         <div className="schedule__default">
-          <h3 className="schedule__title">Programma</h3>
+          <h3 className="schedule__title">{copy.schedule.title}</h3>
           <p className="hidden md:inline">
-            Heel het programma is weergegeven.{" "}
-            <span className="font-bold">Klik</span> op het gebouw om te zien wat
-            er daar plaatsvindt.
+            {copy.schedule.subtitle["program-is-shown"]}{" "}
+            <span className="font-bold">{copy.schedule.subtitle["click"]}</span>
+            {copy.schedule.subtitle["on-a-building"]}
           </p>
           <ul className="schedule__list">
             {events.sort(sortDates).map((event) => (
@@ -135,7 +135,9 @@ const Schedule = ({
               }}
             >
               <span className="button__arrow left">←</span>
-              <span className="hidden md:inline">TERUG</span>
+              <span className="hidden md:inline">
+                {copy.buttons.back.toUpperCase()}
+              </span>
             </button>
             <h3 className="schedule__title">
               {copy.buildings[selectedBuilding ?? "default"]}

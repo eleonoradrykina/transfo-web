@@ -1,8 +1,8 @@
 {
     "nl": {
-        "title": "TRANSFO INTIEM",
-        "title-lower-case": "Transfo Intiem",
+        "title": "Transfo Intiem",
         "description": "Wandel langs sfeervolle routes en ontdek intieme optredens, kunstinstallaties, muziek en meer. Laat je raken door het thema ‘eenzaamheid’ en geniet van een avond vol warmte en creativiteit.",
+        "intro": "<p class='hero__intro'>Wandel langs sfeervolle routes en ontdek <span class='bold'>intieme optredens</span>, kunstinstallaties, muziek en meer. Laat je raken door het thema‘eenzaamheid’ en geniet van een avond vol <span class='bold'>warmte en creativiteit</span>.</p>",
         "date": {
             "festival": "14 December 2024",
             "days": "dagen",
@@ -16,10 +16,59 @@
         },
         "faq": {
             "title": "Veelgestelde vragen",
-            "back": "Terug"
+            "questions": {
+                "nr-1": {
+                    "question": "Hoe geraak ik op het evenement?",
+                    "p-1": "Dicht bij het evenement zijn de parkeerplaatsen beperkt. We raden dus aan op zo veel mogelijk met de fiets, te voet of met het openbaar vervoer te komen."
+                },
+                "nr-2": {
+                    "question": "Waar kan ik mijn fiets parkeren?",
+                    "p-1": "Met de fiets heb je de volgende opties:",
+                    "li-1": "Het grasplein vooraan de site, bereikbaar via de Blokellestraat en de Transfostraat",
+                    "li-2": "De parking aan de achterkant van de site, bereikbaar via de Otegemstraat."
+                },
+                "nr-3": {
+                    "question": "Waar kan ik mijn auto parkeren?",
+                    "p-1": "Met de auto heb je de volgende opties:",
+                    "li-1": "Een beperkt aantal plaatsen zijn beschikbaar aan de voorkant van de site, bereikbaar via de Blokellestraat",
+                    "li-2": "De parking aan de achterkant van de site, bereikbaar via de Otegemstraat.",
+                    "li-3": "Parkeren in de Stoomstraat",
+                    "p-2": "De volgende parkings liggen iets verder, maar zijn ook beschikbaar, indien nodig:",
+                    "li-4": "Parking Intratuin",
+                    "li-5": "Parking OC Slypemolen (OC Kappaert)",
+                    "li-6": "Parking Gemeentepunt",
+                    "li-7": "Parkeren in omliggende straten"
+                },
+                "nr-4": {
+                    "question": "Hoeveel kost het evenement?",
+                    "p-1": "De avond is helemaal gratis! Je kan op elk moment vrij binnen- en buitenwandelen."
+                },
+                "nr-5": {
+                    "question": "Zijn er ook activiteiten speciaal voor kinderen?",
+                    "p-1": "Het evenement is bedoeld voor alle leeftijden! Zo zullen de kinderen bijvoorbeeld de Amibots van de Breinbrouwerij kunnen bewonderen en op stickerzoektocht kunnen gaan."
+                },
+                "nr-6": {
+                    "question": "Is het evenement toegankelijk voor mensen met beperkte mobiliteit?",
+                    "p-1": "Het evenement is toegankelijk voor mensen met beperkte mobiliteit. De route is ongeveer 750m lang en bevat één trap. Mensen met beperkte mobiliteit kunnen hier gebruik maken van een lift (uitgang machinezaal).",
+                    "p-2": "Hou er rekening mee dat het terrein buiten niet altijd effen is en dat er stukken onverhard zijn."
+                },
+                "nr-7": {
+                    "question": "Kan ik iets drinken en eten op het evenement?",
+                    "p-1": "Aan de Duiktank zal je de kans hebben om iets te drinken. Er zal geen eten verkocht worden op het evenement."
+                }
+            }
         },
         "schedule": {
-            "title": "Programma"
+            "title": "Programma",
+            "subtitle": {
+                "program-is-shown": "Heel het programma is weergegeven.",
+                "click": "Klik",
+                "on-a-building": " op het gebouw om te zien wat er daar plaatsvindt."
+            }
+        },
+        "buttons": {
+            "transfo-in-ar": "Transfo Intiem in AR",
+            "back": "Terug"
         },
         "buildings": {
             "markt": "Markt",
