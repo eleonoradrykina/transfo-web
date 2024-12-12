@@ -88,7 +88,6 @@ if (faqButton) {
 
 if (faqBackButton) {
   faqBackButton.addEventListener("click", () => {
-    console.log(revertTL);
     revertTL.restart();
   });
 }

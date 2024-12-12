@@ -22,15 +22,8 @@ export default function Mechaniekers(props, onEnterBack) {
   const hotspot = useRef(null);
   const [hasAnimation, setHasAnimation] = useState(false);
 
-
-  //TODO: fix hotspot on scroll.
-
   useGSAP(
     () => {
-
-      console.log("props.onEnterBack", props.onEnterBack);
-      console.log("props.hasClickHappened", props.hasClickHappened);
-
       if (!props.loading && props.onEnterBack !== null) {
         if (props.hasClickHappened || !props.onEnterBack) {
           gsap.to("#hotspot", {
@@ -57,7 +50,10 @@ export default function Mechaniekers(props, onEnterBack) {
         }
       }
     },
-    { scope: hotspot, dependencies: [props.hasClickHappened, props.loading, props.onEnterBack] }
+    {
+      scope: hotspot,
+      dependencies: [props.hasClickHappened, props.loading, props.onEnterBack],
+    }
   );
 
   return (
@@ -86,9 +82,12 @@ export default function Mechaniekers(props, onEnterBack) {
               {props.label}
             </p>
           </Html>
-          <Html     ref={hotspot} position={[-0.5, 0, 0.2]} wrapperClass="hotspot-wrapper">
+          <Html
+            ref={hotspot}
+            position={[-0.5, 0, 0.2]}
+            wrapperClass="hotspot-wrapper"
+          >
             <svg
-            
               opacity={props.hasClickHappened ? 0 : 1}
               id="hotspot"
               width="22"

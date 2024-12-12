@@ -53,7 +53,7 @@ export default function Experience({
   loading,
   setLoading,
   onEnterBack,
-  timeline
+  timeline,
 }) {
   const [hoofdzaaActive, setHoofdzaalActive] = useState(false);
   const [mechaniekersActive, setMechaniekersActive] = useState(false);
@@ -181,11 +181,8 @@ export default function Experience({
   useEffect(() => {
     if (onEnterBack !== null) {
       if (onEnterBack) {
-        console.log("onEnterBack");
         disableCanvasInteraction();
-        
       } else {
-        console.log("onEnter");
         enableCanvasInteraction();
       }
     }
@@ -206,46 +203,38 @@ export default function Experience({
     setTimeAfterScroll(Date.now());
 
     //move to the left and zoom in
-    if (window.innerWidth > 768)
-    {
+    if (window.innerWidth > 768) {
       if (!selectedBuilding && !selectedEvent) {
         cameraControlsRef.current?.truck(3.5, 0, true);
         cameraControlsRef.current?.dolly(2, true);
       }
-    }
-    else {
+    } else {
       cameraControlsRef.current?.truck(0, 3.0, true);
     }
-    
   };
-  const disableCanvasInteraction = () => {
-    
 
+  const disableCanvasInteraction = () => {
     //moving this from reverse complete:
     onChangeBuilding(null);
     onChangeEvent(null);
-    if ((window.innerWidth > 768))
-    {
+    if (window.innerWidth > 768) {
       //set cursor of canvas to default
-    document.querySelector("canvas").style.cursor = "default";
+      document.querySelector("canvas").style.cursor = "default";
 
-    //disable clickable buildings
-    setIsClickable(false);
+      //disable clickable buildings
+      setIsClickable(false);
 
-
-
-    //set camera to default position
-    cameraControlsRef.current.setLookAt(10, 5, 10, 0, 0, 0, true);
-    //disable user gestures
-    setUsersGestures({
-      left: 0,
-      one: 0,
-    });
-          //move to the right and zoom out
-    cameraControlsRef.current?.truck(-3.5, 0, true);
-    cameraControlsRef.current?.dolly(-2, true);
-    }
-    else {
+      //set camera to default position
+      cameraControlsRef.current.setLookAt(10, 5, 10, 0, 0, 0, true);
+      //disable user gestures
+      setUsersGestures({
+        left: 0,
+        one: 0,
+      });
+      //move to the right and zoom out
+      cameraControlsRef.current?.truck(-3.5, 0, true);
+      cameraControlsRef.current?.dolly(-2, true);
+    } else {
       cameraControlsRef.current?.truck(0, -3.0, true);
     }
   };
