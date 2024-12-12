@@ -41,7 +41,6 @@ if (faqButton) {
 
 if (faqBackButton) {
   faqBackButton.addEventListener("click", () => {
-    console.log(faqTL);
     faqTL.reverse();
   });
 }

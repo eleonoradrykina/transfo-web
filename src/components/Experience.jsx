@@ -189,7 +189,7 @@ export default function Experience({
   }, [onEnterBack]);
 
   const enableCanvasInteraction = () => {
-    document.querySelector("canvas").style.cursor = "pointer";
+    gsap.set("canvas", { cursor: "pointer" });
 
     //enable user gestures
     setUsersGestures({
@@ -219,10 +219,14 @@ export default function Experience({
     onChangeEvent(null);
     if (window.innerWidth > 768) {
       //set cursor of canvas to default
-      document.querySelector("canvas").style.cursor = "default";
+      gsap.set("canvas", { cursor: "default" });
 
       //disable clickable buildings
       setIsClickable(false);
+
+      //move to the right and zoom out
+      cameraControlsRef.current?.truck(-3.5, 0, true);
+      cameraControlsRef.current?.dolly(-2, true);
 
       //set camera to default position
       cameraControlsRef.current.setLookAt(10, 5, 10, 0, 0, 0, true);
@@ -231,9 +235,6 @@ export default function Experience({
         left: 0,
         one: 0,
       });
-      //move to the right and zoom out
-      cameraControlsRef.current?.truck(-3.5, 0, true);
-      cameraControlsRef.current?.dolly(-2, true);
     } else {
       cameraControlsRef.current?.truck(0, -3.0, true);
     }
