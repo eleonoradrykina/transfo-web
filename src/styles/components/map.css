@@ -68,6 +68,7 @@
 }
 
 #hotspot {
+  @apply hidden md:block;
   @apply scale-0;
 }
 

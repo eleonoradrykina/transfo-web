@@ -24,7 +24,11 @@ export default function Mechaniekers(props, onEnterBack) {
 
   useGSAP(
     () => {
-      if (!props.loading && props.onEnterBack !== null) {
+      if (
+        window.innerWidth > 768 &&
+        !props.loading &&
+        props.onEnterBack !== null
+      ) {
         if (props.hasClickHappened || props.onEnterBack) {
           gsap.to("#hotspot", {
             scale: 0,
