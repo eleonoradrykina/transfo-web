@@ -12,7 +12,10 @@ interface Props {
   selectedEvent: string | null;
   copy: any;
   events: IEvent[];
+  loading: boolean;
   setLoading: (loading: boolean) => void;
+  onEnterBack: boolean | null;
+  timeline: React.MutableRefObject<gsap.core.Timeline | undefined>;
 }
 
 export default function Map({
@@ -22,7 +25,10 @@ export default function Map({
   selectedEvent,
   copy,
   events,
+  loading,
   setLoading,
+  onEnterBack,
+  timeline,
 }: Props) {
   const [clearSelection, setClearSelection] = useState(0);
 
@@ -53,7 +59,10 @@ export default function Map({
             clearSelection={clearSelection}
             onChangeBuilding={onChangeBuilding}
             onChangeEvent={onChangeEvent}
+            loading={loading}
             setLoading={setLoading}
+            onEnterBack={onEnterBack}
+            timeline={timeline}
           />
         </Bvh>
       </Canvas>

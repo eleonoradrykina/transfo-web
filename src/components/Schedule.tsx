@@ -3,7 +3,6 @@ import "../styles/components/schedule.css";
 import EventPreview from "./EventPreview";
 import { gsap } from "gsap";
 
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { type IEvent } from "../services/types";
 import Event from "./Event";
 
@@ -76,7 +75,7 @@ const Schedule = ({
 
   const handleBack = (location: string) => {
     let mm = gsap.matchMedia();
-    mm.add("(max-width: 768px)", () => {
+    mm.add("(max-width: 767px)", () => {
       setState("onDefault");
       onChangeBuilding(null);
     });
@@ -89,47 +88,6 @@ const Schedule = ({
     });
     onChangeEvent(null);
   };
-
-  // const handleScroll = (e: React.UIEvent<HTMLElement>) => {
-  //   if (window.innerWidth < 768) {
-  //     if (e.currentTarget.scrollTop > 100) {
-  //       gsap.to("#schedule", {
-  //         duration: 0.5,
-  //         ease: "power1.out",
-  //         top: "35%",
-  //       });
-  //     } else {
-  //       gsap.to("#schedule", {
-  //         duration: 0.5,
-  //         ease: "power1.out",
-  //         top: "50%",
-  //       });
-  //     }
-  //   }
-  // };
-
-  useEffect(() => {
-    gsap.registerPlugin(ScrollTrigger);
-
-    const scheduleTL = gsap.timeline({
-      scrollTrigger: {
-        trigger: "#body",
-        start: "top top",
-        end: "20",
-        onEnterBack: () => {
-          scheduleTL.reverse();
-        },
-      },
-    });
-
-    scheduleTL.from(
-      "#schedule",
-      {
-        y: "100%",
-      },
-      "<"
-    );
-  }, []);
 
   return (
     <div id="schedule" className={`schedule ${state}`}>

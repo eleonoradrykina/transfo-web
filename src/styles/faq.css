@@ -1,15 +1,20 @@
 .faq {
   @apply max-h-dvh fixed z-20;
   @apply inset-0;
-  @apply flex flex-col justify-between gap-30;
+  @apply flex flex-col;
   @apply -translate-x-[100%];
   @apply py-30 pt-15 px-15 pb-[60px] md:pt-120 md:px-60;
 
   &__questions {
-    @apply max-w-[550px];
-    @apply flex flex-col gap-15;
+    @apply flex flex-col md:flex-row md:flex-wrap gap-15 w-fit;
     @apply overflow-y-auto overscroll-contain;
+    @apply flex-grow;
     @apply pb-60;
+
+    &__col {
+      @apply flex flex-col gap-15;
+      @apply h-fit;
+    }
   }
 
   &__title {
@@ -18,8 +23,10 @@
   }
 
   .faq__item {
+    @apply max-w-[550px];
     @apply text-start;
     @apply transition-all duration-300;
+
     &__question {
       @apply relative z-20;
       @apply flex flex-row gap-15 items-start;
@@ -34,9 +41,10 @@
     }
 
     &__answer {
-      @apply max-h-0 opacity-0;
+      @apply h-0 max-h-0 opacity-0;
       @apply transition-all duration-300;
       @apply mx-2;
+      @apply overflow-hidden;
 
       p,
       ul,
@@ -56,6 +64,7 @@
     &.open {
       .faq__item__answer {
         @apply opacity-100 mt-15 mb-30;
+        @apply overflow-visible;
       }
 
       .faq__item__question__dot {
