@@ -75,7 +75,7 @@ const Schedule = ({
 
   const handleBack = (location: string) => {
     let mm = gsap.matchMedia();
-    mm.add("(max-width: 768px)", () => {
+    mm.add("(max-width: 767px)", () => {
       setState("onDefault");
       onChangeBuilding(null);
     });

@@ -165,7 +165,7 @@ export default function Experience({
     const camera = [10, 7, 10];
     const offsetCenter = [5, 1, 0];
 
-    if (cameraControlsRef.current && window.innerWidth > 767) {
+    if (cameraControlsRef.current && window.innerWidth > 768) {
       // Lerp from current position to new position
       cameraControlsRef.current.lerpLookAt(
         ...camera, // camera position
@@ -206,7 +206,7 @@ export default function Experience({
     setTimeAfterScroll(Date.now());
 
     //move to the left and zoom in
-    if (window.innerWidth > 767)
+    if (window.innerWidth > 768)
     {
       if (!selectedBuilding && !selectedEvent) {
         cameraControlsRef.current?.truck(3.5, 0, true);
@@ -214,7 +214,7 @@ export default function Experience({
       }
     }
     else {
-      cameraControlsRef.current?.truck(0, -3.0, true);
+      cameraControlsRef.current?.truck(0, 3.0, true);
     }
     
   };
@@ -240,7 +240,7 @@ export default function Experience({
     //moving this from reverse complete:
     onChangeBuilding(null);
     onChangeEvent(null);
-    if (window.innerWidth < 768)
+    if (!(window.innerWidth > 768))
     {
       cameraControlsRef.current?.truck(0, -3.0, true);
     }
