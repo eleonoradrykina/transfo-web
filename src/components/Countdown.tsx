@@ -9,13 +9,14 @@ interface CountdownProps {
 
 const Countdown = ({ language }: CountdownProps) => {
   const copy = languages[language];
-  const startFestival = new Date("2024-12-12T18:17:00+01:00"); //TODO: CHANGE BACK
+  const startFestival = new Date("2024-12-14T17:00:00+01:00"); //TODO: CHANGE BACK
   const [timeLeft, setTimeLeft] = useState(
     Math.floor((startFestival.getTime() - new Date().getTime()) / 1000)
   );
   const [days, setDays] = useState(Math.floor(timeLeft / (60 * 60 * 24)));
   const [hours, setHours] = useState(Math.floor((timeLeft / (60 * 60)) % 24));
   const [minutes, setMinutes] = useState(Math.floor((timeLeft / 60) % 60));
+  const [seconds, setSeconds] = useState(Math.floor(timeLeft % 60));
 
   useEffect(() => {
     const timerInterval = setInterval(() => {
@@ -27,9 +28,9 @@ const Countdown = ({ language }: CountdownProps) => {
         setDays(Math.floor(newTime / (60 * 60 * 24)));
         setHours(Math.floor((newTime / (60 * 60)) % 24));
         setMinutes(Math.floor((newTime / 60) % 60));
+        setSeconds(Math.floor(newTime % 60));
       }
     }, 1000);
-
     // Cleanup the interval when the component unmounts
     return () => clearInterval(timerInterval);
   });
@@ -42,12 +43,15 @@ const Countdown = ({ language }: CountdownProps) => {
 
   return (
     <div className={`countdown ${timeLeft <= 0 ? "started" : ""}`}>
-      <div className="countdown__time days">
-        <span className="countdown__number">{days}</span>
-        <span className="countdown__text">
-          {days === 1 ? copy.date.day : copy.date.days}
-        </span>
-      </div>
+      {days >= 1 && (
+        <div className="countdown__time days">
+          <span className="countdown__number">{days}</span>
+          <span className="countdown__text">
+            {days === 1 ? copy.date.day : copy.date.days}
+          </span>
+        </div>
+      )}
+
       <div className="countdown__time hours">
         <span className="countdown__number">{hours}</span>
         <span className="countdown__text">
@@ -60,6 +64,14 @@ const Countdown = ({ language }: CountdownProps) => {
           {minutes === 1 ? copy.date.minute : copy.date.minutes}
         </span>
       </div>
+      {days < 1 && (
+        <div className="countdown__time seconds">
+          <span className="countdown__number">{seconds}</span>
+          <span className="countdown__text">
+            {seconds === 1 ? copy.date.second : copy.date.seconds}
+          </span>
+        </div>
+      )}
     </div>
   );
 };

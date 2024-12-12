@@ -5,6 +5,7 @@ import { gsap } from "gsap";
 
 import { type IEvent } from "../services/types";
 import Event from "./Event";
+import { sortDates } from "../services/functions";
 
 interface Props {
   selectedBuilding: string | null;
@@ -26,6 +27,17 @@ const Schedule = ({
   const [localEvent, setLocalEvent] = useState<IEvent | null>(
     events.find((event) => event.slug === selectedEvent) ?? null
   );
+
+  const [time, setTime] = useState(Math.floor(Date.now() / (1000 * 60)));
+
+  useEffect(() => {
+    const timerInterval = setInterval(() => {
+      setTime(Math.floor(Date.now() / (1000 * 60)));
+    }, 1000);
+    // Cleanup the interval when the component unmounts
+    return () => clearInterval(timerInterval);
+  });
+
   const [filteredSchedule, setFilteredSchedule] = useState(
     events.filter((event) => {
       if (selectedBuilding) {
@@ -100,29 +112,18 @@ const Schedule = ({
             er daar plaatsvindt.
           </p>
           <ul className="schedule__list">
-            {events
-              .sort((a: IEvent, b: IEvent) => {
-                if (a.startTime && b.startTime) {
-                  return a.startTime.getTime() - b.startTime.getTime();
-                } else if (a.startTime && !b.startTime) {
-                  return -1;
-                } else if (!a.startTime && b.startTime) {
-                  return 1;
-                } else {
-                  return 0;
-                }
-              })
-              .map((event) => (
-                <li key={event.title}>
-                  <EventPreview
-                    handleClick={() => handleEventClick(event)}
-                    location={
-                      selectedBuilding ? null : copy.buildings[event.location]
-                    }
-                    event={event}
-                  />
-                </li>
-              ))}
+            {events.sort(sortDates).map((event) => (
+              <li key={event.title}>
+                <EventPreview
+                  time={time}
+                  handleClick={() => handleEventClick(event)}
+                  location={
+                    selectedBuilding ? null : copy.buildings[event.location]
+                  }
+                  event={event}
+                />
+              </li>
+            ))}
           </ul>
         </div>
         <div className="schedule__building">
@@ -142,34 +143,24 @@ const Schedule = ({
           </div>
 
           <ul className="schedule__list">
-            {filteredSchedule
-              .sort((a: IEvent, b: IEvent) => {
-                if (a.startTime && b.startTime) {
-                  return a.startTime.getTime() - b.startTime.getTime();
-                } else if (a.startTime && !b.startTime) {
-                  return -1;
-                } else if (!a.startTime && b.startTime) {
-                  return 1;
-                } else {
-                  return 0;
-                }
-              })
-              .map((event) => (
-                <li key={event.title}>
-                  <EventPreview
-                    handleClick={() => handleEventClick(event)}
-                    location={
-                      selectedBuilding ? null : copy.buildings[event.location]
-                    }
-                    event={event}
-                  />
-                </li>
-              ))}
+            {filteredSchedule.sort(sortDates).map((event) => (
+              <li key={event.title}>
+                <EventPreview
+                  time={time}
+                  handleClick={() => handleEventClick(event)}
+                  location={
+                    selectedBuilding ? null : copy.buildings[event.location]
+                  }
+                  event={event}
+                />
+              </li>
+            ))}
           </ul>
         </div>
         <div className="schedule__event">
           {localEvent && (
             <Event
+              time={time}
               location={copy.buildings[localEvent.location]}
               handleBack={handleBack}
               event={localEvent}

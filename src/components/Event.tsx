@@ -1,15 +1,16 @@
 import { useEffect, useState } from "react";
 import { type IEvent } from "../services/types";
 import "../styles/components/schedule.css";
-import { getTime } from "../services/functions";
+import { determineTimeTag } from "./EventPreview";
 
 interface Props {
   event: IEvent;
   handleBack: (location: string) => void;
   location: string;
+  time: number;
 }
 
-const Event = ({ event, handleBack, location }: Props) => {
+const Event = ({ event, handleBack, location, time }: Props) => {
   useEffect(() => {
     const test = document.getElementById(`content__${event.name}`);
     if (test) {
@@ -18,6 +19,11 @@ const Event = ({ event, handleBack, location }: Props) => {
   }, [event]);
 
   const [share, setShared] = useState(false);
+  const [timeTag, setTimeTag] = useState(determineTimeTag(event));
+
+  useEffect(() => {
+    setTimeTag(determineTimeTag(event));
+  }, [time]);
 
   useEffect(() => {
     if (share) {
@@ -65,27 +71,14 @@ const Event = ({ event, handleBack, location }: Props) => {
             src={`/events/${event.heroImage}`}
             alt={event.name}
           />
-          <div className="event__tags">
+          <div className="tags tags__event">
             {event.tags.map((tag) => (
-              <span key={tag} className="event__tag regular">
+              <span key={tag} className="tag regular">
                 {tag}
               </span>
             ))}
-            <span className="event__tag location">{location}</span>
-            {event.startTime && event.endTime ? (
-              <>
-                <span className="event__tag time">
-                  {getTime(event.startTime)} - {getTime(event.endTime)}
-                </span>
-                {event.startTime2 && event.endTime2 && (
-                  <span className="event__tag time">
-                    {getTime(event.startTime2)} - {getTime(event.endTime2)}
-                  </span>
-                )}{" "}
-              </>
-            ) : (
-              <span className="event__tag no-bg">Heel de avond</span>
-            )}
+            <span className="tag location">{location}</span>
+            {timeTag}
           </div>
         </div>
         <div className="event__content">
