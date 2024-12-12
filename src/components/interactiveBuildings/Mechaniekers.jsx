@@ -27,12 +27,12 @@ export default function Mechaniekers(props, onEnterBack) {
 
   useGSAP(
     () => {
-      console.log("hasClickHappened", props.hasClickHappened);
-      console.log("loading", props.loading);
-      console.log("onEnterBack", props.onEnterBack);
+
+      console.log("props.onEnterBack", props.onEnterBack);
+      console.log("props.hasClickHappened", props.hasClickHappened);
 
       if (!props.loading && props.onEnterBack !== null) {
-        if (props.hasClickHappened || props.onEnterBack) {
+        if (props.hasClickHappened || !props.onEnterBack) {
           gsap.to("#hotspot", {
             opacity: 0,
             ease: "power1.inOut",

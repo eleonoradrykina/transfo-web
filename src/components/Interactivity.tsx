@@ -50,7 +50,8 @@ const Interactivity = ({ events, copy }: Props) => {
             "#schedule",
             {
               y: "100%",
-              duration: 1,
+              duration: 0.5,
+              ease: "power1.inOut",
             },
             0
           )
@@ -60,14 +61,14 @@ const Interactivity = ({ events, copy }: Props) => {
             {
               opacity: 1,
               cursor: "pointer",
-              duration: 1,
+              duration: 0.25,
               ease: "power2.out",
             },
-            0
+            0.25
           );
       }
     },
-    { dependencies: [loading], scope: container }
+    { dependencies: [loading] }
   );
 
   useEffect(() => {
