@@ -13,8 +13,10 @@ const Question = ({ question, children }: Props) => {
     const answer = document.getElementById(`answer-${question}`);
     if (answer) {
       if (open) {
+        answer.style.height = "0px";
         answer.style.maxHeight = "0px";
       } else {
+        answer.style.height = answer.scrollHeight + "px";
         answer.style.maxHeight = answer.scrollHeight + "px";
       }
     }
