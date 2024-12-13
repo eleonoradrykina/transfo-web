@@ -36,7 +36,7 @@ const Schedule = ({
     }, 1000);
     // Cleanup the interval when the component unmounts
     return () => clearInterval(timerInterval);
-  });
+  }, [setTime]);
 
   const [filteredSchedule, setFilteredSchedule] = useState(
     events.filter((event) => {
