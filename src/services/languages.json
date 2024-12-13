@@ -2,7 +2,7 @@
     "nl": {
         "title": "Transfo Intiem",
         "description": "Wandel langs sfeervolle routes en ontdek intieme optredens, kunstinstallaties, muziek en meer. Laat je raken door het thema ‘eenzaamheid’ en geniet van een avond vol warmte en creativiteit.",
-        "intro": "<p class='hero__intro'>Wandel langs sfeervolle routes en ontdek <span class='bold'>intieme optredens</span>, kunstinstallaties, muziek en meer. Laat je raken door het thema‘eenzaamheid’ en geniet van een avond vol <span class='bold'>warmte en creativiteit</span>.</p>",
+        "intro": "<p class='hero__intro'>Wandel langs sfeervolle routes en ontdek <span class='bold'>intieme optredens</span>, kunstinstallaties, muziek en meer. Laat je raken door het thema ‘eenzaamheid’ en geniet van een avond vol <span class='bold'>warmte en creativiteit</span>.</p>",
         "date": {
             "festival": "14 December 2024",
             "days": "dagen",
@@ -25,13 +25,13 @@
                     "question": "Waar kan ik mijn fiets parkeren?",
                     "p-1": "Met de fiets heb je de volgende opties:",
                     "li-1": "Het grasplein vooraan de site, bereikbaar via de Blokellestraat en de Transfostraat",
-                    "li-2": "De parking aan de achterkant van de site, bereikbaar via de Otegemstraat."
+                    "li-2": "De parking aan de achterkant van de site, bereikbaar via de Otegemstraat"
                 },
                 "nr-3": {
                     "question": "Waar kan ik mijn auto parkeren?",
                     "p-1": "Met de auto heb je de volgende opties:",
                     "li-1": "Een beperkt aantal plaatsen zijn beschikbaar aan de voorkant van de site, bereikbaar via de Blokellestraat",
-                    "li-2": "De parking aan de achterkant van de site, bereikbaar via de Otegemstraat.",
+                    "li-2": "De parking aan de achterkant van de site, bereikbaar via de Otegemstraat",
                     "li-3": "Parkeren in de Stoomstraat",
                     "p-2": "De volgende parkings liggen iets verder, maar zijn ook beschikbaar, indien nodig:",
                     "li-4": "Parking Intratuin",
@@ -54,7 +54,7 @@
                 },
                 "nr-7": {
                     "question": "Kan ik iets drinken en eten op het evenement?",
-                    "p-1": "Aan de Duiktank zal je de kans hebben om iets te drinken. Er zal geen eten verkocht worden op het evenement."
+                    "p-1": "Aan de Duiktank zal je de kans hebben om iets te drinken en een borrelhapje te eten. Op de Warmste Week markt zullen wafels verkocht worden."
                 }
             }
         },

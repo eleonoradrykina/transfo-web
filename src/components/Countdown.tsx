@@ -33,7 +33,7 @@ const Countdown = ({ language }: CountdownProps) => {
     }, 1000);
     // Cleanup the interval when the component unmounts
     return () => clearInterval(timerInterval);
-  });
+  }, [setTimeLeft, setDays, setHours, setMinutes, setSeconds]);
 
   useEffect(() => {
     if (timeLeft < 0) {

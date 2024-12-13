@@ -199,6 +199,20 @@ const events = await Promise.all(
     </footer>
     <script src="../services/gsap.ts"></script>
     <script>
+      console.groupCollapsed(
+        "%cDesigned by Ella Gaublomme",
+        "font-family: Helvetica, sans-serif; background-color: #3F4194; color: #FBFBFB; padding: 5px 20px; border-radius: 50px;"
+      );
+      console.log("https://ellagaublomme.com/");
+      console.groupEnd();
+      console.groupCollapsed(
+        "%cDeveloped by Eleonora Drykina and Adam Vromman",
+        "font-family: Helvetica, sans-serif; background-color: #EA5739; color: #FBFBFB; padding: 5px 20px; border-radius: 50px;"
+      );
+      console.log("https://elu.sh/");
+      console.log("https://adamvromman.net");
+      console.groupEnd();
+
       const title = document.getElementById("hero__title");
       title?.addEventListener("click", () => {
         window.scrollTo({ top: 0, behavior: "smooth" });

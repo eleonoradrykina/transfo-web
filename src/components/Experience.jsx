@@ -261,7 +261,7 @@ export default function Experience({
 
   useEffect(() => {
     setLoading(false);
-  }, []);
+  }, [setLoading]);
 
   const cameraControls = {
     minDistance: 10.0,
