@@ -64,7 +64,17 @@ const events = await Promise.all(
     <Analytics />
   </head>
   <body id="body">
-    <div class="loading"><Image src={loading} alt="loading icon" /></div>
+    <div class="loading">
+      <Image src={loading} alt="loading icon" />
+      <div class="loading__download">
+        <span>{copy.errors["something-went-wrong"]}</span><a
+          class="button"
+          download
+          href="/transfo-intiem-offline-flyer.pdf"
+          >{copy.buttons["download-flyer"]}</a
+        >
+      </div>
+    </div>
     <main class="main">
       <div id="hero" class="hero">
         <div id="hero__top" class="hero__top margins">

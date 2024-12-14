@@ -70,11 +70,15 @@
             "all-night": "Heel de avond",
             "in": "Binnen"
         },
+        "errors": {
+            "something-went-wrong": "Miefel laat weten dat er iets mis is gelopen.."
+        },
         "buttons": {
             "transfo-in-ar": "Transfo Intiem in AR",
             "back": "Terug",
             "share": "Delen",
-            "copied": "Gekopieerd!"
+            "copied": "Gekopieerd!",
+            "download-flyer": "Download de offline flyer"
         },
         "buildings": {
             "markt": "Markt",
