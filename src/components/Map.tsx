@@ -1,5 +1,5 @@
 import "../styles/components/map.css";
-import { useState, useRef } from "react";
+import { useState } from "react";
 import type { IEvent } from "../services/types";
 import { Bvh } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
