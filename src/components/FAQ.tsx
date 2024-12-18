@@ -14,6 +14,9 @@ const FAQ = ({ copy }: Props) => {
       <h2 className="faq__title"> {copy.faq?.title}</h2>
       <div id="faq__questions" className="faq__questions">
         <div className="faq__questions__col">
+          <Question question={copy.faq?.questions["nr-0"]?.question}>
+            <p>{copy.faq?.questions["nr-0"]["p-1"]}</p>
+          </Question>
           <Question question={copy.faq?.questions["nr-1"]?.question}>
             <p>{copy.faq?.questions["nr-1"]["p-1"]}</p>
           </Question>
