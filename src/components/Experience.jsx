@@ -104,7 +104,7 @@ export default function Experience({
 
     //set hotspot display to none:
     gsap.to("#hotspot", {
-      scale: 1,
+      scale: 0,
       ease: "bounce.out",
     });
 
@@ -333,6 +333,7 @@ export default function Experience({
       <MapModel />
       <Path timeline={timeline} intensity={0.5} />
       <Hoofdzaal
+        timeline={timeline}
         handleClick={() => {
           if (isClickable) {
             handleSelect("machinezaal-pompenzaal", false);
@@ -342,6 +343,7 @@ export default function Experience({
         label={copy.buildings["machinezaal-pompenzaal"]}
       />
       <Mechaniekers
+        timeline={timeline}
         handleClick={() => {
           if (isClickable) {
             handleSelect("mechaniekers", false);
@@ -351,10 +353,10 @@ export default function Experience({
         loading={loading}
         active={mechaniekersActive}
         label={copy.buildings.mechaniekers}
-        hotspotGsap={() => hotspotInteraction()}
         hasClickHappened={hasClickHappened}
       />
       <Ketelhuis
+        timeline={timeline}
         handleClick={() => {
           if (isClickable) {
             handleSelect("ketelhuis", false);
@@ -364,6 +366,7 @@ export default function Experience({
         label={copy.buildings.ketelhuis}
       />
       <Transformatoren
+        timeline={timeline}
         handleClick={() => {
           if (isClickable) {
             handleSelect("transformatoren", false);
@@ -373,6 +376,7 @@ export default function Experience({
         label={copy.buildings.transformatoren}
       />
       <Octagon
+        timeline={timeline}
         handleClick={() => {
           if (isClickable) {
             handleSelect("octagon", false);
@@ -382,6 +386,7 @@ export default function Experience({
         label={copy.buildings.octagon}
       />
       <Kunstacademie
+        timeline={timeline}
         handleClick={() => {
           if (isClickable) {
             handleSelect("directeurswoning", false);
@@ -391,6 +396,7 @@ export default function Experience({
         label={copy.buildings.directeurswoning}
       />
       <Duiktank
+        timeline={timeline}
         handleClick={() => {
           if (isClickable) {
             handleSelect("duiktank", false);
@@ -400,6 +406,7 @@ export default function Experience({
         label={copy.buildings.duiktank}
       />
       <Watertoren
+        timeline={timeline}
         handleClick={() => {
           if (isClickable) {
             handleSelect("watertoren", false);
@@ -409,6 +416,7 @@ export default function Experience({
         label={copy.buildings.watertoren}
       />
       <Plong
+        timeline={timeline}
         handleClick={() => {
           if (isClickable) {
             handleSelect("plong", false);

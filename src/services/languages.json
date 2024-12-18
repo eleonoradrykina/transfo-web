@@ -17,6 +17,10 @@
         "faq": {
             "title": "Veelgestelde vragen",
             "questions": {
+                "nr-0": {
+                    "question": "Waar en wanneer is het festival?",
+                    "p-1": "Het festival gaat door op de Transfo site (Transfostraat 3-15, Zwevegem) op 14 december 2024 van 17u tot 23u."
+                },
                 "nr-1": {
                     "question": "Hoe geraak ik op het evenement?",
                     "p-1": "Dicht bij het evenement zijn de parkeerplaatsen beperkt. We raden dus aan op zo veel mogelijk met de fiets, te voet of met het openbaar vervoer te komen."
@@ -70,11 +74,15 @@
             "all-night": "Heel de avond",
             "in": "Binnen"
         },
+        "errors": {
+            "something-went-wrong": "Miefel laat weten dat er iets mis is gelopen.."
+        },
         "buttons": {
             "transfo-in-ar": "Transfo Intiem in AR",
             "back": "Terug",
             "share": "Delen",
-            "copied": "Gekopieerd!"
+            "copied": "Gekopieerd!",
+            "download-flyer": "Download de offline flyer"
         },
         "buildings": {
             "markt": "Markt",

@@ -64,7 +64,17 @@ const events = await Promise.all(
     <Analytics />
   </head>
   <body id="body">
-    <div class="loading"><Image src={loading} alt="loading icon" /></div>
+    <div class="loading">
+      <Image src={loading} alt="loading icon" />
+      <div class="loading__download">
+        <span>{copy.errors["something-went-wrong"]}</span><a
+          class="button"
+          download
+          href="/transfo-intiem-offline-flyer.pdf"
+          >{copy.buttons["download-flyer"]}</a
+        >
+      </div>
+    </div>
     <main class="main">
       <div id="hero" class="hero">
         <div id="hero__top" class="hero__top margins">
@@ -92,13 +102,13 @@ const events = await Promise.all(
           <Countdown client:only="react" language={Language.NL} />
 
           <Fragment set:html={copy.intro} />
-          <div class="ar-button">
+          <!-- <div class="ar-button">
             <a href="https://ar.transfo-intiem.be/" class="button"
               >{copy.buttons["transfo-in-ar"].toUpperCase()}<span
                 class="button__arrow right">→</span
               ></a
             >
-          </div>
+          </div> -->
           <span class="text-2xl animate-bounce">↓</span>
         </div>
       </div>

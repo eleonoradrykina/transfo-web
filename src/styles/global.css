@@ -118,6 +118,17 @@
   font-display: swap;
 }
 
+@keyframes loading {
+  from {
+    opacity: 0;
+    pointer-events: none;
+  }
+  to {
+    opacity: 1;
+    pointer-events: all;
+  }
+}
+
 html {
   @apply bg-black;
   @apply overflow-y-hidden;
@@ -207,6 +218,13 @@ body {
   img {
     @apply h-20 w-20 md:h-24 md:w-24;
     @apply animate-spin-slow;
+  }
+
+  &__download {
+    @apply pointer-events-none opacity-0;
+    @apply fixed top-[75%] mx-auto;
+    @apply flex flex-col items-center gap-15 mt-30;
+    animation: loading 0.5s ease-in-out 6s forwards;
   }
 }
 
